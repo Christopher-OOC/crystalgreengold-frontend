@@ -97,8 +97,8 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center space-y-4">
-          <Loader2 className="w-12 h-12 text-amber-500 animate-spin mx-auto" />
-          <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">
+          <Loader2 className="w-12 h-12 text-amber-400 animate-spin mx-auto" />
+          <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">
             Loading Products...
           </p>
         </div>
@@ -126,22 +126,22 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
         <div className="flex items-center space-x-4">
           <button
             onClick={onBack}
-            className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-full transition-colors text-slate-500"
+            className="p-2 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-full transition-colors text-emerald-600"
           >
             <ChevronLeft size={24} />
           </button>
-          <div className="bg-amber-500 text-white px-4 py-2 rounded-lg flex items-center space-x-2 shadow-lg shadow-amber-500/20">
+          <div className="bg-amber-400 text-white px-4 py-2 rounded-lg flex items-center space-x-2 shadow-lg shadow-amber-400/20">
             <Package size={20} />
             <span className="font-bold">{title}</span>
           </div>
           <div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">{storeName}</h2>
-            <p className="text-xs text-slate-500">{products.length} products available</p>
+            <h2 className="text-xl font-bold text-emerald-950 dark:text-white">{storeName}</h2>
+            <p className="text-xs text-emerald-600">{products.length} products available</p>
           </div>
         </div>
         <Button
           onClick={onBuyPackage}
-          className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-lg font-bold shadow-lg shadow-amber-500/20"
+          className="bg-amber-400 hover:bg-amber-400 text-white px-6 py-2 rounded-lg font-bold shadow-lg shadow-amber-400/20"
         >
           Buy a package
         </Button>
@@ -150,21 +150,21 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
       {/* Filters */}
       <Card className="p-4 flex flex-col md:flex-row items-center gap-4">
         <div className="flex-1 relative w-full">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
           <input
             type="text"
             placeholder="Search products by name, description, or SKU..."
-            className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-amber-500 transition-all"
+            className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/5 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-amber-400 transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
         <div className="flex items-center space-x-4 w-full md:w-auto">
-          <Filter size={18} className="text-slate-400" />
+          <Filter size={18} className="text-emerald-400" />
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="flex-1 md:w-48 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl py-3 px-4 outline-none focus:border-amber-500 transition-all text-sm font-medium"
+            className="flex-1 md:w-48 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/5 rounded-xl py-3 px-4 outline-none focus:border-amber-400 transition-all text-sm font-medium"
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
@@ -173,7 +173,7 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="flex-1 md:w-40 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-xl py-3 px-4 outline-none focus:border-amber-500 transition-all text-sm font-medium"
+            className="flex-1 md:w-40 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/5 rounded-xl py-3 px-4 outline-none focus:border-amber-400 transition-all text-sm font-medium"
           >
             <option value="name_asc">Name A-Z</option>
             <option value="name_desc">Name Z-A</option>
@@ -184,8 +184,8 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
       </Card>
 
       {/* Status Banner */}
-      <div className="bg-amber-50 dark:bg-amber-500/5 border border-amber-100 dark:border-amber-500/20 py-2 px-6 rounded-lg">
-        <p className="text-amber-600 dark:text-amber-400 text-sm font-bold">
+      <div className="bg-amber-50 dark:bg-amber-400/5 border border-amber-100 dark:border-amber-400/20 py-2 px-6 rounded-lg">
+        <p className="text-amber-400 dark:text-amber-400 text-sm font-bold">
           Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} products available
         </p>
       </div>
@@ -193,9 +193,9 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
       {/* Products Grid */}
       {paginatedProducts.length === 0 ? (
         <div className="text-center py-16">
-          <Package size={48} className="mx-auto text-slate-300 mb-4" />
-          <p className="text-slate-500 font-medium">No products found</p>
-          <p className="text-slate-400 text-sm mt-2">Try adjusting your search or filters.</p>
+          <Package size={48} className="mx-auto text-emerald-200 mb-4" />
+          <p className="text-emerald-600 font-medium">No products found</p>
+          <p className="text-emerald-400 text-sm mt-2">Try adjusting your search or filters.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -208,8 +208,8 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
               className="group cursor-pointer"
               onClick={() => onSelectProduct(product)}
             >
-              <div className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden shadow-sm border border-slate-100 dark:border-white/5 hover:shadow-xl transition-all duration-500">
-                <div className="relative aspect-square overflow-hidden bg-slate-50 dark:bg-white/5">
+              <div className="bg-white dark:bg-emerald-950 rounded-3xl overflow-hidden shadow-sm border border-emerald-50 dark:border-white/5 hover:shadow-xl transition-all duration-500">
+                <div className="relative aspect-square overflow-hidden bg-white dark:bg-white/5">
                   {product.image ? (
                     <img
                       src={product.image}
@@ -219,35 +219,35 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <Package size={48} className="text-slate-300" />
+                      <Package size={48} className="text-emerald-200" />
                     </div>
                   )}
                   <div className="absolute top-4 left-4 space-y-2">
-                    <div className="bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-md flex items-center space-x-1">
+                    <div className="bg-amber-400 text-white text-[10px] font-bold px-2 py-1 rounded-md flex items-center space-x-1">
                       <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                       <span>PV: {product.pv}</span>
                     </div>
-                    <div className="bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-md flex items-center space-x-1">
+                    <div className="bg-amber-400 text-white text-[10px] font-bold px-2 py-1 rounded-md flex items-center space-x-1">
                       <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                       <span>BV: {product.bv}</span>
                     </div>
                   </div>
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <Button className="rounded-full p-4 bg-white text-amber-500 hover:bg-amber-500 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300">
+                    <Button className="rounded-full p-4 bg-white text-amber-400 hover:bg-amber-400 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300">
                       <ShoppingCart size={24} />
                     </Button>
                   </div>
                 </div>
                 <div className="p-6 text-center">
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-2 uppercase tracking-widest line-clamp-2">
+                  <h4 className="text-xs font-bold text-emerald-950 dark:text-white mb-2 uppercase tracking-widest line-clamp-2">
                     {product.name}
                   </h4>
                   {product.category && (
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-2">
+                    <p className="text-[10px] text-emerald-400 uppercase tracking-widest mb-2">
                       {getCategoryName(product.category)}
                     </p>
                   )}
-                  <p className="text-xl font-bold text-amber-500">₦{product.price?.toLocaleString()}</p>
+                  <p className="text-xl font-bold text-amber-400">₦{product.price?.toLocaleString()}</p>
                   {product.stock !== undefined && product.stock > 0 && (
                     <p className="text-[10px] text-green-500 mt-1">In Stock: {product.stock} units</p>
                   )}
@@ -267,7 +267,7 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="p-2 rounded-lg border border-slate-200 dark:border-white/5 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-2 rounded-lg border border-emerald-100 dark:border-white/5 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <ChevronLeft size={20} />
           </button>
@@ -289,8 +289,8 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
                 onClick={() => setCurrentPage(pageNum)}
                 className={`w-10 h-10 rounded-lg font-bold transition-all ${
                   currentPage === pageNum
-                    ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20'
-                    : 'border border-slate-200 dark:border-white/5 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5'
+                    ? 'bg-amber-400 text-white shadow-lg shadow-amber-400/20'
+                    : 'border border-emerald-100 dark:border-white/5 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5'
                 }`}
               >
                 {pageNum}
@@ -301,7 +301,7 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="p-2 rounded-lg border border-slate-200 dark:border-white/5 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-2 rounded-lg border border-emerald-100 dark:border-white/5 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <ChevronRight size={20} />
           </button>

@@ -114,13 +114,13 @@ const CheckoutComponent: React.FC<{
               <CheckCircle2 size={48} />
             </div>
             <div className="space-y-2">
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white">Order Placed & Paid!</h2>
+              <h2 className="text-2xl font-black text-emerald-950 dark:text-white">Order Placed & Paid!</h2>
               {orderId && (
-                <p className="text-sm text-slate-500">
-                  Order ID: <span className="font-mono font-bold text-amber-500">{orderId}</span>
+                <p className="text-sm text-emerald-600">
+                  Order ID: <span className="font-mono font-bold text-amber-400">{orderId}</span>
                 </p>
               )}
-              <p className="text-slate-500">
+              <p className="text-emerald-600">
                 Your order has been received and payment confirmed. You'll receive a confirmation email shortly.
               </p>
             </div>
@@ -143,11 +143,11 @@ const CheckoutComponent: React.FC<{
         </Button>
 
         <Card className="p-8">
-          <h2 className="text-2xl font-black mb-6 text-slate-900 dark:text-white">Checkout</h2>
+          <h2 className="text-2xl font-black mb-6 text-emerald-950 dark:text-white">Checkout</h2>
 
           {!member && (
-            <div className="mb-4 p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl">
-              <p className="text-amber-600 dark:text-amber-400 text-sm">
+            <div className="mb-4 p-4 bg-amber-400/10 border border-amber-400/20 rounded-xl">
+              <p className="text-amber-400 dark:text-amber-400 text-sm">
                 Please <button onClick={() => window.location.href = '/login'} className="font-bold underline">login</button> to complete your order
               </p>
             </div>
@@ -161,21 +161,21 @@ const CheckoutComponent: React.FC<{
 
           <div className="space-y-4">
             {items.map(item => (
-              <div key={item.id} className="flex justify-between py-3 border-b border-slate-100 dark:border-white/5">
+              <div key={item.id} className="flex justify-between py-3 border-b border-emerald-50 dark:border-white/5">
                 <div>
-                  <p className="font-bold text-slate-900 dark:text-white">{item.name}</p>
-                  <p className="text-xs text-slate-500">Quantity: {item.quantity}</p>
+                  <p className="font-bold text-emerald-950 dark:text-white">{item.name}</p>
+                  <p className="text-xs text-emerald-600">Quantity: {item.quantity}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-bold text-amber-500">₦{(item.price * item.quantity).toLocaleString()}</p>
-                  <p className="text-xs text-slate-500">₦{item.price.toLocaleString()} each</p>
+                  <p className="font-bold text-amber-400">₦{(item.price * item.quantity).toLocaleString()}</p>
+                  <p className="text-xs text-emerald-600">₦{item.price.toLocaleString()} each</p>
                 </div>
               </div>
             ))}
 
-            <div className="flex justify-between pt-4 border-t border-slate-200 dark:border-white/10">
-              <span className="text-lg font-bold text-slate-900 dark:text-white">Total</span>
-              <span className="text-2xl font-black text-amber-500">₦{total.toLocaleString()}</span>
+            <div className="flex justify-between pt-4 border-t border-emerald-100 dark:border-white/10">
+              <span className="text-lg font-bold text-emerald-950 dark:text-white">Total</span>
+              <span className="text-2xl font-black text-amber-400">₦{total.toLocaleString()}</span>
             </div>
           </div>
 
@@ -183,7 +183,7 @@ const CheckoutComponent: React.FC<{
             <Button
               onClick={handlePlaceOrder}
               disabled={isProcessing || !member}
-              className="w-full py-3 rounded-xl font-bold bg-amber-500 hover:bg-amber-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-3 rounded-xl font-bold bg-amber-400 hover:bg-amber-400 text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isProcessing ? (
                 <div className="flex items-center justify-center space-x-2">
@@ -194,7 +194,7 @@ const CheckoutComponent: React.FC<{
                 'Place Order & Pay'
               )}
             </Button>
-            <p className="text-xs text-center text-slate-500">
+            <p className="text-xs text-center text-emerald-600">
               By placing your order, you agree to our Terms and Conditions
             </p>
           </div>
@@ -253,8 +253,8 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center space-y-4">
-          <Loader2 className="w-12 h-12 text-amber-500 animate-spin mx-auto" />
-          <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Cart...</p>
+          <Loader2 className="w-12 h-12 text-amber-400 animate-spin mx-auto" />
+          <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Cart...</p>
         </div>
       </div>
     );
@@ -274,18 +274,18 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Breadcrumb Header */}
-      <Card className="p-4 flex items-center space-x-2 text-sm font-bold text-slate-400 uppercase tracking-widest">
-        <Home size={16} className="text-slate-400" />
+      <Card className="p-4 flex items-center space-x-2 text-sm font-bold text-emerald-400 uppercase tracking-widest">
+        <Home size={16} className="text-emerald-400" />
         <span>Home</span>
-        <span className="text-slate-300">/</span>
-        <ShoppingCart size={16} className="text-amber-500" />
-        <span className="text-amber-500">Cart</span>
+        <span className="text-emerald-200">/</span>
+        <ShoppingCart size={16} className="text-amber-400" />
+        <span className="text-amber-400">Cart</span>
       </Card>
 
       {/* Login Warning for Guests */}
       {!member && items.length > 0 && (
-        <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
-          <p className="text-amber-600 dark:text-amber-400 text-sm text-center">
+        <div className="bg-amber-400/10 border border-amber-400/20 rounded-xl p-4">
+          <p className="text-amber-400 dark:text-amber-400 text-sm text-center">
             Please <button onClick={() => window.location.href = '/login'} className="font-bold underline">login</button> to complete your purchase
           </p>
         </div>
@@ -296,21 +296,21 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
         <div className="lg:col-span-2 space-y-6">
           <Card className="p-8">
             <div className="flex items-center space-x-3 mb-8">
-              <ShoppingCart className="text-amber-500" size={24} />
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Shopping Cart</h2>
+              <ShoppingCart className="text-amber-400" size={24} />
+              <h2 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Shopping Cart</h2>
             </div>
 
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="bg-amber-50 dark:bg-amber-500/5 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                  <tr className="bg-amber-50 dark:bg-amber-400/5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">
                     <th className="text-left py-4 px-6 rounded-l-2xl">Products</th>
                     <th className="text-center py-4 px-6">Price</th>
                     <th className="text-center py-4 px-6">Quantity</th>
                     <th className="text-right py-4 px-6 rounded-r-2xl">Subtotal</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50 dark:divide-white/5">
+                <tbody className="divide-y divide-white dark:divide-white/5">
                   <AnimatePresence mode="popLayout">
                     {items.length > 0 ? (
                       items.map((item) => (
@@ -331,7 +331,7 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
                               >
                                 <X size={16} />
                               </button>
-                              <div className="w-20 h-20 bg-slate-50 dark:bg-white/5 rounded-2xl p-2 flex items-center justify-center overflow-hidden">
+                              <div className="w-20 h-20 bg-white dark:bg-white/5 rounded-2xl p-2 flex items-center justify-center overflow-hidden">
                                 <img
                                   src={item.image}
                                   alt={item.name}
@@ -342,27 +342,27 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
                                   }}
                                 />
                               </div>
-                              <span className="font-bold text-slate-900 dark:text-white">{item.name}</span>
+                              <span className="font-bold text-emerald-950 dark:text-white">{item.name}</span>
                             </div>
                           </td>
                           <td className="py-6 px-6 text-center">
-                            <span className="font-bold text-slate-600 dark:text-slate-400">₦{item.price.toLocaleString()}</span>
+                            <span className="font-bold text-emerald-700 dark:text-emerald-400">₦{item.price.toLocaleString()}</span>
                           </td>
                           <td className="py-6 px-6 text-center">
-                            <div className="inline-flex items-center border border-slate-200 dark:border-white/10 rounded-xl overflow-hidden">
+                            <div className="inline-flex items-center border border-emerald-100 dark:border-white/10 rounded-xl overflow-hidden">
                               <button
                                 onClick={() => updateQuantity(item.id, -1)}
-                                className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-slate-500"
+                                className="p-2 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors text-emerald-600"
                                 aria-label="Decrease quantity"
                               >
                                 <Minus size={14} />
                               </button>
-                              <div className="w-10 text-center font-bold text-slate-900 dark:text-white text-sm">
+                              <div className="w-10 text-center font-bold text-emerald-950 dark:text-white text-sm">
                                 {item.quantity}
                               </div>
                               <button
                                 onClick={() => updateQuantity(item.id, 1)}
-                                className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-slate-500"
+                                className="p-2 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors text-emerald-600"
                                 aria-label="Increase quantity"
                               >
                                 <Plus size={14} />
@@ -370,7 +370,7 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
                             </div>
                           </td>
                           <td className="py-6 px-6 text-right">
-                            <span className="font-black text-slate-900 dark:text-white">₦{(item.price * item.quantity).toLocaleString()}</span>
+                            <span className="font-black text-emerald-950 dark:text-white">₦{(item.price * item.quantity).toLocaleString()}</span>
                           </td>
                         </motion.tr>
                       ))
@@ -378,12 +378,12 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
                       <tr>
                         <td colSpan={4} className="py-20">
                           <div className="flex flex-col items-center justify-center text-center space-y-6">
-                            <div className="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center">
+                            <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center">
                               <ShoppingCart size={48} />
                             </div>
                             <div className="space-y-2">
-                              <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Your cart is empty</h3>
-                              <p className="text-slate-500 dark:text-slate-400 font-medium">Start adding products to your cart!</p>
+                              <h3 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Your cart is empty</h3>
+                              <p className="text-emerald-600 dark:text-emerald-400 font-medium">Start adding products to your cart!</p>
                             </div>
                             <Button
                               onClick={handleStartShopping}
@@ -402,7 +402,7 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
             </div>
 
             {items.length > 0 && (
-              <div className="mt-8 pt-8 border-t border-slate-50 dark:border-white/5 flex justify-between">
+              <div className="mt-8 pt-8 border-t border-white dark:border-white/5 flex justify-between">
                 <Button variant="secondary" className="px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs">
                   Update Cart
                 </Button>
@@ -423,28 +423,28 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
         {/* Order Summary */}
         <div className="space-y-6">
           <Card className="p-8 space-y-8">
-            <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Order Summary</h3>
+            <h3 className="text-xl font-black text-emerald-950 dark:text-white tracking-tight">Order Summary</h3>
 
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-slate-500 font-medium">Subtotal</span>
-                <span className="font-bold text-slate-900 dark:text-white">₦{subtotal.toLocaleString()}</span>
+                <span className="text-emerald-600 font-medium">Subtotal</span>
+                <span className="font-bold text-emerald-950 dark:text-white">₦{subtotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-slate-500 font-medium">Shipping</span>
+                <span className="text-emerald-600 font-medium">Shipping</span>
                 <span className="font-bold text-emerald-500">Free</span>
               </div>
-              <div className="pt-4 border-t border-slate-50 dark:border-white/5 flex justify-between items-center">
-                <span className="text-lg font-black text-slate-900 dark:text-white">Total</span>
+              <div className="pt-4 border-t border-white dark:border-white/5 flex justify-between items-center">
+                <span className="text-lg font-black text-emerald-950 dark:text-white">Total</span>
                 <div className="text-right">
-                  <p className="text-lg font-black text-slate-900 dark:text-white">₦{total.toLocaleString()}</p>
+                  <p className="text-lg font-black text-emerald-950 dark:text-white">₦{total.toLocaleString()}</p>
                 </div>
               </div>
             </div>
 
             <Button
               onClick={() => setShowCheckout(true)}
-              className="w-full py-4 rounded-2xl font-black flex items-center justify-center space-x-3 shadow-xl shadow-amber-500/20"
+              className="w-full py-4 rounded-2xl font-black flex items-center justify-center space-x-3 shadow-xl shadow-amber-400/20"
               disabled={items.length === 0}
             >
               <span>PROCEED TO CHECKOUT</span>
@@ -453,8 +453,8 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
           </Card>
 
           {/* Additional Info */}
-          <Card className="p-6 bg-slate-50 dark:bg-white/5 border-none">
-            <div className="flex items-center space-x-3 text-slate-500">
+          <Card className="p-6 bg-white dark:bg-white/5 border-none">
+            <div className="flex items-center space-x-3 text-emerald-600">
               <Trash2 size={18} />
               <p className="text-xs font-medium">Items in cart are not reserved until checkout is complete.</p>
             </div>

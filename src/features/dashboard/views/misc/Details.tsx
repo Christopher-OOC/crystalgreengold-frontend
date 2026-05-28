@@ -17,22 +17,22 @@ export const NetworkStructure = ({ data }: NetworkStructureProps) => {
   return (
     <Card className="p-3">
       <div className="flex items-center space-x-2 mb-3">
-        <div className="p-1 bg-blue-500/10 text-blue-500 rounded-lg">
+        <div className="p-1 bg-emerald-500/10 text-emerald-500 rounded-lg">
           <Users size={16} />
         </div>
-        <h3 className="text-base font-bold text-slate-900 dark:text-white">Network Structure</h3>
+        <h3 className="text-base font-bold text-emerald-950 dark:text-white">Network Structure</h3>
       </div>
 
       <div className="space-y-2">
         {nodes.map((node, i) => (
-          <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 hover:border-amber-500/20 dark:hover:border-white/10 transition-all">
+          <div key={i} className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-white/5 border border-emerald-50 dark:border-white/5 hover:border-amber-400/20 dark:hover:border-white/10 transition-all">
             <div className="flex items-center space-x-3">
-              <div className="p-1.5 bg-white dark:bg-slate-800 rounded-lg text-slate-400 shadow-sm border border-slate-100 dark:border-transparent">
+              <div className="p-1.5 bg-white dark:bg-emerald-900 rounded-lg text-emerald-400 shadow-sm border border-emerald-50 dark:border-transparent">
                 <node.icon size={16} />
               </div>
               <div>
-                <p className="text-[9px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{node.label}</p>
-                <p className="text-xs font-medium text-slate-700 dark:text-slate-200">{node.name}</p>
+                <p className="text-[9px] font-bold text-emerald-400 dark:text-emerald-600 uppercase tracking-widest">{node.label}</p>
+                <p className="text-xs font-medium text-emerald-800 dark:text-emerald-100">{node.name}</p>
               </div>
             </div>
           </div>
@@ -56,18 +56,18 @@ export const FinancialMetrics = ({ data }: FinancialMetricsProps) => {
         <div className="p-1 bg-purple-500/10 text-purple-500 rounded-lg">
           <User size={16} />
         </div>
-        <h3 className="text-base font-bold text-slate-900 dark:text-white">Financial Metrics</h3>
+        <h3 className="text-base font-bold text-emerald-950 dark:text-white">Financial Metrics</h3>
       </div>
 
       <div className="space-y-0.5">
         {metrics.map((metric, i) => (
-          <div key={i} className="flex items-center justify-between py-3 border-b border-slate-100 dark:border-white/5 last:border-0">
+          <div key={i} className="flex items-center justify-between py-3 border-b border-emerald-50 dark:border-white/5 last:border-0">
             <div className="flex items-center space-x-2">
-              <div className={`w-1 h-1 rounded-full ${metric.isMoney ? 'bg-amber-500' : 'bg-purple-500'}`} />
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{metric.label}</span>
+              <div className={`w-1 h-1 rounded-full ${metric.isMoney ? 'bg-amber-400' : 'bg-purple-500'}`} />
+              <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">{metric.label}</span>
             </div>
             <div className="text-right">
-              <p className="text-xs font-bold text-slate-900 dark:text-white">{metric.value}</p>
+              <p className="text-xs font-bold text-emerald-950 dark:text-white">{metric.value}</p>
               {metric.trend && <p className="text-[9px] text-emerald-600 dark:text-emerald-500 font-bold">{metric.trend}</p>}
             </div>
           </div>
@@ -93,10 +93,10 @@ export const SalesDistribution = ({ data }: { data: DashboardMetrics | null }) =
   return (
     <Card className="p-3">
       <div className="flex items-center space-x-2 mb-3">
-        <div className="p-1 bg-orange-500/10 text-orange-500 rounded-lg">
+        <div className="p-1 bg-yellow-500/10 text-yellow-500 rounded-lg">
           <PieIcon size={16} />
         </div>
-        <h3 className="text-base font-bold text-slate-900 dark:text-white">Sales Distribution</h3>
+        <h3 className="text-base font-bold text-emerald-950 dark:text-white">Sales Distribution</h3>
       </div>
 
       <div className="h-[140px] w-full relative">
@@ -122,8 +122,8 @@ export const SalesDistribution = ({ data }: { data: DashboardMetrics | null }) =
         </ResponsiveContainer>
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="text-center">
-            <p className="text-xl font-bold text-slate-900 dark:text-white">100%</p>
-            <p className="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Total</p>
+            <p className="text-xl font-bold text-emerald-950 dark:text-white">100%</p>
+            <p className="text-[9px] text-emerald-600 font-bold uppercase tracking-widest">Total</p>
           </div>
         </div>
       </div>
@@ -133,9 +133,9 @@ export const SalesDistribution = ({ data }: { data: DashboardMetrics | null }) =
           <div key={i} className="text-center">
             <div className="flex items-center justify-center space-x-1 mb-1">
               <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: COLORS[i] }} />
-              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">{item.name}</span>
+              <span className="text-[9px] font-bold text-emerald-600 uppercase tracking-widest">{item.name}</span>
             </div>
-            <p className="text-xs font-bold text-slate-900 dark:text-white">{item.value}%</p>
+            <p className="text-xs font-bold text-emerald-950 dark:text-white">{item.value}%</p>
           </div>
         ))}
       </div>
@@ -161,7 +161,7 @@ export const MonthlyPVAnalysis = ({ data }: { data: DashboardMetrics | null }) =
         <div className="p-1 bg-emerald-500/10 text-emerald-500 rounded-lg">
           <BarChart size={16} />
         </div>
-        <h3 className="text-base font-bold text-slate-900 dark:text-white">Monthly PV Analysis</h3>
+        <h3 className="text-base font-bold text-emerald-950 dark:text-white">Monthly PV Analysis</h3>
       </div>
 
       <div className="h-[170px] w-full">
@@ -196,12 +196,12 @@ export const MonthlyPVAnalysis = ({ data }: { data: DashboardMetrics | null }) =
 
       <div className="mt-4 flex justify-center space-x-4">
         <div className="flex items-center space-x-1.5">
-          <div className="w-2 h-2 rounded-full bg-blue-500" />
-          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Left PV</span>
+          <div className="w-2 h-2 rounded-full bg-emerald-500" />
+          <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Left PV</span>
         </div>
         <div className="flex items-center space-x-1.5">
-          <div className="w-2 h-2 rounded-full bg-amber-500" />
-          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Right PV</span>
+          <div className="w-2 h-2 rounded-full bg-amber-400" />
+          <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">Right PV</span>
         </div>
       </div>
     </Card>

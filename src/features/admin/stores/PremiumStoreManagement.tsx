@@ -76,8 +76,8 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">
           Loading Premium Stores...
         </p>
       </div>
@@ -99,7 +99,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="relative flex-1 max-w-md">
           <Search
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400"
             size={18}
           />
           <input
@@ -107,14 +107,14 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
             placeholder="Search premium stores..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium text-sm"
+            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium text-sm"
           />
         </div>
         <div className="flex items-center space-x-3">
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value as any)}
-            className="px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl text-sm font-medium outline-none"
+            className="px-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl text-sm font-medium outline-none"
           >
             <option value="ALL">All Stores</option>
             <option value="ACTIVE">Active Only</option>
@@ -122,7 +122,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
           </select>
           <Button
             onClick={onAddStore}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-lg shadow-orange-500/20"
+            className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-lg shadow-yellow-500/20"
           >
             <Plus size={18} />
             <span>Register Store</span>
@@ -131,16 +131,16 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="p-4 border-l-4 border-orange-500">
-          <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
+        <Card className="p-4 border-l-4 border-yellow-500">
+          <p className="text-xs font-black text-emerald-400 uppercase tracking-widest">
             Total Stores
           </p>
-          <p className="text-2xl font-black text-slate-900 dark:text-white">
+          <p className="text-2xl font-black text-emerald-950 dark:text-white">
             {stores.length}
           </p>
         </Card>
         <Card className="p-4 border-l-4 border-emerald-500">
-          <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
+          <p className="text-xs font-black text-emerald-400 uppercase tracking-widest">
             Active
           </p>
           <p className="text-2xl font-black text-emerald-500">
@@ -148,7 +148,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
           </p>
         </Card>
         <Card className="p-4 border-l-4 border-rose-500">
-          <p className="text-xs font-black text-slate-400 uppercase tracking-widest">
+          <p className="text-xs font-black text-emerald-400 uppercase tracking-widest">
             Inactive
           </p>
           <p className="text-2xl font-black text-rose-500">
@@ -159,11 +159,11 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
 
       {filteredStores.length === 0 ? (
         <div className="text-center py-16">
-          <Store size={48} className="mx-auto text-slate-300 mb-4" />
-          <p className="text-slate-500 font-medium">No premium stores found</p>
+          <Store size={48} className="mx-auto text-emerald-200 mb-4" />
+          <p className="text-emerald-600 font-medium">No premium stores found</p>
           <Button
             onClick={onAddStore}
-            className="mt-4 bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-black uppercase tracking-widest"
+            className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-black uppercase tracking-widest"
           >
             Register your first store
           </Button>
@@ -178,13 +178,13 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
               transition={{ delay: i * 0.1 }}
             >
               <Card className="p-6 border-none shadow-xl hover:shadow-2xl transition-all group overflow-hidden relative">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110" />
 
                 <div className="flex justify-between items-start mb-6 relative z-10">
-                  <div className="w-12 h-12 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-yellow-500/10 text-yellow-500 rounded-2xl flex items-center justify-center">
                     <Store size={24} />
                   </div>
-                  <div className="flex items-center space-x-1 bg-amber-50 text-amber-600 px-2 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">
+                  <div className="flex items-center space-x-1 bg-amber-50 text-amber-400 px-2 py-1 rounded-lg text-[10px] font-black uppercase tracking-widest">
                     <Star size={10} fill="currentColor" />
                     <span>{store.rating || 5.0}</span>
                   </div>
@@ -192,33 +192,33 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
 
                 <div className="space-y-4 relative z-10">
                   <div>
-                    <h3 className="text-lg font-black text-slate-900 dark:text-white tracking-tight">
+                    <h3 className="text-lg font-black text-emerald-950 dark:text-white tracking-tight">
                       {store.businessName || store.username}
                     </h3>
-                    <div className="flex items-center space-x-2 text-slate-500 text-sm font-medium mt-1">
-                      <MapPin size={14} className="text-orange-500" />
+                    <div className="flex items-center space-x-2 text-emerald-600 text-sm font-medium mt-1">
+                      <MapPin size={14} className="text-yellow-500" />
                       <span className="truncate">
                         {store.address || "Address not set"}
                       </span>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-50 dark:border-white/5">
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white dark:border-white/5">
                     <div className="space-y-1">
-                      <div className="flex items-center space-x-1 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                      <div className="flex items-center space-x-1 text-[10px] font-black text-emerald-400 uppercase tracking-widest">
                         <TrendingUp size={10} />
                         <span>Balance</span>
                       </div>
-                      <p className="text-sm font-black text-slate-900 dark:text-white">
+                      <p className="text-sm font-black text-emerald-950 dark:text-white">
                         ₦{store.availableBalance?.toLocaleString() || "0"}
                       </p>
                     </div>
                     <div className="space-y-1">
-                      <div className="flex items-center space-x-1 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                      <div className="flex items-center space-x-1 text-[10px] font-black text-emerald-400 uppercase tracking-widest">
                         <Package size={10} />
                         <span>Orders</span>
                       </div>
-                      <p className="text-sm font-black text-slate-900 dark:text-white">
+                      <p className="text-sm font-black text-emerald-950 dark:text-white">
                         {store.totalOrders || 0}
                       </p>
                     </div>
@@ -226,10 +226,10 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
 
                   <div className="pt-4 flex items-center justify-between text-xs">
                     <div>
-                      <span className="font-black text-slate-400 uppercase tracking-widest block">
+                      <span className="font-black text-emerald-400 uppercase tracking-widest block">
                         Owner
                       </span>
-                      <span className="font-bold text-slate-700 dark:text-slate-300">
+                      <span className="font-bold text-emerald-800 dark:text-emerald-200">
                         {store.firstName} {store.lastName}
                       </span>
                     </div>
@@ -247,14 +247,14 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
                   <div className="pt-4 flex items-center justify-end gap-2">
                     <Button
                       onClick={() => onEditStore?.(store)}
-                      className="px-4 py-2 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all flex items-center space-x-1"
+                      className="px-4 py-2 bg-emerald-50 dark:bg-white/5 text-emerald-700 dark:text-emerald-400 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-emerald-100 transition-all flex items-center space-x-1"
                     >
                       <Edit size={12} />
                       <span>Edit</span>
                     </Button>
                     <Button
                       onClick={() => onDeleteStore?.(store.memberId)}
-                      className="w-10 h-10 bg-slate-100 dark:bg-white/5 text-rose-500 rounded-lg flex items-center justify-center hover:bg-rose-100 transition-all"
+                      className="w-10 h-10 bg-emerald-50 dark:bg-white/5 text-rose-500 rounded-lg flex items-center justify-center hover:bg-rose-100 transition-all"
                     >
                       <Trash2 size={16} />
                     </Button>

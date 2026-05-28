@@ -89,15 +89,15 @@ export const CreatePromotion: React.FC<CreatePromotionProps> = ({ onBack, initia
     <div className="max-w-4xl mx-auto pb-12 space-y-6 relative">
       <AnimatePresence>
         {showSuccessModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-emerald-950/60 backdrop-blur-sm">
             <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl text-center space-y-6">
+              className="bg-white dark:bg-emerald-950 rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl text-center space-y-6">
               <div className="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 size={48} />
               </div>
               <div className="space-y-2">
-                <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Success!</h2>
-                <p className="text-slate-500 dark:text-slate-400 font-medium">Promotion {isEditing ? 'updated' : 'created'} successfully.</p>
+                <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight uppercase">Success!</h2>
+                <p className="text-emerald-600 dark:text-emerald-400 font-medium">Promotion {isEditing ? 'updated' : 'created'} successfully.</p>
               </div>
               <Button onClick={onBack} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-2xl font-black uppercase tracking-widest">
                 Back to Promotions
@@ -108,14 +108,14 @@ export const CreatePromotion: React.FC<CreatePromotionProps> = ({ onBack, initia
       </AnimatePresence>
 
       <div className="flex items-center space-x-4">
-        <button onClick={onBack} className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-full transition-colors">
-          <ArrowLeft size={20} className="text-slate-600 dark:text-slate-400" />
+        <button onClick={onBack} className="p-2 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-full transition-colors">
+          <ArrowLeft size={20} className="text-emerald-700 dark:text-emerald-400" />
         </button>
         <div className="space-y-1">
-          <h1 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase">
+          <h1 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight uppercase">
             {isEditing ? 'Edit Promotion' : 'Create New Promotion'}
           </h1>
-          <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Setup a new marketing promotion or incentive</p>
+          <p className="text-xs font-bold text-emerald-600 uppercase tracking-widest">Setup a new marketing promotion or incentive</p>
         </div>
       </div>
 
@@ -130,21 +130,21 @@ export const CreatePromotion: React.FC<CreatePromotionProps> = ({ onBack, initia
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+              <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
                 Promotion Image * {isEditing && <span className="normal-case font-medium text-xs">(leave empty to keep current)</span>}
               </label>
-              <label className="border-2 border-dashed border-orange-200 dark:border-orange-500/20 rounded-2xl p-8 flex flex-col items-center justify-center space-y-3 bg-orange-50/30 dark:bg-orange-500/5 hover:border-orange-500 transition-colors cursor-pointer group aspect-video">
+              <label className="border-2 border-dashed border-yellow-200 dark:border-yellow-500/20 rounded-2xl p-8 flex flex-col items-center justify-center space-y-3 bg-yellow-50/30 dark:bg-yellow-500/5 hover:border-yellow-500 transition-colors cursor-pointer group aspect-video">
                 <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
                 {imagePreview ? (
                   <img src={imagePreview} className="w-full h-full object-cover rounded-xl" />
                 ) : (
                   <>
-                    <div className="w-12 h-12 bg-orange-100 dark:bg-orange-500/10 text-orange-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-500/10 text-yellow-500 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                       <Upload size={24} />
                     </div>
                     <div className="text-center space-y-1">
-                      <p className="text-xs font-bold text-slate-600 dark:text-slate-400">Click to upload or drag and drop</p>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">PNG, JPG, JPEG (Max 5MB)</p>
+                      <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400">Click to upload or drag and drop</p>
+                      <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">PNG, JPG, JPEG (Max 5MB)</p>
                     </div>
                   </>
                 )}
@@ -152,51 +152,51 @@ export const CreatePromotion: React.FC<CreatePromotionProps> = ({ onBack, initia
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Promotion Name *</label>
+              <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Promotion Name *</label>
               <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="e.g., Summer Sale 2024" disabled={isLoading}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium disabled:opacity-50" />
+                className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium disabled:opacity-50" />
             </div>
 
             <div className="flex items-center space-x-3">
               <input type="checkbox" id="enabled" checked={form.enabled} onChange={(e) => setForm({ ...form, enabled: e.target.checked })}
-                className="w-4 h-4 rounded border-slate-300 text-orange-600 focus:ring-orange-500" />
-              <label htmlFor="enabled" className="text-sm font-medium text-slate-700 dark:text-slate-300">Enabled (visible to members)</label>
+                className="w-4 h-4 rounded border-emerald-200 text-yellow-600 focus:ring-yellow-500" />
+              <label htmlFor="enabled" className="text-sm font-medium text-emerald-800 dark:text-emerald-200">Enabled (visible to members)</label>
             </div>
           </div>
 
           <div className="space-y-6">
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Prize (₦) *</label>
+              <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Prize (₦) *</label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-bold">₦</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400 text-sm font-bold">₦</span>
                 <input type="number" name="prize" value={form.prize} onChange={handleChange} placeholder="500" disabled={isLoading}
-                  className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 pl-8 pr-4 outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium disabled:opacity-50" />
+                  className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 pl-8 pr-4 outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium disabled:opacity-50" />
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Target PV *</label>
+              <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Target PV *</label>
               <input type="number" name="targetPv" value={form.targetPv} onChange={handleChange} placeholder="1000" disabled={isLoading}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium disabled:opacity-50" />
+                className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium disabled:opacity-50" />
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Description *</label>
+              <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Description *</label>
               <textarea name="description" value={form.description} onChange={handleChange}
                 placeholder="Describe the promotion details, terms, and conditions..." rows={6} disabled={isLoading}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium resize-none disabled:opacity-50" />
+                className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium resize-none disabled:opacity-50" />
             </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-8 border-t border-slate-100 dark:border-white/5">
+        <div className="flex items-center justify-between pt-8 border-t border-emerald-50 dark:border-white/5">
           <button onClick={onBack} disabled={isLoading}
-            className="flex items-center space-x-2 px-6 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:bg-slate-50 transition-all disabled:opacity-50">
+            className="flex items-center space-x-2 px-6 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-400 hover:bg-white transition-all disabled:opacity-50">
             <X size={16} />
             <span>Cancel</span>
           </button>
           <Button onClick={handleSubmit} disabled={isLoading || !form.name}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-10 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-orange-600/20 disabled:opacity-80 min-w-[200px] justify-center">
+            className="bg-yellow-600 hover:bg-yellow-700 text-white px-10 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-yellow-600/20 disabled:opacity-80 min-w-[200px] justify-center">
             {isLoading ? (
               <><Loader2 size={18} className="animate-spin" /><span>{isEditing ? 'Updating...' : 'Creating...'}</span></>
             ) : (

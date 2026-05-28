@@ -74,27 +74,27 @@ const menuItems = [
   { icon: Info, label: 'About Us', id: 'about-us' },
 ];
   return (
-    <aside className={`${isCollapsed ? 'w-16' : 'w-60'} h-full bg-white dark:bg-slate-950 border-r border-slate-200 dark:border-white/5 flex flex-col transition-all duration-500 relative group/sidebar`}>
+    <aside className={`${isCollapsed ? 'w-16' : 'w-60'} h-full bg-white dark:bg-emerald-950 border-r border-emerald-100 dark:border-white/5 flex flex-col transition-all duration-500 relative group/sidebar`}>
       {/* Toggle Button */}
       <button 
         onClick={onToggle}
-        className="absolute -right-3 top-24 w-6 h-6 bg-amber-500 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50"
+        className="absolute -right-3 top-24 w-6 h-6 bg-amber-400 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-50"
       >
         <ChevronRight size={14} className={`transition-transform duration-300 ${isCollapsed ? '' : 'rotate-180'}`} />
       </button>
 
       <div className={`p-3 flex items-center ${isCollapsed ? 'justify-center' : 'space-x-2'}`}>
-        <div className="w-7 h-7 bg-amber-500 rounded-lg flex items-center justify-center shadow-lg shadow-amber-500/20 shrink-0">
+        <div className="w-7 h-7 bg-amber-400 rounded-lg flex items-center justify-center shadow-lg shadow-amber-400/20 shrink-0">
           <img src={logo} alt="Logo" className="w-4 h-4 object-contain brightness-0 invert" />
         </div>
-        {!isCollapsed && <span className="text-base font-bold text-slate-900 dark:text-white tracking-tight truncate">TopNivo</span>}
+        {!isCollapsed && <span className="text-base font-bold text-emerald-950 dark:text-white tracking-tight truncate">crystalgreengold</span>}
       </div>
 
       <nav className="flex-1 overflow-y-auto px-2 py-2 space-y-0.5 custom-scrollbar">
         {menuItems.map((item, index) => {
           if (item.section) {
             return !isCollapsed && (
-              <div key={index} className="pt-2 pb-1 px-3 text-[8px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em] truncate">
+              <div key={index} className="pt-2 pb-1 px-3 text-[8px] font-bold text-emerald-400 dark:text-emerald-600 uppercase tracking-[0.2em] truncate">
                 {item.section}
               </div>
             );
@@ -110,18 +110,18 @@ const menuItems = [
               title={isCollapsed ? item.label : ''}
               className={`w-full flex items-center ${isCollapsed ? 'justify-center' : 'justify-between'} px-2.5 py-1.5 rounded-lg transition-all group ${
                 isActive 
-                  ? 'bg-amber-500/10 text-amber-500' 
-                  : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 hover:text-slate-900 dark:hover:text-slate-200'
+                  ? 'bg-amber-400/10 text-amber-400' 
+                  : 'text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 hover:text-emerald-950 dark:hover:text-emerald-100'
               }`}
             >
               <div className="flex items-center space-x-2">
-                <Icon size={16} className={isActive ? 'text-amber-500' : 'text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-slate-300'} />
+                <Icon size={16} className={isActive ? 'text-amber-400' : 'text-emerald-400 dark:text-emerald-600 group-hover:text-emerald-700 dark:group-hover:text-emerald-200'} />
                 {!isCollapsed && <span className="text-[11px] font-semibold truncate">{item.label}</span>}
               </div>
               {!isCollapsed && (
                 <>
-                  {item.badge && <span className="text-amber-500 text-sm leading-none">{item.badge}</span>}
-                  {!item.badge && isActive && <ChevronRight size={10} className="text-amber-500" />}
+                  {item.badge && <span className="text-amber-400 text-sm leading-none">{item.badge}</span>}
+                  {!item.badge && isActive && <ChevronRight size={10} className="text-amber-400" />}
                 </>
               )}
             </button>
@@ -129,16 +129,17 @@ const menuItems = [
         })}
       </nav>
 
-      <div className="p-2 border-t border-slate-200 dark:border-white/5">
+      <div className="p-2 border-t border-emerald-100 dark:border-white/5">
         <button 
           onClick={onLogout}
           title={isCollapsed ? 'Logout' : ''}
-          className={`w-full flex items-center ${isCollapsed ? 'justify-center' : 'space-x-2'} px-2.5 py-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-red-500/10 hover:text-red-500 transition-all group`}
+          className={`w-full flex items-center ${isCollapsed ? 'justify-center' : 'space-x-2'} px-2.5 py-1.5 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-red-500/10 hover:text-red-500 transition-all group`}
         >
-          <LogOut size={16} className="text-slate-400 dark:text-slate-500 group-hover:text-red-500 shrink-0" />
+          <LogOut size={16} className="text-emerald-400 dark:text-emerald-600 group-hover:text-red-500 shrink-0" />
           {!isCollapsed && <span className="text-[11px] font-semibold">Logout</span>}
         </button>
       </div>
     </aside>
   );
 };
+

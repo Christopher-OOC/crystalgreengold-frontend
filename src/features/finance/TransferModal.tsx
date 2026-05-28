@@ -51,27 +51,27 @@ export const TransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose })
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={!isLoading ? onClose : undefined}
-            className="absolute inset-0 bg-slate-950/40 backdrop-blur-sm"
+            className="absolute inset-0 bg-emerald-950/40 backdrop-blur-sm"
           />
           
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-md bg-white dark:bg-slate-900 rounded-[32px] shadow-2xl overflow-hidden border border-slate-200 dark:border-white/5"
+            className="relative w-full max-w-md bg-white dark:bg-emerald-950 rounded-[32px] shadow-2xl overflow-hidden border border-emerald-100 dark:border-white/5"
           >
             <div className="p-8">
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 bg-amber-500/10 text-amber-500 rounded-xl">
+                  <div className="p-2 bg-amber-400/10 text-amber-400 rounded-xl">
                     <SendHorizontal size={24} />
                   </div>
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Transfer Funds</h2>
+                  <h2 className="text-2xl font-bold text-emerald-950 dark:text-white">Transfer Funds</h2>
                 </div>
                 <button 
                   onClick={onClose}
                   disabled={isLoading}
-                  className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors disabled:opacity-50"
+                  className="p-2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors disabled:opacity-50"
                 >
                   <X size={24} />
                 </button>
@@ -79,26 +79,26 @@ export const TransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose })
 
               <div className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-500 dark:text-slate-400 ml-1">Recipient Username</label>
+                  <label className="text-sm font-bold text-emerald-600 dark:text-emerald-400 ml-1">Recipient Username</label>
                   <input 
                     type="text" 
                     placeholder="Enter member username"
                     value={formData.recipient}
                     onChange={(e) => setFormData(prev => ({ ...prev, recipient: e.target.value }))}
                     disabled={isLoading}
-                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl py-4 px-6 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all text-slate-900 dark:text-white disabled:opacity-50"
+                    className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/5 rounded-2xl py-4 px-6 outline-none focus:border-amber-400 focus:ring-4 focus:ring-amber-400/10 transition-all text-emerald-950 dark:text-white disabled:opacity-50"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-bold text-slate-500 dark:text-slate-400 ml-1">Amount</label>
+                  <label className="text-sm font-bold text-emerald-600 dark:text-emerald-400 ml-1">Amount</label>
                   <input 
                     type="number" 
                     placeholder="Enter amount"
                     value={formData.amount}
                     onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
                     disabled={isLoading}
-                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 rounded-2xl py-4 px-6 outline-none focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 transition-all text-slate-900 dark:text-white disabled:opacity-50"
+                    className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/5 rounded-2xl py-4 px-6 outline-none focus:border-amber-400 focus:ring-4 focus:ring-amber-400/10 transition-all text-emerald-950 dark:text-white disabled:opacity-50"
                   />
                 </div>
 
@@ -106,7 +106,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose })
                   <Button 
                     onClick={handleTransfer}
                     isLoading={isLoading}
-                    className="w-full py-4 rounded-2xl flex items-center justify-center space-x-2 shadow-lg shadow-amber-500/20"
+                    className="w-full py-4 rounded-2xl flex items-center justify-center space-x-2 shadow-lg shadow-amber-400/20"
                   >
                     <span className="text-lg">Send Money</span>
                     <Send size={20} />

@@ -85,8 +85,8 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Payout Requests...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Payout Requests...</p>
       </div>
     );
   }
@@ -109,15 +109,15 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
         <div className="space-y-1">
           <button
             onClick={onBack}
-            className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group"
+            className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Admin Dashboard</span>
           </button>
-          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">
             {view === 'list' ? 'Payouts' : view === 'process' ? 'Payroll Processing' : 'Generating Payroll'}
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">
+          <p className="text-emerald-600 dark:text-emerald-400 font-medium">
             {view === 'list'
               ? 'Process and manage member withdrawal requests'
               : view === 'process'
@@ -130,12 +130,12 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
             <>
               <Button
                 onClick={() => setView('process')}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-lg shadow-orange-500/20"
+                className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-lg shadow-yellow-500/20"
               >
                 <RefreshCw size={20} />
                 <span>Process Payroll</span>
               </Button>
-              <Button className="bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-slate-200 transition-all">
+              <Button className="bg-emerald-50 dark:bg-white/5 text-emerald-700 dark:text-emerald-400 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-emerald-100 transition-all">
                 <Download size={20} />
                 <span>Export</span>
               </Button>
@@ -143,7 +143,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
           ) : view === 'process' ? (
             <Button
               onClick={() => setView('list')}
-              className="bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-slate-200 transition-all"
+              className="bg-emerald-50 dark:bg-white/5 text-emerald-700 dark:text-emerald-400 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-emerald-100 transition-all"
             >
               <LayoutList size={20} />
               <span>View List</span>
@@ -164,17 +164,17 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
             {/* Action Bar */}
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
               <div className="relative w-full sm:w-96">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
                 <input
                   type="text"
                   placeholder="Search by member or bank..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium"
+                  className="w-full pl-12 pr-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium"
                 />
               </div>
               <div className="flex items-center space-x-2">
-                <button className="flex items-center space-x-2 px-6 py-3 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-slate-200 transition-colors">
+                <button className="flex items-center space-x-2 px-6 py-3 bg-emerald-50 dark:bg-white/5 text-emerald-700 dark:text-emerald-400 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-emerald-100 transition-colors">
                   <Filter size={16} />
                   <span>Filter Status</span>
                 </button>
@@ -186,51 +186,51 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="bg-slate-50 dark:bg-white/5 border-b border-slate-100 dark:border-white/5">
-                      <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Member</th>
-                      <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Bank Details</th>
-                      <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Amount</th>
-                      <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Date</th>
-                      <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
-                      <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                    <tr className="bg-white dark:bg-white/5 border-b border-emerald-50 dark:border-white/5">
+                      <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Member</th>
+                      <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Bank Details</th>
+                      <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Amount</th>
+                      <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Date</th>
+                      <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Status</th>
+                      <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-50 dark:divide-white/5">
+                  <tbody className="divide-y divide-white dark:divide-white/5">
                     {payouts.map((payout, i) => (
                       <motion.tr
                         key={payout.id}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.05 }}
-                        className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors group"
+                        className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors group"
                       >
                         <td className="px-6 py-5">
                           <div className="flex items-center space-x-3">
-                            <div className="w-10 h-10 bg-orange-500/10 text-orange-500 rounded-xl flex items-center justify-center text-sm font-black">
+                            <div className="w-10 h-10 bg-yellow-500/10 text-yellow-500 rounded-xl flex items-center justify-center text-sm font-black">
                               <User size={18} />
                             </div>
-                            <span className="text-sm font-black text-slate-900 dark:text-white tracking-tight">{payout.accountName || payout.memberId}</span>
+                            <span className="text-sm font-black text-emerald-950 dark:text-white tracking-tight">{payout.accountName || payout.memberId}</span>
                           </div>
                         </td>
                         <td className="px-6 py-5">
                           <div className="space-y-1">
-                            <div className="flex items-center space-x-2 text-xs font-bold text-slate-600 dark:text-slate-400">
+                            <div className="flex items-center space-x-2 text-xs font-bold text-emerald-700 dark:text-emerald-400">
                               <Building2 size={12} />
                               <span>Bank ID: {payout.bankId}</span>
                             </div>
-                            <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            <div className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
                               {payout.accountNumber}
                             </div>
                           </div>
                         </td>
                         <td className="px-6 py-5">
-                          <span className="text-sm font-black text-slate-900 dark:text-white">${payout.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                          <span className="text-sm font-black text-emerald-950 dark:text-white">${payout.amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                         </td>
-                        <td className="px-6 py-5 text-sm font-bold text-slate-400">—</td>
+                        <td className="px-6 py-5 text-sm font-bold text-emerald-400">—</td>
                         <td className="px-6 py-5">
                           <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                             payout.status === 'SENT' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                            payout.status === 'PENDING' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
+                            payout.status === 'PENDING' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20' :
                             'bg-rose-500/10 text-rose-500 border-rose-500/20'
                           }`}>
                             {payout.status || 'PENDING'}
@@ -248,7 +248,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
                                 </button>
                               </>
                             )}
-                            <button className="p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-all">
+                            <button className="p-2 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-lg transition-all">
                               <Clock size={18} />
                             </button>
                           </div>
@@ -270,17 +270,17 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
           >
             <Card className="max-w-2xl w-full p-12 border-none shadow-2xl space-y-10 text-center">
               <div className="space-y-6">
-                <div className="w-20 h-20 bg-orange-50 dark:bg-orange-500/10 text-orange-500 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                <div className="w-20 h-20 bg-yellow-50 dark:bg-yellow-500/10 text-yellow-500 rounded-full flex items-center justify-center mx-auto shadow-inner">
                   <DollarSign size={40} />
                 </div>
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Payroll Processing</h2>
-                  <p className="text-slate-500 dark:text-slate-400 font-medium">Generate payroll for the current period</p>
+                  <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Payroll Processing</h2>
+                  <p className="text-emerald-600 dark:text-emerald-400 font-medium">Generate payroll for the current period</p>
                 </div>
               </div>
 
-              <div className="bg-blue-50/50 dark:bg-blue-500/5 border border-blue-100 dark:border-blue-500/20 rounded-2xl p-8 text-left space-y-4">
-                <div className="flex items-center space-x-3 text-blue-600 dark:text-blue-400">
+              <div className="bg-emerald-50/50 dark:bg-emerald-500/5 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl p-8 text-left space-y-4">
+                <div className="flex items-center space-x-3 text-emerald-600 dark:text-emerald-400">
                   <Wallet size={20} />
                   <span className="font-black uppercase tracking-widest text-xs">Payroll Overview</span>
                 </div>
@@ -291,8 +291,8 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
                     'Generates pay stubs and direct deposit files'
                   ].map((item, i) => (
                     <li key={i} className="flex items-start space-x-3 group">
-                      <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-400 group-hover:scale-125 transition-transform" />
-                      <span className="text-sm font-bold text-blue-700/70 dark:text-blue-300/70">{item}</span>
+                      <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-emerald-400 group-hover:scale-125 transition-transform" />
+                      <span className="text-sm font-bold text-emerald-700/70 dark:text-emerald-300/70">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -301,12 +301,12 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
               <div className="space-y-6">
                 <Button
                   onClick={handleGeneratePayroll}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-2xl flex items-center justify-center space-x-3 font-black uppercase tracking-widest shadow-xl shadow-orange-500/20"
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-4 rounded-2xl flex items-center justify-center space-x-3 font-black uppercase tracking-widest shadow-xl shadow-yellow-500/20"
                 >
                   <RefreshCw size={20} />
                   <span>Generate Payroll</span>
                 </Button>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
                   Pay periods close on the 15th and last day of each month
                 </p>
               </div>
@@ -321,23 +321,23 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
             className="flex flex-col items-center justify-center py-24 space-y-8"
           >
             <div className="relative">
-              <div className="w-32 h-32 border-4 border-orange-500/20 rounded-full" />
+              <div className="w-32 h-32 border-4 border-yellow-500/20 rounded-full" />
               <motion.div
-                className="absolute inset-0 border-4 border-orange-500 rounded-full border-t-transparent"
+                className="absolute inset-0 border-4 border-yellow-500 rounded-full border-t-transparent"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
               />
-              <div className="absolute inset-0 flex items-center justify-center text-orange-500">
+              <div className="absolute inset-0 flex items-center justify-center text-yellow-500">
                 <DollarSign size={40} />
               </div>
             </div>
             <div className="text-center space-y-2">
-              <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Generating Payroll...</h2>
-              <p className="text-slate-500 font-medium">This may take a few moments. Please do not close this window.</p>
+              <h2 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Generating Payroll...</h2>
+              <p className="text-emerald-600 font-medium">This may take a few moments. Please do not close this window.</p>
             </div>
-            <div className="w-64 h-2 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+            <div className="w-64 h-2 bg-emerald-50 dark:bg-white/5 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-orange-500"
+                className="h-full bg-yellow-500"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: 3 }}

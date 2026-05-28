@@ -42,8 +42,8 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 	if (isLoading) {
 		return (
 			<div className="flex flex-col items-center justify-center min-h-[400px]">
-				<Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-4" />
-				<p className="text-slate-500 font-bold animate-pulse">
+				<Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
+				<p className="text-emerald-600 font-bold animate-pulse">
 					Finding service centers...
 				</p>
 			</div>
@@ -63,11 +63,11 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 	if (centers.length === 0) {
 		return (
 			<div className="text-center py-16">
-				<Award size={48} className="mx-auto text-slate-300 mb-4" />
-				<p className="text-slate-500 font-medium">
+				<Award size={48} className="mx-auto text-emerald-200 mb-4" />
+				<p className="text-emerald-600 font-medium">
 					No service centers available at the moment.
 				</p>
-				<p className="text-slate-400 text-sm mt-2">Please check back later.</p>
+				<p className="text-emerald-400 text-sm mt-2">Please check back later.</p>
 			</div>
 		);
 	}
@@ -78,15 +78,15 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 				<motion.h2
 					initial={{ opacity: 0, y: -20 }}
 					animate={{ opacity: 1, y: 0 }}
-					className="text-4xl font-bold text-slate-900 dark:text-white"
+					className="text-4xl font-bold text-emerald-950 dark:text-white"
 				>
-					Our <span className="text-amber-500">Service Centers</span>
+					Our <span className="text-amber-400">Service Centers</span>
 				</motion.h2>
 				<motion.p
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 0.2 }}
-					className="text-slate-500 font-medium"
+					className="text-emerald-600 font-medium"
 				>
 					Discover our premium network ready to serve you
 				</motion.p>
@@ -103,7 +103,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 						hover
 						className="flex flex-col group"
 					>
-						<div className="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-800">
+						<div className="relative h-48 overflow-hidden bg-emerald-50 dark:bg-emerald-900">
 							{center.profileImageUrl ? (
 								<img
 									src={center.profileImageUrl}
@@ -112,10 +112,10 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 								/>
 							) : (
 								<div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30">
-									<Award size={48} className="text-amber-500" />
+									<Award size={48} className="text-amber-400" />
 								</div>
 							)}
-							<div className="absolute top-4 left-4 bg-amber-500 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 shadow-lg">
+							<div className="absolute top-4 left-4 bg-amber-400 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 shadow-lg">
 								<Award size={12} />
 								<span className="uppercase tracking-widest">
 									Service Center
@@ -124,14 +124,14 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 						</div>
 
 						<div className="p-6 flex-1 flex flex-col">
-							<h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4 leading-tight">
+							<h3 className="text-lg font-bold text-emerald-950 dark:text-white mb-4 leading-tight">
 								{center.businessName || center.name}
 							</h3>
 
 							<div className="space-y-3 mb-6 flex-1">
 								{center.phoneNumber && (
-									<div className="flex items-center space-x-3 text-amber-500">
-										<div className="p-1.5 bg-amber-500/10 rounded-lg">
+									<div className="flex items-center space-x-3 text-amber-400">
+										<div className="p-1.5 bg-amber-400/10 rounded-lg">
 											<Phone size={16} />
 										</div>
 										<span className="text-sm font-bold">
@@ -140,8 +140,8 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 									</div>
 								)}
 								{center.address && (
-									<div className="flex items-start space-x-3 text-slate-400 dark:text-slate-500">
-										<div className="p-1.5 bg-slate-100 dark:bg-white/5 rounded-lg shrink-0">
+									<div className="flex items-start space-x-3 text-emerald-400 dark:text-emerald-600">
+										<div className="p-1.5 bg-emerald-50 dark:bg-white/5 rounded-lg shrink-0">
 											<MapPin size={16} />
 										</div>
 										<span className="text-xs font-medium leading-relaxed">
@@ -159,7 +159,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 
 									onSelectCenter(id, name);
 								}}
-								className="w-full py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-xl font-bold flex items-center justify-center space-x-2 shadow-lg shadow-amber-500/20 transition-all active:scale-95"
+								className="w-full py-3 bg-amber-400 hover:bg-amber-400 text-white rounded-xl font-bold flex items-center justify-center space-x-2 shadow-lg shadow-amber-400/20 transition-all active:scale-95"
 							>
 								<ShoppingCart size={18} />
 								<span>Shop at this center</span>

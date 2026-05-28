@@ -138,8 +138,8 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse">Loading product catalog...</p>
+        <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse">Loading product catalog...</p>
       </div>
     );
   }
@@ -158,29 +158,29 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
         <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-amber-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/20">
+          <div className="w-10 h-10 bg-amber-400 text-white rounded-xl flex items-center justify-center shadow-lg shadow-amber-400/20">
             <ShoppingBag size={20} />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Company Products</h2>
-            <p className="text-slate-500 dark:text-slate-400 text-xs">Browse and purchase our official products</p>
+            <h2 className="text-lg font-bold text-emerald-950 dark:text-white">Company Products</h2>
+            <p className="text-emerald-600 dark:text-emerald-400 text-xs">Browse and purchase our official products</p>
           </div>
         </div>
         <div className="flex items-center space-x-2">
           <Button 
             onClick={onBuyPackage} 
-            className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-1.5 rounded-lg font-bold text-xs"
+            className="bg-amber-400 hover:bg-amber-400 text-white px-4 py-1.5 rounded-lg font-bold text-xs"
           >
             Buy a package
           </Button>
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400" size={16} />
             <input 
               type="text" 
               placeholder="Search products..." 
               value={searchQuery} 
               onChange={handleSearch}
-              className="pl-9 pr-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-lg outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all w-48 text-xs" 
+              className="pl-9 pr-3 py-1.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-lg outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all w-48 text-xs" 
             />
           </div>
         </div>
@@ -191,8 +191,8 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
           onClick={() => handleCategoryChange('')}
           className={`px-4 py-1.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-all ${
             activeCategoryId === ''
-              ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20'
-              : 'bg-white dark:bg-slate-900 text-slate-500 border border-slate-200 dark:border-white/10 hover:border-amber-500 hover:text-amber-500'
+              ? 'bg-amber-400 text-white shadow-lg shadow-amber-400/20'
+              : 'bg-white dark:bg-emerald-950 text-emerald-600 border border-emerald-100 dark:border-white/10 hover:border-amber-400 hover:text-amber-400'
           }`}
         >
           All Categories
@@ -203,8 +203,8 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
             onClick={() => handleCategoryChange(String(category.id))}
             className={`px-4 py-1.5 rounded-full text-[10px] font-bold whitespace-nowrap transition-all ${
               activeCategoryId === String(category.id)
-                ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20'
-                : 'bg-white dark:bg-slate-900 text-slate-500 border border-slate-200 dark:border-white/10 hover:border-amber-500 hover:text-amber-500'
+                ? 'bg-amber-400 text-white shadow-lg shadow-amber-400/20'
+                : 'bg-white dark:bg-emerald-950 text-emerald-600 border border-emerald-100 dark:border-white/10 hover:border-amber-400 hover:text-amber-400'
             }`}
           >
             {category.name}
@@ -213,7 +213,7 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
       </div>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-20 text-slate-400 font-bold">
+        <div className="text-center py-20 text-emerald-400 font-bold">
           {searchQuery ? 'No products match your search.' : 'No products found.'}
         </div>
       ) : (
@@ -227,8 +227,8 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
               className="group cursor-pointer" 
               onClick={() => onSelectProduct(product)}
             >
-              <div className="bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-white/5 hover:shadow-xl transition-all duration-500">
-                <div className="relative aspect-square overflow-hidden bg-slate-50 dark:bg-white/5">
+              <div className="bg-white dark:bg-emerald-950 rounded-2xl overflow-hidden shadow-sm border border-emerald-50 dark:border-white/5 hover:shadow-xl transition-all duration-500">
+                <div className="relative aspect-square overflow-hidden bg-white dark:bg-white/5">
                   {product.image ? (
                     <img 
                       src={product.image} 
@@ -242,35 +242,35 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
                       }}
                     />
                   ) : null}
-                  <div className={`w-full h-full flex items-center justify-center text-slate-300 text-4xl ${product.image ? 'hidden' : ''}`}>
+                  <div className={`w-full h-full flex items-center justify-center text-emerald-200 text-4xl ${product.image ? 'hidden' : ''}`}>
                     📦
                   </div>
-                  <div className="absolute top-3 right-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md px-2 py-0.5 rounded-full text-[9px] font-black text-amber-500 shadow-sm">
+                  <div className="absolute top-3 right-3 bg-white/80 dark:bg-emerald-900/80 backdrop-blur-md px-2 py-0.5 rounded-full text-[9px] font-black text-amber-400 shadow-sm">
                     {product.pv} PV
                   </div>
                   <div 
-                    className="absolute inset-0 bg-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                    className="absolute inset-0 bg-amber-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                     onClick={(e) => handleAddToCart(product, e)}
                   >
-                    <div className="rounded-full p-3 bg-white text-amber-500 hover:bg-amber-500 hover:text-white transition-all transform translate-y-3 group-hover:translate-y-0 duration-300 cursor-pointer">
+                    <div className="rounded-full p-3 bg-white text-amber-400 hover:bg-amber-400 hover:text-white transition-all transform translate-y-3 group-hover:translate-y-0 duration-300 cursor-pointer">
                       <ShoppingCart size={20} />
                     </div>
                   </div>
                 </div>
                 <div className="p-4 space-y-2">
                   <div className="space-y-0.5">
-                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
+                    <p className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest">
                       {getCategoryName(product.category)}
                     </p>
-                    <h3 className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors truncate">
+                    <h3 className="font-bold text-sm text-emerald-950 dark:text-white group-hover:text-amber-400 transition-colors truncate">
                       {product.name}
                     </h3>
                   </div>
-                  <div className="flex items-center justify-between pt-2 border-t border-slate-50 dark:border-white/5">
-                    <span className="text-lg font-black text-amber-500">
+                  <div className="flex items-center justify-between pt-2 border-t border-white dark:border-white/5">
+                    <span className="text-lg font-black text-amber-400">
                       ₦{product.price?.toLocaleString() ?? '0'}
                     </span>
-                    <div className="flex items-center space-x-1 text-[9px] font-bold text-slate-400">
+                    <div className="flex items-center space-x-1 text-[9px] font-bold text-emerald-400">
                       <span>BV: {product.bv}</span>
                     </div>
                   </div>
@@ -286,7 +286,7 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
           <button 
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))} 
             disabled={currentPage === 1}
-            className="p-2 rounded-lg border border-slate-200 dark:border-white/10 text-slate-400 hover:text-amber-500 hover:border-amber-500 transition-all disabled:opacity-50 disabled:hover:border-slate-200 disabled:hover:text-slate-400"
+            className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 hover:border-amber-400 transition-all disabled:opacity-50 disabled:hover:border-emerald-100 disabled:hover:text-emerald-400"
             aria-label="Previous page"
           >
             <ChevronLeft size={20} />
@@ -310,8 +310,8 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
                 onClick={() => setCurrentPage(pageNum)}
                 className={`w-10 h-10 rounded-lg font-bold transition-all ${
                   currentPage === pageNum 
-                    ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' 
-                    : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5'
+                    ? 'bg-amber-400 text-white shadow-lg shadow-amber-400/20' 
+                    : 'text-emerald-600 hover:bg-emerald-50 dark:hover:bg-white/5'
                 }`}
               >
                 {pageNum}
@@ -321,7 +321,7 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
           <button 
             onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} 
             disabled={currentPage === totalPages}
-            className="p-2 rounded-lg border border-slate-200 dark:border-white/10 text-slate-400 hover:text-amber-500 hover:border-amber-500 transition-all disabled:opacity-50 disabled:hover:border-slate-200 disabled:hover:text-slate-400"
+            className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 hover:border-amber-400 transition-all disabled:opacity-50 disabled:hover:border-emerald-100 disabled:hover:text-emerald-400"
             aria-label="Next page"
           >
             <ChevronRight size={20} />

@@ -29,10 +29,10 @@ export const MainChart = () => {
 		<Card className="h-[280px] p-4">
 			<div className="flex justify-between items-center mb-3">
 				<div>
-					<h3 className="text-base font-bold text-slate-900 dark:text-white">
+					<h3 className="text-base font-bold text-emerald-950 dark:text-white">
 						Revenue Analysis
 					</h3>
-					<p className="text-slate-500 text-[10px]">
+					<p className="text-emerald-600 text-[10px]">
 						Monthly performance overview
 					</p>
 				</div>
@@ -42,8 +42,8 @@ export const MainChart = () => {
 							key={year}
 							className={`px-2 py-0.5 rounded-full text-[9px] font-bold transition-all ${
 								year === "2025"
-									? "bg-amber-500 text-white"
-									: "text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-300"
+									? "bg-amber-400 text-white"
+									: "text-emerald-400 dark:text-emerald-600 hover:text-emerald-950 dark:hover:text-emerald-200"
 							}`}
 						>
 							{year}

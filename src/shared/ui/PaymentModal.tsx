@@ -83,7 +83,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   };
 
   const inputClass =
-    'w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium text-sm';
+    'w-full pl-10 pr-4 py-3 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium text-sm';
 
   return (
     <AnimatePresence>
@@ -100,7 +100,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
           {/* Modal */}
           <motion.div
-            className="fixed inset-x-4 top-1/2 -translate-y-1/2 sm:inset-auto sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:w-[480px] bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-100 dark:border-white/10 overflow-hidden"
+            className="fixed inset-x-4 top-1/2 -translate-y-1/2 sm:inset-auto sm:left-1/2 sm:-translate-x-1/2 sm:top-1/2 sm:w-[480px] bg-white dark:bg-emerald-950 rounded-3xl shadow-2xl border border-emerald-50 dark:border-white/10 overflow-hidden"
             style={{ zIndex: 70 }}
             initial={{ opacity: 0, y: 40, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -109,25 +109,25 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
           >
             <div className="overflow-hidden">
               {/* Top accent */}
-              <div className="h-1.5 w-full bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500" />
+              <div className="h-1.5 w-full bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500" />
 
               <div className="p-6 space-y-5">
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-2xl bg-orange-50 dark:bg-orange-500/10 flex items-center justify-center">
-                      <CreditCard size={20} className="text-orange-500" />
+                    <div className="w-10 h-10 rounded-2xl bg-yellow-50 dark:bg-yellow-500/10 flex items-center justify-center">
+                      <CreditCard size={20} className="text-yellow-500" />
                     </div>
                     <div>
-                      <h2 className="text-base font-black text-slate-900 dark:text-white tracking-tight">
+                      <h2 className="text-base font-black text-emerald-950 dark:text-white tracking-tight">
                         {title}
                       </h2>
-                      <p className="text-xs text-slate-500 mt-0.5">{description}</p>
+                      <p className="text-xs text-emerald-600 mt-0.5">{description}</p>
                     </div>
                   </div>
                   <button
                     onClick={handleReset}
-                    className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors"
+                    className="w-8 h-8 rounded-xl flex items-center justify-center text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-white/10 transition-colors"
                   >
                     <X size={16} />
                   </button>
@@ -144,10 +144,10 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                       <CheckCircle2 size={32} className="text-emerald-500" />
                     </div>
                     <div className="text-center">
-                      <p className="text-base font-black text-slate-900 dark:text-white">
+                      <p className="text-base font-black text-emerald-950 dark:text-white">
                         Payment Successful!
                       </p>
-                      <p className="text-xs text-slate-500 mt-1">
+                      <p className="text-xs text-emerald-600 mt-1">
                         Your payment of ₦{numericAmount.toLocaleString()} has been confirmed.
                       </p>
                     </div>
@@ -163,7 +163,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                   <div className="space-y-3">
                     {/* Email */}
                     <div className="relative">
-                      <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400" />
                       <input
                         type="email"
                         placeholder="Email address"
@@ -175,7 +175,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
                     {/* Name */}
                     <div className="relative">
-                      <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <User size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400" />
                       <input
                         type="text"
                         placeholder="Full name (optional)"
@@ -187,7 +187,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
                     {/* Phone */}
                     <div className="relative">
-                      <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <Phone size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400" />
                       <input
                         type="tel"
                         placeholder="Phone number (optional)"
@@ -200,7 +200,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                     {/* Amount — hidden if fixedAmount is set */}
                     {!fixedAmount && (
                       <div className="relative">
-                        <Wallet size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <Wallet size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400" />
                         <input
                           type="number"
                           placeholder="Amount (₦)"
@@ -213,9 +213,9 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
                     {/* Fixed amount display */}
                     {fixedAmount && (
-                      <div className="rounded-xl bg-orange-50 dark:bg-orange-500/10 border border-orange-100 dark:border-orange-500/20 px-4 py-3 flex items-center justify-between">
-                        <span className="text-xs font-black text-slate-500 uppercase tracking-widest">Amount</span>
-                        <span className="text-lg font-black text-orange-500">
+                      <div className="rounded-xl bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-100 dark:border-yellow-500/20 px-4 py-3 flex items-center justify-between">
+                        <span className="text-xs font-black text-emerald-600 uppercase tracking-widest">Amount</span>
+                        <span className="text-lg font-black text-yellow-500">
                           ₦{fixedAmount.toLocaleString()}
                         </span>
                       </div>
@@ -228,7 +228,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                     )}
 
                     {!PAYSTACK_KEY && (
-                      <p className="text-xs text-amber-600 font-medium bg-amber-50 dark:bg-amber-500/10 px-4 py-3 rounded-xl">
+                      <p className="text-xs text-amber-400 font-medium bg-amber-50 dark:bg-amber-400/10 px-4 py-3 rounded-xl">
                         Paystack is not configured. Please set <strong>NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY</strong> in your environment.
                       </p>
                     )}
@@ -265,7 +265,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                         }
                       }}
                       disabled={!isValid || isLaunching || !PAYSTACK_KEY}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 bg-orange-500 hover:bg-orange-400 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-black text-sm uppercase tracking-widest transition-all shadow-lg shadow-orange-500/20"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 bg-yellow-500 hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-black text-sm uppercase tracking-widest transition-all shadow-lg shadow-yellow-500/20"
                     >
                       {isLaunching ? (
                         <>
@@ -280,8 +280,8 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                       )}
                     </button>
 
-                    <p className="text-center text-[10px] text-slate-400 font-medium">
-                      Secured by <span className="font-black text-slate-600 dark:text-slate-300">Paystack</span>
+                    <p className="text-center text-[10px] text-emerald-400 font-medium">
+                      Secured by <span className="font-black text-emerald-700 dark:text-emerald-200">Paystack</span>
                     </p>
                   </div>
                 )}

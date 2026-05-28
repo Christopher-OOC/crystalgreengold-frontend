@@ -56,17 +56,17 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
   );
 
   const stats = [
-    { label: 'Total Promotions', value: promotions.length.toString(), color: 'border-blue-500' },
+    { label: 'Total Promotions', value: promotions.length.toString(), color: 'border-emerald-500' },
     { label: 'Active', value: promotions.filter(p => p.enabled).length.toString(), color: 'border-emerald-500' },
     { label: 'Total Prize (₦)', value: promotions.reduce((s, p) => s + p.prize, 0).toLocaleString(), color: 'border-purple-500' },
-    { label: 'Avg Target PV', value: promotions.length > 0 ? (promotions.reduce((s, p) => s + p.targetPv, 0) / promotions.length).toFixed(0) : '0', color: 'border-orange-500' },
+    { label: 'Avg Target PV', value: promotions.length > 0 ? (promotions.reduce((s, p) => s + p.targetPv, 0) / promotions.length).toFixed(0) : '0', color: 'border-yellow-500' },
   ];
 
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Promotions...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Promotions...</p>
       </div>
     );
   }
@@ -91,20 +91,20 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <button onClick={onBack} className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group">
+          <button onClick={onBack} className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group">
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Admin Dashboard</span>
           </button>
-          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Promotions</h1>
+          <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">Promotions</h1>
         </div>
         <div className="flex items-center space-x-3">
           <Button onClick={() => setShowEarned(true)}
-            className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-200 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-slate-50 transition-all shadow-xl">
-            <Gift size={20} className="text-orange-500" />
+            className="bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 text-emerald-800 dark:text-emerald-100 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-white transition-all shadow-xl">
+            <Gift size={20} className="text-yellow-500" />
             <span>Earned Promotions</span>
           </Button>
           <Button onClick={() => setIsCreating(true)}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-orange-600/20">
+            className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-yellow-600/20">
             <Plus size={20} />
             <span>Create New Promotion</span>
           </Button>
@@ -113,9 +113,9 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
 
       <Card className="p-4 border-none shadow-xl">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
           <input type="text" placeholder="Search promotions..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium" />
+            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium" />
         </div>
       </Card>
 
@@ -123,8 +123,8 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
         {stats.map((stat, i) => (
           <Card key={i} className={`p-6 border-l-4 ${stat.color} shadow-xl`}>
             <div className="space-y-1">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</p>
-              <p className="text-2xl font-black text-slate-900 dark:text-white">{stat.value}</p>
+              <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">{stat.label}</p>
+              <p className="text-2xl font-black text-emerald-950 dark:text-white">{stat.value}</p>
             </div>
           </Card>
         ))}
@@ -134,13 +134,13 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 dark:bg-white/5 border-b border-slate-100 dark:border-white/5">
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">PROMOTION</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">TARGET PV</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">PRIZE</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">DESCRIPTION</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">STATUS</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">ACTIONS</th>
+              <tr className="bg-white dark:bg-white/5 border-b border-emerald-50 dark:border-white/5">
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">PROMOTION</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-center">TARGET PV</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-center">PRIZE</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">DESCRIPTION</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-center">STATUS</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">ACTIONS</th>
               </tr>
             </thead>
             <tbody>
@@ -148,14 +148,14 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
                 <tr>
                   <td colSpan={6} className="py-24">
                     <div className="flex flex-col items-center justify-center text-center space-y-6">
-                      <div className="w-24 h-24 bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center text-slate-300">
+                      <div className="w-24 h-24 bg-emerald-50 dark:bg-white/5 rounded-full flex items-center justify-center text-emerald-200">
                         <Frown size={64} />
                       </div>
                       <div className="space-y-2">
-                        <h3 className="text-xl font-black text-slate-900 dark:text-white">No promotions found</h3>
-                        <p className="text-slate-500 font-medium">Get started by creating a new promotion.</p>
+                        <h3 className="text-xl font-black text-emerald-950 dark:text-white">No promotions found</h3>
+                        <p className="text-emerald-600 font-medium">Get started by creating a new promotion.</p>
                       </div>
-                      <Button onClick={() => setIsCreating(true)} className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 rounded-xl font-black uppercase tracking-widest">
+                      <Button onClick={() => setIsCreating(true)} className="bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-3 rounded-xl font-black uppercase tracking-widest">
                         <Plus size={20} />
                         <span>New Promotion</span>
                       </Button>
@@ -165,33 +165,33 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
               ) : (
                 filtered.map((promo, i) => (
                   <motion.tr key={promo.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors border-b border-slate-50 dark:border-white/5">
+                    className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors border-b border-white dark:border-white/5">
                     <td className="px-6 py-5">
                       <div className="flex items-center space-x-3">
                         {promo.image ? (
                           <img src={promo.image} className="w-10 h-10 rounded-xl object-cover" />
                         ) : (
-                          <div className="w-10 h-10 bg-orange-500/10 text-orange-500 rounded-xl flex items-center justify-center">
+                          <div className="w-10 h-10 bg-yellow-500/10 text-yellow-500 rounded-xl flex items-center justify-center">
                             <Megaphone size={18} />
                           </div>
                         )}
-                        <span className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">{promo.name}</span>
+                        <span className="text-sm font-black text-emerald-950 dark:text-white uppercase tracking-tight">{promo.name}</span>
                       </div>
                     </td>
                     <td className="px-6 py-5 text-center">
-                      <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{promo.targetPv?.toLocaleString()}</span>
+                      <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">{promo.targetPv?.toLocaleString()}</span>
                     </td>
                     <td className="px-6 py-5 text-center">
-                      <span className="text-sm font-black text-slate-900 dark:text-white">₦{promo.prize?.toLocaleString()}</span>
+                      <span className="text-sm font-black text-emerald-950 dark:text-white">₦{promo.prize?.toLocaleString()}</span>
                     </td>
                     <td className="px-6 py-5 max-w-xs">
-                      <p className="text-xs font-medium text-slate-500 dark:text-slate-400 line-clamp-2">{promo.description}</p>
+                      <p className="text-xs font-medium text-emerald-600 dark:text-emerald-400 line-clamp-2">{promo.description}</p>
                     </td>
                     <td className="px-6 py-5 text-center">
                       <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                         promo.enabled
                           ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
-                          : 'bg-slate-500/10 text-slate-500 border-slate-500/20'
+                          : 'bg-emerald-600/10 text-emerald-600 border-emerald-600/20'
                       }`}>
                         {promo.enabled ? 'Active' : 'Disabled'}
                       </span>
@@ -199,7 +199,7 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
                     <td className="px-6 py-5">
                       <div className="flex items-center justify-end space-x-2">
                         <button onClick={() => setEditingPromotion(promo)}
-                          className="flex items-center space-x-1 text-orange-500 hover:text-orange-600 transition-colors font-black uppercase tracking-widest text-xs px-3 py-2 hover:bg-orange-500/10 rounded-lg">
+                          className="flex items-center space-x-1 text-yellow-500 hover:text-yellow-600 transition-colors font-black uppercase tracking-widest text-xs px-3 py-2 hover:bg-yellow-500/10 rounded-lg">
                           <Edit size={14} />
                           <span>Edit</span>
                         </button>

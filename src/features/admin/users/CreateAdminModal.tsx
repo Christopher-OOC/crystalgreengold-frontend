@@ -106,7 +106,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
       >
         <Card className="p-0 overflow-hidden border-none shadow-2xl">
           {/* Header */}
-          <div className="relative bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
+          <div className="relative bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-4">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
@@ -121,7 +121,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                 <h2 className="text-xl font-black text-white tracking-tight">
                   {admin ? 'Edit Admin User' : 'Create New Admin User'}
                 </h2>
-                <p className="text-orange-100 text-xs font-medium mt-0.5">
+                <p className="text-yellow-100 text-xs font-medium mt-0.5">
                   {admin ? 'Update admin information' : 'Add a new administrator to the system'}
                 </p>
               </div>
@@ -140,7 +140,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
               {/* Username - only for new admins */}
               {!admin && (
                 <div className="space-y-2">
-                  <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                  <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                     <User size={12} />
                     <span>Username *</span>
                   </label>
@@ -150,7 +150,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                     value={formData.username}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                    className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                     placeholder="admin_username"
                   />
                 </div>
@@ -158,7 +158,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
 
               {/* Email */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <Mail size={12} />
                   <span>Email *</span>
                 </label>
@@ -169,14 +169,14 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                   onChange={handleChange}
                   required
                   disabled={!!admin}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium disabled:opacity-50"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium disabled:opacity-50"
                   placeholder="admin@example.com"
                 />
               </div>
 
               {/* First Name */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <User size={12} />
                   <span>First Name</span>
                 </label>
@@ -185,14 +185,14 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                   placeholder="John"
                 />
               </div>
 
               {/* Last Name */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <User size={12} />
                   <span>Last Name</span>
                 </label>
@@ -201,14 +201,14 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                   placeholder="Doe"
                 />
               </div>
 
               {/* Phone Number */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <Phone size={12} />
                   <span>Phone Number</span>
                 </label>
@@ -217,14 +217,14 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                   placeholder="+234 800 000 0000"
                 />
               </div>
 
               {/* Role */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <Shield size={12} />
                   <span>Admin Role</span>
                 </label>
@@ -232,7 +232,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                   name="role"
                   value={formData.role}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                 >
                   <option value="ROLE_ADMIN">Admin</option>
                   <option value="ROLE_SUPER_ADMIN">Super Admin</option>
@@ -243,7 +243,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
               {!admin && (
                 <>
                   <div className="space-y-2">
-                    <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                    <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                       <Lock size={12} />
                       <span>Password *</span>
                     </label>
@@ -254,13 +254,13 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                         value={formData.password}
                         onChange={handleChange}
                         required
-                        className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium pr-10"
+                        className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium pr-10"
                         placeholder="••••••••"
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 hover:text-emerald-700"
                       >
                         {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                       </button>
@@ -268,7 +268,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                   </div>
 
                   <div className="space-y-2">
-                    <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                    <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                       <Lock size={12} />
                       <span>Confirm Password *</span>
                     </label>
@@ -278,7 +278,7 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
                       value={formData.confirmPassword}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                       placeholder="••••••••"
                     />
                   </div>
@@ -287,18 +287,18 @@ export const CreateAdminModal: React.FC<CreateAdminModalProps> = ({
             </div>
 
             {/* Actions */}
-            <div className="flex items-center justify-end space-x-3 pt-4 border-t border-slate-100 dark:border-white/5">
+            <div className="flex items-center justify-end space-x-3 pt-4 border-t border-emerald-50 dark:border-white/5">
               <Button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
+                className="px-6 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-orange-500/20 transition-all disabled:opacity-50 flex items-center space-x-2"
+                className="px-6 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-yellow-500/20 transition-all disabled:opacity-50 flex items-center space-x-2"
               >
                 {isSubmitting && <Loader2 size={14} className="animate-spin" />}
                 <span>{admin ? 'Update Admin' : 'Create Admin'}</span>

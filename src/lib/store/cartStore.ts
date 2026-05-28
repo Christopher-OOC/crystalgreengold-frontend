@@ -86,7 +86,7 @@ export const useCartStore = create<CartState & CartActions>()(
       },
     }),
     {
-      name:       'topnivo-cart',
+      name:       'crystalgreengold-cart',
       storage:    createJSONStorage(() => localStorage),
       partialize: (state) => ({ cart: state.cart, itemCount: state.itemCount, totalAmount: state.totalAmount }),
     },

@@ -16,14 +16,14 @@ export const StepIndicator = ({ currentStep }: { currentStep: number }) => (
           }}
           className={`flex items-center justify-center w-8 h-8 rounded-full border-2 transition-all duration-500 ${
             step === currentStep 
-              ? 'shadow-lg shadow-amber-500/20' 
-              : 'text-slate-400 border-slate-200 dark:border-slate-700'
+              ? 'shadow-lg shadow-amber-400/20' 
+              : 'text-emerald-400 border-emerald-100 dark:border-emerald-800'
           }`}
         >
           {step < currentStep ? <CheckCircle2 size={16} /> : <span className="text-sm font-bold">{step}</span>}
         </motion.div>
         {step < 3 && (
-          <div className="w-12 h-0.5 rounded-full bg-slate-200 dark:bg-slate-700 relative overflow-hidden">
+          <div className="w-12 h-0.5 rounded-full bg-emerald-100 dark:bg-emerald-800 relative overflow-hidden">
             <motion.div 
               initial={false}
               animate={{ width: step < currentStep ? '100%' : '0%' }}

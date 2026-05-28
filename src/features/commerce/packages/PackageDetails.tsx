@@ -49,7 +49,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
       {/* Back Button */}
       <button 
         onClick={onBack}
-        className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold group"
+        className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold group"
       >
         <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
         <span>Back to Packages</span>
@@ -57,7 +57,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
 +
       <Card noPadding className="overflow-hidden border-none shadow-2xl">
         {/* Hero Header */}
-        <div className="relative h-64 bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden">
+        <div className="relative h-64 bg-gradient-to-br from-emerald-900 to-emerald-950 flex items-center justify-center overflow-hidden">
           {/* Animated Background Elements */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-10 left-10 w-32 h-32 border-2 border-white/20 rounded-full animate-pulse" />
@@ -65,7 +65,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
           </div>
 
           {/* Price Badge */}
-          <div className="absolute top-6 right-6 bg-amber-500 text-white px-4 py-1.5 rounded-full font-black text-sm shadow-lg">
+          <div className="absolute top-6 right-6 bg-amber-400 text-white px-4 py-1.5 rounded-full font-black text-sm shadow-lg">
             ₦{pkg.price.toLocaleString()}
           </div>
 
@@ -99,13 +99,13 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
         <div className="p-8 md:p-12 space-y-12">
           {/* Value Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-blue-50 dark:bg-blue-500/5 p-6 rounded-3xl border border-blue-100 dark:border-blue-500/20 flex items-center space-x-4">
-              <div className="p-3 bg-blue-500 text-white rounded-2xl shadow-lg shadow-blue-500/20">
+            <div className="bg-emerald-50 dark:bg-emerald-500/5 p-6 rounded-3xl border border-emerald-100 dark:border-emerald-500/20 flex items-center space-x-4">
+              <div className="p-3 bg-emerald-500 text-white rounded-2xl shadow-lg shadow-emerald-500/20">
                 <DollarSign size={24} />
               </div>
               <div>
-                <p className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Business Value</p>
-                <p className="text-xl font-black text-blue-600 dark:text-blue-400">{pkg.bv}</p>
+                <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Business Value</p>
+                <p className="text-xl font-black text-emerald-600 dark:text-emerald-400">{pkg.bv}</p>
               </div>
             </div>
             <div className="bg-purple-50 dark:bg-purple-500/5 p-6 rounded-3xl border border-purple-100 dark:border-purple-500/20 flex items-center space-x-4">
@@ -121,32 +121,32 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
 
           {/* Package Includes */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2 text-amber-500">
+            <div className="flex items-center space-x-2 text-amber-400">
               <Gift size={24} />
               <h2 className="text-xl font-bold">Package Includes</h2>
             </div>
-            <div className="flex items-center space-x-3 bg-slate-50 dark:bg-white/5 p-4 rounded-2xl border border-slate-100 dark:border-white/5">
+            <div className="flex items-center space-x-3 bg-white dark:bg-white/5 p-4 rounded-2xl border border-emerald-50 dark:border-white/5">
               <CheckCircle2 size={20} className="text-emerald-500" />
-              <span className="font-bold text-slate-700 dark:text-slate-200">Select</span>
+              <span className="font-bold text-emerald-800 dark:text-emerald-100">Select</span>
             </div>
           </div>
 
           {/* Earning Potential */}
           <div className="space-y-6">
-            <div className="flex items-center space-x-2 text-blue-500">
+            <div className="flex items-center space-x-2 text-emerald-500">
               <TrendingUp size={24} />
               <h2 className="text-xl font-bold">Earning Potential</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-3xl border border-slate-100 dark:border-white/5 relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-blue-500/10 text-blue-500 px-3 py-1 rounded-bl-2xl text-[10px] font-bold">25%</div>
-                <h3 className="font-bold text-slate-900 dark:text-white mb-1">Direct Commission</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Earn on every direct referral you make</p>
+              <div className="bg-white dark:bg-white/5 p-6 rounded-3xl border border-emerald-50 dark:border-white/5 relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-emerald-500/10 text-emerald-500 px-3 py-1 rounded-bl-2xl text-[10px] font-bold">25%</div>
+                <h3 className="font-bold text-emerald-950 dark:text-white mb-1">Direct Commission</h3>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400">Earn on every direct referral you make</p>
               </div>
-              <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-3xl border border-slate-100 dark:border-white/5 relative overflow-hidden">
+              <div className="bg-white dark:bg-white/5 p-6 rounded-3xl border border-emerald-50 dark:border-white/5 relative overflow-hidden">
                 <div className="absolute top-0 right-0 bg-purple-500/10 text-purple-500 px-3 py-1 rounded-bl-2xl text-[10px] font-bold">12%</div>
-                <h3 className="font-bold text-slate-900 dark:text-white mb-1">Binary Commission</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Earn from your network's performance</p>
+                <h3 className="font-bold text-emerald-950 dark:text-white mb-1">Binary Commission</h3>
+                <p className="text-xs text-emerald-600 dark:text-emerald-400">Earn from your network's performance</p>
               </div>
             </div>
           </div>
@@ -167,11 +167,11 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
           <div className="space-y-4">
             {/* Quantity Selector for Buy */}
             <div className="flex items-center gap-4">
-              <span className="font-bold text-slate-700 dark:text-slate-200 text-sm">Quantity:</span>
-              <div className="flex items-center border border-slate-200 dark:border-white/10 rounded-xl overflow-hidden">
+              <span className="font-bold text-emerald-800 dark:text-emerald-100 text-sm">Quantity:</span>
+              <div className="flex items-center border border-emerald-100 dark:border-white/10 rounded-xl overflow-hidden">
                 <button
                   onClick={() => setBuyQuantity(Math.max(1, buyQuantity - 1))}
-                  className="px-3 py-2 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors font-bold text-slate-600 dark:text-slate-300"
+                  className="px-3 py-2 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors font-bold text-emerald-700 dark:text-emerald-200"
                 >
                   −
                 </button>
@@ -180,11 +180,11 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
                   min="1"
                   value={buyQuantity}
                   onChange={(e) => setBuyQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-16 px-2 py-2 text-center font-bold bg-white dark:bg-slate-800 outline-none"
+                  className="w-16 px-2 py-2 text-center font-bold bg-white dark:bg-emerald-900 outline-none"
                 />
                 <button
                   onClick={() => setBuyQuantity(buyQuantity + 1)}
-                  className="px-3 py-2 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors font-bold text-slate-600 dark:text-slate-300"
+                  className="px-3 py-2 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors font-bold text-emerald-700 dark:text-emerald-200"
                 >
                   +
                 </button>
@@ -196,7 +196,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
               {/* Buy Button */}
               <Button 
                 onClick={() => setIsBuyModalOpen(true)}
-                className="py-6 rounded-3xl text-lg font-black shadow-2xl shadow-blue-500/40 flex items-center justify-center space-x-3 bg-blue-600 hover:bg-blue-700"
+                className="py-6 rounded-3xl text-lg font-black shadow-2xl shadow-emerald-500/40 flex items-center justify-center space-x-3 bg-emerald-600 hover:bg-emerald-700"
               >
                 <ShoppingCart size={24} />
                 <div className="text-left">
@@ -208,7 +208,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
               {/* Activate Button */}
               <Button 
                 onClick={() => setIsActivationModalOpen(true)}
-                className="py-6 rounded-3xl text-lg font-black shadow-2xl shadow-amber-500/40 flex items-center justify-center space-x-3"
+                className="py-6 rounded-3xl text-lg font-black shadow-2xl shadow-amber-400/40 flex items-center justify-center space-x-3"
               >
                 <ShieldCheck size={24} />
                 <span>Activate Package</span>

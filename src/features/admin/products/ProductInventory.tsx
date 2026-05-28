@@ -119,8 +119,8 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Inventory...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Inventory...</p>
       </div>
     );
   }
@@ -137,31 +137,31 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <button onClick={onBack} className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group">
+          <button onClick={onBack} className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group">
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Admin Dashboard</span>
           </button>
-          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Product Inventory</h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">Manage your product catalog</p>
+          <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">Product Inventory</h1>
+          <p className="text-emerald-600 dark:text-emerald-400 font-medium">Manage your product catalog</p>
         </div>
       </div>
 
       <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
         <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-          <Button onClick={() => setIsCreating(true)} className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shrink-0">
+          <Button onClick={() => setIsCreating(true)} className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shrink-0">
             <Plus size={20} />
             <span>Create New Product</span>
           </Button>
           <div className="relative flex-1 sm:w-96">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
             <input type="text" placeholder="Search products by name..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium" />
+              className="w-full pl-12 pr-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium" />
           </div>
           
           <select 
             value={selectedCategory} 
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-bold text-xs uppercase tracking-widest text-slate-500 min-w-[200px]"
+            className="px-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-bold text-xs uppercase tracking-widest text-emerald-600 min-w-[200px]"
           >
             <option value="">All Categories</option>
             {categories.map(cat => (
@@ -172,7 +172,7 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
       </div>
 
       {error && (
-        <div className="flex flex-col gap-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-700 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-300 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-amber-700 dark:border-amber-400/20 dark:bg-amber-400/10 dark:text-amber-300 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">
             <AlertCircle size={20} className="mt-0.5 shrink-0" />
             <div>
@@ -180,7 +180,7 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
               <p className="text-sm font-medium">{error}</p>
             </div>
           </div>
-          <Button onClick={fetchData} className="w-full rounded-xl bg-amber-500 px-5 py-2 text-xs font-black uppercase text-white hover:bg-amber-600 sm:w-auto">
+          <Button onClick={fetchData} className="w-full rounded-xl bg-amber-400 px-5 py-2 text-xs font-black uppercase text-white hover:bg-amber-400 sm:w-auto">
             Retry
           </Button>
         </div>
@@ -190,50 +190,50 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 dark:bg-white/5 border-b border-slate-100 dark:border-white/5">
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">S/N</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Image</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Name</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Price</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">PV</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">BV</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Category</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Stock</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+              <tr className="bg-white dark:bg-white/5 border-b border-emerald-50 dark:border-white/5">
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">S/N</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Image</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Name</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Price</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-center">PV</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-center">BV</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Category</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Stock</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50 dark:divide-white/5">
+            <tbody className="divide-y divide-white dark:divide-white/5">
               {paginated.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="px-6 py-12 text-center text-slate-400 font-bold">
+                  <td colSpan={9} className="px-6 py-12 text-center text-emerald-400 font-bold">
                     No products found. Create one.
                   </td>
                 </tr>
               ) : (
                 paginated.map((product, i) => (
                   <motion.tr key={product.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
-                    <td className="px-6 py-5 text-sm font-black text-slate-400">{(currentPage - 1) * itemsPerPage + i + 1}.</td>
+                    className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors">
+                    <td className="px-6 py-5 text-sm font-black text-emerald-400">{(currentPage - 1) * itemsPerPage + i + 1}.</td>
                     <td className="px-6 py-5">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden border border-slate-100 dark:border-white/10 bg-slate-100 dark:bg-white/5">
+                      <div className="w-12 h-12 rounded-lg overflow-hidden border border-emerald-50 dark:border-white/10 bg-emerald-50 dark:bg-white/5">
                         {(product.image || product.imageUrl) && <img src={product.image || product.imageUrl} alt={product.name} className="w-full h-full object-cover" />}
                       </div>
                     </td>
                     <td className="px-6 py-5">
-                      <p className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">{product.name}</p>
-                      <p className="text-[10px] font-bold text-slate-400">{product.description?.slice(0, 40)}...</p>
+                      <p className="text-sm font-black text-emerald-950 dark:text-white uppercase tracking-tight">{product.name}</p>
+                      <p className="text-[10px] font-bold text-emerald-400">{product.description?.slice(0, 40)}...</p>
                     </td>
                     <td className="px-6 py-5">
-                      <span className="text-sm font-black text-slate-900 dark:text-white">₦{product.price?.toLocaleString()}</span>
+                      <span className="text-sm font-black text-emerald-950 dark:text-white">₦{product.price?.toLocaleString()}</span>
                     </td>
                     <td className="px-6 py-5 text-center">
-                      <span className="px-3 py-1 bg-blue-500/10 text-blue-500 text-[10px] font-black rounded-full uppercase tracking-widest border border-blue-500/20">{product.pv} PV</span>
+                      <span className="px-3 py-1 bg-emerald-500/10 text-emerald-500 text-[10px] font-black rounded-full uppercase tracking-widest border border-emerald-500/20">{product.pv} PV</span>
                     </td>
                     <td className="px-6 py-5 text-center">
                       <span className="px-3 py-1 bg-purple-500/10 text-purple-500 text-[10px] font-black rounded-full uppercase tracking-widest border border-purple-500/20">{product.bv} BV</span>
                     </td>
                     <td className="px-6 py-5">
-                      <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{getProductCategoryName(product.category)}</span>
+                      <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">{getProductCategoryName(product.category)}</span>
                     </td>
                     <td className="px-6 py-5">
                       <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
@@ -246,7 +246,7 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
                     </td>
                     <td className="px-6 py-5">
                       <div className="flex items-center justify-end space-x-1">
-                        <button onClick={() => setEditingProduct(product)} className="p-2 text-slate-400 hover:text-blue-500 hover:bg-blue-500/10 rounded-lg transition-all" title="Edit">
+                        <button onClick={() => setEditingProduct(product)} className="p-2 text-emerald-400 hover:text-emerald-500 hover:bg-emerald-500/10 rounded-lg transition-all" title="Edit">
                           <Edit size={16} />
                         </button>
                      
@@ -266,7 +266,7 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
           <button
             onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
-            className="p-2 rounded-lg border border-slate-200 dark:border-white/10 text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:bg-white dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <ChevronLeft size={20} />
           </button>
@@ -288,8 +288,8 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
                 onClick={() => setCurrentPage(pageNum)}
                 className={`w-10 h-10 rounded-lg font-bold transition-all ${
                   currentPage === pageNum
-                    ? 'bg-orange-600 text-white shadow-lg shadow-orange-600/20'
-                    : 'border border-slate-200 dark:border-white/10 text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5'
+                    ? 'bg-yellow-600 text-white shadow-lg shadow-yellow-600/20'
+                    : 'border border-emerald-100 dark:border-white/10 text-emerald-400 hover:bg-white dark:hover:bg-white/5'
                 }`}
               >
                 {pageNum}
@@ -300,7 +300,7 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
           <button
             onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
-            className="p-2 rounded-lg border border-slate-200 dark:border-white/10 text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:bg-white dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <ChevronRight size={20} />
           </button>

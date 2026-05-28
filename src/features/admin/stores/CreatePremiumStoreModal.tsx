@@ -124,7 +124,7 @@ export const CreatePremiumStoreModal: React.FC<
       >
         <Card className="p-0 overflow-hidden border-none shadow-2xl">
           {/* Header */}
-          <div className="relative bg-gradient-to-r from-orange-500 to-orange-600 px-6 py-4">
+          <div className="relative bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-4">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"
@@ -139,7 +139,7 @@ export const CreatePremiumStoreModal: React.FC<
                 <h2 className="text-xl font-black text-white tracking-tight">
                   {store ? "Edit Premium Store" : "Register New Premium Store"}
                 </h2>
-                <p className="text-orange-100 text-xs font-medium mt-0.5">
+                <p className="text-yellow-100 text-xs font-medium mt-0.5">
                   {store
                     ? "Update store information"
                     : "Create a new premium store in the network"}
@@ -163,7 +163,7 @@ export const CreatePremiumStoreModal: React.FC<
               {/* Username - only for new stores */}
               {!store && (
                 <div className="space-y-2">
-                  <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                  <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                     <User size={12} />
                     <span>Username *</span>
                   </label>
@@ -173,7 +173,7 @@ export const CreatePremiumStoreModal: React.FC<
                     value={formData.username}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                    className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                     placeholder="e.g., premium_store_001"
                   />
                 </div>
@@ -181,7 +181,7 @@ export const CreatePremiumStoreModal: React.FC<
 
               {/* Email */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <Mail size={12} />
                   <span>Email *</span>
                 </label>
@@ -192,14 +192,14 @@ export const CreatePremiumStoreModal: React.FC<
                   onChange={handleChange}
                   required
                   disabled={!!store}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium disabled:opacity-50"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium disabled:opacity-50"
                   placeholder="store@example.com"
                 />
               </div>
 
               {/* First Name */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <User size={12} />
                   <span>First Name *</span>
                 </label>
@@ -209,14 +209,14 @@ export const CreatePremiumStoreModal: React.FC<
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                   placeholder="John"
                 />
               </div>
 
               {/* Last Name */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <User size={12} />
                   <span>Last Name *</span>
                 </label>
@@ -226,14 +226,14 @@ export const CreatePremiumStoreModal: React.FC<
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                   placeholder="Doe"
                 />
               </div>
 
               {/* Phone Number */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <Phone size={12} />
                   <span>Phone Number</span>
                 </label>
@@ -242,14 +242,14 @@ export const CreatePremiumStoreModal: React.FC<
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                   placeholder="+234 800 000 0000"
                 />
               </div>
 
               {/* Business Name */}
               <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <Building size={12} />
                   <span>Business Name</span>
                 </label>
@@ -258,14 +258,14 @@ export const CreatePremiumStoreModal: React.FC<
                   name="businessName"
                   value={formData.businessName}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                   placeholder="My Premium Store"
                 />
               </div>
 
               {/* Address */}
               <div className="space-y-2 md:col-span-2">
-                <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                   <MapPin size={12} />
                   <span>Address</span>
                 </label>
@@ -274,7 +274,7 @@ export const CreatePremiumStoreModal: React.FC<
                   value={formData.address}
                   onChange={handleChange}
                   rows={2}
-                  className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium resize-none"
+                  className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium resize-none"
                   placeholder="Full address of the store"
                 />
               </div>
@@ -283,7 +283,7 @@ export const CreatePremiumStoreModal: React.FC<
               {!store && (
                 <>
                   <div className="space-y-2">
-                    <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                    <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                       <Award size={12} />
                       <span>Sponsor ID (Optional)</span>
                     </label>
@@ -292,13 +292,13 @@ export const CreatePremiumStoreModal: React.FC<
                       name="sponsorId"
                       value={formData.sponsorId}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                       placeholder="Sponsor username or ID"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                    <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                       <Award size={12} />
                       <span>Placer ID (Optional)</span>
                     </label>
@@ -307,13 +307,13 @@ export const CreatePremiumStoreModal: React.FC<
                       name="placementId"
                       value={formData.placementId}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                       placeholder="Placer username or ID"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <label className="flex items-center space-x-2 text-xs font-black text-slate-600 uppercase tracking-widest">
+                    <label className="flex items-center space-x-2 text-xs font-black text-emerald-700 uppercase tracking-widest">
                       <Award size={12} />
                       <span>Leg (Optional)</span>
                     </label>
@@ -321,7 +321,7 @@ export const CreatePremiumStoreModal: React.FC<
                       name="leg"
                       value={formData.leg}
                       onChange={handleChange}
-                      className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all text-sm font-medium"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
                     >
                       <option value="LEFT">Left</option>
                       <option value="RIGHT">Right</option>
@@ -332,18 +332,18 @@ export const CreatePremiumStoreModal: React.FC<
             </div>
 
             {/* Actions */}
-            <div className="flex items-center justify-end space-x-3 pt-4 border-t border-slate-100 dark:border-white/5">
+            <div className="flex items-center justify-end space-x-3 pt-4 border-t border-emerald-50 dark:border-white/5">
               <Button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
+                className="px-6 py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 rounded-xl text-xs font-black uppercase tracking-widest transition-all"
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-6 py-2.5 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-orange-500/20 transition-all disabled:opacity-50 flex items-center space-x-2"
+                className="px-6 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl text-xs font-black uppercase tracking-widest shadow-lg shadow-yellow-500/20 transition-all disabled:opacity-50 flex items-center space-x-2"
               >
                 {isSubmitting && <Loader2 size={14} className="animate-spin" />}
                 <span>{store ? "Update Store" : "Create Store"}</span>

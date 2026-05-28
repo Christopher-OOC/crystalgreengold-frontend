@@ -90,19 +90,19 @@ export const CreateCategory: React.FC<CreateCategoryProps> = ({
       {/* Success Modal */}
       <AnimatePresence>
         {showSuccessModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-emerald-950/60 backdrop-blur-sm">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl text-center space-y-6 border border-slate-100 dark:border-white/5"
+              className="bg-white dark:bg-emerald-950 rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl text-center space-y-6 border border-emerald-50 dark:border-white/5"
             >
               <div className="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 size={48} />
               </div>
               <div className="space-y-2">
-                <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Success!</h2>
-                <p className="text-slate-500 dark:text-slate-400 font-medium">
+                <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight uppercase">Success!</h2>
+                <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                   The category has been {editCategory ? 'updated' : 'created'} successfully.
                 </p>
               </div>
@@ -115,11 +115,11 @@ export const CreateCategory: React.FC<CreateCategoryProps> = ({
       <div className="flex items-center space-x-4">
         <button 
           onClick={onBack}
-          className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-full transition-colors"
+          className="p-2 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-full transition-colors"
         >
-          <ArrowLeft size={20} className="text-slate-600 dark:text-slate-400" />
+          <ArrowLeft size={20} className="text-emerald-700 dark:text-emerald-400" />
         </button>
-        <h1 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
+        <h1 className="text-xl font-black text-emerald-950 dark:text-white uppercase tracking-tight">
           {editCategory ? 'Edit Category' : 'Create New Category'}
         </h1>
       </div>
@@ -135,7 +135,7 @@ export const CreateCategory: React.FC<CreateCategoryProps> = ({
 
         <div className="space-y-6">
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
               Category Name *
             </label>
             <input 
@@ -143,13 +143,13 @@ export const CreateCategory: React.FC<CreateCategoryProps> = ({
               placeholder="e.g., Fashion and Beauty"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium"
+              className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium"
               autoFocus
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
               Description
             </label>
             <textarea 
@@ -157,15 +157,15 @@ export const CreateCategory: React.FC<CreateCategoryProps> = ({
               rows={4}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium resize-none"
+              className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium resize-none"
             />
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-emerald-400">
               Optional: A brief description of what this category represents
             </p>
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
               Image URL (Optional)
             </label>
             <div className="relative">
@@ -174,29 +174,29 @@ export const CreateCategory: React.FC<CreateCategoryProps> = ({
                 placeholder="https://example.com/category-image.jpg"
                 value={formData.imageUrl}
                 onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 pl-10 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium"
+                className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 pl-10 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium"
               />
-              <Upload size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+              <Upload size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400" />
             </div>
-            <p className="text-[10px] text-slate-400">
+            <p className="text-[10px] text-emerald-400">
               Add an image URL to display an icon for this category
             </p>
           </div>
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center justify-end space-x-4 pt-6 border-t border-slate-100 dark:border-white/5">
+        <div className="flex items-center justify-end space-x-4 pt-6 border-t border-emerald-50 dark:border-white/5">
           <button 
             onClick={onBack}
             disabled={isLoading}
-            className="px-8 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:bg-slate-50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-8 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-400 hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Cancel
           </button>
           <Button 
             onClick={handleCreate}
             disabled={isLoading || !formData.name.trim()}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-10 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-orange-600/20 disabled:opacity-80 disabled:cursor-not-allowed min-w-[180px] justify-center"
+            className="bg-yellow-600 hover:bg-yellow-700 text-white px-10 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-yellow-600/20 disabled:opacity-80 disabled:cursor-not-allowed min-w-[180px] justify-center"
           >
             {isLoading ? (
               <>

@@ -121,16 +121,16 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+        <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400 uppercase tracking-widest">
           <span>Home</span>
           <span>/</span>
           <span>Products</span>
           <span>/</span>
-          <span className="text-amber-500">{product.name}</span>
+          <span className="text-amber-400">{product.name}</span>
         </div>
         <Button 
           onClick={onBack}
-          className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-2 rounded-lg font-bold flex items-center space-x-2"
+          className="bg-amber-400 hover:bg-amber-400 text-white px-6 py-2 rounded-lg font-bold flex items-center space-x-2"
         >
           <ChevronLeft size={18} />
           <span>BACK TO PRODUCTS</span>
@@ -140,7 +140,7 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
       <Card className="p-0 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
           {/* Product Image */}
-          <div className="p-8 bg-slate-50 dark:bg-white/5 flex items-center justify-center relative">
+          <div className="p-8 bg-white dark:bg-white/5 flex items-center justify-center relative">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -155,7 +155,7 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
                   e.currentTarget.src = 'https://via.placeholder.com/400?text=No+Image';
                 }}
               />
-              <button className="absolute top-0 right-0 p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg text-slate-400 hover:text-rose-500 transition-colors">
+              <button className="absolute top-0 right-0 p-3 bg-white dark:bg-emerald-900 rounded-full shadow-lg text-emerald-400 hover:text-rose-500 transition-colors">
                 <Heart size={20} />
               </button>
             </motion.div>
@@ -165,54 +165,54 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
           <div className="p-12 space-y-8">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <h1 className="text-4xl font-bold text-slate-900 dark:text-white">{product.name}</h1>
+                <h1 className="text-4xl font-bold text-emerald-950 dark:text-white">{product.name}</h1>
               </div>
               
               <div className="flex items-center space-x-4">
-                <div className="bg-amber-50 dark:bg-amber-500/10 text-amber-500 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-200 dark:border-amber-500/20 flex items-center space-x-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                <div className="bg-amber-50 dark:bg-amber-400/10 text-amber-400 text-[10px] font-bold px-3 py-1 rounded-full border border-amber-200 dark:border-amber-400/20 flex items-center space-x-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-amber-400" />
                   <span className="uppercase tracking-widest">Center Product</span>
                 </div>
-                <span className="text-xs font-bold text-slate-400">
+                <span className="text-xs font-bold text-emerald-400">
                   Availability: <span className="text-emerald-500">{product.stock || 20} In Stock</span>
                 </span>
               </div>
 
               <div className="flex items-center space-x-12 pt-2">
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">PV:</span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white">{product.pv ?? 0}</span>
+                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest">PV:</span>
+                  <span className="text-sm font-bold text-emerald-950 dark:text-white">{product.pv ?? 0}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">BV:</span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white">{product.bv ?? 0}</span>
+                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest">BV:</span>
+                  <span className="text-sm font-bold text-emerald-950 dark:text-white">{product.bv ?? 0}</span>
                 </div>
               </div>
 
-              <p className="text-xs font-bold text-slate-400">
-                Category: <span className="text-amber-500">{getCategoryName}</span>
+              <p className="text-xs font-bold text-emerald-400">
+                Category: <span className="text-amber-400">{getCategoryName}</span>
               </p>
             </div>
 
-            <div className="text-4xl font-bold text-amber-500">
+            <div className="text-4xl font-bold text-amber-400">
               {product.price}
             </div>
 
             <div className="flex items-center space-x-6">
-              <div className="flex items-center border border-slate-200 dark:border-white/10 rounded-xl overflow-hidden">
+              <div className="flex items-center border border-emerald-100 dark:border-white/10 rounded-xl overflow-hidden">
                 <button 
                   onClick={() => handleQuantityChange(-1)}
-                  className="p-4 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-slate-500"
+                  className="p-4 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors text-emerald-600"
                   aria-label="Decrease quantity"
                 >
                   <Minus size={18} />
                 </button>
-                <div className="w-12 text-center font-bold text-slate-900 dark:text-white">
+                <div className="w-12 text-center font-bold text-emerald-950 dark:text-white">
                   {quantity}
                 </div>
                 <button 
                   onClick={() => handleQuantityChange(1)}
-                  className="p-4 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors text-slate-500"
+                  className="p-4 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors text-emerald-600"
                   aria-label="Increase quantity"
                 >
                   <Plus size={18} />
@@ -238,22 +238,22 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-2xl flex items-center space-x-4">
-                <div className="p-2 bg-amber-500/10 text-amber-500 rounded-lg">
+              <div className="bg-white dark:bg-white/5 p-4 rounded-2xl flex items-center space-x-4">
+                <div className="p-2 bg-amber-400/10 text-amber-400 rounded-lg">
                   <Truck size={20} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Free Shipping</p>
-                  <p className="text-xs font-bold text-slate-900 dark:text-white">On all orders</p>
+                  <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Free Shipping</p>
+                  <p className="text-xs font-bold text-emerald-950 dark:text-white">On all orders</p>
                 </div>
               </div>
-              <div className="bg-slate-50 dark:bg-white/5 p-4 rounded-2xl flex items-center space-x-4">
+              <div className="bg-white dark:bg-white/5 p-4 rounded-2xl flex items-center space-x-4">
                 <div className="p-2 bg-emerald-500/10 text-emerald-500 rounded-lg">
                   <ShieldCheck size={20} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Secure Payment</p>
-                  <p className="text-xs font-bold text-slate-900 dark:text-white">100% Protected</p>
+                  <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Secure Payment</p>
+                  <p className="text-xs font-bold text-emerald-950 dark:text-white">100% Protected</p>
                 </div>
               </div>
             </div>
@@ -261,62 +261,62 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
         </div>
 
         {/* Tabs */}
-        <div className="border-t border-slate-100 dark:border-white/5">
-          <div className="flex border-b border-slate-100 dark:border-white/5">
+        <div className="border-t border-emerald-50 dark:border-white/5">
+          <div className="flex border-b border-emerald-50 dark:border-white/5">
             <button 
               onClick={() => setActiveTab('description')}
               className={`px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all relative ${
-                activeTab === 'description' ? 'text-amber-500' : 'text-slate-400 hover:text-slate-600'
+                activeTab === 'description' ? 'text-amber-400' : 'text-emerald-400 hover:text-emerald-700'
               }`}
             >
               Description
               {activeTab === 'description' && (
-                <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500" />
+                <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400" />
               )}
             </button>
             <button 
               onClick={() => setActiveTab('additional')}
               className={`px-8 py-4 text-xs font-bold uppercase tracking-widest transition-all relative ${
-                activeTab === 'additional' ? 'text-amber-500' : 'text-slate-400 hover:text-slate-600'
+                activeTab === 'additional' ? 'text-amber-400' : 'text-emerald-400 hover:text-emerald-700'
               }`}
             >
               Additional Information
               {activeTab === 'additional' && (
-                <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500" />
+                <motion.div layoutId="activeTab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-400" />
               )}
             </button>
           </div>
           <div className="p-12">
             {activeTab === 'description' ? (
               <div className="space-y-6">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">Description</h3>
+                <h3 className="text-xl font-bold text-emerald-950 dark:text-white">Description</h3>
                 {/* FIX: Render the extracted description text, not the object */}
-                <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
+                <p className="text-emerald-600 dark:text-emerald-400 leading-relaxed">
                   {getDescriptionText}
                 </p>
               </div>
             ) : (
               <div className="space-y-6">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">Additional Information</h3>
+                <h3 className="text-xl font-bold text-emerald-950 dark:text-white">Additional Information</h3>
                 <div className="space-y-3">
-                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-white/5">
-                    <span className="font-bold text-slate-600 dark:text-slate-400">Product Name</span>
-                    <span className="text-slate-500 dark:text-slate-500">{product.name}</span>
+                  <div className="flex justify-between py-2 border-b border-emerald-50 dark:border-white/5">
+                    <span className="font-bold text-emerald-700 dark:text-emerald-400">Product Name</span>
+                    <span className="text-emerald-600 dark:text-emerald-600">{product.name}</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-white/5">
-                    <span className="font-bold text-slate-600 dark:text-slate-400">Category</span>
-                    <span className="text-slate-500 dark:text-slate-500">{getCategoryName}</span>
+                  <div className="flex justify-between py-2 border-b border-emerald-50 dark:border-white/5">
+                    <span className="font-bold text-emerald-700 dark:text-emerald-400">Category</span>
+                    <span className="text-emerald-600 dark:text-emerald-600">{getCategoryName}</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-white/5">
-                    <span className="font-bold text-slate-600 dark:text-slate-400">PV Points</span>
-                  <span className="text-slate-500 dark:text-slate-500">{product.pv ?? 0}</span>
+                  <div className="flex justify-between py-2 border-b border-emerald-50 dark:border-white/5">
+                    <span className="font-bold text-emerald-700 dark:text-emerald-400">PV Points</span>
+                  <span className="text-emerald-600 dark:text-emerald-600">{product.pv ?? 0}</span>
                   </div>
-                  <div className="flex justify-between py-2 border-b border-slate-100 dark:border-white/5">
-                    <span className="font-bold text-slate-600 dark:text-slate-400">BV Points</span>
-                  <span className="text-slate-500 dark:text-slate-500">{product.bv ?? 0}</span>
+                  <div className="flex justify-between py-2 border-b border-emerald-50 dark:border-white/5">
+                    <span className="font-bold text-emerald-700 dark:text-emerald-400">BV Points</span>
+                  <span className="text-emerald-600 dark:text-emerald-600">{product.bv ?? 0}</span>
                   </div>
                   <div className="flex justify-between py-2">
-                    <span className="font-bold text-slate-600 dark:text-slate-400">Stock Status</span>
+                    <span className="font-bold text-emerald-700 dark:text-emerald-400">Stock Status</span>
                     <span className="text-emerald-500 font-bold">{product.stock || 20} units available</span>
                   </div>
                 </div>

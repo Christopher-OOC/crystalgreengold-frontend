@@ -98,18 +98,18 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={onClose}
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-emerald-950/60 backdrop-blur-sm"
             />
 
             <motion.div
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden"
+              className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden"
             >
               <button
                 onClick={onClose}
-                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors z-10"
+                className="absolute top-6 right-6 p-2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors z-10"
               >
                 <X size={24} />
               </button>
@@ -117,25 +117,25 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
               <div className="p-10 text-center space-y-8">
                 {step === 'confirm' && (
                   <>
-                    <div className="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
+                    <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto">
                       <DollarSign size={48} className="animate-bounce" />
                     </div>
 
                     <div className="space-y-4">
-                      <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                      <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">
                         {modalTitle}
                       </h2>
-                      <p className="text-slate-500 dark:text-slate-400 font-medium">
+                      <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                         {mode === 'buy' ? (
                           <>
-                            Buy <span className="font-bold text-slate-900 dark:text-white">{quantity}x</span> {pkgName} package for{' '}
-                            <span className="text-amber-500 font-bold">{displayPrice}</span>.
+                            Buy <span className="font-bold text-emerald-950 dark:text-white">{quantity}x</span> {pkgName} package for{' '}
+                            <span className="text-amber-400 font-bold">{displayPrice}</span>.
                           </>
                         ) : (
                           <>
                             You are about to pay{' '}
-                            <span className="text-amber-500 font-bold">{displayPrice}</span> to activate the{' '}
-                            <span className="font-bold text-slate-900 dark:text-white">{pkgName}</span> package.
+                            <span className="text-amber-400 font-bold">{displayPrice}</span> to activate the{' '}
+                            <span className="font-bold text-emerald-950 dark:text-white">{pkgName}</span> package.
                           </>
                         )}
                       </p>
@@ -146,9 +146,9 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                         type="text"
                         readOnly
                         value={price}
-                        className="w-full bg-slate-50 dark:bg-white/5 border-2 border-amber-500/20 rounded-2xl py-4 px-6 text-center text-2xl font-black text-slate-900 dark:text-white outline-none focus:border-amber-500 transition-all"
+                        className="w-full bg-white dark:bg-white/5 border-2 border-amber-400/20 rounded-2xl py-4 px-6 text-center text-2xl font-black text-emerald-950 dark:text-white outline-none focus:border-amber-400 transition-all"
                       />
-                      <p className="mt-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      <p className="mt-3 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
                         Complete payment via Paystack
                       </p>
                     </div>
@@ -166,25 +166,25 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
 
                 {step === 'processing' && (
                   <div className="py-12 space-y-12">
-                    <div className="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto relative">
-                      <div className="absolute inset-0 border-4 border-amber-500/20 rounded-full" />
-                      <div className="absolute inset-0 border-4 border-amber-500 rounded-full border-t-transparent animate-spin" />
+                    <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto relative">
+                      <div className="absolute inset-0 border-4 border-amber-400/20 rounded-full" />
+                      <div className="absolute inset-0 border-4 border-amber-400 rounded-full border-t-transparent animate-spin" />
                       <DollarSign size={32} />
                     </div>
                     <div className="space-y-4">
-                      <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                      <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">
                         {mode === 'buy' ? 'Processing Purchase' : 'Activating Package'}
                       </h2>
-                      <p className="text-slate-500 dark:text-slate-400 font-medium">
+                      <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                         Please wait while we {mode === 'buy' ? 'complete your purchase' : 'activate your package'}...
                       </p>
                     </div>
                     <div className="space-y-6">
-                      <div className="w-full h-3 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+                      <div className="w-full h-3 bg-emerald-50 dark:bg-white/5 rounded-full overflow-hidden">
                         <motion.div
                           initial={{ width: 0 }}
                           animate={{ width: `${progress}%` }}
-                          className="h-full bg-amber-500"
+                          className="h-full bg-amber-400"
                         />
                       </div>
                       <div className="flex justify-center space-x-2">
@@ -193,7 +193,7 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                             key={i}
                             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 1, 0.3] }}
                             transition={{ repeat: Infinity, duration: 1, delay: i * 0.2 }}
-                            className="w-3 h-3 bg-amber-500 rounded-full"
+                            className="w-3 h-3 bg-amber-400 rounded-full"
                           />
                         ))}
                       </div>
@@ -211,18 +211,18 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                       <CheckCircle2 size={48} />
                     </div>
                     <div className="space-y-2">
-                      <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                      <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">
                         Success!
                       </h2>
-                      <p className="text-slate-500 dark:text-slate-400 font-medium">
+                      <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                         Your {mode === 'buy' ? (
                           <>
-                            <span className="font-bold text-slate-900 dark:text-white">{quantity}x</span> {pkgName} package
+                            <span className="font-bold text-emerald-950 dark:text-white">{quantity}x</span> {pkgName} package
                             has been purchased successfully!
                           </>
                         ) : (
                           <>
-                            <span className="font-bold text-slate-900 dark:text-white">{pkgName}</span> package
+                            <span className="font-bold text-emerald-950 dark:text-white">{pkgName}</span> package
                             has been activated successfully!
                           </>
                         )}

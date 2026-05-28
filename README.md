@@ -1,6 +1,6 @@
-# TopNivo Frontend
+# crystalgreengold Frontend
 
-TopNivo Frontend is a Next.js App Router application for the TopNivo commerce and member dashboard platform. It includes public product browsing, authentication, member dashboard tools, cart and order flows, admin management screens, genealogy views, finance views, and service-center / premium-store commerce workflows.
+crystalgreengold Frontend is a Next.js App Router application for the crystalgreengold commerce and member dashboard platform. It includes public product browsing, authentication, member dashboard tools, cart and order flows, admin management screens, genealogy views, finance views, and service-center / premium-store commerce workflows.
 
 ## Tech Stack
 
@@ -21,7 +21,7 @@ TopNivo Frontend is a Next.js App Router application for the TopNivo commerce an
 
 - Node.js 20 or newer is recommended
 - npm
-- A running TopNivo backend API, or access to the configured hosted API
+- A running crystalgreengold backend API, or access to the configured hosted API
 
 ## Getting Started
 
@@ -56,7 +56,7 @@ The dev server is configured to listen on `0.0.0.0:3000`, so it can also be reac
 The main environment file is `.env.local`.
 
 ```env
-NEXT_PUBLIC_API_URL="https://topnivo-api.onrender.com"
+NEXT_PUBLIC_API_URL="https://crystalgreengold-api.onrender.com"
 NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY="pk_test_xxx"
 GEMINI_API_KEY="MY_GEMINI_API_KEY"
 APP_URL="http://localhost:3000"
@@ -258,8 +258,8 @@ src/lib/store/authStore.ts
 Tokens are stored with keys:
 
 ```text
-topnivo_access_token
-topnivo_refresh_token
+crystalgreengold_access_token
+crystalgreengold_refresh_token
 ```
 
 The app supports:
@@ -391,4 +391,5 @@ Most shared API response shape issues should be fixed in `src/lib/types` rather 
 - Keep route mappings centralized in `src/features/navigation/paths.ts`.
 - Use `react-hot-toast` through `useUIStore().toast` for user-facing feedback.
 - Avoid replacing dashboard navigation with full page reloads unless a route truly needs to remount.
+
 

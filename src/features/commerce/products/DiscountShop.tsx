@@ -40,8 +40,8 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse">Loading discounted products...</p>
+        <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse">Loading discounted products...</p>
       </div>
     );
   }
@@ -63,7 +63,7 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         rounded="2xl"
-        className="bg-gradient-to-r from-amber-500 to-orange-600 p-5 text-white shadow-lg shadow-amber-500/20 flex items-center space-x-4 border-none"
+        className="bg-gradient-to-r from-amber-400 to-yellow-600 p-5 text-white shadow-lg shadow-amber-400/20 flex items-center space-x-4 border-none"
       >
         <div className="p-3 bg-white/20 backdrop-blur-md rounded-xl border border-white/20">
           <Package size={24} />
@@ -80,16 +80,16 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
         rounded="xl"
-        className="p-1.5 flex items-center focus-within:ring-4 focus-within:ring-amber-500/10 transition-all border-2 border-slate-900 dark:border-white/10"
+        className="p-1.5 flex items-center focus-within:ring-4 focus-within:ring-amber-400/10 transition-all border-2 border-emerald-950 dark:border-white/10"
       >
         <input 
           type="text" 
           placeholder="Search discounted products..." 
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 bg-transparent py-2 px-3 outline-none text-slate-900 dark:text-white font-black placeholder:text-slate-400 uppercase text-[10px] tracking-widest"
+          className="flex-1 bg-transparent py-2 px-3 outline-none text-emerald-950 dark:text-white font-black placeholder:text-emerald-400 uppercase text-[10px] tracking-widest"
         />
-        <div className="p-2 text-amber-500">
+        <div className="p-2 text-amber-400">
           <Search size={20} />
         </div>
       </Card>
@@ -106,7 +106,7 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
             onClick={() => onSelectProduct?.(product)}
           >
             <Card className="p-0 overflow-hidden border-none shadow-sm hover:shadow-2xl transition-all duration-500">
-              <div className="relative aspect-square bg-slate-50 dark:bg-white/5 flex items-center justify-center p-8">
+              <div className="relative aspect-square bg-white dark:bg-white/5 flex items-center justify-center p-8">
                 <img 
                   src={getProductImage(product)} 
                   alt={product.name} 
@@ -117,27 +117,27 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
                   PROMO
                 </div>
                 {product.pv !== undefined && (
-                  <div className="absolute top-3 right-3 bg-amber-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-lg uppercase tracking-widest">
+                  <div className="absolute top-3 right-3 bg-amber-400 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-lg uppercase tracking-widest">
                     {product.pv} PV
                   </div>
                 )}
               </div>
               <div className="p-4 space-y-3">
                 <div className="space-y-1">
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                  <p className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">
                     {getCategoryName(product.category)}
                   </p>
-                  <h3 className="text-base font-black text-slate-900 dark:text-white group-hover:text-amber-500 transition-colors truncate tracking-tight uppercase">
+                  <h3 className="text-base font-black text-emerald-950 dark:text-white group-hover:text-amber-400 transition-colors truncate tracking-tight uppercase">
                     {product.name}
                   </h3>
                 </div>
-                <div className="flex items-center justify-between pt-3 border-t border-slate-50 dark:border-white/5">
+                <div className="flex items-center justify-between pt-3 border-t border-white dark:border-white/5">
                   <div className="flex flex-col">
-                    <span className="text-lg font-black text-amber-500">
+                    <span className="text-lg font-black text-amber-400">
                       ₦{product.price.toLocaleString()}
                     </span>
                   </div>
-                  <div className="flex items-center space-x-1 text-amber-500">
+                  <div className="flex items-center space-x-1 text-amber-400">
                     <Info size={12} />
                     <span className="text-[9px] font-black uppercase tracking-widest">View Details</span>
                   </div>
@@ -152,16 +152,16 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
         <Card 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="bg-amber-50/50 dark:bg-amber-500/5 border border-amber-200 dark:border-amber-500/20 p-12 text-center"
+          className="bg-amber-50/50 dark:bg-amber-400/5 border border-amber-200 dark:border-amber-400/20 p-12 text-center"
         >
           <div className="flex flex-col items-center space-y-4">
-            <div className="w-16 h-16 bg-amber-100 dark:bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center">
+            <div className="w-16 h-16 bg-amber-100 dark:bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center">
               <Info size={32} />
             </div>
             <p className="text-amber-800 dark:text-amber-200 font-black text-lg uppercase tracking-tight">
               No products found
             </p>
-            <p className="text-amber-600/60 dark:text-amber-400/40 text-xs font-bold uppercase tracking-widest max-w-xs">
+            <p className="text-amber-400/60 dark:text-amber-400/40 text-xs font-bold uppercase tracking-widest max-w-xs">
               Try adjusting your search terms.
             </p>
           </div>

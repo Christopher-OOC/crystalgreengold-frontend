@@ -67,8 +67,8 @@ export const EarnedPromotionManagement: React.FC<EarnedPromotionManagementProps>
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Achievements...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Achievements...</p>
       </div>
     );
   }
@@ -91,29 +91,29 @@ export const EarnedPromotionManagement: React.FC<EarnedPromotionManagementProps>
         <div className="space-y-1">
           <button 
             onClick={onBack}
-            className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group"
+            className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Admin Dashboard</span>
           </button>
-          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Earned Promotions</h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">Track and approve member promotion achievements</p>
+          <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">Earned Promotions</h1>
+          <p className="text-emerald-600 dark:text-emerald-400 font-medium">Track and approve member promotion achievements</p>
         </div>
       </div>
 
       {/* Action Bar */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div className="relative w-full sm:w-96">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
           <input 
             type="text" 
             placeholder="Search member or promotion..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium"
+            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all font-medium"
           />
         </div>
-        <button className="flex items-center space-x-2 px-6 py-3 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-slate-200 transition-colors">
+        <button className="flex items-center space-x-2 px-6 py-3 bg-emerald-50 dark:bg-white/5 text-emerald-700 dark:text-emerald-400 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-emerald-100 transition-colors">
           <Filter size={16} />
           <span>Filter</span>
         </button>
@@ -124,37 +124,37 @@ export const EarnedPromotionManagement: React.FC<EarnedPromotionManagementProps>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 dark:bg-white/5 border-b border-slate-100 dark:border-white/5">
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">S/N</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Member</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Promotion</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Reward</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Earned Date</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+              <tr className="bg-white dark:bg-white/5 border-b border-emerald-50 dark:border-white/5">
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">S/N</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Member</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Promotion</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Reward</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Earned Date</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Status</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50 dark:divide-white/5">
+            <tbody className="divide-y divide-white dark:divide-white/5">
               {earnedPromotions.map((earned, i) => (
                 <motion.tr 
                   key={earned.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors group"
+                  className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors group"
                 >
-                  <td className="px-6 py-5 text-sm font-black text-slate-400">{i + 1}.</td>
+                  <td className="px-6 py-5 text-sm font-black text-emerald-400">{i + 1}.</td>
                   <td className="px-6 py-5">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-indigo-500/10 text-indigo-500 rounded-full flex items-center justify-center text-xs font-black">
                         {earned.user[0]}
                       </div>
-                      <span className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">{earned.user}</span>
+                      <span className="text-sm font-bold text-emerald-950 dark:text-white tracking-tight">{earned.user}</span>
                     </div>
                   </td>
                   <td className="px-6 py-5">
-                    <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
-                      <Medal size={14} className="text-amber-500" />
+                    <div className="flex items-center space-x-2 text-emerald-700 dark:text-emerald-400">
+                      <Medal size={14} className="text-amber-400" />
                       <span className="text-sm font-bold">{earned.promotion}</span>
                     </div>
                   </td>
@@ -162,7 +162,7 @@ export const EarnedPromotionManagement: React.FC<EarnedPromotionManagementProps>
                     <span className="text-xs font-black text-indigo-500 uppercase tracking-widest">{earned.reward}</span>
                   </td>
                   <td className="px-6 py-5">
-                    <div className="flex items-center space-x-2 text-xs font-bold text-slate-400">
+                    <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400">
                       <Calendar size={14} />
                       <span>{earned.earnedDate}</span>
                     </div>
@@ -170,7 +170,7 @@ export const EarnedPromotionManagement: React.FC<EarnedPromotionManagementProps>
                   <td className="px-6 py-5">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                       earned.status === 'Approved' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                      earned.status === 'Pending' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' :
+                      earned.status === 'Pending' ? 'bg-amber-400/10 text-amber-400 border-amber-400/20' :
                       'bg-rose-500/10 text-rose-500 border-rose-500/20'
                     }`}>
                       {earned.status}
@@ -188,7 +188,7 @@ export const EarnedPromotionManagement: React.FC<EarnedPromotionManagementProps>
                           </button>
                         </>
                       )}
-                      <button className="p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-all">
+                      <button className="p-2 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-lg transition-all">
                         <Users size={18} />
                       </button>
                     </div>

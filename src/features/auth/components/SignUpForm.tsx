@@ -165,14 +165,14 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
   return (
     <div className="flex-1 flex flex-col justify-center max-w-xs mx-auto w-full">
       <div className="mb-3 text-center md:text-left">
-        <h1 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-0.5">
+        <h1 className="text-lg md:text-xl font-bold text-emerald-950 dark:text-white mb-0.5">
           Create Account
         </h1>
       </div>
 
       <StepIndicator currentStep={step} />
       {step < 4 && (
-        <p className="text-center text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em] -mt-2.5 mb-3">
+        <p className="text-center text-[8px] font-bold text-emerald-400 uppercase tracking-[0.2em] -mt-2.5 mb-3">
           {step === 1 && "Personal Information"}
           {step === 2 && "Account Information"}
           {step === 3 && "Sponsor & Placement"}
@@ -251,11 +251,11 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
 
             {/* Password with eye toggle */}
             <div className="w-full">
-              <label className="block text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1 ml-1">
+              <label className="block text-[10px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1 ml-1">
                 Username
               </label>
               <div className="relative group">
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-amber-500 transition-colors">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400 group-focus-within:text-amber-400 transition-colors">
                   <ShieldCheck size={16} />
                 </div>
                 <input
@@ -263,12 +263,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
                   type={showPassword ? "text" : "text"}
                   value={formData.username}
                   onChange={handleInputChange}
-                  className="w-full bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl py-2 pl-10 pr-12 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600 text-sm text-slate-900 dark:text-white"
+                  className="w-full bg-white/50 dark:bg-emerald-900/50 border border-emerald-100 dark:border-emerald-800 rounded-xl py-2 pl-10 pr-12 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all placeholder:text-emerald-400 dark:placeholder:text-emerald-700 text-sm text-emerald-950 dark:text-white"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors"
                   tabIndex={-1}
                 >
                   {showPassword ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -313,13 +313,13 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
             transition={{ type: "spring", damping: 20, stiffness: 100 }}
             className="space-y-2.5"
           >
-            <div className="flex items-center space-x-2 text-[10px] text-amber-500 font-semibold mb-0.5">
+            <div className="flex items-center space-x-2 text-[10px] text-amber-400 font-semibold mb-0.5">
               <button
                 onClick={() => {
                   setStepError(null);
                   setStep(2);
                 }}
-                className="flex items-center hover:text-amber-600 transition-colors disabled:opacity-50"
+                className="flex items-center hover:text-amber-400 transition-colors disabled:opacity-50"
                 disabled={isLoading}
               >
                 <ArrowRight size={12} className="rotate-180 mr-1" />
@@ -349,7 +349,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
             <div className="space-y-1">
               <label
                 htmlFor="leg"
-                className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 ml-1"
+                className="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 ml-1"
               >
                 Leg
               </label>
@@ -359,12 +359,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
                   value={formData.leg}
                   onChange={handleInputChange}
                   disabled={isLoading}
-                  className="w-full bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl py-2 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all appearance-none text-slate-900 dark:text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                  className="w-full bg-white/50 dark:bg-emerald-900/50 border border-emerald-100 dark:border-emerald-800 rounded-xl py-2 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all appearance-none text-emerald-950 dark:text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                 >
                   <option value="LEFT">LEFT</option>
                   <option value="RIGHT">RIGHT</option>
                 </select>
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-emerald-400">
                   <ChevronDown size={14} />
                 </div>
               </div>
@@ -387,11 +387,11 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
             </Button>
 
             <div className="text-center pt-1">
-              <p className="text-slate-500 dark:text-slate-400 text-[10px]">
+              <p className="text-emerald-600 dark:text-emerald-400 text-[10px]">
                 Already have an account?{" "}
                 <button
                   onClick={onLoginClick}
-                  className="text-amber-500 hover:text-amber-600 font-bold ml-1"
+                  className="text-amber-400 hover:text-amber-400 font-bold ml-1"
                 >
                   Sign in
                 </button>
@@ -411,16 +411,16 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
             <div className="w-12 h-12 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3">
               <CheckCircle2 size={24} />
             </div>
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+            <h2 className="text-xl font-bold text-emerald-950 dark:text-white">
               Welcome Aboard!
             </h2>
-            <p className="text-slate-500 dark:text-slate-400 text-xs">
+            <p className="text-emerald-600 dark:text-emerald-400 text-xs">
               Your account has been created successfully. Redirecting you to the
               dashboard...
             </p>
             <button
               onClick={onLoginClick}
-              className="text-amber-500 hover:underline font-medium text-xs"
+              className="text-amber-400 hover:underline font-medium text-xs"
             >
               Go to login now
             </button>
@@ -429,12 +429,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
       </AnimatePresence>
 
       {step < 3 && (
-        <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
-          <p className="text-slate-500 dark:text-slate-400 text-[10px]">
+        <div className="mt-4 pt-3 border-t border-emerald-50 dark:border-emerald-900 text-center">
+          <p className="text-emerald-600 dark:text-emerald-400 text-[10px]">
             Already have an account?{" "}
             <button
               onClick={onLoginClick}
-              className="text-amber-500 hover:text-amber-600 font-bold ml-1"
+              className="text-amber-400 hover:text-amber-400 font-bold ml-1"
             >
               Sign in
             </button>

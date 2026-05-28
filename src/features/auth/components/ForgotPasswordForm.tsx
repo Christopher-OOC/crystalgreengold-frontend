@@ -28,11 +28,11 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackTo
       {!isSent ? (
         <>
           <div className="mb-6 text-center md:text-left flex flex-col items-center md:items-start">
-            <div className="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mb-4">
               <Mail size={24} />
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white mb-2">Reset Password</h1>
-            <p className="text-slate-500 dark:text-slate-400 text-sm text-center md:text-left">
+            <h1 className="text-2xl md:text-3xl font-bold text-emerald-950 dark:text-white mb-2">Reset Password</h1>
+            <p className="text-emerald-600 dark:text-emerald-400 text-sm text-center md:text-left">
               Enter your username and we'll send you instructions to reset your password.
             </p>
           </div>
@@ -62,7 +62,7 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackTo
               type="button"
               onClick={onBackToLogin}
               disabled={isLoading}
-              className="w-full flex items-center justify-center space-x-2 text-amber-500 hover:text-amber-600 font-semibold transition-colors disabled:opacity-50"
+              className="w-full flex items-center justify-center space-x-2 text-amber-400 hover:text-amber-400 font-semibold transition-colors disabled:opacity-50"
             >
               <ArrowLeft size={18} />
               <span>Back to login</span>
@@ -78,9 +78,9 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackTo
           <div className="w-16 h-16 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
             <Send size={24} />
           </div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Instructions Sent!</h2>
-          <p className="text-slate-500 dark:text-slate-400 text-sm">
-            We've sent password reset instructions to the email associated with <span className="font-bold text-slate-900 dark:text-white">{username}</span>.
+          <h2 className="text-2xl font-bold text-emerald-950 dark:text-white">Instructions Sent!</h2>
+          <p className="text-emerald-600 dark:text-emerald-400 text-sm">
+            We've sent password reset instructions to the email associated with <span className="font-bold text-emerald-950 dark:text-white">{username}</span>.
           </p>
           <Button variant="secondary" onClick={onBackToLogin} className="w-full py-3 rounded-xl">
             Return to Login
@@ -88,9 +88,9 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ onBackTo
         </motion.div>
       )}
 
-      <div className="mt-8 pt-6 border-t border-slate-100 dark:border-slate-800 text-center">
-        <p className="text-slate-500 dark:text-slate-400 text-sm">
-          Don't have an account? <button onClick={onSignUpClick} className="text-amber-500 hover:text-amber-600 font-bold ml-1">Sign up</button>
+      <div className="mt-8 pt-6 border-t border-emerald-50 dark:border-emerald-900 text-center">
+        <p className="text-emerald-600 dark:text-emerald-400 text-sm">
+          Don't have an account? <button onClick={onSignUpClick} className="text-amber-400 hover:text-amber-400 font-bold ml-1">Sign up</button>
         </p>
       </div>
     </div>

@@ -82,8 +82,8 @@ export const CategoryManagement: React.FC<CategoryManagementProps> = ({ onBack }
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Categories...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Categories...</p>
       </div>
     );
   }
@@ -106,32 +106,32 @@ export const CategoryManagement: React.FC<CategoryManagementProps> = ({ onBack }
         <div className="space-y-1">
           <button 
             onClick={onBack}
-            className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group"
+            className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Admin Dashboard</span>
           </button>
-          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Categories</h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">Organize your products with categories</p>
+          <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">Categories</h1>
+          <p className="text-emerald-600 dark:text-emerald-400 font-medium">Organize your products with categories</p>
         </div>
       </div>
 
       {/* Action Bar */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div className="relative w-full sm:w-96">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
           <input 
             type="text" 
             placeholder="Search categories..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium"
+            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium"
           />
         </div>
 
         <Button 
           onClick={() => setIsCreating(true)}
-          className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl flex items-center justify-center space-x-2 font-black uppercase tracking-widest"
+          className="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-xl flex items-center justify-center space-x-2 font-black uppercase tracking-widest"
         >
           <Plus size={20} />
           <span>Create New Category</span>
@@ -141,11 +141,11 @@ export const CategoryManagement: React.FC<CategoryManagementProps> = ({ onBack }
       {/* Categories Grid */}
       {filteredCategories.length === 0 ? (
         <div className="text-center py-16">
-          <div className="w-20 h-20 bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Search size={32} className="text-slate-400" />
+          <div className="w-20 h-20 bg-emerald-50 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Search size={32} className="text-emerald-400" />
           </div>
-          <p className="text-slate-500 font-medium">No categories found</p>
-          <p className="text-slate-400 text-sm mt-1">
+          <p className="text-emerald-600 font-medium">No categories found</p>
+          <p className="text-emerald-400 text-sm mt-1">
             {searchQuery ? 'Try adjusting your search' : 'Create your first category to get started'}
           </p>
         </div>
@@ -160,7 +160,7 @@ export const CategoryManagement: React.FC<CategoryManagementProps> = ({ onBack }
             >
               <Card className="p-6 border-none shadow-xl hover:shadow-2xl transition-all group">
                 <div className="flex justify-between items-start mb-4">
-                  <div className="w-12 h-12 bg-orange-500/10 text-orange-500 rounded-2xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-yellow-500/10 text-yellow-500 rounded-2xl flex items-center justify-center">
                     {category.imageUrl ? (
                       <img 
                         src={category.imageUrl} 
@@ -174,14 +174,14 @@ export const CategoryManagement: React.FC<CategoryManagementProps> = ({ onBack }
                   <div className="flex items-center space-x-1">
                     <button 
                       onClick={() => setEditingCategory(category)}
-                      className="p-2 text-slate-400 hover:text-amber-500 hover:bg-amber-500/10 rounded-lg transition-all"
+                      className="p-2 text-emerald-400 hover:text-amber-400 hover:bg-amber-400/10 rounded-lg transition-all"
                       title="Edit"
                     >
                       <Edit size={16} />
                     </button>
                     <button 
                       onClick={() => handleDelete(category.id)}
-                      className="p-2 text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 rounded-lg transition-all"
+                      className="p-2 text-emerald-400 hover:text-rose-500 hover:bg-rose-500/10 rounded-lg transition-all"
                       title="Delete"
                     >
                       <Trash2 size={16} />
@@ -190,21 +190,21 @@ export const CategoryManagement: React.FC<CategoryManagementProps> = ({ onBack }
                 </div>
                 
                 <div className="space-y-2">
-                  <h3 className="text-lg font-black text-slate-900 dark:text-white tracking-tight">
+                  <h3 className="text-lg font-black text-emerald-950 dark:text-white tracking-tight">
                     {category.name}
                   </h3>
                   {category.description && (
-                    <p className="text-sm text-slate-500 dark:text-slate-400 leading-relaxed line-clamp-3">
+                    <p className="text-sm text-emerald-600 dark:text-emerald-400 leading-relaxed line-clamp-3">
                       {category.description}
                     </p>
                   )}
                   {!category.description && (
-                    <p className="text-sm text-slate-400 italic">No description provided</p>
+                    <p className="text-sm text-emerald-400 italic">No description provided</p>
                   )}
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-slate-100 dark:border-white/5">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <div className="mt-4 pt-4 border-t border-emerald-50 dark:border-white/5">
+                  <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
                     Category ID: {typeof category.id === 'string' ? category.id.slice(0, 8) : category.id}
                   </p>
                 </div>

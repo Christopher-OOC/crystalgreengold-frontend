@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosR
 
 import { API_BASE_URL as BASE_URL } from '@/lib/config/api';
 
-const ACCESS_TOKEN_KEY  = 'topnivo_access_token';
-const REFRESH_TOKEN_KEY = 'topnivo_refresh_token';
+const ACCESS_TOKEN_KEY  = 'crystalgreengold_access_token';
+const REFRESH_TOKEN_KEY = 'crystalgreengold_refresh_token';
 
 function getStoredItem(key: string) {
   if (typeof window === 'undefined') return null;
@@ -77,7 +77,7 @@ export const tokenStorage = {
     console.trace('🔴 clearTokens - Clearing tokens!');
     removeStoredItem(ACCESS_TOKEN_KEY);
     removeStoredItem(REFRESH_TOKEN_KEY);
-    removeStoredItem('topnivo_member_id');
+    removeStoredItem('crystalgreengold_member_id');
   },
 };
 
@@ -212,3 +212,4 @@ apiClient.interceptors.response.use(
 );
 
 export default apiClient;
+

@@ -207,10 +207,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   if (isLoading && isMetricsTab) {
     return (
-      <div className="flex h-screen bg-slate-50 dark:bg-slate-950 items-center justify-center">
+      <div className="flex h-screen bg-white dark:bg-emerald-950 items-center justify-center">
         <div className="text-center space-y-4">
-          <Loader2 className="w-12 h-12 text-orange-600 animate-spin mx-auto" />
-          <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">
+          <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mx-auto" />
+          <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">
             {currentMemberId ? "Initializing Dashboard..." : "Loading session..."}
           </p>
         </div>
@@ -220,7 +220,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
   if (error) {
     return (
-      <div className="flex h-screen bg-slate-50 dark:bg-slate-950 items-center justify-center p-8">
+      <div className="flex h-screen bg-white dark:bg-emerald-950 items-center justify-center p-8">
         <ErrorState
           title="Dashboard Error"
           message={error}
@@ -232,7 +232,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   }
 
   return (
-    <div className="flex h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 overflow-hidden font-sans transition-colors duration-500">
+    <div className="flex h-screen bg-white dark:bg-emerald-950 text-emerald-950 dark:text-emerald-100 overflow-hidden font-sans transition-colors duration-500">
       <Sidebar
         onLogout={onLogout}
         isCollapsed={isSidebarCollapsed}
@@ -251,41 +251,41 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       <main className="flex-1 flex flex-col overflow-hidden relative">
         {/* Background Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-amber-500/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-amber-400/5 pointer-events-none" />
 
         {/* Top Bar */}
-        <header className="h-12 border-b border-slate-200 dark:border-white/5 px-3 flex items-center justify-between bg-white/80 dark:bg-slate-950/50 backdrop-blur-xl z-10">
+        <header className="h-12 border-b border-emerald-100 dark:border-white/5 px-3 flex items-center justify-between bg-white/80 dark:bg-emerald-950/50 backdrop-blur-xl z-10">
           <div className="flex-1" /> {/* Spacer */}
 
           <div className="flex items-center space-x-1.5">
             <img src={logo} alt="Logo" className="w-4 h-4 object-contain" />
-            <span className="text-base font-bold text-slate-900 dark:text-white tracking-tight">TopNivo</span>
+            <span className="text-base font-bold text-emerald-950 dark:text-white tracking-tight">crystalgreengold</span>
           </div>
 
           <div className="flex-1 flex justify-end items-center space-x-2">
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-1 text-slate-500 dark:text-slate-400 hover:text-amber-500 transition-colors"
+              className="p-1 text-emerald-600 dark:text-emerald-400 hover:text-amber-400 transition-colors"
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
 
-            <button className="relative p-1 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+            <button className="relative p-1 text-emerald-600 dark:text-emerald-400 hover:text-emerald-950 dark:hover:text-white transition-colors">
               <Bell size={16} />
-              <span className="absolute top-0.5 right-0.5 w-1 h-1 bg-amber-500 rounded-full border border-white dark:border-slate-950" />
+              <span className="absolute top-0.5 right-0.5 w-1 h-1 bg-amber-400 rounded-full border border-white dark:border-emerald-950" />
             </button>
 
-            <div className="h-5 w-px bg-slate-200 dark:bg-white/10" />
+            <div className="h-5 w-px bg-emerald-100 dark:bg-white/10" />
 
             <div className="relative">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 className="flex items-center space-x-1.5 group"
               >
-                <div className="w-7 h-7 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:bg-amber-500 group-hover:text-white transition-all overflow-hidden">
+                <div className="w-7 h-7 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center justify-center text-amber-400 group-hover:bg-amber-400 group-hover:text-white transition-all overflow-hidden">
                   <img src="https://picsum.photos/seed/user/100/100" alt="Avatar" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
-                <ChevronDown size={12} className={`text-slate-400 group-hover:text-amber-500 transition-transform duration-300 ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown size={12} className={`text-emerald-400 group-hover:text-amber-400 transition-transform duration-300 ${isUserMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -299,11 +299,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute right-0 mt-2 w-56 bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-white/5 overflow-hidden z-20"
+                      className="absolute right-0 mt-2 w-56 bg-white dark:bg-emerald-950 rounded-2xl shadow-2xl border border-emerald-100 dark:border-white/5 overflow-hidden z-20"
                     >
-                      <div className="p-4 border-b border-slate-100 dark:border-white/5">
-                        <p className="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Signed in as</p>
-                        <p className="text-sm font-bold text-slate-900 dark:text-white truncate">{member?.email}</p>
+                      <div className="p-4 border-b border-emerald-50 dark:border-white/5">
+                        <p className="text-xs font-black text-emerald-400 uppercase tracking-widest mb-1">Signed in as</p>
+                        <p className="text-sm font-bold text-emerald-950 dark:text-white truncate">{member?.email}</p>
                       </div>
                       <div className="p-2">
                         <button
@@ -311,9 +311,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
                             setActiveTab('profile');
                             setIsUserMenuOpen(false);
                           }}
-                          className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-amber-500 hover:text-white transition-all group"
+                          className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold text-emerald-700 dark:text-emerald-400 hover:bg-amber-400 hover:text-white transition-all group"
                         >
-                          <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-white/5 group-hover:bg-white/20">
+                          <div className="p-1.5 rounded-lg bg-emerald-50 dark:bg-white/5 group-hover:bg-white/20">
                             <Star size={14} />
                           </div>
                           <span>Your Profile</span>
@@ -323,15 +323,15 @@ export const Dashboard: React.FC<DashboardProps> = ({
                             setActiveTab('settings');
                             setIsUserMenuOpen(false);
                           }}
-                          className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-400 hover:bg-amber-500 hover:text-white transition-all group"
+                          className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold text-emerald-700 dark:text-emerald-400 hover:bg-amber-400 hover:text-white transition-all group"
                         >
-                          <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-white/5 group-hover:bg-white/20">
+                          <div className="p-1.5 rounded-lg bg-emerald-50 dark:bg-white/5 group-hover:bg-white/20">
                             <ArrowLeftRight size={14} />
                           </div>
                           <span>Settings</span>
                         </button>
                       </div>
-                      <div className="p-2 border-t border-slate-100 dark:border-white/5">
+                      <div className="p-2 border-t border-emerald-50 dark:border-white/5">
                         <button
                           onClick={onLogout}
                           className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold text-rose-500 hover:bg-rose-500 hover:text-white transition-all group"
@@ -358,14 +358,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 {/* Dashboard Header */}
                 <Card rounded="xl" className="p-2.5 flex flex-col md:flex-row justify-between items-center gap-2">
                   <div>
-                    <h2 className="text-xl font-bold text-slate-900 dark:text-white">
+                    <h2 className="text-xl font-bold text-emerald-950 dark:text-white">
                       Hello, {username || member?.username || "User"}
                     </h2>
-                    <p className="text-slate-500 text-sm">See your metrics, and upgrade your current package to a higher package.</p>
+                    <p className="text-emerald-600 text-sm">See your metrics, and upgrade your current package to a higher package.</p>
                   </div>
                   <button
                     onClick={() => setIsTransferModalOpen(true)}
-                    className="bg-amber-500 hover:bg-amber-600 text-white px-3 py-1 rounded-lg font-bold transition-all shadow-lg shadow-amber-500/20 text-[9px]"
+                    className="bg-amber-400 hover:bg-amber-400 text-white px-3 py-1 rounded-lg font-bold transition-all shadow-lg shadow-amber-400/20 text-[9px]"
                   >
                     Transfer
                   </button>
@@ -374,30 +374,30 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 {/* Dashboard Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
                   <Card rounded="xl" className="p-3 text-center" hover>
-                    <p className="text-slate-500 font-medium mb-0.5 text-sm">Available Balance</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">
+                    <p className="text-emerald-600 font-medium mb-0.5 text-sm">Available Balance</p>
+                    <p className="text-lg font-bold text-emerald-950 dark:text-white">
                       {formatCurrency(dashboardData?.available_balance ?? 0)}
                     </p>
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
-                    <p className="text-slate-500 font-medium mb-0.5 text-sm">Pending Wallet</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">
+                    <p className="text-emerald-600 font-medium mb-0.5 text-sm">Pending Wallet</p>
+                    <p className="text-lg font-bold text-emerald-950 dark:text-white">
                       {formatCurrency(dashboardData?.awaiting_wallet ?? 0)}
                     </p>
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
-                    <p className="text-slate-500 font-medium mb-0.5 text-sm">Rank</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white">
+                    <p className="text-emerald-600 font-medium mb-0.5 text-sm">Rank</p>
+                    <p className="text-lg font-bold text-emerald-950 dark:text-white">
                       {dashboardData?.rank_id ? `Rank ${dashboardData.rank_id}` : "Member"}
                     </p>
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
-                    <p className="text-slate-500 font-medium mb-0.5 text-sm">Current Members Counter</p>
-                    <p className="text-lg font-bold text-slate-900 dark:text-white mb-0.5">0 out of 20.</p>
-                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Award: ₦20000.00</p>
+                    <p className="text-emerald-600 font-medium mb-0.5 text-sm">Current Members Counter</p>
+                    <p className="text-lg font-bold text-emerald-950 dark:text-white mb-0.5">0 out of 20.</p>
+                    <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Award: ₦20000.00</p>
                   </Card>
                 </div>
               </div>
@@ -406,12 +406,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 {/* Welcome Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-2">
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">Member Analysis</h2>
-                    <p className="text-slate-500 text-[10px] font-medium">Comprehensive metrics for your growth</p>
+                    <h2 className="text-lg font-bold text-emerald-950 dark:text-white tracking-tight">Member Analysis</h2>
+                    <p className="text-emerald-600 text-[10px] font-medium">Comprehensive metrics for your growth</p>
                   </div>
-                  <div className="flex items-center space-x-1.5 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/5 px-2 py-0.5 rounded-lg shadow-sm">
-                    <Clock size={10} className="text-amber-500" />
-                    <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Last Earned: 2025-11-01</span>
+                  <div className="flex items-center space-x-1.5 bg-white dark:bg-emerald-950/50 border border-emerald-100 dark:border-white/5 px-2 py-0.5 rounded-lg shadow-sm">
+                    <Clock size={10} className="text-amber-400" />
+                    <span className="text-[8px] font-bold text-emerald-400 uppercase tracking-widest">Last Earned: 2025-11-01</span>
                   </div>
                 </div>
 
@@ -432,7 +432,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <SalesDistribution data={dashboardData} />
 
                     {/* Rank Card */}
-                    <Card className="bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-2xl shadow-amber-500/20 relative overflow-hidden group p-4">
+                    <Card className="bg-gradient-to-br from-amber-400 to-yellow-600 text-white shadow-2xl shadow-amber-400/20 relative overflow-hidden group p-4">
                       <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
                       <div className="relative z-10">
                         <div className="flex items-center justify-between mb-3">
@@ -443,7 +443,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         </div>
                         <h4 className="text-xl font-bold mb-0.5">No Rank Yet!</h4>
                         <p className="text-white/80 text-[9px] font-medium leading-relaxed">Keep growing your network to unlock prestigious ranks and exclusive rewards.</p>
-                        <button className="mt-3 w-full py-1.5 bg-white text-orange-600 font-bold rounded-lg hover:bg-slate-100 transition-colors shadow-lg text-[10px]">
+                        <button className="mt-3 w-full py-1.5 bg-white text-yellow-600 font-bold rounded-lg hover:bg-emerald-50 transition-colors shadow-lg text-[10px]">
                           View Rank Requirements
                         </button>
                       </div>
@@ -451,11 +451,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
                     {/* Promotions Card */}
                     <Card className="flex flex-col items-center justify-center text-center min-h-[160px] p-4">
-                      <div className="w-8 h-8 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mb-2">
+                      <div className="w-8 h-8 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mb-2">
                         <Star size={16} />
                       </div>
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-0.5">Promotions</h3>
-                      <p className="text-slate-500 text-[9px] max-w-[140px]">No active promotions or awards at the moment.</p>
+                      <h3 className="text-sm font-bold text-emerald-950 dark:text-white mb-0.5">Promotions</h3>
+                      <p className="text-emerald-600 text-[9px] max-w-[140px]">No active promotions or awards at the moment.</p>
                     </Card>
 
                     {/* Newly Registered Card */}
@@ -464,19 +464,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
                         <div className="p-1 bg-emerald-500/10 text-emerald-500 rounded-lg">
                           <UserPlus size={14} />
                         </div>
-                        <h3 className="text-sm font-bold text-slate-900 dark:text-white">New Members</h3>
+                        <h3 className="text-sm font-bold text-emerald-950 dark:text-white">New Members</h3>
                       </div>
                       <div className="text-center py-1">
-                        <p className="text-xl font-bold text-slate-900 dark:text-white mb-0.5">0</p>
-                        <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest">On Weak Leg</p>
+                        <p className="text-xl font-bold text-emerald-950 dark:text-white mb-0.5">0</p>
+                        <p className="text-[8px] font-bold text-emerald-600 uppercase tracking-widest">On Weak Leg</p>
                       </div>
                     </Card>
                   </div>
                 </div>
 
                 {/* Stats Grid - Moved to bottom */}
-                <div className="pt-3 border-t border-slate-200 dark:border-white/5">
-                  <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-2">Key Performance Indicators</h3>
+                <div className="pt-3 border-t border-emerald-100 dark:border-white/5">
+                  <h3 className="text-sm font-bold text-emerald-950 dark:text-white mb-2">Key Performance Indicators</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
                     {stats.map((stat, i) => (
                       <motion.div
@@ -635,76 +635,76 @@ export const Dashboard: React.FC<DashboardProps> = ({
             ) : (
               <div className="flex items-center justify-center h-[60vh]">
                 <div className="text-center space-y-4">
-                  <div className="w-20 h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
+                  <div className="w-20 h-20 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto">
                     <Star size={40} />
                   </div>
-                  <h2 className="text-2xl font-bold text-slate-900 dark:text-white capitalize">{activeTab.replace('-', ' ')}</h2>
-                  <p className="text-slate-500">This section is coming soon.</p>
+                  <h2 className="text-2xl font-bold text-emerald-950 dark:text-white capitalize">{activeTab.replace('-', ' ')}</h2>
+                  <p className="text-emerald-600">This section is coming soon.</p>
                 </div>
               </div>
             )}</div>
 
           {/* Footer */}
-          <footer className="mt-8 pt-4 border-t border-slate-200 dark:border-white/5 max-w-5xl mx-auto">
+          <footer className="mt-8 pt-4 border-t border-emerald-100 dark:border-white/5 max-w-5xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
               <div className="space-y-3">
                 <div className="flex items-center space-x-1.5">
-                  <div className="w-6 h-6 bg-amber-500 rounded-lg flex items-center justify-center">
+                  <div className="w-6 h-6 bg-amber-400 rounded-lg flex items-center justify-center">
                     <img src={logo} alt="Logo" className="w-3.5 h-3.5 object-contain brightness-0 invert" />
                   </div>
-                  <span className="text-sm font-bold text-slate-900 dark:text-white">TopNivo</span>
+                  <span className="text-sm font-bold text-emerald-950 dark:text-white">crystalgreengold</span>
                 </div>
                 <div className="space-y-0.5">
-                  <button className="block text-[10px] text-slate-500 hover:text-amber-500 transition-colors">Privacy Policy</button>
-                  <button className="block text-[10px] text-slate-500 hover:text-amber-500 transition-colors">Terms and Condition</button>
+                  <button className="block text-[10px] text-emerald-600 hover:text-amber-400 transition-colors">Privacy Policy</button>
+                  <button className="block text-[10px] text-emerald-600 hover:text-amber-400 transition-colors">Terms and Condition</button>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <h5 className="text-[9px] font-bold text-slate-900 dark:text-white uppercase tracking-[0.2em]">Information</h5>
-                <p className="text-[10px] text-slate-500 leading-relaxed">
+                <h5 className="text-[9px] font-bold text-emerald-950 dark:text-white uppercase tracking-[0.2em]">Information</h5>
+                <p className="text-[10px] text-emerald-600 leading-relaxed">
                   4, Afariogun Street, Awolowo Way, Ikeja, Lagos, Nigeria.
                 </p>
                 <div className="space-y-0.5">
-                  <button className="block text-[10px] text-amber-500 hover:underline">About us</button>
+                  <button className="block text-[10px] text-amber-400 hover:underline">About us</button>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <h5 className="text-[9px] font-bold text-slate-900 dark:text-white uppercase tracking-[0.2em]">Help</h5>
+                <h5 className="text-[9px] font-bold text-emerald-950 dark:text-white uppercase tracking-[0.2em]">Help</h5>
                 <div className="space-y-0.5">
-                  <button className="block text-[10px] text-slate-500 hover:text-amber-500 transition-colors">My Account</button>
-                  <button className="block text-[10px] text-slate-500 hover:text-amber-500 transition-colors">Cart</button>
-                  <button className="block text-[10px] text-slate-500 hover:text-amber-500 transition-colors">Order Status</button>
+                  <button className="block text-[10px] text-emerald-600 hover:text-amber-400 transition-colors">My Account</button>
+                  <button className="block text-[10px] text-emerald-600 hover:text-amber-400 transition-colors">Cart</button>
+                  <button className="block text-[10px] text-emerald-600 hover:text-amber-400 transition-colors">Order Status</button>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <h5 className="text-[9px] font-bold text-slate-900 dark:text-white uppercase tracking-[0.2em]">Social Media</h5>
+                <h5 className="text-[9px] font-bold text-emerald-950 dark:text-white uppercase tracking-[0.2em]">Social Media</h5>
                 <div className="flex space-x-2">
                   {['instagram', 'twitter', 'youtube'].map((social) => (
-                    <button key={social} className="w-6 h-6 rounded-lg bg-slate-200 dark:bg-white/5 flex items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-amber-500 hover:text-white transition-all">
+                    <button key={social} className="w-6 h-6 rounded-lg bg-emerald-100 dark:bg-white/5 flex items-center justify-center text-emerald-600 dark:text-emerald-400 hover:bg-amber-400 hover:text-white transition-all">
                       <span className="sr-only">{social}</span>
                       <div className="w-3 h-3 bg-current rounded-sm opacity-50" />
                     </button>
                   ))}
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-[9px] text-slate-500">090topnivo</p>
-                  <p className="text-[9px] text-slate-500">topnivoinfo@gmail.com</p>
+                  <p className="text-[9px] text-emerald-600">090crystalgreengold</p>
+                  <p className="text-[9px] text-emerald-600">crystalgreengoldinfo@gmail.com</p>
                 </div>
               </div>
             </div>
             <div className="pb-4 flex flex-col md:flex-row justify-between items-center gap-2">
-              <div className="flex flex-wrap gap-2 text-[8px] font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest">
+              <div className="flex flex-wrap gap-2 text-[8px] font-bold text-emerald-400 dark:text-emerald-700 uppercase tracking-widest">
                 <span>Category</span>
-                <span className="text-slate-300 dark:text-slate-400">Perfumes</span>
-                <span className="text-slate-300 dark:text-slate-400">Cosmetics</span>
-                <span className="text-slate-300 dark:text-slate-400">Soaps</span>
-                <span className="text-slate-300 dark:text-slate-400">and So Much More...</span>
+                <span className="text-emerald-200 dark:text-emerald-400">Perfumes</span>
+                <span className="text-emerald-200 dark:text-emerald-400">Cosmetics</span>
+                <span className="text-emerald-200 dark:text-emerald-400">Soaps</span>
+                <span className="text-emerald-200 dark:text-emerald-400">and So Much More...</span>
               </div>
-              <p className="text-[8px] font-bold text-slate-400 dark:text-slate-600 uppercase tracking-widest">
-                © 2025 Topnivo. All rights reserved.
+              <p className="text-[8px] font-bold text-emerald-400 dark:text-emerald-700 uppercase tracking-widest">
+                © 2025 crystalgreengold. All rights reserved.
               </p>
             </div>
           </footer>
@@ -718,3 +718,4 @@ export const Dashboard: React.FC<DashboardProps> = ({
     </div>
   );
 };
+

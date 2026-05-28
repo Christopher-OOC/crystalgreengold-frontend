@@ -80,18 +80,18 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleClose}
-            className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-emerald-950/60 backdrop-blur-sm"
           />
           
           <motion.div 
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden"
+            className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden"
           >
             <button 
               onClick={handleClose}
-              className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors z-10"
+              className="absolute top-6 right-6 p-2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors z-10"
               aria-label="Close"
             >
               <X size={24} />
@@ -100,23 +100,23 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
             <div className="p-10 text-center space-y-8">
               {step === 'confirm' && (
                 <>
-                  <div className="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
+                  <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto">
                     <CreditCard size={48} className="animate-pulse" />
                   </div>
 
                   <div className="space-y-4">
-                    <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Confirm Purchase</h2>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium">
-                      You are about to purchase <span className="text-amber-500 font-bold">{quantity}x {productName}</span> for <span className="font-bold text-slate-900 dark:text-white">{totalPrice}</span>.
+                    <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Confirm Purchase</h2>
+                    <p className="text-emerald-600 dark:text-emerald-400 font-medium">
+                      You are about to purchase <span className="text-amber-400 font-bold">{quantity}x {productName}</span> for <span className="font-bold text-emerald-950 dark:text-white">{totalPrice}</span>.
                     </p>
                   </div>
 
                   <div className="relative">
-                    <div className="w-full bg-slate-50 dark:bg-white/5 border-2 border-amber-500/20 rounded-2xl py-4 px-6 text-center">
-                      <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Total Amount</p>
-                      <p className="text-3xl font-black text-amber-500">{totalPrice}</p>
+                    <div className="w-full bg-white dark:bg-white/5 border-2 border-amber-400/20 rounded-2xl py-4 px-6 text-center">
+                      <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest mb-1">Total Amount</p>
+                      <p className="text-3xl font-black text-amber-400">{totalPrice}</p>
                     </div>
-                    <p className="mt-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    <p className="mt-3 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
                       Payment will be processed securely
                     </p>
                   </div>
@@ -141,28 +141,28 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
 
               {step === 'payment' && (
                 <>
-                  <div className="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
+                  <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto">
                     <ShieldCheck size={48} />
                   </div>
 
                   <div className="space-y-2">
-                    <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Secure Payment</h2>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
+                    <h2 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Secure Payment</h2>
+                    <p className="text-emerald-600 dark:text-emerald-400 text-sm font-medium">
                       Please transfer to the account details below!
                     </p>
                   </div>
 
-                  <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-3xl border border-slate-100 dark:border-white/5 text-left space-y-4">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Transfer To:</p>
+                  <div className="bg-white dark:bg-white/5 p-6 rounded-3xl border border-emerald-50 dark:border-white/5 text-left space-y-4">
+                    <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Transfer To:</p>
                     <div className="space-y-2">
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">
-                        Account Name: <span className="font-medium text-slate-600 dark:text-slate-400">TopNivo Official</span>
+                      <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                        Account Name: <span className="font-medium text-emerald-700 dark:text-emerald-400">crystalgreengold Official</span>
                       </p>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">
-                        Account Number: <span className="font-medium text-slate-600 dark:text-slate-400">1002891739</span>
+                      <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                        Account Number: <span className="font-medium text-emerald-700 dark:text-emerald-400">1002891739</span>
                       </p>
-                      <p className="text-sm font-bold text-slate-900 dark:text-white">
-                        Bank: <span className="font-medium text-slate-600 dark:text-slate-400">Lotus Bank</span>
+                      <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                        Bank: <span className="font-medium text-emerald-700 dark:text-emerald-400">Lotus Bank</span>
                       </p>
                     </div>
                   </div>
@@ -187,26 +187,26 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
 
               {step === 'processing' && (
                 <div className="py-12 space-y-12">
-                  <div className="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto relative">
-                    <div className="absolute inset-0 border-4 border-amber-500/20 rounded-full" />
+                  <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto relative">
+                    <div className="absolute inset-0 border-4 border-amber-400/20 rounded-full" />
                     <div 
-                      className="absolute inset-0 border-4 border-amber-500 rounded-full border-t-transparent animate-spin"
+                      className="absolute inset-0 border-4 border-amber-400 rounded-full border-t-transparent animate-spin"
                     />
                     <DollarSign size={32} />
                   </div>
 
                   <div className="space-y-4">
-                    <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Processing Order</h2>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium">
+                    <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Processing Order</h2>
+                    <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                       We are verifying your payment...
                     </p>
                   </div>
 
-                  <div className="w-full h-3 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+                  <div className="w-full h-3 bg-emerald-50 dark:bg-white/5 rounded-full overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${progress}%` }}
-                      className="h-full bg-amber-500"
+                      className="h-full bg-amber-400"
                     />
                   </div>
                 </div>
@@ -222,8 +222,8 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
                     <CheckCircle2 size={48} />
                   </div>
                   <div className="space-y-2">
-                    <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Order Placed!</h2>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium">
+                    <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Order Placed!</h2>
+                    <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                       Your order for {quantity}x {productName} has been placed successfully.
                     </p>
                   </div>

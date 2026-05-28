@@ -55,9 +55,9 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         tokenStorage.setTokens(accessToken, refreshToken);
 
         if (typeof window !== 'undefined' && nextMemberId) {
-          window.localStorage.removeItem('topnivo-auth');
-          window.sessionStorage.setItem('topnivo_member_id', nextMemberId);
-          window.localStorage.setItem('topnivo_member_id', nextMemberId);
+          window.localStorage.removeItem('crystalgreengold-auth');
+          window.sessionStorage.setItem('crystalgreengold_member_id', nextMemberId);
+          window.localStorage.setItem('crystalgreengold_member_id', nextMemberId);
         }
 
         set({
@@ -87,17 +87,17 @@ export const useAuthStore = create<AuthState & AuthActions>()(
         tokenStorage.clearTokens();
 
         // 🔥 Remove persisted state completely
-        sessionStorage.removeItem('topnivo-auth');
-        localStorage.removeItem('topnivo-auth');
-        sessionStorage.removeItem('topnivo_member_id');
-        localStorage.removeItem('topnivo_member_id');
+        sessionStorage.removeItem('crystalgreengold-auth');
+        localStorage.removeItem('crystalgreengold-auth');
+        sessionStorage.removeItem('crystalgreengold_member_id');
+        localStorage.removeItem('crystalgreengold_member_id');
 
         set(initialState);
       },
     }),
 
     {
-      name: 'topnivo-auth',
+      name: 'crystalgreengold-auth',
       storage: createJSONStorage(() => sessionStorage),
 
       // ✅ Persist only needed fields
@@ -133,3 +133,4 @@ export const selectIsAdmin = (s: AuthState & AuthActions) => {
   const type = s.member?.memberType?.toUpperCase() || '';
   return ['ADMIN', 'SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'].includes(type);
 };
+

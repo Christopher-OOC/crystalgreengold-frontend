@@ -50,8 +50,8 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Achievements...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Achievements...</p>
       </div>
     );
   }
@@ -63,19 +63,19 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
   return (
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col space-y-4">
-        <button onClick={onBack} className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm group w-fit">
+        <button onClick={onBack} className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm group w-fit">
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           <span>Back to Promotions</span>
         </button>
 
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-orange-500 to-orange-600 p-8 md:p-10 shadow-xl shadow-orange-500/20">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-yellow-500 to-yellow-600 p-8 md:p-10 shadow-xl shadow-yellow-500/20">
           <div className="relative z-10 flex items-center space-x-6">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white">
               <Gift size={32} />
             </div>
             <div className="space-y-1">
               <h1 className="text-3xl font-black text-white tracking-tight">Earned Promotions</h1>
-              <p className="text-orange-100 font-medium">View all promotions earned by members</p>
+              <p className="text-yellow-100 font-medium">View all promotions earned by members</p>
             </div>
           </div>
           <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
@@ -83,18 +83,18 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
       </div>
 
       <Card className="p-6 border-none shadow-xl space-y-4">
-        <div className="flex items-center space-x-2 text-slate-500">
+        <div className="flex items-center space-x-2 text-emerald-600">
           <Filter size={18} />
           <span className="text-xs font-black uppercase tracking-widest">Filter by Status</span>
         </div>
         <div className="relative">
           <select value={selectedFilter} onChange={(e) => setSelectedFilter(e.target.value)}
-            className="w-full appearance-none bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-bold text-slate-700 dark:text-slate-200 cursor-pointer">
+            className="w-full appearance-none bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-2xl py-4 px-6 outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-bold text-emerald-800 dark:text-emerald-100 cursor-pointer">
             <option value="ALL">All Promotions</option>
             <option value="TRUE">Received</option>
             <option value="FALSE">Not Received</option>
           </select>
-          <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-emerald-400">
             <ChevronDown size={20} />
           </div>
         </div>
@@ -102,12 +102,12 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
 
       {promos.length === 0 ? (
         <Card className="p-20 border-none shadow-2xl flex flex-col items-center justify-center text-center space-y-6">
-          <div className="w-24 h-24 bg-slate-50 dark:bg-white/5 rounded-full flex items-center justify-center text-slate-300">
+          <div className="w-24 h-24 bg-white dark:bg-white/5 rounded-full flex items-center justify-center text-emerald-200">
             <Gift size={64} />
           </div>
           <div className="space-y-2">
-            <h3 className="text-2xl font-black text-slate-900 dark:text-white">No promotions found</h3>
-            <p className="text-slate-500 font-medium">No promotions have been earned yet.</p>
+            <h3 className="text-2xl font-black text-emerald-950 dark:text-white">No promotions found</h3>
+            <p className="text-emerald-600 font-medium">No promotions have been earned yet.</p>
           </div>
         </Card>
       ) : (
@@ -115,46 +115,46 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 dark:bg-white/5 border-b border-slate-100 dark:border-white/5">
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">S/N</th>
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Member</th>
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Promotion</th>
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Prize</th>
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Target PV</th>
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Date Earned</th>
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Received</th>
-                  <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+                <tr className="bg-white dark:bg-white/5 border-b border-emerald-50 dark:border-white/5">
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">S/N</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Member</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Promotion</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Prize</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Target PV</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Date Earned</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-center">Received</th>
+                  <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50 dark:divide-white/5">
+              <tbody className="divide-y divide-white dark:divide-white/5">
                 {promos.map((promo, i) => (
                   <motion.tr key={promo.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
-                    <td className="px-6 py-5 text-sm font-black text-slate-400">{i + 1}.</td>
+                    className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors">
+                    <td className="px-6 py-5 text-sm font-black text-emerald-400">{i + 1}.</td>
                     <td className="px-6 py-5">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-indigo-500/10 text-indigo-500 rounded-full flex items-center justify-center text-xs font-black">
                           {promo.member?.firstName?.[0] ?? '?'}
                         </div>
-                        <span className="text-sm font-bold text-slate-900 dark:text-white">
+                        <span className="text-sm font-bold text-emerald-950 dark:text-white">
                           {promo.member?.firstName} {promo.member?.lastName}
                         </span>
                       </div>
                     </td>
                     <td className="px-6 py-5">
-                      <div className="flex items-center space-x-2 text-slate-600 dark:text-slate-400">
-                        <Medal size={14} className="text-amber-500" />
+                      <div className="flex items-center space-x-2 text-emerald-700 dark:text-emerald-400">
+                        <Medal size={14} className="text-amber-400" />
                         <span className="text-sm font-bold">{promo.name}</span>
                       </div>
                     </td>
                     <td className="px-6 py-5">
-                      <span className="text-sm font-black text-slate-900 dark:text-white">₦{promo.prize?.toLocaleString()}</span>
+                      <span className="text-sm font-black text-emerald-950 dark:text-white">₦{promo.prize?.toLocaleString()}</span>
                     </td>
                     <td className="px-6 py-5">
-                      <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{promo.targetPv?.toLocaleString()}</span>
+                      <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">{promo.targetPv?.toLocaleString()}</span>
                     </td>
                     <td className="px-6 py-5">
-                      <div className="flex items-center space-x-2 text-xs font-bold text-slate-400">
+                      <div className="flex items-center space-x-2 text-xs font-bold text-emerald-400">
                         <Calendar size={14} />
                         <span>{promo.dateEarned ? new Date(promo.dateEarned).toLocaleDateString() : '—'}</span>
                       </div>
@@ -163,7 +163,7 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
                       <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                         promo.hasReceived
                           ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
-                          : 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                          : 'bg-amber-400/10 text-amber-400 border-amber-400/20'
                       }`}>
                         {promo.hasReceived ? 'Received' : 'Pending'}
                       </span>
@@ -191,11 +191,11 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
           </div>
 
           {totalPages > 1 && (
-            <div className="flex items-center justify-center space-x-2 p-4 border-t border-slate-100 dark:border-white/5">
+            <div className="flex items-center justify-center space-x-2 p-4 border-t border-emerald-50 dark:border-white/5">
               {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
                 <button key={page} onClick={() => { setCurrentPage(page); fetchData(page, selectedFilter); }}
                   className={`w-8 h-8 rounded-lg font-bold text-sm transition-all ${
-                    currentPage === page ? 'bg-orange-500 text-white' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-white/5'
+                    currentPage === page ? 'bg-yellow-500 text-white' : 'text-emerald-600 hover:bg-emerald-50 dark:hover:bg-white/5'
                   }`}>
                   {page}
                 </button>

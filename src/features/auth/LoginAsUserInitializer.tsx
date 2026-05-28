@@ -94,16 +94,16 @@ export function LoginAsUserInitializer() {
   }, [initializeMember]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 p-6 text-slate-900 dark:bg-slate-950 dark:text-white">
-      <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-xl shadow-slate-200/60 dark:border-white/10 dark:bg-slate-900 dark:shadow-black/20">
-        <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-orange-500/10 text-orange-500">
+    <div className="flex min-h-screen items-center justify-center bg-white p-6 text-emerald-950 dark:bg-emerald-950 dark:text-white">
+      <div className="w-full max-w-md rounded-2xl border border-emerald-100 bg-white p-8 text-center shadow-xl shadow-emerald-100/60 dark:border-white/10 dark:bg-emerald-950 dark:shadow-black/20">
+        <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-yellow-500/10 text-yellow-500">
           {error ? <AlertCircle size={28} /> : isInitializing ? <Loader2 size={28} className="animate-spin" /> : <LogIn size={28} />}
         </div>
 
         <h1 className="text-lg font-black tracking-tight">
           {error ? 'Member Session Failed' : 'Initializing Member Session'}
         </h1>
-        <p className="mt-2 text-sm font-medium leading-6 text-slate-500 dark:text-slate-400">
+        <p className="mt-2 text-sm font-medium leading-6 text-emerald-600 dark:text-emerald-400">
           {error || 'Preparing the selected user account before opening the dashboard.'}
         </p>
 

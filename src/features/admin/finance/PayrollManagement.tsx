@@ -71,8 +71,8 @@ export const PayrollManagement: React.FC<PayrollManagementProps> = ({ onBack }) 
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Payroll Records...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Payroll Records...</p>
       </div>
     );
   }
@@ -95,16 +95,16 @@ export const PayrollManagement: React.FC<PayrollManagementProps> = ({ onBack }) 
         <div className="space-y-1">
           <button 
             onClick={onBack}
-            className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group"
+            className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Payouts</span>
           </button>
-          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Payroll Management</h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">History and records of generated payrolls</p>
+          <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">Payroll Management</h1>
+          <p className="text-emerald-600 dark:text-emerald-400 font-medium">History and records of generated payrolls</p>
         </div>
         <div className="flex items-center space-x-3">
-          <Button className="bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-slate-200 transition-all">
+          <Button className="bg-emerald-50 dark:bg-white/5 text-emerald-700 dark:text-emerald-400 px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest hover:bg-emerald-100 transition-all">
             <Download size={20} />
             <span>Export All</span>
           </Button>
@@ -113,54 +113,54 @@ export const PayrollManagement: React.FC<PayrollManagementProps> = ({ onBack }) 
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="p-6 border-none shadow-xl bg-white dark:bg-slate-900">
+        <Card className="p-6 border-none shadow-xl bg-white dark:bg-emerald-950">
           <div className="flex items-center justify-between mb-4">
             <div className="w-10 h-10 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center">
               <DollarSign size={20} />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Paid</span>
+            <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Total Paid</span>
           </div>
-          <p className="text-2xl font-black text-slate-900 dark:text-white">₦160,951.25</p>
-          <p className="text-xs text-slate-500 font-medium mt-1">Last 4 periods</p>
+          <p className="text-2xl font-black text-emerald-950 dark:text-white">₦160,951.25</p>
+          <p className="text-xs text-emerald-600 font-medium mt-1">Last 4 periods</p>
         </Card>
 
-        <Card className="p-6 border-none shadow-xl bg-white dark:bg-slate-900">
+        <Card className="p-6 border-none shadow-xl bg-white dark:bg-emerald-950">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center">
               <Users size={20} />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Members</span>
+            <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Total Members</span>
           </div>
-          <p className="text-2xl font-black text-slate-900 dark:text-white">477</p>
-          <p className="text-xs text-slate-500 font-medium mt-1">Unique recipients</p>
+          <p className="text-2xl font-black text-emerald-950 dark:text-white">477</p>
+          <p className="text-xs text-emerald-600 font-medium mt-1">Unique recipients</p>
         </Card>
 
-        <Card className="p-6 border-none shadow-xl bg-white dark:bg-slate-900">
+        <Card className="p-6 border-none shadow-xl bg-white dark:bg-emerald-950">
           <div className="flex items-center justify-between mb-4">
             <div className="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center">
               <Calendar size={20} />
             </div>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Next Run</span>
+            <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Next Run</span>
           </div>
-          <p className="text-2xl font-black text-slate-900 dark:text-white">March 31</p>
-          <p className="text-xs text-slate-500 font-medium mt-1">Scheduled processing</p>
+          <p className="text-2xl font-black text-emerald-950 dark:text-white">March 31</p>
+          <p className="text-xs text-emerald-600 font-medium mt-1">Scheduled processing</p>
         </Card>
       </div>
 
       {/* Action Bar */}
       <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
         <div className="relative w-full sm:w-96">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
           <input 
             type="text" 
             placeholder="Search by period..." 
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium"
+            className="w-full pl-12 pr-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium"
           />
         </div>
         <div className="flex items-center space-x-2">
-          <button className="flex items-center space-x-2 px-6 py-3 bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-slate-200 transition-colors">
+          <button className="flex items-center space-x-2 px-6 py-3 bg-emerald-50 dark:bg-white/5 text-emerald-700 dark:text-emerald-400 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-emerald-100 transition-colors">
             <Filter size={16} />
             <span>Filter</span>
           </button>
@@ -172,54 +172,54 @@ export const PayrollManagement: React.FC<PayrollManagementProps> = ({ onBack }) 
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 dark:bg-white/5 border-b border-slate-100 dark:border-white/5">
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Period</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-center">Members</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Amount</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Generated Date</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Actions</th>
+              <tr className="bg-white dark:bg-white/5 border-b border-emerald-50 dark:border-white/5">
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Period</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-center">Members</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Total Amount</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Generated Date</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Status</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50 dark:divide-white/5">
+            <tbody className="divide-y divide-white dark:divide-white/5">
               {payrollRecords.map((record, i) => (
                 <motion.tr 
                   key={record.id}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors group"
+                  className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors group"
                 >
                   <td className="px-6 py-5">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center">
+                      <div className="w-10 h-10 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center">
                         <Calendar size={18} />
                       </div>
-                      <span className="text-sm font-black text-slate-900 dark:text-white tracking-tight">{record.period}</span>
+                      <span className="text-sm font-black text-emerald-950 dark:text-white tracking-tight">{record.period}</span>
                     </div>
                   </td>
                   <td className="px-6 py-5 text-center">
-                    <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{record.membersCount}</span>
+                    <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">{record.membersCount}</span>
                   </td>
                   <td className="px-6 py-5">
-                    <span className="text-sm font-black text-slate-900 dark:text-white">₦{record.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+                    <span className="text-sm font-black text-emerald-950 dark:text-white">₦{record.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
                   </td>
-                  <td className="px-6 py-5 text-sm font-bold text-slate-400">{record.generatedDate}</td>
+                  <td className="px-6 py-5 text-sm font-bold text-emerald-400">{record.generatedDate}</td>
                   <td className="px-6 py-5">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${
                       record.status === 'Completed' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
-                      record.status === 'Processing' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
-                      'bg-amber-500/10 text-amber-500 border-amber-500/20'
+                      record.status === 'Processing' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
+                      'bg-amber-400/10 text-amber-400 border-amber-400/20'
                     }`}>
                       {record.status}
                     </span>
                   </td>
                   <td className="px-6 py-5">
                     <div className="flex items-center justify-end space-x-2">
-                      <button className="p-2 text-blue-500 hover:bg-blue-500/10 rounded-lg transition-all" title="View Details">
+                      <button className="p-2 text-emerald-500 hover:bg-emerald-500/10 rounded-lg transition-all" title="View Details">
                         <ChevronRight size={18} />
                       </button>
-                      <button className="p-2 text-slate-400 hover:bg-slate-100 dark:hover:bg-white/5 rounded-lg transition-all" title="Download PDF">
+                      <button className="p-2 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-lg transition-all" title="Download PDF">
                         <Download size={18} />
                       </button>
                     </div>

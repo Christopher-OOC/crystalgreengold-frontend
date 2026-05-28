@@ -23,11 +23,11 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   ]
 }) => {
   const colorClasses: Record<string, string> = {
-    amber: "text-amber-500 bg-amber-500/10 border-amber-500/20",
+    amber: "text-amber-400 bg-amber-400/10 border-amber-400/20",
     emerald: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
-    blue: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+    blue: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20",
     purple: "text-purple-500 bg-purple-500/10 border-purple-500/20",
-    orange: "text-orange-500 bg-orange-500/10 border-orange-500/20",
+    orange: "text-yellow-500 bg-yellow-500/10 border-yellow-500/20",
   };
 
   const chartColors: Record<string, string> = {
@@ -41,7 +41,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
   return (
     <Card 
       rounded="xl" 
-      className="p-3 flex flex-col justify-between group hover:border-amber-500/30 dark:hover:border-white/10 transition-all"
+      className="p-3 flex flex-col justify-between group hover:border-amber-400/30 dark:hover:border-white/10 transition-all"
     >
       <div className="flex justify-between items-start mb-2">
         <div className={`p-1.5 rounded-lg border ${colorClasses[color]}`}>
@@ -56,8 +56,8 @@ export const StatsCard: React.FC<StatsCardProps> = ({
       </div>
 
       <div>
-        <p className="text-slate-400 dark:text-slate-500 text-[9px] font-bold uppercase tracking-wider mb-0.5">{label}</p>
-        <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">{value}</h3>
+        <p className="text-emerald-400 dark:text-emerald-600 text-[9px] font-bold uppercase tracking-wider mb-0.5">{label}</p>
+        <h3 className="text-lg font-bold text-emerald-950 dark:text-white tracking-tight">{value}</h3>
       </div>
 
       <div className="h-8 mt-2 -mx-1 opacity-50 group-hover:opacity-100 transition-opacity">

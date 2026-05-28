@@ -65,7 +65,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
       <div className="flex items-center justify-between">
         <button 
           onClick={onBack}
-          className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm uppercase tracking-widest"
+          className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm uppercase tracking-widest"
         >
           <ChevronLeft size={20} />
           <span>Back to Cart</span>
@@ -76,15 +76,15 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
         {/* Order Information */}
         <div className="lg:col-span-2">
           <Card className="p-10 space-y-8">
-            <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Order Information</h2>
+            <h2 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Order Information</h2>
             
             <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Address</label>
+                <label className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Address</label>
                 <div className="relative">
-                  <MapPin className="absolute left-4 top-4 text-slate-400" size={18} />
+                  <MapPin className="absolute left-4 top-4 text-emerald-400" size={18} />
                   <textarea 
-                    className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 pl-12 pr-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all min-h-[100px]"
+                    className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-2xl py-4 pl-12 pr-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all min-h-[100px]"
                     placeholder="Enter your delivery address"
                     defaultValue="irapada"
                   />
@@ -93,24 +93,24 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Email</label>
+                  <label className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Email</label>
                   <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={18} />
                     <input 
                       type="email"
                       defaultValue="faithokekeri2017@gmail.com"
-                      className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 pl-12 pr-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all"
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-2xl py-4 pl-12 pr-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-400 uppercase tracking-widest">Phone Number</label>
+                  <label className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Phone Number</label>
                   <div className="relative">
-                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={18} />
                     <input 
                       type="tel"
                       defaultValue="09046624920"
-                      className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl py-4 pl-12 pr-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all"
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-2xl py-4 pl-12 pr-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all"
                       placeholder="Enter your phone number"
                     />
                   </div>
@@ -124,43 +124,43 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
         <div className="space-y-6">
           <Card className="p-8 space-y-8">
             <div className="flex items-center space-x-3">
-              <ShoppingBag className="text-amber-500" size={24} />
-              <h3 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Order Summary</h3>
+              <ShoppingBag className="text-amber-400" size={24} />
+              <h3 className="text-xl font-black text-emerald-950 dark:text-white tracking-tight">Order Summary</h3>
             </div>
             
             <div className="space-y-4">
               {items.map((item, i) => (
-                <div key={i} className="flex items-center space-x-4 p-3 bg-slate-50 dark:bg-white/5 rounded-2xl">
-                  <div className="w-16 h-16 bg-white dark:bg-slate-800 rounded-xl p-2 flex items-center justify-center shrink-0">
+                <div key={i} className="flex items-center space-x-4 p-3 bg-white dark:bg-white/5 rounded-2xl">
+                  <div className="w-16 h-16 bg-white dark:bg-emerald-900 rounded-xl p-2 flex items-center justify-center shrink-0">
                     <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-bold text-slate-900 dark:text-white truncate">{item.name}</p>
-                    <p className="text-xs font-bold text-slate-400">{item.quantity} x <span className="text-amber-500">₦{item.price.toLocaleString()}</span></p>
+                    <p className="font-bold text-emerald-950 dark:text-white truncate">{item.name}</p>
+                    <p className="text-xs font-bold text-emerald-400">{item.quantity} x <span className="text-amber-400">₦{item.price.toLocaleString()}</span></p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="space-y-4 pt-4 border-t border-slate-100 dark:border-white/5">
+            <div className="space-y-4 pt-4 border-t border-emerald-50 dark:border-white/5">
               <div className="flex justify-between items-center text-sm">
-                <span className="text-slate-500 font-medium">Sub-total</span>
-                <span className="font-bold text-slate-900 dark:text-white">₦{subtotal.toLocaleString()}.00</span>
+                <span className="text-emerald-600 font-medium">Sub-total</span>
+                <span className="font-bold text-emerald-950 dark:text-white">₦{subtotal.toLocaleString()}.00</span>
               </div>
               <div className="flex justify-between items-center text-sm">
-                <span className="text-slate-500 font-medium">Shipping</span>
+                <span className="text-emerald-600 font-medium">Shipping</span>
                 <span className="font-bold text-emerald-500">Free</span>
               </div>
-              <div className="pt-4 border-t border-slate-100 dark:border-white/5 flex justify-between items-center">
-                <span className="text-lg font-black text-slate-900 dark:text-white">Total</span>
-                <span className="text-lg font-black text-amber-500">₦{total.toLocaleString()}.00 USD</span>
+              <div className="pt-4 border-t border-emerald-50 dark:border-white/5 flex justify-between items-center">
+                <span className="text-lg font-black text-emerald-950 dark:text-white">Total</span>
+                <span className="text-lg font-black text-amber-400">₦{total.toLocaleString()}.00 USD</span>
               </div>
             </div>
 
             {isValidated ? (
               <Button 
                 onClick={handlePayNow}
-                className="w-full py-4 rounded-2xl font-black flex items-center justify-center space-x-3 shadow-xl shadow-amber-500/20"
+                className="w-full py-4 rounded-2xl font-black flex items-center justify-center space-x-3 shadow-xl shadow-amber-400/20"
               >
                 <DollarSign size={20} />
                 <span>Pay Now</span>
@@ -169,7 +169,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               <Button 
                 onClick={handleValidateOrder}
                 disabled={isValidating}
-                className="w-full py-4 rounded-2xl font-black flex items-center justify-center space-x-3 shadow-xl shadow-amber-500/20"
+                className="w-full py-4 rounded-2xl font-black flex items-center justify-center space-x-3 shadow-xl shadow-amber-400/20"
               >
                 <CheckCircle size={20} />
                 <span>Validate Order</span>
@@ -188,27 +188,27 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-emerald-950/40 backdrop-blur-sm"
             />
             
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
+              className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
             >
               <div className="space-y-8">
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white text-left">Validating Order</h2>
+                <h2 className="text-2xl font-bold text-emerald-950 dark:text-white text-left">Validating Order</h2>
                 
                 <div className="space-y-6">
-                  <p className="text-slate-500 dark:text-slate-400 font-medium text-left">Checking for order validity...</p>
+                  <p className="text-emerald-600 dark:text-emerald-400 font-medium text-left">Checking for order validity...</p>
                   <div className="flex justify-center space-x-3">
                     {[0, 1, 2].map((i) => (
                       <motion.div
                         key={i}
                         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 1, 0.3] }}
                         transition={{ repeat: Infinity, duration: 1, delay: i * 0.2 }}
-                        className="w-10 h-10 bg-amber-500 rounded-full"
+                        className="w-10 h-10 bg-amber-400 rounded-full"
                       />
                     ))}
                   </div>
@@ -225,7 +225,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-emerald-950/40 backdrop-blur-sm"
               onClick={() => setShowValidModal(false)}
             />
             
@@ -233,18 +233,18 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10"
+              className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10"
             >
               <button 
                 onClick={() => setShowValidModal(false)}
-                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                className="absolute top-6 right-6 p-2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors"
               >
                 <X size={24} />
               </button>
 
               <div className="space-y-6">
-                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Order is valid!</h2>
-                <p className="text-slate-500 dark:text-slate-400 font-medium">
+                <h2 className="text-2xl font-bold text-emerald-950 dark:text-white">Order is valid!</h2>
+                <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                   Your order has been validated. You can continue with payment!
                 </p>
               </div>
@@ -259,7 +259,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-emerald-950/40 backdrop-blur-sm"
               onClick={() => setPaymentStep('none')}
             />
             
@@ -267,32 +267,32 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
+              className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
             >
               <button 
                 onClick={() => setPaymentStep('none')}
-                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                className="absolute top-6 right-6 p-2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors"
               >
                 <X size={24} />
               </button>
 
               <div className="space-y-8">
-                <div className="w-20 h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
+                <div className="w-20 h-20 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto">
                   <DollarSign size={40} />
                 </div>
 
                 <div className="space-y-2">
-                  <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Payment Confirmation</h2>
-                  <p className="text-slate-500 dark:text-slate-400 font-medium">
-                    You are about to pay <span className="text-amber-500 font-bold">₦{total.toLocaleString()}.00</span>
+                  <h2 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Payment Confirmation</h2>
+                  <p className="text-emerald-600 dark:text-emerald-400 font-medium">
+                    You are about to pay <span className="text-amber-400 font-bold">₦{total.toLocaleString()}.00</span>
                   </p>
                 </div>
 
                 <div className="relative">
-                  <div className="w-full bg-slate-50 dark:bg-white/5 border-2 border-amber-500/20 rounded-2xl py-4 px-6 text-center text-2xl font-black text-slate-900 dark:text-white">
+                  <div className="w-full bg-white dark:bg-white/5 border-2 border-amber-400/20 rounded-2xl py-4 px-6 text-center text-2xl font-black text-emerald-950 dark:text-white">
                     {total.toLocaleString()}.00
                   </div>
-                  <p className="mt-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                  <p className="mt-3 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
                     This amount will be deducted from your transaction wallet
                   </p>
                 </div>
@@ -324,7 +324,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-emerald-950/40 backdrop-blur-sm"
               onClick={() => setPaymentStep('none')}
             />
             
@@ -332,41 +332,41 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
+              className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
             >
               <button 
                 onClick={() => setPaymentStep('none')}
-                className="absolute top-6 right-6 p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                className="absolute top-6 right-6 p-2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors"
               >
                 <X size={24} />
               </button>
 
               <div className="space-y-8">
-                <div className="w-20 h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto">
+                <div className="w-20 h-20 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto">
                   <ShieldCheck size={40} />
                 </div>
 
                 <div className="space-y-2">
-                  <h2 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">Secure Payment</h2>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">
+                  <h2 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Secure Payment</h2>
+                  <p className="text-emerald-600 dark:text-emerald-400 text-sm font-medium">
                     Please transfer to the account details below!
                   </p>
                 </div>
 
-                <div className="bg-slate-50 dark:bg-white/5 p-6 rounded-3xl border border-slate-100 dark:border-white/5 text-left space-y-4">
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Transfer To:</p>
+                <div className="bg-white dark:bg-white/5 p-6 rounded-3xl border border-emerald-50 dark:border-white/5 text-left space-y-4">
+                  <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Transfer To:</p>
                   <div className="space-y-2">
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">
-                      Account Name: <span className="font-medium text-slate-600 dark:text-slate-400">Obaro Don Duke</span>
+                    <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                      Account Name: <span className="font-medium text-emerald-700 dark:text-emerald-400">Obaro Don Duke</span>
                     </p>
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">
-                      Account Number: <span className="font-medium text-slate-600 dark:text-slate-400">1002891739</span>
+                    <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                      Account Number: <span className="font-medium text-emerald-700 dark:text-emerald-400">1002891739</span>
                     </p>
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">
-                      Bank: <span className="font-medium text-slate-600 dark:text-slate-400">Lotus Bank</span>
+                    <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                      Bank: <span className="font-medium text-emerald-700 dark:text-emerald-400">Lotus Bank</span>
                     </p>
-                    <p className="text-sm font-bold text-slate-900 dark:text-white">
-                      For Enquiry Call: <span className="font-medium text-slate-600 dark:text-slate-400">(070 6340 2463 )</span>
+                    <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                      For Enquiry Call: <span className="font-medium text-emerald-700 dark:text-emerald-400">(070 6340 2463 )</span>
                     </p>
                   </div>
                 </div>
@@ -398,39 +398,39 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-emerald-950/40 backdrop-blur-sm"
             />
             
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
+              className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
             >
               <div className="space-y-12">
-                <div className="w-24 h-24 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto relative">
-                  <div className="absolute inset-0 border-4 border-amber-500/20 rounded-full" />
+                <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto relative">
+                  <div className="absolute inset-0 border-4 border-amber-400/20 rounded-full" />
                   <div 
-                    className="absolute inset-0 border-4 border-amber-500 rounded-full border-t-transparent animate-spin"
+                    className="absolute inset-0 border-4 border-amber-400 rounded-full border-t-transparent animate-spin"
                   />
-                  <div className="w-12 h-12 bg-amber-500/20 rounded-full flex items-center justify-center">
-                    <div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin" />
+                  <div className="w-12 h-12 bg-amber-400/20 rounded-full flex items-center justify-center">
+                    <div className="w-8 h-8 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Processing Payment</h2>
-                  <p className="text-slate-500 dark:text-slate-400 font-medium">
+                  <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Processing Payment</h2>
+                  <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                     Please wait while we secure your transaction...
                   </p>
                 </div>
 
                 <div className="space-y-6">
-                  <div className="w-full h-3 bg-slate-100 dark:bg-white/5 rounded-full overflow-hidden">
+                  <div className="w-full h-3 bg-emerald-50 dark:bg-white/5 rounded-full overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
                       animate={{ width: `${progress}%` }}
-                      className="h-full bg-amber-500"
+                      className="h-full bg-amber-400"
                     />
                   </div>
                   <div className="flex justify-center space-x-3">
@@ -439,7 +439,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
                         key={i}
                         animate={{ scale: [1, 1.2, 1], opacity: [0.3, 1, 0.3] }}
                         transition={{ repeat: Infinity, duration: 1, delay: i * 0.2 }}
-                        className="w-10 h-10 bg-amber-500 rounded-full"
+                        className="w-10 h-10 bg-amber-400 rounded-full"
                       />
                     ))}
                   </div>
@@ -456,7 +456,7 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+              className="absolute inset-0 bg-emerald-950/40 backdrop-blur-sm"
               onClick={onBack}
             />
             
@@ -464,15 +464,15 @@ export const Checkout: React.FC<CheckoutProps> = ({ items, onBack }) => {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
+              className="relative bg-white dark:bg-emerald-950 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden p-10 text-center"
             >
               <div className="space-y-8">
                 <div className="w-24 h-24 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto">
                   <CheckCircle2 size={48} />
                 </div>
                 <div className="space-y-2">
-                  <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Success!</h2>
-                  <p className="text-slate-500 dark:text-slate-400 font-medium">
+                  <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Success!</h2>
+                  <p className="text-emerald-600 dark:text-emerald-400 font-medium">
                     Your payment was successful and your order has been placed.
                   </p>
                 </div>

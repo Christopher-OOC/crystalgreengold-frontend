@@ -95,7 +95,7 @@ export const useUIStore = create<UIState & UIActions>()(
 			},
 		}),
 		{
-			name: "topnivo-ui",
+			name: "crystalgreengold-ui",
 			storage: createJSONStorage(() => localStorage),
 			partialize: (state) => ({
 				theme: state.theme,
@@ -108,3 +108,4 @@ export const useUIStore = create<UIState & UIActions>()(
 function formatToast(title: string, message?: string) {
 	return message ? `${title}: ${message}` : title;
 }
+

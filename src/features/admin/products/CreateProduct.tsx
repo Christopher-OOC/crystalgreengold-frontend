@@ -143,15 +143,15 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
     <div className="max-w-4xl mx-auto pb-12 space-y-6 relative">
       <AnimatePresence>
         {showSuccessModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-emerald-950/60 backdrop-blur-sm">
             <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white dark:bg-slate-900 rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl text-center space-y-6">
+              className="bg-white dark:bg-emerald-950 rounded-3xl p-8 md:p-12 max-w-md w-full shadow-2xl text-center space-y-6">
               <div className="w-20 h-20 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto">
                 <CheckCircle2 size={48} />
               </div>
               <div className="space-y-2">
-                <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight uppercase">Success!</h2>
-                <p className="text-slate-500 dark:text-slate-400 font-medium">Product {isEditing ? 'updated' : 'created'} successfully.</p>
+                <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight uppercase">Success!</h2>
+                <p className="text-emerald-600 dark:text-emerald-400 font-medium">Product {isEditing ? 'updated' : 'created'} successfully.</p>
               </div>
               <Button onClick={onBack} className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-2xl font-black uppercase tracking-widest">
                 Back to Inventory
@@ -162,10 +162,10 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
       </AnimatePresence>
 
       <div className="flex items-center space-x-4">
-        <button onClick={onBack} className="p-2 hover:bg-slate-100 dark:hover:bg-white/5 rounded-full transition-colors">
-          <ArrowLeft size={20} className="text-slate-600 dark:text-slate-400" />
+        <button onClick={onBack} className="p-2 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-full transition-colors">
+          <ArrowLeft size={20} className="text-emerald-700 dark:text-emerald-400" />
         </button>
-        <h1 className="text-xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
+        <h1 className="text-xl font-black text-emerald-950 dark:text-white uppercase tracking-tight">
           {isEditing ? 'Edit Product' : 'Create New Product'}
         </h1>
       </div>
@@ -178,21 +178,21 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
 
       <Card className="p-8 md:p-10 border-none shadow-2xl space-y-10">
         <div className="space-y-4">
-          <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest border-b border-slate-200 dark:border-white/10 pb-2">
-            Product Image {isEditing && <span className="normal-case font-medium text-slate-400 text-xs">(leave empty to keep current)</span>}
+          <h3 className="text-sm font-black text-emerald-950 dark:text-white uppercase tracking-widest border-b border-emerald-100 dark:border-white/10 pb-2">
+            Product Image {isEditing && <span className="normal-case font-medium text-emerald-400 text-xs">(leave empty to keep current)</span>}
           </h3>
-          <label className="border-2 border-dashed border-slate-200 dark:border-white/10 rounded-2xl p-12 flex flex-col items-center justify-center space-y-4 hover:border-amber-500/50 transition-colors cursor-pointer group bg-slate-50/50 dark:bg-white/[0.02]">
+          <label className="border-2 border-dashed border-emerald-100 dark:border-white/10 rounded-2xl p-12 flex flex-col items-center justify-center space-y-4 hover:border-amber-400/50 transition-colors cursor-pointer group bg-white/50 dark:bg-white/[0.02]">
             <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
             {imagePreview ? (
               <img src={imagePreview} className="w-32 h-32 object-cover rounded-xl" />
             ) : (
               <>
-                <div className="w-12 h-12 bg-slate-100 dark:bg-white/5 rounded-full flex items-center justify-center text-slate-400 group-hover:text-amber-500 transition-colors">
+                <div className="w-12 h-12 bg-emerald-50 dark:bg-white/5 rounded-full flex items-center justify-center text-emerald-400 group-hover:text-amber-400 transition-colors">
                   <Upload size={24} />
                 </div>
                 <div className="text-center space-y-1">
-                  <p className="text-sm font-bold text-slate-600 dark:text-slate-400">Click or drag to upload an image</p>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">PNG, JPG, JPEG (max 5MB)</p>
+                  <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400">Click or drag to upload an image</p>
+                  <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">PNG, JPG, JPEG (max 5MB)</p>
                 </div>
               </>
             )}
@@ -201,17 +201,17 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-6">
-            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest border-b border-slate-200 dark:border-white/10 pb-2">Basic Information</h3>
+            <h3 className="text-sm font-black text-emerald-950 dark:text-white uppercase tracking-widest border-b border-emerald-100 dark:border-white/10 pb-2">Basic Information</h3>
             <div className="space-y-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Product Name *</label>
+                <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Product Name *</label>
                 <input type="text" name="name" value={form.name} onChange={handleChange} placeholder="e.g., Premium Organic Tea" disabled={isLoading}
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50" />
+                  className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50" />
               </div>
               <div className="space-y-2">
-  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Category *</label>
+  <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Category *</label>
   <select name="categoryId" value={form.categoryId} onChange={handleChange} disabled={isLoading}
-    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50">
+    className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50">
     <option value="">Select a category</option>
     {categories.map(cat => (
       <option key={cat.id} value={cat.id}>{cat.name}</option>
@@ -220,13 +220,13 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
 </div>
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Price (₦) *</label>
+                  <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Price (₦) *</label>
                   <input type="number" name="price" value={form.price} onChange={handleChange} placeholder="0.00" disabled={isLoading}
-                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50" />
+                    className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50" />
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Product Type *</label>
+                  <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Product Type *</label>
                   <div className="flex space-x-3">
                     {[
                       { id: 'regular', label: 'Regular' },
@@ -238,8 +238,8 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
                         onClick={() => setForm({ ...form, productType: type.id })}
                         className={`flex-1 flex items-center justify-center space-x-2 py-3 px-4 rounded-xl border-2 transition-all font-bold ${
                           form.productType === type.id 
-                            ? 'bg-orange-50 border-orange-500 text-orange-600' 
-                            : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-white/10 text-slate-400'
+                            ? 'bg-yellow-50 border-yellow-500 text-yellow-600' 
+                            : 'bg-white dark:bg-emerald-950 border-emerald-100 dark:border-white/10 text-emerald-400'
                         }`}
                       >
                         {form.productType === type.id && <Check size={16} />}
@@ -258,20 +258,20 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
                       className="space-y-4 overflow-hidden"
                     >
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Discount Percentage *</label>
+                        <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Discount Percentage *</label>
                         <input type="number" name="discount" value={form.discount} onChange={handleChange} placeholder="Enter discount percentage (0-100%)" disabled={isLoading} min="0" max="100"
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50" />
+                          className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50" />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Attached Package *</label>
+                        <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Attached Package *</label>
                         <select name="packageId" value={form.packageId} onChange={handleChange} disabled={isLoading}
-                          className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50">
+                          className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50">
                           <option value="0">Select a package</option>
                           {packages.map(pkg => (
                             <option key={pkg.id} value={pkg.id}>{pkg.name}</option>
                           ))}
                         </select>
-                        <p className="text-[10px] font-bold text-slate-400 mt-1">Select the package this discounted product is attached to</p>
+                        <p className="text-[10px] font-bold text-emerald-400 mt-1">Select the package this discounted product is attached to</p>
                       </div>
                     </motion.div>
                   )}
@@ -281,41 +281,41 @@ export const CreateProduct: React.FC<CreateProductProps> = ({ onBack, editProduc
           </div>
 
           <div className="space-y-6">
-            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest border-b border-slate-200 dark:border-white/10 pb-2">Inventory & Metrics</h3>
+            <h3 className="text-sm font-black text-emerald-950 dark:text-white uppercase tracking-widest border-b border-emerald-100 dark:border-white/10 pb-2">Inventory & Metrics</h3>
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">PV *</label>
+                  <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">PV *</label>
                   <input type="number" name="pv" value={form.pv} onChange={handleChange} disabled={isLoading}
-                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50" />
+                    className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50" />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">BV *</label>
+                  <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">BV *</label>
                   <input type="number" name="bv" value={form.bv} onChange={handleChange} disabled={isLoading}
-                    className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50" />
+                    className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50" />
                 </div>
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Available Quantity *</label>
+                <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Available Quantity *</label>
                 <input type="number" name="availableQuantity" value={form.availableQuantity} onChange={handleChange} disabled={isLoading}
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium disabled:opacity-50" />
+                  className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium disabled:opacity-50" />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Description</label>
+                <label className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Description</label>
                 <textarea name="description" value={form.description} onChange={handleChange} placeholder="Enter detailed product description..." rows={6} disabled={isLoading}
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all font-medium resize-none disabled:opacity-50" />
+                  className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium resize-none disabled:opacity-50" />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center justify-end space-x-4 pt-8 border-t border-slate-100 dark:border-white/5">
+        <div className="flex items-center justify-end space-x-4 pt-8 border-t border-emerald-50 dark:border-white/5">
           <button onClick={onBack} disabled={isLoading}
-            className="px-8 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-slate-600 dark:text-slate-400 hover:bg-slate-50 transition-all disabled:opacity-50">
+            className="px-8 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-emerald-700 dark:text-emerald-400 hover:bg-white transition-all disabled:opacity-50">
             Cancel
           </button>
           <Button onClick={handleSubmit} isLoading={isLoading}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-10 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-orange-600/20 min-w-[180px] justify-center">
+            className="bg-yellow-600 hover:bg-yellow-700 text-white px-10 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-xl shadow-yellow-600/20 min-w-[180px] justify-center">
             <Check size={18} />
             <span>{isEditing ? 'Update Product' : 'Create Product'}</span>
           </Button>

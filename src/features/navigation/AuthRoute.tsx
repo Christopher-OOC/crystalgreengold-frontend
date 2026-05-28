@@ -10,7 +10,7 @@ import { SignUpForm } from '@/features/auth/components/SignUpForm';
 import { useAuth } from '@/features/auth/AuthContext';
 import logo from '@/shared/assets/logo';
 import type { AuthPage } from '@/features/navigation/paths';
-import { useTopnivoTheme } from '@/features/navigation/useTopnivoTheme';
+import { useCrystalgreengoldTheme } from '@/features/navigation/useCrystalgreengoldTheme';
 
 const BACKGROUND_IMAGES = [
   'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80',
@@ -21,7 +21,7 @@ const BACKGROUND_IMAGES = [
 export function AuthRoute({ page }: { page: AuthPage }) {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
-  const { isDark, setIsDark } = useTopnivoTheme();
+  const { isDark, setIsDark } = useCrystalgreengoldTheme();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -39,10 +39,10 @@ export function AuthRoute({ page }: { page: AuthPage }) {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 md:p-8 bg-slate-100 dark:bg-slate-950 transition-colors duration-500">
+    <div className="min-h-screen flex items-center justify-center p-4 md:p-8 bg-emerald-50 dark:bg-emerald-950 transition-colors duration-500">
       <button
         onClick={() => setIsDark(!isDark)}
-        className="fixed top-6 right-6 p-3 rounded-full bg-white dark:bg-slate-800 shadow-xl border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:scale-110 transition-transform z-50"
+        className="fixed top-6 right-6 p-3 rounded-full bg-white dark:bg-emerald-900 shadow-xl border border-emerald-100 dark:border-emerald-800 text-emerald-900 dark:text-emerald-100 hover:scale-110 transition-transform z-50"
       >
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
@@ -50,14 +50,14 @@ export function AuthRoute({ page }: { page: AuthPage }) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-5xl h-auto md:h-[700px] flex flex-col md:flex-row rounded-[24px] overflow-hidden shadow-2xl border border-white/10 dark:border-white/5 bg-white dark:bg-slate-900"
+        className="w-full max-w-5xl h-auto md:h-[700px] flex flex-col md:flex-row rounded-[24px] overflow-hidden shadow-2xl border border-white/10 dark:border-white/5 bg-white dark:bg-emerald-950"
       >
         <div className="relative w-full md:w-1/2 h-80 md:h-auto overflow-hidden group">
           <AnimatePresence mode="wait">
             <motion.img
               key={`${page}-${currentImageIndex}`}
               src={BACKGROUND_IMAGES[currentImageIndex]}
-              alt="Topnivo Lifestyle"
+              alt="crystalgreengold Lifestyle"
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
@@ -70,7 +70,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
           <div
             className={`absolute inset-0 transition-all duration-700 ${
               page === 'signup'
-                ? 'bg-amber-500/90 mix-blend-multiply'
+                ? 'bg-amber-400/90 mix-blend-multiply'
                 : 'bg-gradient-to-t from-black/95 via-black/40 to-transparent'
             }`}
           />
@@ -83,7 +83,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
                   i === currentImageIndex
                     ? page === 'signup'
                       ? 'bg-white w-8'
-                      : 'bg-amber-500 w-8'
+                      : 'bg-amber-400 w-8'
                     : page === 'signup'
                       ? 'bg-white/20 w-4'
                       : 'bg-white/20 w-4'
@@ -101,7 +101,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
               <div className="relative inline-block">
                 <img
                   src={logo}
-                  alt="Topnivo Logo"
+                  alt="crystalgreengold Logo"
                   className={`h-16 md:h-20 w-auto object-contain drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] transition-all duration-700 ${
                     page === 'signup' ? 'brightness-0 invert' : ''
                   }`}
@@ -125,7 +125,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
                 initial={{ width: 0 }}
                 animate={{ width: 60 }}
                 transition={{ delay: 0.8, duration: 1 }}
-                className="h-1 bg-amber-500 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.5)]"
+                className="h-1 bg-amber-400 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.5)]"
               />
             </div>
 
@@ -154,7 +154,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
                     transition={{ delay: 1 + i * 0.1 }}
                     className="flex items-start space-x-3 group"
                   >
-                    <div className="mt-1 p-1 rounded-full bg-white/20 text-white group-hover:bg-white group-hover:text-amber-500 transition-colors">
+                    <div className="mt-1 p-1 rounded-full bg-white/20 text-white group-hover:bg-white group-hover:text-amber-400 transition-colors">
                       <CheckCircle2 size={14} />
                     </div>
                     <div>
@@ -169,7 +169,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
           </div>
         </div>
 
-        <div className="relative w-full md:w-1/2 flex flex-col bg-gradient-to-br from-white via-amber-50/30 to-orange-100/40 dark:from-slate-950 dark:via-slate-900 dark:to-orange-900/30 p-6 md:p-10 transition-all duration-700">
+        <div className="relative w-full md:w-1/2 flex flex-col bg-gradient-to-br from-white via-amber-50/30 to-yellow-100/40 dark:from-emerald-950 dark:via-emerald-950 dark:to-yellow-900/30 p-6 md:p-10 transition-all duration-700">
           <AnimatePresence mode="wait">
             {page === 'signup' && (
               <motion.div
@@ -223,3 +223,4 @@ export function AuthRoute({ page }: { page: AuthPage }) {
     </div>
   );
 }
+

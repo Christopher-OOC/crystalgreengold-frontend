@@ -4,8 +4,8 @@ import { AppProviders } from '@/app/providers';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Topnivo',
-  description: 'The Topnivo frontend application',
+  title: 'crystalgreengold',
+  description: 'The crystalgreengold frontend application',
 };
 
 export default function RootLayout({
@@ -21,3 +21,4 @@ export default function RootLayout({
     </html>
   );
 }
+

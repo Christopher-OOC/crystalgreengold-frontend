@@ -1,5 +1,5 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// All Spring Boot endpoint URL constants for topnivo
+// All Spring Boot endpoint URL constants for crystalgreengold
 // Base: http://localhost:8080  (set via NEXT_PUBLIC_API_URL)
 // Version prefix: /api/v1
 // ─────────────────────────────────────────────────────────────────────────────
@@ -137,3 +137,4 @@ export const ENDPOINTS = {
   },
 
 } as const;
+

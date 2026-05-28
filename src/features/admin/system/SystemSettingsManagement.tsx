@@ -160,8 +160,8 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading System Settings...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading System Settings...</p>
       </div>
     );
   }
@@ -184,22 +184,22 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
         <div className="space-y-1">
           <button 
             onClick={onBack}
-            className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group"
+            className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group"
           >
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Admin Dashboard</span>
           </button>
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-orange-500/10 text-orange-500 rounded-lg">
+            <div className="p-2 bg-yellow-500/10 text-yellow-500 rounded-lg">
               <Settings size={24} />
             </div>
-            <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Business Settings</h1>
+            <h1 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Business Settings</h1>
           </div>
         </div>
         <div className="flex items-center space-x-3">
           <Button
             onClick={fetchData}
-            className="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-400 px-6 py-2.5 rounded-xl flex items-center space-x-2 font-bold hover:bg-slate-50 transition-all shadow-sm"
+            className="bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 text-emerald-700 dark:text-emerald-400 px-6 py-2.5 rounded-xl flex items-center space-x-2 font-bold hover:bg-white transition-all shadow-sm"
           >
             <RefreshCw size={18} />
             <span>Refresh</span>
@@ -207,7 +207,7 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
           <Button 
             onClick={handleUpdate}
             disabled={isSaving}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-2.5 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest text-xs shadow-lg shadow-orange-600/20 transition-all disabled:opacity-50"
+            className="bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-2.5 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest text-xs shadow-lg shadow-yellow-600/20 transition-all disabled:opacity-50"
           >
             {isSaving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
             <span>{isSaving ? 'Saving...' : 'Save Changes'}</span>
@@ -223,8 +223,8 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
             onClick={() => setActiveCategory(cat.id as any)}
             className={`flex items-center space-x-2 px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all whitespace-nowrap ${
               activeCategory === cat.id 
-                ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-xl' 
-                : 'bg-white text-slate-500 hover:bg-slate-50 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10'
+                ? 'bg-emerald-950 text-white dark:bg-white dark:text-emerald-950 shadow-xl' 
+                : 'bg-white text-emerald-600 hover:bg-white dark:bg-white/5 dark:text-emerald-400 dark:hover:bg-white/10'
             }`}
           >
             <cat.icon size={14} />
@@ -236,9 +236,9 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Settings Area */}
         <div className="lg:col-span-2 space-y-6">
-          <Card className="p-8 border-none shadow-2xl bg-white dark:bg-slate-900">
+          <Card className="p-8 border-none shadow-2xl bg-white dark:bg-emerald-950">
             {filteredSettings.length === 0 ? (
-              <p className="text-slate-400 font-bold text-center py-8">No settings found in this category.</p>
+              <p className="text-emerald-400 font-bold text-center py-8">No settings found in this category.</p>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-8">
                 <AnimatePresence mode="popLayout">
@@ -248,14 +248,14 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="space-y-3 p-4 rounded-2xl hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group"
+                      className="space-y-3 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/5 transition-colors group"
                     >
                       <div className="flex items-center justify-between">
-                        <label className="text-[10px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]">
+                        <label className="text-[10px] font-black text-emerald-400 dark:text-emerald-600 uppercase tracking-[0.2em]">
                           {field.label}
                         </label>
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                          <Info size={14} className="text-slate-300" />
+                          <Info size={14} className="text-emerald-200" />
                         </div>
                       </div>
                       <div className="relative">
@@ -265,10 +265,10 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
                           onChange={(e) => {
                             editsRef.current[field.id] = e.target.value;
                           }}
-                          className="w-full bg-white dark:bg-slate-800 border-2 border-slate-100 dark:border-white/5 rounded-xl py-3 px-5 outline-none focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all font-black text-slate-800 dark:text-white text-lg"
+                          className="w-full bg-white dark:bg-emerald-900 border-2 border-emerald-50 dark:border-white/5 rounded-xl py-3 px-5 outline-none focus:ring-4 focus:ring-yellow-500/10 focus:border-yellow-500 transition-all font-black text-emerald-900 dark:text-white text-lg"
                         />
                       </div>
-                      <p className="text-[10px] text-slate-400 font-medium leading-relaxed">
+                      <p className="text-[10px] text-emerald-400 font-medium leading-relaxed">
                         {field.description}
                       </p>
                     </motion.div>
@@ -281,7 +281,7 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
 
         {/* Sidebar Info */}
         <div className="space-y-6">
-          <Card className="p-8 border-none shadow-2xl bg-blue-600 text-white space-y-6 relative overflow-hidden">
+          <Card className="p-8 border-none shadow-2xl bg-emerald-600 text-white space-y-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-8 opacity-10">
               <Info size={120} />
             </div>
@@ -290,8 +290,8 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
                 <Info size={24} />
               </div>
               <h3 className="text-2xl font-black tracking-tight">System Guide</h3>
-              <p className="text-blue-100 text-sm leading-relaxed font-medium">
-                These settings control the core financial and growth logic of the entire Topnivo platform.
+              <p className="text-emerald-100 text-sm leading-relaxed font-medium">
+                These settings control the core financial and growth logic of the entire crystalgreengold platform.
               </p>
               <ul className="space-y-3">
                 {[
@@ -309,17 +309,17 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
             </div>
           </Card>
 
-          <Card className="p-8 border-none shadow-2xl bg-slate-900 dark:bg-black text-white space-y-4">
-            <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">Last Updated</h4>
+          <Card className="p-8 border-none shadow-2xl bg-emerald-950 dark:bg-black text-white space-y-4">
+            <h4 className="text-xs font-black uppercase tracking-widest text-emerald-600">Last Updated</h4>
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-                <RefreshCw size={18} className="text-amber-500" />
+                <RefreshCw size={18} className="text-amber-400" />
               </div>
               <div>
                 <p className="font-black text-lg">
                   {lastUpdated?.date ?? '—'}
                 </p>
-                <p className="text-xs text-slate-500 font-bold">
+                <p className="text-xs text-emerald-600 font-bold">
                   {lastUpdated?.by ? `by ${lastUpdated.by}` : 'No update history'}
                 </p>
               </div>
@@ -345,3 +345,4 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
     </div>
   );
 };
+

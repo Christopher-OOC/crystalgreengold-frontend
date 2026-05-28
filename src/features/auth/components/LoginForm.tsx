@@ -83,9 +83,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({
 
           if (accessToken) {
 
-           localStorage.setItem('topnivo_member_id', memberId);
-            localStorage.setItem('topnivo_access_token', accessToken);
-            if (refreshToken) localStorage.setItem('topnivo_refresh_token', refreshToken);
+           localStorage.setItem('crystalgreengold_member_id', memberId);
+            localStorage.setItem('crystalgreengold_access_token', accessToken);
+            if (refreshToken) localStorage.setItem('crystalgreengold_refresh_token', refreshToken);
             console.log('Login successful, tokens stored');
             toast.success('Welcome back');
             onLoginSuccess();
@@ -115,10 +115,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({
   return (
     <div className="flex-1 flex flex-col justify-center max-w-xs mx-auto w-full">
       <div className="mb-3 text-center md:text-left">
-        <h1 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white mb-0.5 flex items-center justify-center md:justify-start gap-2">
+        <h1 className="text-lg md:text-xl font-bold text-emerald-950 dark:text-white mb-0.5 flex items-center justify-center md:justify-start gap-2">
           Welcome Back <span className="animate-bounce">👋</span>
         </h1>
-        <p className="text-slate-500 dark:text-slate-400 text-[10px]">Sign in to your account to continue</p>
+        <p className="text-emerald-600 dark:text-emerald-400 text-[10px]">Sign in to your account to continue</p>
       </div>
 
       <motion.div 
@@ -139,20 +139,20 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         
         <div className="relative">
           <div className="flex justify-between items-center mb-1 px-1">
-            <label htmlFor="password" className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <label htmlFor="password" className="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
               Password
             </label>
             <button 
               type="button"
               onClick={onForgotPasswordClick}
-              className="text-[10px] font-semibold text-amber-500 hover:text-amber-600 transition-colors"
+              className="text-[10px] font-semibold text-amber-400 hover:text-amber-400 transition-colors"
               disabled={isLoading}
             >
               Forgot password?
             </button>
           </div>
           <div className="relative group">
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-amber-500 transition-colors">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-emerald-400 group-focus-within:text-amber-400 transition-colors">
               <ShieldCheck size={16} />
             </div>
             <input
@@ -163,12 +163,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({
               onChange={handleInputChange}
               onKeyDown={handleKeyDown}
               disabled={isLoading}
-              className="w-full bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl py-2 pl-10 pr-12 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all placeholder:text-slate-400 dark:placeholder:text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+              className="w-full bg-white/50 dark:bg-emerald-900/50 border border-emerald-100 dark:border-emerald-800 rounded-xl py-2 pl-10 pr-12 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all placeholder:text-emerald-400 dark:placeholder:text-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
             />
             <button 
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-100 transition-colors"
               disabled={isLoading}
             >
               {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -192,12 +192,12 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         </div>
       </motion.div>
 
-      <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 text-center">
-        <p className="text-slate-500 dark:text-slate-400 text-[10px]">
+      <div className="mt-4 pt-3 border-t border-emerald-50 dark:border-emerald-900 text-center">
+        <p className="text-emerald-600 dark:text-emerald-400 text-[10px]">
           Don't have an account?{' '}
           <button 
             onClick={onSignUpClick} 
-            className="text-amber-500 hover:text-amber-600 font-bold ml-1"
+            className="text-amber-400 hover:text-amber-400 font-bold ml-1"
             disabled={isLoading}
           >
             Create account
@@ -207,3 +207,4 @@ export const LoginForm: React.FC<LoginFormProps> = ({
     </div>
   );
 };
+

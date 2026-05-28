@@ -41,7 +41,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   // Theme management
   const [internalIsDark, setInternalIsDark] = useState(() => {
     if (externalIsDark !== undefined) return externalIsDark;
-    const saved = localStorage.getItem('topnivo-theme');
+    const saved = localStorage.getItem('crystalgreengold-theme');
     if (saved) return saved === 'dark';
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
@@ -51,7 +51,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
-    localStorage.setItem('topnivo-theme', isDark ? 'dark' : 'light');
+    localStorage.setItem('crystalgreengold-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
 
   // Fetch products
@@ -141,7 +141,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="inline-flex items-center space-x-2 bg-amber-400/10 text-amber-600 px-3 py-1.5 rounded-full border border-amber-400/30"
+                    className="inline-flex items-center space-x-2 bg-amber-400/10 text-amber-400 px-3 py-1.5 rounded-full border border-amber-400/30"
                   >
                     <Star size={14} fill="currentColor" />
                     <span className="text-[10px] font-black uppercase tracking-widest">Premium Quality Products</span>
@@ -153,9 +153,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                     transition={{ delay: 0.2 }}
                     className="text-4xl md:text-6xl font-black text-emerald-950 dark:text-white leading-[0.9] tracking-tighter"
                   >
-                    ELEVATE YOUR <br />
-                    <span className="text-amber-400">LIFESTYLE</span> WITH <br />
-                    TOPNIVO.
+                    HEALTHY LIVING<br />
+                    <span className="text-amber-400">REWARDING</span> <br/> FUTURE WITH <br />
+                    crystalgreengold.
                   </motion.h1>
 
                   <motion.p
@@ -164,7 +164,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     transition={{ delay: 0.4 }}
                     className="text-base text-emerald-600 dark:text-emerald-200 max-w-lg leading-relaxed font-medium"
                   >
-                    Discover a world of premium health, beauty, and home products designed to empower your life and community.
+                    Discover a world of sustainable health and reward-based well being, designed to empower you with crystalgreengold.
                   </motion.p>
 
                   <motion.div
@@ -183,7 +183,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <Button
                       variant="outline"
                       onClick={() => {
-                        const aboutSection = document.getElementById('about-topnivo');
+                        const aboutSection = document.getElementById('about-crystalgreengold');
                         if (aboutSection) {
                           aboutSection.scrollIntoView({ behavior: 'smooth' });
                         }
@@ -226,7 +226,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="max-w-7xl mx-auto px-6">
                 <div className="text-center space-y-2 mb-12">
                   <h2 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.3em]">Why Choose Us</h2>
-                  <p className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">The Topnivo Advantage</p>
+                  <p className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">The crystalgreengold Advantage</p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {[
@@ -340,7 +340,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </section>
 
             {/* About Section */}
-            <section id="about-topnivo" className="py-12 bg-emerald-900 text-white overflow-hidden relative">
+            <section id="about-crystalgreengold" className="py-12 bg-emerald-900 text-white overflow-hidden relative">
               <div className="absolute inset-0 opacity-10 pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-amber-400 rounded-full blur-[100px]" />
                 <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-yellow-400 rounded-full blur-[100px]" />
@@ -348,19 +348,19 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="max-w-7xl mx-auto px-6 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                   <div className="space-y-6">
-                    <h2 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.3em]">About Topnivo</h2>
+                    <h2 className="text-[10px] font-black text-amber-400 uppercase tracking-[0.3em]">About crystalgreengold</h2>
                     <p className="text-3xl font-black leading-tight tracking-tighter">
                       WE ARE MORE THAN JUST A <br />
                       <span className="text-amber-400">BUSINESS NETWORK.</span>
                     </p>
                     <div className="space-y-4 text-emerald-100 text-base leading-relaxed font-medium">
-                      <p>Topnivo International is a community-driven platform dedicated to providing high-quality products while creating financial opportunities for our members.</p>
+                      <p>crystalgreengold International is a community-driven platform dedicated to providing high-quality products while creating financial opportunities for our members.</p>
                       <p>Our mission is to empower individuals through a robust referral system and a diverse catalog of premium goods ranging from health supplements to modern home appliances.</p>
                     </div>
                     <div className="flex items-center space-x-8 pt-6">
                       {[{ icon: Globe, label: 'Global\nPresence' }, { icon: Award, label: 'Certified\nQuality' }].map(({ icon: Icon, label }) => (
                         <div key={label} className="flex items-center space-x-3">
-                          <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-amber-500">
+                          <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center text-amber-400">
                             <Icon size={20} />
                           </div>
                           <p className="text-[10px] font-black uppercase tracking-widest whitespace-pre-line leading-tight">{label}</p>
@@ -403,14 +403,14 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-500">
+    <div className="min-h-screen bg-white dark:bg-emerald-950 transition-colors duration-500">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-emerald-950/80 backdrop-blur-xl border-b border-emerald-100 dark:border-emerald-600/20">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-10">
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => setActiveView('home')}>
-              <img src={logo} alt="Topnivo" className="h-8 w-auto" />
-              <span className="text-lg font-black text-emerald-950 dark:text-white tracking-tighter">TOPNIVO</span>
+              <img src={logo} alt="crystalgreengold" className="h-8 w-auto" />
+              <span className="text-lg font-black text-emerald-950 dark:text-white tracking-tighter">crystalgreengold</span>
             </div>
 
             <div className="hidden md:flex items-center space-x-6">
@@ -444,7 +444,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                       onMouseEnter={() => setIsShopDropdownOpen(true)}
                       onMouseLeave={() => setIsShopDropdownOpen(false)}
                       className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-emerald-900 rounded-xl shadow-2xl border border-emerald-100 dark:border-emerald-600/30 overflow-hidden">
-                    >
                       <div className="p-1.5">
                         {shopLinks.map((link) => (
                           <button
@@ -490,7 +489,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               </Button>
               <Button 
                 onClick={onSignUp}
-                className="bg-amber-400 hover:bg-amber-500 text-emerald-950 px-6 py-2 rounded-full font-black uppercase tracking-widest text-[10px] shadow-lg shadow-amber-400/20"
+                className="bg-amber-400 hover:bg-amber-400 text-emerald-950 px-6 py-2 rounded-full font-black uppercase tracking-widest text-[10px] shadow-lg shadow-amber-400/20"
               >
                 Sign Up
               </Button>
@@ -499,7 +498,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             {/* Mobile Menu Button */}
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
-              className="md:hidden p-2 text-slate-600 dark:text-slate-400"
+              className="md:hidden p-2 text-emerald-600 dark:text-emerald-300"
             >
               {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -513,28 +512,28 @@ export const HomePage: React.FC<HomePageProps> = ({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-white/5 overflow-hidden"
+              className="md:hidden bg-white dark:bg-emerald-950 border-b border-emerald-100 dark:border-emerald-600/30 overflow-hidden"
             >
               <div className="p-5 space-y-3">
-                <button 
-                  onClick={() => { 
-                    setActiveView('home'); 
-                    setIsMenuOpen(false); 
-                  }} 
-                  className="block text-base font-bold text-amber-500"
+                <button
+                  onClick={() => {
+                    setActiveView('home');
+                    setIsMenuOpen(false);
+                  }}
+                  className="block text-base font-bold text-amber-400"
                 >
                   Home
                 </button>
                 <div className="space-y-1">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Shop</p>
+                  <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">Shop</p>
                   {shopLinks.map((link) => (
-                    <button 
-                      key={link.id} 
-                      onClick={() => { 
-                        setActiveView(link.id); 
-                        setIsMenuOpen(false); 
+                    <button
+                      key={link.id}
+                      onClick={() => {
+                        setActiveView(link.id);
+                        setIsMenuOpen(false);
                       }}
-                      className="block w-full text-left py-1.5 text-slate-600 dark:text-slate-400 font-bold text-sm"
+                      className="block w-full text-left py-1.5 text-emerald-600 dark:text-emerald-300 font-bold text-sm"
                     >
                       {link.name}
                     </button>
@@ -556,7 +555,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       onSignUp(); 
                       setIsMenuOpen(false); 
                     }} 
-                    className="w-full bg-amber-500 text-white py-3 rounded-xl font-black uppercase tracking-widest text-xs"
+                    className="w-full bg-amber-400 text-emerald-950 py-3 rounded-xl font-black uppercase tracking-widest text-xs"
                   >
                     Sign Up
                   </Button>
@@ -570,52 +569,52 @@ export const HomePage: React.FC<HomePageProps> = ({
       {renderView()}
 
       {/* Footer */}
-      <footer className="py-12 bg-white dark:bg-slate-950 transition-colors duration-500 border-t border-slate-200 dark:border-white/5">
+      <footer className="py-12 bg-white dark:bg-emerald-950 transition-colors duration-500 border-t border-emerald-100 dark:border-emerald-600/30">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
           <div className="space-y-4 col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => setActiveView('home')}>
-              <img src={logo} alt="Topnivo" className="h-10 w-auto" />
-              <span className="text-xl font-black text-slate-900 dark:text-white tracking-tighter">TOPNIVO</span>
+              <img src={logo} alt="crystalgreengold" className="h-10 w-auto" />
+              <span className="text-xl font-black text-emerald-950 dark:text-white tracking-tighter">crystalgreengold</span>
             </div>
-            <p className="text-slate-500 dark:text-slate-400 max-w-sm text-sm font-medium leading-relaxed">
+            <p className="text-emerald-600 dark:text-emerald-200 max-w-sm text-sm font-medium leading-relaxed">
               Empowering lives through quality products and innovative community-driven financial opportunities.
             </p>
           </div>
           <div className="space-y-4">
-            <h4 className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest">Quick Links</h4>
-            <ul className="space-y-2 text-xs font-bold text-slate-500 dark:text-slate-400">
+            <h4 className="text-[10px] font-black text-emerald-950 dark:text-white uppercase tracking-widest">Quick Links</h4>
+            <ul className="space-y-2 text-xs font-bold text-emerald-600 dark:text-emerald-300">
               <li>
-                <button onClick={() => setActiveView('home')} className="hover:text-amber-500 transition-colors">
+                <button onClick={() => setActiveView('home')} className="hover:text-amber-400 transition-colors">
                   Home
                 </button>
               </li>
               <li>
-                <button onClick={() => setActiveView('company-products')} className="hover:text-amber-500 transition-colors">
+                <button onClick={() => setActiveView('company-products')} className="hover:text-amber-400 transition-colors">
                   Shop
                 </button>
               </li>
               <li>
-                <button onClick={() => setActiveView('home')} className="hover:text-amber-500 transition-colors">
+                <button onClick={() => setActiveView('home')} className="hover:text-amber-400 transition-colors">
                   About Us
                 </button>
               </li>
             </ul>
           </div>
           <div className="space-y-4">
-            <h4 className="text-[10px] font-black text-slate-900 dark:text-white uppercase tracking-widest">Legal</h4>
-            <ul className="space-y-2 text-xs font-bold text-slate-500 dark:text-slate-400">
+            <h4 className="text-[10px] font-black text-emerald-950 dark:text-white uppercase tracking-widest">Legal</h4>
+            <ul className="space-y-2 text-xs font-bold text-emerald-600 dark:text-emerald-300">
               <li>
-                <a href="#" className="hover:text-amber-500 transition-colors">Privacy Policy</a>
+                <a href="#" className="hover:text-amber-400 transition-colors">Privacy Policy</a>
               </li>
               <li>
-                <a href="#" className="hover:text-amber-500 transition-colors">Terms of Service</a>
+                <a href="#" className="hover:text-amber-400 transition-colors">Terms of Service</a>
               </li>
             </ul>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-slate-100 dark:border-white/5 text-center">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            © 2026 Topnivo International. All rights reserved.
+        <div className="max-w-7xl mx-auto px-6 pt-8 mt-8 border-t border-emerald-100 dark:border-emerald-600/30 text-center">
+          <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
+            © 2026 crystalgreengold International. All rights reserved.
           </p>
         </div>
       </footer>
@@ -624,3 +623,4 @@ export const HomePage: React.FC<HomePageProps> = ({
 };
 
 export default HomePage;
+

@@ -69,8 +69,8 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse">Loading your orders...</p>
+        <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse">Loading your orders...</p>
       </div>
     );
   }
@@ -88,18 +88,18 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       <div className="space-y-2">
-        <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Order History</h2>
-        <p className="text-slate-500 dark:text-slate-400 font-medium">View and manage your past orders</p>
+        <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Order History</h2>
+        <p className="text-emerald-600 dark:text-emerald-400 font-medium">View and manage your past orders</p>
       </div>
 
       <Card className="p-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-400 uppercase" style={wideTrackingStyle}>Order Status</label>
+            <label className="text-xs font-bold text-emerald-400 uppercase" style={wideTrackingStyle}>Order Status</label>
             <select 
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm font-medium"
+              className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all text-sm font-medium"
             >
               <option>All Orders</option>
               <option>Pending</option>
@@ -109,30 +109,30 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-400 uppercase" style={wideTrackingStyle}>From Date</label>
+            <label className="text-xs font-bold text-emerald-400 uppercase" style={wideTrackingStyle}>From Date</label>
             <div className="relative">
               <input 
                 type="date"
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm font-medium"
+                className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all text-sm font-medium"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-400 uppercase" style={wideTrackingStyle}>To Date</label>
+            <label className="text-xs font-bold text-emerald-400 uppercase" style={wideTrackingStyle}>To Date</label>
             <div className="relative">
               <input 
                 type="date"
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
-                className="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all text-sm font-medium"
+                className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all text-sm font-medium"
               />
             </div>
           </div>
 
-          <Button className="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white rounded-xl font-bold transition-all shadow-lg">
+          <Button className="w-full py-3 bg-emerald-900 hover:bg-emerald-950 text-white rounded-xl font-bold transition-all shadow-lg">
             Apply Filters
           </Button>
         </div>
@@ -143,16 +143,16 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
               key={getOrderKey(order, index)}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="group relative bg-white dark:bg-slate-900/50 border border-slate-100 dark:border-white/5 rounded-[2rem] p-8 hover:shadow-xl hover:border-amber-500/20 transition-all duration-500"
+              className="group relative bg-white dark:bg-emerald-950/50 border border-emerald-50 dark:border-white/5 rounded-[2rem] p-8 hover:shadow-xl hover:border-amber-400/20 transition-all duration-500"
             >
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-lg font-black text-slate-900 dark:text-white">Order #{order.id}</h3>
+                    <h3 className="text-lg font-black text-emerald-950 dark:text-white">Order #{order.id}</h3>
                     <span style={wideTrackingStyle} className={`px-3 py-1 text-[10px] font-black rounded-full uppercase ${
                       order.status === 'COMPLETED' ? 'bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-500' :
                       order.status === 'CANCELLED' ? 'bg-rose-100 dark:bg-rose-500/10 text-rose-600 dark:text-rose-500' :
-                      'bg-amber-100 dark:bg-amber-500/10 text-amber-600 dark:text-amber-500'
+                      'bg-amber-100 dark:bg-amber-400/10 text-amber-400 dark:text-amber-400'
                     }`}>
                       {order.status}
                     </span>
@@ -164,7 +164,7 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
                     </span>
                   </div>
                   
-                  <div className="flex items-center space-x-6 text-slate-400">
+                  <div className="flex items-center space-x-6 text-emerald-400">
                     <div className="flex items-center space-x-2">
                       <Calendar size={16} />
                       <span className="text-xs font-bold">{order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'N/A'}</span>
@@ -178,13 +178,13 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
 
                 <div className="flex items-center space-x-8">
                   <div className="text-right">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase mb-1" style={wideTrackingStyle}>Total Amount</p>
-                    <p className="text-2xl font-black text-slate-900 dark:text-white">{formatCurrency(order.totalAmount)}</p>
+                    <p className="text-[10px] font-bold text-emerald-400 uppercase mb-1" style={wideTrackingStyle}>Total Amount</p>
+                    <p className="text-2xl font-black text-emerald-950 dark:text-white">{formatCurrency(order.totalAmount)}</p>
                   </div>
                   
                   <button 
                     onClick={() => setSelectedOrder(order)}
-                    className="flex items-center space-x-2 px-6 py-3 border border-slate-200 dark:border-white/10 rounded-2xl text-slate-600 dark:text-slate-300 hover:bg-amber-500 hover:text-white hover:border-amber-500 transition-all font-bold text-sm"
+                    className="flex items-center space-x-2 px-6 py-3 border border-emerald-100 dark:border-white/10 rounded-2xl text-emerald-700 dark:text-emerald-200 hover:bg-amber-400 hover:text-white hover:border-amber-400 transition-all font-bold text-sm"
                   >
                     <Eye size={18} />
                     <span>View Details</span>
@@ -196,16 +196,16 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
         </div>
 
         <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm font-bold text-slate-400 uppercase" style={wideTrackingStyle}>Showing page 1 of 1</p>
+          <p className="text-sm font-bold text-emerald-400 uppercase" style={wideTrackingStyle}>Showing page 1 of 1</p>
           
           <div className="flex items-center space-x-2">
-            <button className="p-2 rounded-xl border border-slate-200 dark:border-white/10 text-slate-400 hover:text-amber-500 transition-all">
+            <button className="p-2 rounded-xl border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 transition-all">
               <ChevronLeft size={20} />
             </button>
-            <button className="w-10 h-10 bg-amber-500 text-white rounded-xl font-bold shadow-lg shadow-amber-500/20">
+            <button className="w-10 h-10 bg-amber-400 text-white rounded-xl font-bold shadow-lg shadow-amber-400/20">
               1
             </button>
-            <button className="p-2 rounded-xl border border-slate-200 dark:border-white/10 text-slate-400 hover:text-amber-500 transition-all">
+            <button className="p-2 rounded-xl border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 transition-all">
               <ChevronRight size={20} />
             </button>
           </div>

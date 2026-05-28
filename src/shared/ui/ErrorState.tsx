@@ -26,11 +26,11 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
         <AlertCircle size={40} />
       </div>
       
-      <h2 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight mb-3">
+      <h2 className="text-2xl font-black text-emerald-950 dark:text-white uppercase tracking-tight mb-3">
         {title}
       </h2>
       
-      <p className="text-slate-500 dark:text-slate-400 max-w-md mb-8 leading-relaxed">
+      <p className="text-emerald-600 dark:text-emerald-400 max-w-md mb-8 leading-relaxed">
         {message}
       </p>
       

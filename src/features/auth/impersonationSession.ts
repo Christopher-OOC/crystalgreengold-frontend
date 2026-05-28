@@ -1,8 +1,8 @@
 import type { Member } from '@/lib/types/member.types';
 
-export const ADMIN_SNAPSHOT_KEY = 'topnivo_admin_snapshot';
-export const IMPERSONATION_TARGET_KEY = 'topnivo_impersonation_target';
-export const IMPERSONATION_MEMBER_KEY = 'topnivo_impersonation_member';
+export const ADMIN_SNAPSHOT_KEY = 'crystalgreengold_admin_snapshot';
+export const IMPERSONATION_TARGET_KEY = 'crystalgreengold_impersonation_target';
+export const IMPERSONATION_MEMBER_KEY = 'crystalgreengold_impersonation_member';
 
 export interface AdminSessionSnapshot {
   token: string;
@@ -111,3 +111,4 @@ export function normalizeImpersonatedMember(rawMember: Partial<Member> | null | 
     roles: member.roles ?? [],
   };
 }
+

@@ -63,8 +63,8 @@ export const PackageManagement: React.FC<PackageManagementProps> = ({ onBack }) 
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-orange-600 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Packages...</p>
+        <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Packages...</p>
       </div>
     );
   }
@@ -88,14 +88,14 @@ export const PackageManagement: React.FC<PackageManagementProps> = ({ onBack }) 
     <div className="space-y-8 max-w-7xl mx-auto pb-12">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
-          <button onClick={onBack} className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm mb-2 group">
+          <button onClick={onBack} className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm mb-2 group">
             <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
             <span>Back to Admin Dashboard</span>
           </button>
-          <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Package List</h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">Manage all available membership packages</p>
+          <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">Package List</h1>
+          <p className="text-emerald-600 dark:text-emerald-400 font-medium">Manage all available membership packages</p>
         </div>
-        <Button onClick={() => setIsCreating(true)} className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-xl flex items-center justify-center space-x-2 font-black uppercase tracking-widest">
+        <Button onClick={() => setIsCreating(true)} className="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-xl flex items-center justify-center space-x-2 font-black uppercase tracking-widest">
           <Plus size={20} />
           <span>Create New Package</span>
         </Button>
@@ -105,40 +105,40 @@ export const PackageManagement: React.FC<PackageManagementProps> = ({ onBack }) 
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 dark:bg-white/5 border-b border-slate-100 dark:border-white/5">
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">PACKAGE</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">PRICE & VALUES</th>
-                <th className="px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">ACTIONS</th>
+              <tr className="bg-white dark:bg-white/5 border-b border-emerald-50 dark:border-white/5">
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">PACKAGE</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">PRICE & VALUES</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">ACTIONS</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50 dark:divide-white/5">
+            <tbody className="divide-y divide-white dark:divide-white/5">
               {packages.length === 0 ? (
                 <tr>
-                  <td colSpan={3} className="px-6 py-12 text-center text-slate-400 font-bold">
+                  <td colSpan={3} className="px-6 py-12 text-center text-emerald-400 font-bold">
                     No packages found. Create one.
                   </td>
                 </tr>
               ) : (
                 packages.map((pkg, i) => (
-                  <motion.tr key={pkg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                  <motion.tr key={pkg.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }} className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors">
                     <td className="px-6 py-5 max-w-md">
                       <div className="flex items-start space-x-4">
                         {pkg.image ? (
                           <img src={pkg.image} className="w-12 h-12 rounded-xl object-cover shrink-0" />
                         ) : (
-                          <div className="w-12 h-12 bg-slate-100 dark:bg-white/5 rounded-xl shrink-0" />
+                          <div className="w-12 h-12 bg-emerald-50 dark:bg-white/5 rounded-xl shrink-0" />
                         )}
                         <div className="space-y-1">
-                          <span className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-tight">{pkg.name}</span>
-                          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 leading-relaxed">{pkg.description}</p>
+                          <span className="text-sm font-black text-emerald-950 dark:text-white uppercase tracking-tight">{pkg.name}</span>
+                          <p className="text-xs font-bold text-emerald-600 dark:text-emerald-400 leading-relaxed">{pkg.description}</p>
                         </div>
                       </div>
                     </td>
                     <td className="px-6 py-5">
                       <div className="space-y-2">
-                        <p className="text-sm font-black text-slate-900 dark:text-white">₦{pkg.price.toLocaleString()}</p>
+                        <p className="text-sm font-black text-emerald-950 dark:text-white">₦{pkg.price.toLocaleString()}</p>
                         <div className="flex items-center space-x-2">
-                          <span className="px-2 py-0.5 bg-blue-500/10 text-blue-500 text-[8px] font-black rounded uppercase tracking-widest border border-blue-500/20">BV: {pkg.bv}</span>
+                          <span className="px-2 py-0.5 bg-emerald-500/10 text-emerald-500 text-[8px] font-black rounded uppercase tracking-widest border border-emerald-500/20">BV: {pkg.bv}</span>
                           <span className="px-2 py-0.5 bg-purple-500/10 text-purple-500 text-[8px] font-black rounded uppercase tracking-widest border border-purple-500/20">PV: {pkg.pv}</span>
                         </div>
                       </div>
@@ -147,7 +147,7 @@ export const PackageManagement: React.FC<PackageManagementProps> = ({ onBack }) 
                       <div className="flex items-center justify-end space-x-2">
                         <button
                           onClick={() => setEditingPackage(pkg)}
-                          className="flex items-center space-x-1 text-blue-500 hover:text-blue-600 transition-colors font-black uppercase tracking-widest text-xs px-3 py-2 hover:bg-blue-500/10 rounded-lg"
+                          className="flex items-center space-x-1 text-emerald-500 hover:text-emerald-600 transition-colors font-black uppercase tracking-widest text-xs px-3 py-2 hover:bg-emerald-500/10 rounded-lg"
                         >
                           <Edit size={14} />
                           <span>Edit</span>

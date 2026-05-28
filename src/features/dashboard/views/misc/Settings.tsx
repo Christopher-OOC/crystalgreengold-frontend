@@ -98,8 +98,8 @@ useEffect(() => {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <Loader2 className="w-12 h-12 text-amber-500 animate-spin mb-4" />
-        <p className="text-slate-500 font-bold animate-pulse">Loading your profile settings...</p>
+        <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
+        <p className="text-emerald-600 font-bold animate-pulse">Loading your profile settings...</p>
       </div>
     );
   }
@@ -119,7 +119,7 @@ useEffect(() => {
       {/* Back Button */}
       <button 
         onClick={onBack}
-        className="flex items-center space-x-2 text-slate-500 hover:text-amber-500 transition-colors font-bold text-sm group"
+        className="flex items-center space-x-2 text-emerald-600 hover:text-amber-400 transition-colors font-bold text-sm group"
       >
         <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
         <span>Back to Dashboard</span>
@@ -127,14 +127,14 @@ useEffect(() => {
 
       {/* Profile Header Card */}
       <Card noPadding className="overflow-hidden border-none shadow-2xl">
-        <div className="bg-amber-500 p-8 md:p-12">
+        <div className="bg-amber-400 p-8 md:p-12">
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="relative">
               <div className="w-32 h-32 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border-4 border-white/30 shadow-xl">
                 <User size={64} className="text-white" />
               </div>
               <div className="absolute bottom-1 right-1 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg">
-                <UserCircle size={20} className="text-amber-500" />
+                <UserCircle size={20} className="text-amber-400" />
               </div>
             </div>
             
@@ -158,57 +158,57 @@ useEffect(() => {
         <div className="p-8 md:p-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Personal Information */}
           <div className="space-y-8">
-            <div className="flex items-center space-x-3 text-amber-500">
+            <div className="flex items-center space-x-3 text-amber-400">
               <User size={20} />
-              <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase">Personal Information</h3>
+              <h3 className="text-lg font-black tracking-tight text-emerald-950 dark:text-white uppercase">Personal Information</h3>
             </div>
 
             <div className="space-y-6">
               <div className="flex items-start space-x-4">
-                <div className="p-2 bg-slate-50 dark:bg-white/5 rounded-lg text-slate-400">
+                <div className="p-2 bg-white dark:bg-white/5 rounded-lg text-emerald-400">
                   <Mail size={18} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Email</p>
-                  <p className="font-bold text-slate-700 dark:text-slate-200">{member?.email}</p>
+                  <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">Email</p>
+                  <p className="font-bold text-emerald-800 dark:text-emerald-100">{member?.email}</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="p-2 bg-slate-50 dark:bg-white/5 rounded-lg text-slate-400">
+                <div className="p-2 bg-white dark:bg-white/5 rounded-lg text-emerald-400">
                   <UserCircle size={18} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Username</p>
-                  <p className="font-bold text-slate-700 dark:text-slate-200"> {member?.username}</p>
+                  <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">Username</p>
+                  <p className="font-bold text-emerald-800 dark:text-emerald-100"> {member?.username}</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="p-2 bg-slate-50 dark:bg-white/5 rounded-lg text-slate-400">
+                <div className="p-2 bg-white dark:bg-white/5 rounded-lg text-emerald-400">
                   <Phone size={18} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Phone Number</p>
-                  <p className="font-bold text-slate-700 dark:text-slate-200">{member?.phone_number || "Not provided"}</p>
+                  <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">Phone Number</p>
+                  <p className="font-bold text-emerald-800 dark:text-emerald-100">{member?.phone_number || "Not provided"}</p>
                 </div>
               </div>
 
               <div className="flex items-start space-x-4">
-                <div className="p-2 bg-slate-50 dark:bg-white/5 rounded-lg text-slate-400">
+                <div className="p-2 bg-white dark:bg-white/5 rounded-lg text-emerald-400">
                   <Calendar size={18} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Member Since</p>
-                  <p className="font-bold text-slate-700 dark:text-slate-200"> {joinedDate}</p>
+                  <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest mb-1">Member Since</p>
+                  <p className="font-bold text-emerald-800 dark:text-emerald-100"> {joinedDate}</p>
                 </div>
               </div>
 
               <div className="pt-4 flex items-center justify-between">
-                <span className="text-sm font-bold text-slate-600 dark:text-slate-400">Enable Receive Payment</span>
+                <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400">Enable Receive Payment</span>
                 <button 
                   onClick={() => setReceivePayment(!receivePayment)}
-                  className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${receivePayment ? 'bg-emerald-500' : 'bg-slate-300 dark:bg-slate-700'}`}
+                  className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${receivePayment ? 'bg-emerald-500' : 'bg-emerald-200 dark:bg-emerald-800'}`}
                 >
                   <div className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full transition-transform duration-300 ${receivePayment ? 'translate-x-7' : 'translate-x-0'}`} />
                   <span className="absolute right-2 top-1.5 text-[8px] font-black text-white uppercase">{receivePayment ? 'ON' : ''}</span>
@@ -220,9 +220,9 @@ useEffect(() => {
 
           {/* Network Statistics */}
           <div className="space-y-8">
-            <div className="flex items-center space-x-3 text-amber-500">
+            <div className="flex items-center space-x-3 text-amber-400">
               <Building2 size={20} />
-              <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase">Network Statistics</h3>
+              <h3 className="text-lg font-black tracking-tight text-emerald-950 dark:text-white uppercase">Network Statistics</h3>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -234,9 +234,9 @@ useEffect(() => {
                 { label: 'Monthly Left PV', value: String(dashboardData?.monthly_left_pv ?? 0),  },
                 { label: 'Monthly Right PV', value: String(dashboardData?.monthly_right_pv ?? 0),  },
               ].map((stat, i) => (
-                <div key={i} className="p-5 bg-amber-50/50 dark:bg-amber-500/5 rounded-2xl border border-amber-100 dark:border-amber-500/10">
-                  <p className="text-[10px] font-black text-amber-600 dark:text-amber-500 uppercase tracking-widest mb-2">{stat.label}</p>
-                  <p className="text-2xl font-black text-slate-900 dark:text-white">{stat.value}</p>
+                <div key={i} className="p-5 bg-amber-50/50 dark:bg-amber-400/5 rounded-2xl border border-amber-100 dark:border-amber-400/10">
+                  <p className="text-[10px] font-black text-amber-400 dark:text-amber-400 uppercase tracking-widest mb-2">{stat.label}</p>
+                  <p className="text-2xl font-black text-emerald-950 dark:text-white">{stat.value}</p>
                 </div>
               ))}
             </div>
@@ -247,35 +247,35 @@ useEffect(() => {
       {/* Change Password Card */}
       <Card className="p-8 md:p-12 border-none shadow-xl">
         <div className="space-y-8">
-          <div className="flex items-center space-x-3 text-amber-500">
+          <div className="flex items-center space-x-3 text-amber-400">
             <Lock size={20} />
-            <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase">Change Password</h3>
+            <h3 className="text-lg font-black tracking-tight text-emerald-950 dark:text-white uppercase">Change Password</h3>
           </div>
 
           <div className="grid grid-cols-1 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Old Password</label>
+              <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">Old Password</label>
               <input 
                 type="password" 
                 disabled={isSavingPassword}
-                className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all disabled:opacity-50"
+                className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
               />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">New Password</label>
+                <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">New Password</label>
                 <input 
                   type="password" 
                   disabled={isSavingPassword}
-                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all disabled:opacity-50"
+                  className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Confirm New Password</label>
+                <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">Confirm New Password</label>
                 <input 
                   type="password" 
                   disabled={isSavingPassword}
-                  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all disabled:opacity-50"
+                  className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
                 />
               </div>
             </div>
@@ -297,27 +297,27 @@ useEffect(() => {
       {/* Bank Account Details Card */}
       <Card className="p-8 md:p-12 border-none shadow-xl">
         <div className="space-y-8">
-          <div className="flex items-center space-x-3 text-amber-500">
+          <div className="flex items-center space-x-3 text-amber-400">
             <Building2 size={20} />
-            <h3 className="text-lg font-black tracking-tight text-slate-900 dark:text-white uppercase">Bank Account Details</h3>
+            <h3 className="text-lg font-black tracking-tight text-emerald-950 dark:text-white uppercase">Bank Account Details</h3>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Account Name</label>
+              <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">Account Name</label>
               <input 
                 type="text" 
                 disabled={isSavingBank}
-                className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all disabled:opacity-50"
+                className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Bank Name</label>
+              <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">Bank Name</label>
              <select
   value={selectedBank}
   onChange={(e) => setSelectedBank(e.target.value)}
   disabled={isSavingBank}
-  className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all appearance-none font-bold text-slate-700 dark:text-slate-200 disabled:opacity-50"
+  className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all appearance-none font-bold text-emerald-800 dark:text-emerald-100 disabled:opacity-50"
 >
   <option value="">Select Bank</option>
 
@@ -329,11 +329,11 @@ useEffect(() => {
 </select>
             </div>
             <div className="space-y-2 md:col-span-2">
-              <label className="text-xs font-black text-slate-400 uppercase tracking-widest">Account Number</label>
+              <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">Account Number</label>
               <input 
                 type="text" 
                 disabled={isSavingBank}
-                className="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-all disabled:opacity-50"
+                className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
               />
             </div>
           </div>

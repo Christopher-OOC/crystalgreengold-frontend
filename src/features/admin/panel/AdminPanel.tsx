@@ -122,8 +122,8 @@ export const AdminPanel: React.FC = () => {
       title: 'Products', 
       desc: 'Create, edit, and manage products', 
       icon: ShoppingBag, 
-      color: 'text-blue-500', 
-      bg: 'bg-blue-500/10' 
+      color: 'text-emerald-500', 
+      bg: 'bg-emerald-500/10' 
     },
     { 
       id: 'categories',
@@ -138,8 +138,8 @@ export const AdminPanel: React.FC = () => {
       title: 'Packages', 
       desc: 'Manage product packages and bundles', 
       icon: Package, 
-      color: 'text-amber-500', 
-      bg: 'bg-amber-500/10' 
+      color: 'text-amber-400', 
+      bg: 'bg-amber-400/10' 
     },
     { 
       id: 'ranks',
@@ -178,8 +178,8 @@ export const AdminPanel: React.FC = () => {
       title: 'Service Centers', 
       desc: 'Manage service center locations', 
       icon: Store, 
-      color: 'text-orange-500', 
-      bg: 'bg-orange-500/10' 
+      color: 'text-yellow-500', 
+      bg: 'bg-yellow-500/10' 
     },
     { 
       id: 'payouts',
@@ -194,8 +194,8 @@ export const AdminPanel: React.FC = () => {
       title: 'System Settings', 
       desc: 'Configure business parameters', 
       icon: Settings, 
-      color: 'text-slate-500', 
-      bg: 'bg-slate-500/10' 
+      color: 'text-emerald-600', 
+      bg: 'bg-emerald-600/10' 
     },
   ];
 
@@ -203,8 +203,8 @@ export const AdminPanel: React.FC = () => {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center space-y-4">
-          <Loader2 className="w-12 h-12 text-amber-500 animate-spin mx-auto" />
-          <p className="text-slate-500 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Admin Panel...</p>
+          <Loader2 className="w-12 h-12 text-amber-400 animate-spin mx-auto" />
+          <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Admin Panel...</p>
         </div>
       </div>
     );
@@ -267,8 +267,8 @@ export const AdminPanel: React.FC = () => {
         return (
           <div className="space-y-12 max-w-7xl mx-auto pb-12">
             <div className="space-y-2">
-              <h1 className="text-4xl font-black text-slate-900 dark:text-white tracking-tight">Admin Dashboard</h1>
-              <p className="text-lg text-slate-500 dark:text-slate-400 font-medium">Manage all aspects of your business</p>
+              <h1 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight">Admin Dashboard</h1>
+              <p className="text-lg text-emerald-600 dark:text-emerald-400 font-medium">Manage all aspects of your business</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -288,14 +288,14 @@ export const AdminPanel: React.FC = () => {
                         <item.icon size={28} />
                       </div>
                       <div className="space-y-2">
-                        <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight">{item.title}</h3>
-                        <p className="text-slate-500 dark:text-slate-400 font-medium leading-relaxed">{item.desc}</p>
+                        <h3 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">{item.title}</h3>
+                        <p className="text-emerald-600 dark:text-emerald-400 font-medium leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
                     
-                    <div className="mt-8 pt-6 border-t border-slate-50 dark:border-white/5 flex items-center justify-between">
-                      <span className="text-xs font-black text-amber-500 uppercase tracking-widest">Manage</span>
-                      <div className="w-8 h-8 rounded-full bg-amber-500/10 text-amber-500 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-all">
+                    <div className="mt-8 pt-6 border-t border-white dark:border-white/5 flex items-center justify-between">
+                      <span className="text-xs font-black text-amber-400 uppercase tracking-widest">Manage</span>
+                      <div className="w-8 h-8 rounded-full bg-amber-400/10 text-amber-400 flex items-center justify-center group-hover:bg-amber-400 group-hover:text-white transition-all">
                         <ArrowRight size={16} />
                       </div>
                     </div>

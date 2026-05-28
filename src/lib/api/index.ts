@@ -1,5 +1,5 @@
 // lib/api/index.ts
-// Single import point for all topnivo API services
+// Single import point for all crystalgreengold API services
 
 export { authService }         from '@/lib/api/services/auth.service';
 export { memberService }       from '@/lib/api/services/member.service';
@@ -22,3 +22,4 @@ export {
 
 export { default as apiClient, tokenStorage } from '@/lib/api/client';
 export { ENDPOINTS }           from '@/lib/api/endpoints';
+

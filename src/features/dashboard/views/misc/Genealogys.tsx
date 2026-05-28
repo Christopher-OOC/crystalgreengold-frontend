@@ -138,7 +138,7 @@ const UrlModal: React.FC<{ slot: SlotInfo | null; onClose: () => void }> = ({ sl
     <AnimatePresence>
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-950/50 backdrop-blur-sm"
+        className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-emerald-950/50 backdrop-blur-sm"
         onClick={onClose}
       >
         <motion.div
@@ -146,22 +146,22 @@ const UrlModal: React.FC<{ slot: SlotInfo | null; onClose: () => void }> = ({ sl
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.92, opacity: 0, y: 16 }}
           transition={{ type: 'spring', stiffness: 340, damping: 28 }}
-          className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-100 dark:border-white/10 w-full max-w-sm overflow-hidden"
+          className="bg-white dark:bg-emerald-950 rounded-3xl shadow-2xl border border-emerald-50 dark:border-white/10 w-full max-w-sm overflow-hidden"
           onClick={e => e.stopPropagation()}
         >
-          <div className="h-1.5 w-full bg-gradient-to-r from-amber-400 to-orange-500" />
+          <div className="h-1.5 w-full bg-gradient-to-r from-amber-400 to-yellow-500" />
           <div className="p-7 space-y-5">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-11 h-11 rounded-2xl bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center">
-                  <Link2 size={20} className="text-amber-500" />
+                <div className="w-11 h-11 rounded-2xl bg-amber-50 dark:bg-amber-400/10 flex items-center justify-center">
+                  <Link2 size={20} className="text-amber-400" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-slate-900 dark:text-white">Invite Link</h3>
-                  <p className="text-xs text-slate-500 mt-0.5">Ready for signup</p>
+                  <h3 className="text-base font-bold text-emerald-950 dark:text-white">Invite Link</h3>
+                  <p className="text-xs text-emerald-600 mt-0.5">Ready for signup</p>
                 </div>
               </div>
-              <button onClick={onClose} className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors">
+              <button onClick={onClose} className="w-8 h-8 rounded-xl flex items-center justify-center text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/10 transition-colors">
                 <X size={15} />
               </button>
             </div>
@@ -169,23 +169,23 @@ const UrlModal: React.FC<{ slot: SlotInfo | null; onClose: () => void }> = ({ sl
             <div className="grid grid-cols-2 gap-2">
               {[
                 { label: 'Placer',  value: `@${slot.placerUsername}`  },
-                { label: 'Leg',     value: slot.leg.toUpperCase(), color: 'text-amber-500' },
+                { label: 'Leg',     value: slot.leg.toUpperCase(), color: 'text-amber-400' },
               ].map(({ label, value, color }) => (
-                <div key={label} className="rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/5 p-2.5 text-center">
-                  <p className="text-[9px] uppercase font-bold text-slate-400 mb-0.5">{label}</p>
-                  <p className={`text-[10px] font-bold truncate ${color || 'text-slate-700 dark:text-slate-200'}`}>{value}</p>
+                <div key={label} className="rounded-xl bg-white dark:bg-white/5 border border-emerald-50 dark:border-white/5 p-2.5 text-center">
+                  <p className="text-[9px] uppercase font-bold text-emerald-400 mb-0.5">{label}</p>
+                  <p className={`text-[10px] font-bold truncate ${color || 'text-emerald-800 dark:text-emerald-100'}`}>{value}</p>
                 </div>
               ))}
             </div>
 
-            <div className="rounded-xl bg-slate-50 dark:bg-white/5 border border-dashed border-slate-200 dark:border-white/10 p-3.5 text-center">
-               <p className="text-[10px] font-mono break-all text-slate-500 dark:text-slate-400 select-all leading-relaxed">{url}</p>
+            <div className="rounded-xl bg-white dark:bg-white/5 border border-dashed border-emerald-100 dark:border-white/10 p-3.5 text-center">
+               <p className="text-[10px] font-mono break-all text-emerald-600 dark:text-emerald-400 select-all leading-relaxed">{url}</p>
             </div>
 
             <button
               onClick={handleCopy}
               className={`w-full py-3.5 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 transition-all ${
-                copied ? 'bg-emerald-500 text-white' : 'bg-amber-500 hover:bg-amber-400 text-white'
+                copied ? 'bg-emerald-500 text-white' : 'bg-amber-400 hover:bg-amber-400 text-white'
               }`}
             >
               {copied ? <><Check size={15} /> Copied!</> : <><Copy size={15} /> Copy Invite Link</>}
@@ -312,8 +312,8 @@ export const Genealogys: React.FC<GenealogyProps> = ({ memberId, sponsorUsername
 
   if (isLoading) return (
     <div className="flex h-[400px] items-center justify-center flex-col gap-3">
-      <div className="w-10 h-10 border-4 border-amber-500/10 border-t-amber-500 rounded-full animate-spin" />
-      <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Loading Tree...</p>
+      <div className="w-10 h-10 border-4 border-amber-400/10 border-t-amber-400 rounded-full animate-spin" />
+      <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-400">Loading Tree...</p>
     </div>
   );
 
@@ -321,12 +321,12 @@ export const Genealogys: React.FC<GenealogyProps> = ({ memberId, sponsorUsername
     return (
       <div className="flex items-center justify-center p-20">
         <Card className="max-w-md p-10 text-center space-y-6 border-dashed border-2">
-          <div className="w-16 h-16 bg-slate-100 dark:bg-white/5 text-slate-400 rounded-full flex items-center justify-center mx-auto">
+          <div className="w-16 h-16 bg-emerald-50 dark:bg-white/5 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
             <Users size={32} />
           </div>
           <div className="space-y-2">
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white">Empty Network</h3>
-            <p className="text-sm text-slate-500">
+            <h3 className="text-xl font-bold text-emerald-950 dark:text-white">Empty Network</h3>
+            <p className="text-sm text-emerald-600">
               You don't have any members in your downline yet. 
               Start sharing your registration link to grow your network!
             </p>
@@ -355,16 +355,16 @@ export const Genealogys: React.FC<GenealogyProps> = ({ memberId, sponsorUsername
               <ChevronLeft size={16} /> Back
             </Button>
           )}
-           <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight">Binary Genealogy</h2>
+           <h2 className="text-xl font-black text-emerald-950 dark:text-white tracking-tight">Binary Genealogy</h2>
         </div>
-        <div className="flex bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/10 rounded-xl p-1 shadow-sm">
-           <button onClick={() => setZoom(z => Math.max(0.4, z - 0.1))} className="p-2 text-slate-400 hover:text-amber-500 transition-colors"><ZoomOut size={16} /></button>
-           <button onClick={() => setZoom(1)} className="p-2 text-slate-400 hover:text-amber-500 transition-colors"><Maximize2 size={16} /></button>
-           <button onClick={() => setZoom(z => Math.min(2.5, z + 0.1))} className="p-2 text-slate-400 hover:text-amber-500 transition-colors"><ZoomIn size={16} /></button>
+        <div className="flex bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl p-1 shadow-sm">
+           <button onClick={() => setZoom(z => Math.max(0.4, z - 0.1))} className="p-2 text-emerald-400 hover:text-amber-400 transition-colors"><ZoomOut size={16} /></button>
+           <button onClick={() => setZoom(1)} className="p-2 text-emerald-400 hover:text-amber-400 transition-colors"><Maximize2 size={16} /></button>
+           <button onClick={() => setZoom(z => Math.min(2.5, z + 0.1))} className="p-2 text-emerald-400 hover:text-amber-400 transition-colors"><ZoomIn size={16} /></button>
         </div>
       </div>
 
-      <Card className="relative h-[720px] bg-slate-50 dark:bg-slate-950 border-none shadow-inner overflow-hidden" noPadding>
+      <Card className="relative h-[720px] bg-white dark:bg-emerald-950 border-none shadow-inner overflow-hidden" noPadding>
         <div ref={containerRef} className="w-full h-full overflow-auto cursor-grab active:cursor-grabbing">
            {treeLayout && (
              <svg width="100%" height="700" viewBox={`0 0 ${dims.width} 700`}>
@@ -398,7 +398,7 @@ export const Genealogys: React.FC<GenealogyProps> = ({ memberId, sponsorUsername
                        <g key={nodeKey} transform={`translate(${node.x}, ${node.y})`}>
                          {isEmpty ? (
                            <>
-                             <circle r={r} fill="white" stroke="#e2e8f0" strokeWidth={1.5} strokeDasharray="4,4" className={`dark:fill-slate-800 animate-pulse`}
+                             <circle r={r} fill="white" stroke="#e2e8f0" strokeWidth={1.5} strokeDasharray="4,4" className={`dark:fill-emerald-900 animate-pulse`}
                                onClick={() => setSelectedSlot({ sponsorUsername, placerUsername: node.data.parentUsername!, leg: node.data.isLeftSlot ? 'left' : 'right' })}
                                style={{ cursor: 'pointer' }}
                              />
@@ -411,7 +411,7 @@ export const Genealogys: React.FC<GenealogyProps> = ({ memberId, sponsorUsername
                              <foreignObject x={-10} y={-10} width={20} height={20}>
                                <div className="w-full h-full flex items-center justify-center text-white"><User size={14} /></div>
                              </foreignObject>
-                             <text y={r + 14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#475569" className="dark:fill-slate-400">@{node.data.username}</text>
+                             <text y={r + 14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#475569" className="dark:fill-emerald-400">@{node.data.username}</text>
                              {isRoot && <text y={r + 26} textAnchor="middle" fontSize="8" fontWeight="black" fill="#f59e0b" letterSpacing="0.12em">SPONSOR</text>}
                              {!isRoot && node.depth === 1 && <text y={r + 26} textAnchor="middle" fontSize="8" fontWeight="black" fill="#fb923c" letterSpacing="0.12em">PLACER</text>}
                              {!isRoot && node.depth === 2 && <text y={r + 26} textAnchor="middle" fontSize="8" fontWeight="black" fill="#fb923c" letterSpacing="0.12em">CLICK TO EXPAND</text>}
