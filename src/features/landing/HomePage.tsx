@@ -195,7 +195,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </motion.div>
 
                   <div className="grid grid-cols-3 gap-6 pt-6 border-t border-emerald-100 dark:border-emerald-600/30">
-                    {[['10k+', 'Happy Members'], ['500+', 'Premium Products'], ['50+', 'Service Centers']].map(([val, label]) => (
+                    {[['1k+', 'Happy Members'], ['10+', 'Premium Products'], ['20+', 'Service Centers']].map(([val, label]) => (
                       <div key={label}>
                         <p className="text-2xl font-black text-emerald-950 dark:text-white">{val}</p>
                         <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">{label}</p>
@@ -212,7 +212,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 >
                   <div className="absolute inset-0 bg-gradient-to-tr from-amber-400/20 to-yellow-400/20 rounded-full blur-3xl" />
                   <img
-                    src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
+                    src="https://images.unsplash.com/photo-1477332552946-cfb384aeaf1c?auto=format&fit=crop&w=800&q=80"
                     alt="Lifestyle"
                     className="relative rounded-[32px] shadow-2xl border-4 border-emerald-50 dark:border-emerald-900 rotate-3 hover:rotate-0 transition-transform duration-700"
                     referrerPolicy="no-referrer"
