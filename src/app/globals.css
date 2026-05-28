@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+}
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --text-primary: #042f2e;
+  --text-secondary: #0d5c52;
+  --accent: #fbbf24; /* Gold */
+}
+
+.dark {
+  --bg-gradient: linear-gradient(135deg, #042f2e 0%, #064e48 100%);
+  --card-bg: rgba(10, 60, 55, 0.8);
+  --text-primary: #f0fdf4;
+  --text-secondary: #a7f3d0;
+  --accent: #fbbf24;
+}
+
+body {
+  @apply bg-white text-emerald-950 transition-colors duration-300;
+  font-family: var(--font-sans);
+}
+
+.dark body {
+  @apply bg-emerald-950 text-emerald-50;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
