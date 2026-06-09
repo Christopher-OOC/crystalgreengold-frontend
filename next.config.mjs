@@ -6,7 +6,7 @@ const projectRoot = dirname(fileURLToPath(import.meta.url));
 const apiBaseUrl =
   process.env.NEXT_PUBLIC_API_URL ||
   process.env.VITE_API_URL ||
-  'http://localhost:8080';
+  'https://crystalgreengold-backend.onrender.com';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
