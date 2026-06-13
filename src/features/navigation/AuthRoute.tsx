@@ -11,12 +11,13 @@ import { useAuth } from '@/features/auth/AuthContext';
 import logo from '@/shared/assets/logo';
 import type { AuthPage } from '@/features/navigation/paths';
 import { useCrystalgreengoldTheme } from '@/features/navigation/useCrystalgreengoldTheme';
+import personnelImage from '@/shared/assets/personnel.jpeg';
+import bottleImage from '@/shared/assets/bottle.jpg';
+import Image from 'next/image';
+import { p } from 'motion/react-client';
 
-const BACKGROUND_IMAGES = [
-  'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80',
-];
+
+const BACKGROUND_IMAGES = [bottleImage, personnelImage];
 
 export function AuthRoute({ page }: { page: AuthPage }) {
   const router = useRouter();
@@ -54,14 +55,10 @@ export function AuthRoute({ page }: { page: AuthPage }) {
       >
         <div className="relative w-full md:w-1/2 h-80 md:h-auto overflow-hidden group">
           <AnimatePresence mode="wait">
-            <motion.img
+            <Image
               key={`${page}-${currentImageIndex}`}
               src={BACKGROUND_IMAGES[currentImageIndex]}
               alt="crystalgreengold Lifestyle"
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 2, ease: 'easeInOut' }}
               className="absolute inset-0 w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />

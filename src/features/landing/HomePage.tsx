@@ -16,6 +16,9 @@ import { useProducts } from '@/lib/hooks/useDomain';
 import { getProductImage, getCategoryName } from '@/lib/types/product.types';
 import type { Product } from '@/lib/types/product.types';
 import logo from '@/shared/assets/logo';
+import personnelImage from '@/shared/assets/personnel.jpeg';
+import bottleImage from '@/shared/assets/bottle.jpg';
+import Image from 'next/image';
 
 export type ActiveView =
   | 'home' | 'discount-shop' | 'service-centers'
@@ -211,8 +214,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                   className="relative"
                 >
                   <div className="absolute inset-0 bg-gradient-to-tr from-amber-400/20 to-yellow-400/20 rounded-full blur-3xl" />
-                  <img
-                    src="https://images.unsplash.com/photo-1477332552946-cfb384aeaf1c?auto=format&fit=crop&w=800&q=80"
+                  <Image
+                    src={bottleImage}
                     alt="Lifestyle"
                     className="relative rounded-[32px] shadow-2xl border-4 border-emerald-50 dark:border-emerald-900 rotate-3 hover:rotate-0 transition-transform duration-700"
                     referrerPolicy="no-referrer"
@@ -353,9 +356,43 @@ export const HomePage: React.FC<HomePageProps> = ({
                       WE ARE MORE THAN JUST A <br />
                       <span className="text-amber-400">BUSINESS NETWORK.</span>
                     </p>
-                    <div className="space-y-4 text-emerald-100 text-base leading-relaxed font-medium">
-                      <p>crystalgreengold International is a community-driven platform dedicated to providing high-quality products while creating financial opportunities for our members.</p>
-                      <p>Our mission is to empower individuals through a robust referral system and a diverse catalog of premium goods ranging from health supplements to modern home appliances.</p>
+                    <div className="space-y-6 text-emerald-100 text-base leading-relaxed font-medium">
+                      <div>
+                        <h3 className="text-xl font-black text-white">Vision Statement</h3>
+                        <p>To become a globally trusted leader in health and sustainable food solutions, transforming lives through wellness, empowerment, transparency, and equal access to quality nutrition for all.</p>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-black text-white">Mission Statement</h3>
+                        <p>To provide innovative health solutions and sustainable food programs that improve lives, empower communities, and create rewarding opportunities through integrity, transparency, and excellence.</p>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-black text-white">The Health Benefits of CGG Cleanser Herbal</h3>
+                        <p>Introducing CGG Cleanser Herbal Mixture</p>
+                        <p>CGG Cleanser Herbal Mixture is a natural remedy formulated with a blend of medicinal herbs known for their potent therapeutic properties.</p>
+                        <p>It is designed to support overall health by cleansing and promoting the healthy functioning of:</p>
+                        <ul className="list-disc list-inside space-y-2 text-sm text-emerald-200">
+                          <li>Blood vessels</li>
+                          <li>Colon cells</li>
+                          <li>Fibroids (supports fibroid management)</li>
+                          <li>Cholesterol balance</li>
+                          <li>Weight management</li>
+                          <li>Sore throat relief</li>
+                          <li>Lump cleansing support</li>
+                          <li>Heart health</li>
+                          <li>Kidney stone support</li>
+                          <li>Prostate health</li>
+                          <li>Appendicitis-related wellness support</li>
+                          <li>Fallopian tube blockage support</li>
+                          <li>Fertility support</li>
+                          <li>Menstrual pause (menopause) support</li>
+                          <li>Sinus health</li>
+                          <li>Genital wart support</li>
+                          <li>Irregular or unhealthy menstruation</li>
+                          <li>Painful menstruation</li>
+                          <li>Pelvic Inflammatory Disease (PID) support</li>
+                        </ul>
+                        <p className="pt-3">Promoting vitality and overall wellness naturally.</p>
+                      </div>
                     </div>
                     <div className="flex items-center space-x-8 pt-6">
                       {[{ icon: Globe, label: 'Global\nPresence' }, { icon: Award, label: 'Certified\nQuality' }].map(({ icon: Icon, label }) => (
@@ -369,24 +406,19 @@ export const HomePage: React.FC<HomePageProps> = ({
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
-                    <img 
-                      src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80" 
+                    <Image
+                      src={personnelImage}
+                      alt="Our Team"
+                      className="rounded-2xl w-full h-48 object-cover -mb-8"
+                      referrerPolicy="no-referrer"
+                    />
+                    <Image
+                      src={bottleImage}
                       alt="Product" 
                       className="rounded-2xl w-full h-48 object-cover mt-8" 
                       referrerPolicy="no-referrer" 
                     />
-                    <img 
-                      src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=400&q=80" 
-                      alt="Fashion" 
-                      className="rounded-2xl w-full h-48 object-cover" 
-                      referrerPolicy="no-referrer" 
-                    />
-                    <img 
-                      src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80" 
-                      alt="Service" 
-                      className="rounded-2xl w-full h-48 object-cover" 
-                      referrerPolicy="no-referrer" 
-                    />
+                   
                     <img 
                       src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" 
                       alt="Team" 

@@ -26,6 +26,9 @@ import {
 } from 'lucide-react';
 import { Card } from '@/shared/ui/Card';
 import { ErrorState } from '@/shared/ui/ErrorState';
+import personnelImage from '@/shared/assets/personnel.jpeg';
+import bottleImage from '@/shared/assets/bottle.jpg';
+import Image from 'next/image';
 
 export const AboutUs: React.FC = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -58,39 +61,41 @@ export const AboutUs: React.FC = () => {
   }, []);
 
   const coreValues = [
-    { icon: Award, title: 'Quality First', desc: 'We deliver only premium products that enrich everyday living.' },
-    { icon: Rocket, title: 'Empowerment', desc: 'We provide opportunities that inspire growth, independence, and success.' },
-    { icon: Shield, title: 'Integrity', desc: 'We uphold honesty, trust, and transparency in all we do.' },
-    { icon: Users, title: 'Community', desc: 'We believe in collaboration, support, and shared prosperity.' },
-    { icon: Lightbulb, title: 'Innovation', desc: 'We continuously evolve to meet the changing needs of our members and customers.' },
+    { icon: Shield, title: 'Integrity', desc: 'We uphold honesty, transparency, and accountability in all we do.' },
+    { icon: Heart, title: 'Health & Wellness', desc: 'We are committed to promoting healthier lifestyles and well-being for all.' },
+    { icon: Award, title: 'Excellence', desc: 'We strive to deliver high-quality products, services, and solutions at all times.' },
+    { icon: Rocket, title: 'Empowerment', desc: 'We create opportunities that help individuals and communities grow and succeed.' },
+    { icon: Lightbulb, title: 'Innovation', desc: 'We embrace creativity and forward-thinking solutions to meet evolving needs.' },
+    { icon: Globe, title: 'Sustainability', desc: 'We support responsible practices that promote long-term food security and healthy living.' },
+    { icon: Users, title: 'Service to Humanity', desc: 'We believe access to quality food and health solutions should benefit everyone.' },
   ];
 
   const whyChoose = [
-    { icon: Star, title: 'Premium Products', desc: 'From designer perfumes to wellness essentials, carefully crafted for everyday living.' },
-    { icon: Zap, title: 'Empowering Business Model', desc: 'A platform where anyone can grow, earn, and thrive.' },
-    { icon: Users, title: 'Community Support', desc: 'At crystalgreengold, you’re never alone—we rise together as one family.' },
-    { icon: Globe, title: 'Proven Legacy', desc: 'With years of trusted service, we deliver on our promises.' },
+    { icon: Shield, title: 'Transparency', desc: 'We operate with complete honesty and clarity in all our processes.' },
+    { icon: Star, title: 'Reward System', desc: 'Our structured and fair reward system ensures effort and loyalty are properly recognized.' },
+    { icon: Award, title: 'Quality Assurance', desc: 'We are committed to delivering safe, effective, and high-quality health solutions.' },
+    { icon: Users, title: 'Trusted Partnerships', desc: 'We build reliable and long-term relationships based on integrity and shared success.' },
   ];
 
   const products = [
-    { icon: Sparkles, title: 'Designer Perfumes', desc: 'Luxury fragrances that make a statement.' },
-    { icon: Activity, title: 'Health & Wellness Essentials', desc: 'Supplements and products that support vitality and energy.' },
-    { icon: Palette, title: 'Cosmetics & Beauty', desc: 'Innovative products that highlight your natural beauty.' },
-    { icon: Coffee, title: 'Food & Lifestyle Products', desc: 'Everyday essentials crafted for quality and enjoyment.' },
+    { icon: Heart, title: 'Health Solutions', desc: 'Effective health and wellness solutions that support healthier living and overall well-being.' },
+    { icon: Globe, title: 'Food for All Program', desc: 'Sustainability-driven initiative improving access to quality food for individuals and communities.' },
+    { icon: Sparkles, title: 'Wellness Products', desc: 'Natural herbal wellness supplements designed to support overall health and vitality.' },
+    { icon: Users, title: 'Community Empowerment', desc: 'Structured programs creating opportunities for growth, self-reliance, and improved living standards.' },
   ];
 
   const steps = [
-    { number: '1', title: 'Join crystalgreengold', desc: 'Register through our official platform or with the help of an existing member. Becoming part of the crystalgreengold family gives you immediate access to our premium products and the opportunity to start your journey.' },
-    { number: '2', title: 'Use & Share Products', desc: 'Experience our perfumes, cosmetics, wellness, and lifestyle essentials. Share your personal product experience with others—it’s the foundation of our community growth.' },
-    { number: '3', title: 'Refer Others', desc: 'Introduce new members to crystalgreengold. By helping others discover our products and business opportunity, you grow your own network while empowering people around you.' },
-    { number: '4', title: 'Earn Rewards', desc: 'As your network expands, you earn bonuses, commissions, and recognition. With hard work and dedication, crystalgreengold provides a path to financial independence and success.' },
+    { number: '1', title: 'Join CrystalGreenGold', desc: 'Become part of our community and gain access to innovative health solutions and the Food for All program. Starting your wellness journey with us opens doors to personal growth and positive impact.' },
+    { number: '2', title: 'Embrace Wellness', desc: 'Experience our natural herbal wellness products and discover the benefits of health-focused living. Share your personal wellness journey with others—it builds trust and community.' },
+    { number: '3', title: 'Support the Mission', desc: 'Help spread awareness about the Food for All initiative and health solutions. By supporting our mission, you empower others in your community while creating meaningful connections.' },
+    { number: '4', title: 'Create Impact & Earn', desc: 'As your network grows and more people benefit from our programs, you build a rewarding career. CrystalGreenGold provides structure, support, and recognition for those committed to making a difference.' },
   ];
 
   const faqs = [
-    { q: 'What is crystalgreengold?', a: 'crystalgreengold is a legacy Direct Selling company offering premium perfumes, health products, cosmetics, and more. We empower individuals with quality products, rewarding opportunities, and a community built on growth, trust, and success.' },
-    { q: 'How do I join crystalgreengold?', a: 'You can register through our official platform or with the help of an existing member. Becoming part of the crystalgreengold family gives you immediate access to our premium products and the opportunity to start your journey.' },
-    { q: 'Do I need experience to succeed?', a: 'No experience is required. We provide the tools, mentorship, and platform to help you achieve your goals, whether you’re looking for part-time income or lifelong financial freedom.' },
-    { q: 'Where can I buy crystalgreengold products?', a: 'Our products are available through our community of members and our official platform. We bring together luxury, wellness, and lifestyle to enrich everyday living.' },
+    { q: 'What is CrystalGreenGold?', a: 'CrystalGreenGold is a forward-thinking company dedicated to providing quality health solutions and a sustainable "Food for All" program aimed at improving lives and supporting healthier communities through innovative wellness products and rewarding opportunities.' },
+    { q: 'What makes the Food for All Program important?', a: 'The Food for All Program is a sustainability-driven initiative aimed at improving access to quality food for individuals and communities. It is designed to reduce hunger, support healthy nutrition, and promote food security through a structured and transparent system.' },
+    { q: 'What products does CrystalGreenGold offer?', a: 'We offer natural herbal wellness supplements, health solutions, and sustainable food programs designed to support overall health, vitality, and balanced living. All products are carefully developed to promote natural well-being and enhance quality of life.' },
+    { q: 'How can I get involved with CrystalGreenGold?', a: 'You can join our community to access our health solutions and participate in the Food for All initiative. Through our community empowerment programs, you gain access to wellness products, training, support, and structured opportunities to create impact while building a rewarding career.' },
   ];
 
   if (isLoading) {
@@ -135,7 +140,7 @@ export const AboutUs: React.FC = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-[15vw] md:text-[12vw] font-black text-emerald-950 dark:text-white tracking-tighter leading-[0.85] uppercase"
+              className="text-5xl md:text-7xl font-black text-emerald-950 dark:text-white tracking-tighter leading-[0.85] uppercase"
             >
               About <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600">crystalgreengold</span>
@@ -149,8 +154,8 @@ export const AboutUs: React.FC = () => {
           transition={{ delay: 0.5 }}
           className="max-w-3xl mx-auto relative z-10"
         >
-          <p className="text-2xl md:text-3xl text-emerald-600 dark:text-emerald-400 font-serif italic leading-relaxed">
-            "We believe in combining <span className="text-emerald-950 dark:text-white font-black not-italic">quality, opportunity, and community</span> to redefine the landscape of direct selling."
+          <p className="text-lg md:text-xl text-emerald-600 dark:text-emerald-400 font-serif italic leading-relaxed">
+            "We believe that a healthier, hunger-free world is not just a dream—<span className="text-emerald-950 dark:text-white font-black not-italic">it is a responsibility we all share.</span>"
           </p>
         </motion.div>
 
@@ -169,13 +174,13 @@ export const AboutUs: React.FC = () => {
           </div>
           <div className="md:col-span-8 space-y-8 text-xl text-emerald-700 dark:text-emerald-400 leading-relaxed font-medium">
             <p>
-              As a legacy company in the Direct Selling industry, we are proud to offer a wide range of quality designer perfumes, health and wellness essentials, cosmetics and more—that enrich everyday life.
+              CrystalGreenGold is a forward-thinking company dedicated to providing quality health solutions and promoting a sustainable "Food for All" program aimed at improving lives and supporting healthier communities.
             </p>
             <p>
-              Our business model is designed with people in mind. By joining the crystalgreengold Community, members not only enjoy access to world-class products but also the chance to build a rewarding business of their own.
+              We are passionate about wellness, nutrition, and empowering people with products and opportunities that enhance healthy living. Our system is built on transparency, trust, fairness, and rewarding partnerships, ensuring that every member and customer benefits from a clear and reliable structure.
             </p>
             <p className="text-emerald-950 dark:text-white font-black text-3xl tracking-tight leading-tight">
-              We are committed to creating a system that handsomely compensates our members for their hard work, dedication, and leadership.
+              At CrystalGreenGold, we believe that good health and access to quality food should be available to everyone. Through innovation, integrity, and commitment to excellence, we continue to create solutions that positively impact individuals, families, and communities.
             </p>
           </div>
         </div>
@@ -186,11 +191,10 @@ export const AboutUs: React.FC = () => {
         <div className="relative">
           <div className="absolute -inset-4 bg-amber-400/10 rounded-[3rem] blur-2xl" />
           <div className="relative h-[500px] rounded-[2.5rem] overflow-hidden shadow-2xl">
-            <img 
-              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80" 
+            <Image
+              src={personnelImage} 
               alt="Our Story" 
               className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent flex items-end p-12">
               <p className="text-white text-2xl font-serif italic">"Our journey has always been about helping people enrich their lives."</p>
@@ -202,15 +206,15 @@ export const AboutUs: React.FC = () => {
             <TrendingUp size={14} />
             <span>Our Story</span>
           </div>
-          <h2 className="text-5xl font-black text-emerald-950 dark:text-white tracking-tight leading-none">
-            A Vision <br /> <span className="text-amber-400">Redefined.</span>
+          <h2 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight leading-none">
+            Empowering Health, <br /> <span className="text-amber-400">Nourishing Lives.</span>
           </h2>
           <div className="space-y-6 text-lg text-emerald-700 dark:text-emerald-400 leading-relaxed">
             <p>
-              At crystalgreengold, we began with a simple vision: to combine the best of lifestyle, wellness, and entrepreneurship into one powerful platform. Over the years, we have grown into a legacy company trusted for our premium products and our commitment to empowering people across communities.
+              At CrystalGreenGold, we believe that no one should go to bed hungry and that everyone deserves the opportunity to live a healthy and fulfilling life. Through our Food for All and Health for All Initiatives, we are committed to supporting the well-being of individuals and families in our communities.
             </p>
             <p>
-              We are more than just a business—we are a movement. Our journey has always been about helping people enrich their lives, build financial independence, and create lasting success. With every product sold and every opportunity shared, the crystalgreengold story continues to inspire.
+              Our mission extends beyond addressing hunger. We recognize that proper nutrition and good health are closely connected. Through partnerships with local farmers, food producers, and community organizations, we help provide nutritious food to those in need while promoting healthier lifestyles and wellness awareness.
             </p>
           </div>
         </div>
@@ -228,7 +232,7 @@ export const AboutUs: React.FC = () => {
           <div className="space-y-4">
             <h3 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Our Vision</h3>
             <p className="text-lg text-emerald-700 dark:text-emerald-400 leading-relaxed">
-              To be a global leader in lifestyle and wellness, empowering individuals with world-class products and sustainable business opportunities that inspire prosperity, growth, and community.
+              To become a globally trusted leader in health and sustainable food solutions, transforming lives through wellness, empowerment, transparency, and equal access to quality nutrition for all.
             </p>
           </div>
         </Card>
@@ -242,7 +246,7 @@ export const AboutUs: React.FC = () => {
           <div className="space-y-4">
             <h3 className="text-3xl font-black tracking-tight">Our Mission</h3>
             <p className="text-lg text-emerald-200 leading-relaxed">
-              To enrich lives through premium perfumes, cosmetics, health, and lifestyle products while creating a rewarding platform for entrepreneurship, trust, and shared success.
+              To provide innovative health solutions and sustainable food programs that improve lives, empower communities, and create rewarding opportunities through integrity, transparency, and excellence.
             </p>
           </div>
         </Card>
@@ -352,18 +356,18 @@ export const AboutUs: React.FC = () => {
             <Zap size={14} />
             <span>The Opportunity</span>
           </div>
-          <h2 className="text-5xl font-black text-emerald-950 dark:text-white tracking-tight leading-none">
-            Build Your <br /> <span className="text-amber-400">Rewarding Career.</span>
+          <h2 className="text-4xl font-black text-emerald-950 dark:text-white tracking-tight leading-none">
+            Join Our <br /> <span className="text-amber-400">Movement.</span>
           </h2>
           <div className="space-y-6 text-lg text-emerald-700 dark:text-emerald-400 leading-relaxed">
             <p>
-              crystalgreengold is more than a brand—it’s a business opportunity. When you join the crystalgreengold Community, you don’t just gain access to premium products—you unlock the chance to build a rewarding career.
+              CrystalGreenGold offers meaningful partnership opportunities for individuals and organizations who share our vision of promoting health, wellness, and food accessibility.
             </p>
             <p>
-              Whether you’re looking for part-time income, full-time success, or lifelong financial freedom, we provide the tools, mentorship, and platform to help you achieve your goals.
+              We provide a transparent and rewarding system that allows partners to grow while making a positive impact in their communities. With our structured support, training, and incentives, we believe in building strong, mutually beneficial relationships that create value and drive sustainable growth.
             </p>
             <p className="text-emerald-950 dark:text-white font-black text-xl">
-              With crystalgreengold, your success is our success. <span className="text-amber-400">Together, we rise.</span>
+              Whether you're looking to enjoy our products or create real impact in your community, <span className="text-amber-400">together, we rise.</span>
             </p>
           </div>
           <button className="flex items-center space-x-3 px-8 py-4 bg-emerald-950 dark:bg-white text-white dark:text-emerald-950 rounded-2xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform">
@@ -375,11 +379,10 @@ export const AboutUs: React.FC = () => {
           <div className="relative">
             <div className="absolute -inset-4 bg-emerald-500/10 rounded-[3rem] blur-2xl" />
             <div className="relative h-[600px] rounded-[3rem] overflow-hidden shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" 
+              <Image
+                src={bottleImage} 
                 alt="The Opportunity" 
                 className="w-full h-full object-cover"
-                referrerPolicy="no-referrer"
               />
             </div>
           </div>
@@ -392,12 +395,12 @@ export const AboutUs: React.FC = () => {
           <Heart size={40} />
         </div>
         <div className="space-y-6 max-w-4xl mx-auto">
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter leading-none">Social Impact</h2>
+          <h2 className="text-4xl md:text-5xl font-black tracking-tighter leading-none">Together We Can End Disease and Hunger</h2>
           <p className="text-xl md:text-2xl font-medium leading-relaxed opacity-90">
-            At crystalgreengold, success is not just about profit—it’s about purpose. We believe in giving back to the community by supporting initiatives that promote health, education, and empowerment.
+            At CrystalGreenGold, we recognize that a healthier, hunger-free world is not just a dream—it is a responsibility we all share. Across the globe, millions continue to face disease and hunger. Yet with innovation, compassion, and collective action, these barriers can be overcome.
           </p>
           <p className="text-lg opacity-80 max-w-2xl mx-auto">
-            Through our efforts, we aim to create not just individual success stories but also a brighter and stronger society.
+            Our mission is to provide sustainable solutions, promote wellness, empower communities, and encourage collaboration. Through partnership, we can create stronger communities, improve health outcomes, and ensure food security for those who need it most. Every contribution matters. Every innovation counts. Together, we can build a future where healthy lives and nutritious food are accessible to all.
           </p>
         </div>
       </section>
@@ -440,8 +443,8 @@ export const AboutUs: React.FC = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {[
-            { name: 'Joshua', location: 'Nigeria', text: 'crystalgreengold has transformed my life. I started as a customer, but soon discovered the opportunity to grow my own business. Today, I not only enjoy the products but also financial freedom and a supportive community.' },
-            { name: 'Susan', location: 'Nigeria', text: 'The perfumes are simply amazing! I’ve received countless compliments, and I love knowing I’m part of a company that truly values people.' },
+            { name: 'Juliet', location: 'CEO', text: 'My heart for people led me to create the "Food for All" initiative. CrystalGreenGold is more than a business - it is a movement dedicated to ensuring everyone has access to nutritious meals, wellness solutions, and the opportunity to build better lives.' },
+            { name: 'Community Member', location: 'Across Regions', text: 'Through CrystalGreenGold programs, I have not only gained access to quality health solutions, but I am also helping my community. This is about more than products - it is about creating lasting change and empowering people to live healthier, more fulfilling lives.' },
           ].map((item, i) => (
             <Card key={i} className="p-12 space-y-10 border-none shadow-2xl relative overflow-hidden bg-white dark:bg-emerald-950">
               <Quote className="absolute top-12 right-12 text-emerald-50 dark:text-white/5 w-24 h-24 -z-10" />
@@ -508,13 +511,13 @@ export const AboutUs: React.FC = () => {
         </div>
         
         <div className="relative z-10 space-y-8">
-          <h2 className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-none">Together, <br /> <span className="text-amber-400">We Rise.</span></h2>
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none">Together, <br /> <span className="text-amber-400">We Thrive.</span></h2>
           <p className="text-2xl text-emerald-400 max-w-3xl mx-auto font-medium leading-relaxed">
-            Whether you’re here to enjoy our products or pursue an exciting business opportunity, you’re part of a family that values growth, trust, and prosperity.
+            Whether you're seeking to improve your health, support the Food for All mission, or build a rewarding career with purpose, you're part of a family committed to creating positive change and building a brighter future for all.
           </p>
           <div className="pt-8">
             <button className="px-16 py-6 bg-amber-400 text-white rounded-[2rem] font-black uppercase tracking-[0.2em] text-sm shadow-2xl shadow-amber-400/40 hover:scale-110 hover:rotate-2 transition-all">
-              Join the Family
+              Begin Your Journey
             </button>
           </div>
         </div>
