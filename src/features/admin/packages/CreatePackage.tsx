@@ -177,9 +177,9 @@ export const CreatePackage: React.FC<CreatePackageProps> = ({ onBack, editPackag
             <select name="name" value={form.name} onChange={handleChange}
               className="w-full bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl py-3 px-4 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all font-medium">
               <option value="">Select package name</option>
-              <option value="FOUNDATION">STARTER</option>
-              <option value="CLASSIC">BASIC</option>
-              <option value="CLASSIC">BRONZE</option>
+              <option value="STARTER">STARTER</option>
+              <option value="BASIC">BASIC</option>
+              <option value="BRONZE">BRONZE</option>
               <option value="SILVER">SILVER</option>
               <option value="GOLD">GOLD</option>
               <option value="PLATINUM">PLATINUM</option>
