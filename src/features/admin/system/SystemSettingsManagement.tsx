@@ -119,7 +119,10 @@ export const SystemSettingsManagement: React.FC<SystemSettingsManagementProps> =
   }, []);
 
   const handleUpdate = async () => {
-    const changed = Object.entries(editsRef.current).map(([id, value]) => ({ id, value }));
+    const changed = Object.entries(editsRef.current).map(([id, value]) => ({ 
+      id: parseInt(id, 10),
+      value: parseFloat(value)
+    }));
     if (changed.length === 0) {
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);

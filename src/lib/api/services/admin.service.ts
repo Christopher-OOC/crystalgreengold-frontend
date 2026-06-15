@@ -182,14 +182,7 @@ export const adminService = {
     return data.data ?? data;
   },
 
-  /**
-   * Convenience: update multiple settings in parallel
-   */
-  updateAllSettings: async (settings: { id: string; value: string }[]): Promise<void> => {
-    await Promise.all(
-      settings.map(({ id, value }) =>
-        apiClient.put(ENDPOINTS.ADMIN.SETTING_BY_ID(id), { value })
-      )
-    );
+  updateAllSettings: async (settings: { id: number; value: number }[]): Promise<void> => {
+    await apiClient.put(ENDPOINTS.ADMIN.SETTINGS, settings);
   },
 };
