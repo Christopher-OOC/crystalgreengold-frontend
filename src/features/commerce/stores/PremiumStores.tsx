@@ -36,11 +36,11 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
       const data = await premiumStoreService.getAll();
       setStores(data);
     } catch (err: any) {
-      console.warn("Premium stores unavailable.");
+      console.warn("State centers unavailable.");
       setError(
         getRequestErrorMessage(
           err,
-          "Unable to fetch premium store locations. Please check your connection.",
+          "Unable to fetch state center locations. Please check your connection.",
         ),
       );
     } finally {
@@ -87,7 +87,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
 
   // Get store display name
   const getStoreName = (store: PremiumStore) => {
-    return store.businessName || store.username || "Premium Store";
+    return store.businessName || store.username || "State Center";
   };
 
   // Get store location
@@ -109,7 +109,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
       <div className="flex flex-col items-center justify-center min-h-[400px]">
         <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse">
-          Finding premium stores near you...
+          Finding state centers near you...
         </p>
       </div>
     );
@@ -135,12 +135,12 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
           </div>
           <div>
             <h2 className="text-2xl font-bold text-emerald-950 dark:text-white">
-              Premium Stores
+              State Centers
             </h2>
             <p className="text-emerald-600 dark:text-emerald-400 text-sm">
               {stores.length} exclusive{" "}
-              {stores.length === 1 ? "location" : "locations"} for premium
-              products
+              {stores.length === 1 ? "location" : "locations"} for state
+              center products
             </p>
           </div>
         </div>
@@ -214,7 +214,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
       {filteredAndSortedStores.length === 0 ? (
         <div className="text-center py-16">
           <Store size={48} className="mx-auto text-emerald-200 mb-4" />
-          <p className="text-emerald-600 font-medium">No premium stores found</p>
+          <p className="text-emerald-600 font-medium">No state centers found</p>
           <p className="text-emerald-400 text-sm mt-2">
             Try adjusting your search or check back later.
           </p>
@@ -244,7 +244,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                     <span className="text-white font-bold flex items-center">
-                      Visit Store{" "}
+                      Visit Center{" "}
                       <ArrowRight
                         size={16}
                         className="ml-2 group-hover:translate-x-2 transition-transform"
@@ -280,7 +280,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
                   </div>
                   <div className="pt-4 border-t border-white dark:border-white/5 flex items-center justify-between">
                     <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">
-                      Premium Partner
+                      State Center Partner
                     </span>
                     <div className="flex items-center space-x-1">
                       <span className="text-xs font-bold text-emerald-400">
@@ -304,7 +304,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
 function getRequestErrorMessage(err: any, fallback: string) {
   if (err?.response?.data?.message) return err.response.data.message;
   if (err?.response?.data?.error) return err.response.data.error;
-  if (err?.response?.status >= 500) return "Premium stores are temporarily unavailable. Please try again later.";
+  if (err?.response?.status >= 500) return "State centers are temporarily unavailable. Please try again later.";
   if (err?.code === "ECONNABORTED") return "The request timed out. Please try again.";
   if (err?.message === "Network Error") return "Unable to reach the API. Please check the backend connection and try again.";
   return fallback;

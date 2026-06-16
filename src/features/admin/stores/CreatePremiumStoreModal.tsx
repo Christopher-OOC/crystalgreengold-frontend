@@ -104,10 +104,10 @@ export const CreatePremiumStoreModal: React.FC<
 
       onSuccess();
     } catch (err: any) {
-      console.error("Error saving premium store:", err);
+      console.error("Error saving state center:", err);
       setError(
         err?.response?.data?.message ||
-          "Failed to save premium store. Please try again.",
+          "Failed to save state center. Please try again.",
       );
     } finally {
       setIsSubmitting(false);
@@ -137,12 +137,12 @@ export const CreatePremiumStoreModal: React.FC<
               </div>
               <div>
                 <h2 className="text-xl font-black text-white tracking-tight">
-                  {store ? "Edit Premium Store" : "Register New Premium Store"}
+                  {store ? "Edit State Center" : "Register New State Center"}
                 </h2>
                 <p className="text-yellow-100 text-xs font-medium mt-0.5">
                   {store
-                    ? "Update store information"
-                    : "Create a new premium store in the network"}
+                    ? "Update center information"
+                    : "Create a new state center in the network"}
                 </p>
               </div>
             </div>
@@ -259,7 +259,7 @@ export const CreatePremiumStoreModal: React.FC<
                   value={formData.businessName}
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all text-sm font-medium"
-                  placeholder="My Premium Store"
+                  placeholder="My State Center"
                 />
               </div>
 

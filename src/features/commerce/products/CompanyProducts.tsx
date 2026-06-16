@@ -162,7 +162,7 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
             <ShoppingBag size={20} />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-emerald-950 dark:text-white">Company Products</h2>
+            <h2 className="text-lg font-bold text-emerald-950 dark:text-white">National Center</h2>
             <p className="text-emerald-600 dark:text-emerald-400 text-xs">Browse and purchase our official products</p>
           </div>
         </div>

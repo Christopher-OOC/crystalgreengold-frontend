@@ -19,7 +19,7 @@ interface ServiceCenterProductsProps {
 export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({ 
   centerName, 
   centerId,
-  title = "Service Center Products",
+  title = "Local Center Products",
   onBack, 
   onSelectProduct, 
   onBuyPackage 
@@ -39,7 +39,7 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
   const fetchProducts = async () => {
     if (!centerId) {
       console.error('No centerId provided!');
-      setError('Invalid service center ID. Please go back and try again.');
+      setError('Invalid local center ID. Please go back and try again.');
       setIsLoading(false);
       return;
     }
@@ -59,7 +59,7 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
       setCategories(uniqueCategories);
     } catch (err: any) {
       console.error('Error fetching products:', err);
-      setError(err?.response?.data?.message || 'Failed to load products for this service center. Please try again.');
+      setError(err?.response?.data?.message || 'Failed to load products for this local center. Please try again.');
     } finally {
       setIsLoading(false);
     }

@@ -83,7 +83,7 @@ export const premiumStoreService = {
 
   /**
    * GET /api/v1/members/:memberId
-   * Get single premium store by ID
+   * Get single state center by ID
    */
   getById: async (memberId: string): Promise<PremiumStore> => {
     const { data } = await apiClient.get(ENDPOINTS.MEMBERS.BY_ID(memberId));
@@ -92,7 +92,7 @@ export const premiumStoreService = {
 
   /**
    * POST /api/v1/members
-   * Create a new premium store
+   * Create a new state center
    */
   create: async (req: CreatePremiumStoreRequest): Promise<PremiumStore> => {
     const body = {
@@ -118,7 +118,7 @@ export const premiumStoreService = {
 
   /**
    * PUT /api/v1/admins/update-member-info/:memberId
-   * Update premium store information
+   * Update state center information
    */
   update: async (memberId: string, req: UpdatePremiumStoreRequest): Promise<PremiumStore> => {
     const { data } = await apiClient.put(
@@ -130,7 +130,7 @@ export const premiumStoreService = {
 
   /**
    * PUT /api/v1/admins/:memberId/members?enabled=false
-   * Deactivate/reactivate a premium store
+   * Deactivate/reactivate a state center
    */
   toggleStatus: async (memberId: string, enabled: boolean): Promise<PremiumStore> => {
     const { data } = await apiClient.put(

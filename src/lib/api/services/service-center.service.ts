@@ -47,7 +47,7 @@ export const serviceCenterService = {
 
   /**
    * GET /api/v1/members/:memberId
-   * Single service center by memberId.
+   * Single local center by memberId.
    */
   getById: async (memberId: string): Promise<ServiceCenter> => {
     const { data } = await apiClient.get(ENDPOINTS.MEMBERS.BY_ID(memberId));
@@ -90,7 +90,7 @@ export const serviceCenterService = {
 
   /**
    * PUT /api/v1/admins/update-member-info/:memberId
-   * Update personal / business info for an existing service center.
+   * Update personal / business info for an existing local center.
    */
   update: async (
     memberId: string,
@@ -105,7 +105,7 @@ export const serviceCenterService = {
 
   /**
    * PUT /api/v1/admins/:memberId/members?enabled=false
-   * Deactivate (soft-delete) a service center.
+   * Deactivate (soft-delete) a local center.
    * Pass enabled=true to re-activate.
    */
   toggleStatus: async (memberId: string, enabled: boolean): Promise<ServiceCenter> => {

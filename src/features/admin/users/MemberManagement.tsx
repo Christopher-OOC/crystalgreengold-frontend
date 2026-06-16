@@ -74,14 +74,14 @@ const ServiceCenterManagementWrapper: React.FC = () => {
           setShowModal(true);
         }}
         onDeleteCenter={async (memberId) => {
-          if (!window.confirm("Deactivate this service center?")) return;
+          if (!window.confirm("Deactivate this local center?")) return;
           try {
             const { serviceCenterService } =
               await import("@/lib/api/services/service-center.service");
             await serviceCenterService.toggleStatus(memberId, false);
             setRefreshKey((k) => k + 1);
           } catch {
-            alert("Failed to deactivate service center.");
+            alert("Failed to deactivate local center.");
           }
         }}
       />
@@ -121,12 +121,12 @@ const PremiumStoreManagementWrapper: React.FC = () => {
           setShowModal(true);
         }}
         onDeleteStore={async (memberId) => {
-          if (!window.confirm("Deactivate this premium store?")) return;
+          if (!window.confirm("Deactivate this state center?")) return;
           try {
             await premiumStoreService.toggleStatus(memberId, false);
             setRefreshKey((k) => k + 1);
           } catch {
-            alert("Failed to deactivate premium store.");
+            alert("Failed to deactivate state center.");
           }
         }}
       />
@@ -301,16 +301,16 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
     if (roleNames.some((role) => role === "ROLE_SUPER_ADMIN" || role === "SUPER_ADMIN")) return "Super Admin";
     if (roleNames.some((role) => role === "ROLE_ADMIN" || role === "ADMIN")) return "Admin";
     if (roleNames.some((role) => role === "ROLE_PREMIUM_STORE" || role === "PREMIUM_STORE"))
-      return "Premium Store";
+      return "State Center";
     if (roleNames.some((role) => role === "ROLE_SERVICE_CENTER" || role === "SERVICE_CENTER"))
-      return "Service Center";
+      return "Local Center";
     return "Regular Member";
   };
 
   const tabs = [
     { id: "All Members", icon: Users, label: "All Members" },
-    { id: "Service Centers", icon: Shield, label: "Service Centers" },
-    { id: "Premium Stores", icon: Store, label: "Premium Stores" },
+    { id: "Local Centers", icon: Shield, label: "Local Centers" },
+    { id: "State Centers", icon: Store, label: "State Centers" },
     { id: "Admins", icon: UserCog, label: "Admins" },
   ];
 
@@ -528,9 +528,9 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "Service Centers":
+      case "Local Centers":
         return <ServiceCenterManagementWrapper />;
-      case "Premium Stores":
+      case "State Centers":
         return <PremiumStoreManagementWrapper />;
       case "Admins":
         return <AdminUserManagementWrapper />;

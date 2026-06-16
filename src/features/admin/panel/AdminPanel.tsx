@@ -81,7 +81,7 @@ export const AdminPanel: React.FC = () => {
     fetchData();
   }, []);
 
-  // Handlers for Service Center Management
+  // Handlers for Local Center Management
   const handleAddCenter = () => {
     setEditingCenter(null);
     setShowCreateModal(true);
@@ -93,14 +93,14 @@ export const AdminPanel: React.FC = () => {
   };
 
   const handleDeleteCenter = async (centerId: string) => {
-    if (confirm('Are you sure you want to delete this service center?')) {
+    if (confirm('Are you sure you want to delete this local center?')) {
       try {
         const { serviceCenterService } = await import('@/lib/api/services/service-center.service');
         await serviceCenterService.toggleStatus(centerId, false);
         setRefreshKey(prev => prev + 1);
       } catch (error) {
         console.error('Failed to delete center:', error);
-        alert('Failed to delete service center');
+        alert('Failed to delete local center');
       }
     }
   };
@@ -175,8 +175,8 @@ export const AdminPanel: React.FC = () => {
     },
     { 
       id: 'service-centers',
-      title: 'Service Centers', 
-      desc: 'Manage service center locations', 
+      title: 'Local Centers', 
+      desc: 'Manage local center locations', 
       icon: Store, 
       color: 'text-yellow-500', 
       bg: 'bg-yellow-500/10' 

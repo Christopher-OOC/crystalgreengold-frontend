@@ -44,9 +44,9 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
       const data = await premiumStoreService.getAll();
       setStores(data);
     } catch (err: any) {
-      console.warn("Premium stores unavailable in admin management.");
+      console.warn("State centers unavailable in admin management.");
       setError(
-        err?.response?.data?.message || "Failed to load premium stores.",
+        err?.response?.data?.message || "Failed to load state centers.",
       );
     } finally {
       setIsLoading(false);
@@ -78,7 +78,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
       <div className="flex flex-col items-center justify-center min-h-[400px]">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">
-          Loading Premium Stores...
+          Loading State Centers...
         </p>
       </div>
     );
@@ -104,7 +104,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
           />
           <input
             type="text"
-            placeholder="Search premium stores..."
+            placeholder="Search state centers..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-12 pr-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-all font-medium text-sm"
@@ -116,7 +116,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
             onChange={(e) => setFilterStatus(e.target.value as any)}
             className="px-4 py-3 bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-xl text-sm font-medium outline-none"
           >
-            <option value="ALL">All Stores</option>
+            <option value="ALL">All Centers</option>
             <option value="ACTIVE">Active Only</option>
             <option value="INACTIVE">Inactive Only</option>
           </select>
@@ -125,7 +125,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
             className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-lg shadow-yellow-500/20"
           >
             <Plus size={18} />
-            <span>Register Store</span>
+            <span>Register Center</span>
           </Button>
         </div>
       </div>
@@ -133,7 +133,7 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card className="p-4 border-l-4 border-yellow-500">
           <p className="text-xs font-black text-emerald-400 uppercase tracking-widest">
-            Total Stores
+            Total Centers
           </p>
           <p className="text-2xl font-black text-emerald-950 dark:text-white">
             {stores.length}
@@ -160,12 +160,12 @@ export const PremiumStoreManagement: React.FC<PremiumStoreManagementProps> = ({
       {filteredStores.length === 0 ? (
         <div className="text-center py-16">
           <Store size={48} className="mx-auto text-emerald-200 mb-4" />
-          <p className="text-emerald-600 font-medium">No premium stores found</p>
+          <p className="text-emerald-600 font-medium">No state centers found</p>
           <Button
             onClick={onAddStore}
             className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-black uppercase tracking-widest"
           >
-            Register your first store
+            Register your first center
           </Button>
         </div>
       ) : (

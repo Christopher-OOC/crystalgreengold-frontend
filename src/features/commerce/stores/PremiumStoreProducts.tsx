@@ -9,7 +9,7 @@ import { getCategoryName, type Product } from '@/lib/types/product.types';
 
 interface PremiumStoreProductsProps {
   storeName: string;
-  storeId: string; // memberId of the premium store
+  storeId: string; // memberId of the state center
   title?: string;
   onBack: () => void;
   onSelectProduct: (product: Product) => void;
@@ -19,7 +19,7 @@ interface PremiumStoreProductsProps {
 export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
   storeName,
   storeId,
-  title = 'Premium Store Products',
+  title = 'State Center Products',
   onBack,
   onSelectProduct,
   onBuyPackage,
@@ -49,7 +49,7 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
       const uniqueCategories = ['ALL', ...new Set(productList.map((p) => getCategoryName(p.category)).filter(Boolean))];
       setCategories(uniqueCategories);
     } catch (err: any) {
-      console.error('Error fetching premium store products:', err);
+      console.error('Error fetching state center products:', err);
       setError(
         err?.response?.data?.message ||
           'Failed to load products for this store. Please try again.',

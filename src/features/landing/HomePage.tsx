@@ -82,9 +82,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   const shopLinks = [
     { name: 'Discount Shop', id: 'discount-shop' as ActiveView },
-    { name: 'Service Centers', id: 'service-centers' as ActiveView },
-    { name: 'Premium Stores', id: 'premium-stores' as ActiveView },
-    { name: 'Company Products', id: 'company-products' as ActiveView },
+    { name: 'Local Centers', id: 'service-centers' as ActiveView },
+    { name: 'State Centers', id: 'premium-stores' as ActiveView },
+    { name: 'National Center', id: 'company-products' as ActiveView },
   ];
 
   const handleProductSelect = (product: Product) => {
@@ -198,7 +198,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   </motion.div>
 
                   <div className="grid grid-cols-3 gap-6 pt-6 border-t border-emerald-100 dark:border-emerald-600/30">
-                    {[['1k+', 'Happy Members'], ['10+', 'Premium Products'], ['20+', 'Service Centers']].map(([val, label]) => (
+                    {[['1k+', 'Happy Members'], ['10+', 'State Centers'], ['20+', 'Local Centers']].map(([val, label]) => (
                       <div key={label}>
                         <p className="text-2xl font-black text-emerald-950 dark:text-white">{val}</p>
                         <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">{label}</p>
@@ -234,7 +234,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {[
                     { icon: ShieldCheck, title: 'Quality Guaranteed', desc: 'We deliver only premium products that enrich everyday living.', color: 'blue' },
-                    { icon: Zap, title: 'Fast Delivery', desc: 'Our network of service centers ensures your products reach you quickly.', color: 'amber' },
+                    { icon: Zap, title: 'Fast Delivery', desc: 'Our network of local centers ensures your products reach you quickly.', color: 'amber' },
                     { icon: Users, title: 'Community Growth', desc: 'Earn bonuses and grow your wealth by referring others to our network.', color: 'emerald' },
                   ].map((f, i) => (
                     <Card key={i} className="p-6 space-y-4 group hover:-translate-y-2 transition-all duration-500 border-none shadow-xl">

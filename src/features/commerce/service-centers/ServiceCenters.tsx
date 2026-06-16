@@ -24,11 +24,11 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 			const data = await serviceCenterService.getAll();
 			setCenters(data);
 		} catch (err) {
-			console.error("Error fetching service centers:", err);
+			console.error("Error fetching local centers:", err);
 			setError(
 				err instanceof Error
 					? err.message
-					: "Unable to load service centers. Please try again later.",
+					: "Unable to load local centers. Please try again later.",
 			);
 		} finally {
 			setIsLoading(false);
@@ -44,7 +44,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 			<div className="flex flex-col items-center justify-center min-h-[400px]">
 				<Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
 				<p className="text-emerald-600 font-bold animate-pulse">
-					Finding service centers...
+					Finding local centers...
 				</p>
 			</div>
 		);
@@ -53,7 +53,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 	if (error) {
 		return (
 			<ErrorState
-				title="Service Centers Error"
+				title="Local Centers Error"
 				message={error}
 				onRetry={fetchServiceCenters}
 			/>
@@ -65,7 +65,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 			<div className="text-center py-16">
 				<Award size={48} className="mx-auto text-emerald-200 mb-4" />
 				<p className="text-emerald-600 font-medium">
-					No service centers available at the moment.
+					No local centers available at the moment.
 				</p>
 				<p className="text-emerald-400 text-sm mt-2">Please check back later.</p>
 			</div>
@@ -80,7 +80,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 					animate={{ opacity: 1, y: 0 }}
 					className="text-4xl font-bold text-emerald-950 dark:text-white"
 				>
-					Our <span className="text-amber-400">Service Centers</span>
+					Our <span className="text-amber-400">Local Centers</span>
 				</motion.h2>
 				<motion.p
 					initial={{ opacity: 0 }}
@@ -118,7 +118,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 							<div className="absolute top-4 left-4 bg-amber-400 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center space-x-1.5 shadow-lg">
 								<Award size={12} />
 								<span className="uppercase tracking-widest">
-									Service Center
+									Local Center
 								</span>
 							</div>
 						</div>
@@ -155,7 +155,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 								onClick={() => {
 									console.log("Full center object:", center); // log the whole object
 									const id = center.memberId || center.serviceCenterId || center.id || "";
-									const name = center.businessName || center.name || center.username || "Service Center";
+									const name = center.businessName || center.name || center.username || "Local Center";
 
 									onSelectCenter(id, name);
 								}}

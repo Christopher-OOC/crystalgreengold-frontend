@@ -30,7 +30,7 @@ export const ServiceCenterManagement: React.FC<ServiceCenterManagementProps> = (
       const data = await serviceCenterService.getAll();
       setCenters(data);
     } catch (err: any) {
-      setError(err?.response?.data?.message || 'Failed to load service centers.');
+      setError(err?.response?.data?.message || 'Failed to load local centers.');
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +57,7 @@ export const ServiceCenterManagement: React.FC<ServiceCenterManagementProps> = (
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
-        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Service Centers...</p>
+        <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Local Centers...</p>
       </div>
     );
   }
@@ -112,9 +112,9 @@ export const ServiceCenterManagement: React.FC<ServiceCenterManagementProps> = (
       {filteredCenters.length === 0 ? (
         <div className="text-center py-16">
           <Shield size={48} className="mx-auto text-emerald-200 mb-4" />
-          <p className="text-emerald-600 font-medium">No service centers found</p>
+          <p className="text-emerald-600 font-medium">No local centers found</p>
           <Button onClick={onAddCenter} className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-black uppercase tracking-widest">
-            Add your first service center
+            Add your first local center
           </Button>
         </div>
       ) : (

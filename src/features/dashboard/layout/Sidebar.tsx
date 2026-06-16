@@ -50,9 +50,9 @@ const menuItems = [
 
   { section: 'SHOPPING' },
   { icon: ShoppingBag, label: 'Discount Shop', id: 'discount-shop' },
-  { icon: Store, label: 'Service Centers', id: 'service-centers' },
-  { icon: Package, label: 'Premium Stores', id: 'premium-stores' },
-  { icon: Package, label: 'Company Products', id: 'company-products' },
+  { icon: Store, label: 'Local Centers', id: 'service-centers' },
+  { icon: Package, label: 'State Centers', id: 'premium-stores' },
+  { icon: Package, label: 'National Center', id: 'company-products' },
   { icon: ShoppingCart, label: 'My Cart', id: 'my-cart' },
 
   { section: 'ORDERS & HISTORY' },

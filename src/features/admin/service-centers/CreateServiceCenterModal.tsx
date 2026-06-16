@@ -107,7 +107,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         businessName: formData.businessName,
       });
     } else {
-      // Create service center - sponsor/placer/leg are included in the request object
+      // Create local center - sponsor/placer/leg are included in the request object
       // The service will handle converting them to query params
       await serviceCenterService.create({
         username: formData.username,
@@ -125,7 +125,7 @@ const handleSubmit = async (e: React.FormEvent) => {
     onSuccess();
   } catch (err: any) {
     console.error('Submit error:', err);
-    setError(err?.response?.data?.message || err?.message || 'Failed to save service center.');
+    setError(err?.response?.data?.message || err?.message || 'Failed to save local center.');
   } finally {
     setIsLoading(false);
   }
@@ -142,10 +142,10 @@ const handleSubmit = async (e: React.FormEvent) => {
         <div className="sticky top-0 bg-white dark:bg-emerald-950 border-b border-emerald-100 dark:border-white/10 p-6 flex justify-between items-center z-10">
           <div>
             <h2 className="text-2xl font-black text-emerald-950 dark:text-white">
-              {isEditing ? 'Edit Service Center' : 'Add New Service Center'}
+              {isEditing ? 'Edit Local Center' : 'Add New Local Center'}
             </h2>
             <p className="text-sm text-emerald-600 mt-1">
-              {isEditing ? 'Update service center information' : 'Create a new service center in the network'}
+              {isEditing ? 'Update local center information' : 'Create a new local center in the network'}
             </p>
           </div>
           <button onClick={onClose} disabled={isLoading}

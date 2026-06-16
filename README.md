@@ -118,9 +118,9 @@ Public routes:
 ```text
 /                           Home page
 /discount-shop              Public discount shop
-/products                   Public company products
-/premium-stores             Public premium stores
-/service-centers            Public service centers
+/products                   Public national center
+/premium-stores             Public state centers
+/service-centers            Public local centers
 ```
 
 Auth routes:
@@ -178,7 +178,7 @@ Feature folders own their screens and workflow-specific components.
 src/features/admin        Admin dashboard and management screens
 src/features/auth         Auth context, login, signup, forgot password
 src/features/cart         Cart context and cart persistence
-src/features/commerce     Products, stores, service centers, packages, orders
+src/features/commerce     Products, stores, local centers, packages, orders
 src/features/dashboard    Dashboard shell, sidebar, charts, misc dashboard views
 src/features/finance      Transactions and transfer flows
 src/features/landing      Public landing/home experience
