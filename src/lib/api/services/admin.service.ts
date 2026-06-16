@@ -133,6 +133,19 @@ export const adminService = {
     return mapToAdminUser(data.data || data);
   },
 
+  updateMemberRoleAndEnabled: async (
+    memberId: string,
+    role: 'ROLE_ADMIN' | 'ROLE_PREMIUM_STORE' | 'ROLE_SERVICE_CENTER',
+    enabled: boolean,
+  ): Promise<AdminUser> => {
+    const { data } = await apiClient.put(
+      ENDPOINTS.ADMIN.UPDATE_MEMBER(memberId),
+      null,
+      { params: { role, enabled } }
+    );
+    return mapToAdminUser(data.data || data);
+  },
+
   /**
    * PUT /api/v1/admins/:memberId/role
    * Update admin role

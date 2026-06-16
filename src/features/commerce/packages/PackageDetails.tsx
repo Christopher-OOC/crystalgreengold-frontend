@@ -57,7 +57,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
 +
       <Card noPadding className="overflow-hidden border-none shadow-2xl">
         {/* Hero Header */}
-        <div className="relative h-64 bg-gradient-to-br from-emerald-900 to-emerald-950 flex items-center justify-center overflow-hidden">
+        <div className="relative h-64 bg-linear-to-br from-emerald-900 to-emerald-950 flex items-center justify-center overflow-hidden">
           {/* Animated Background Elements */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-10 left-10 w-32 h-32 border-2 border-white/20 rounded-full animate-pulse" />

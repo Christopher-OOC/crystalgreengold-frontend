@@ -106,7 +106,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse">
           Finding state centers near you...
@@ -242,7 +242,7 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                  <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                     <span className="text-white font-bold flex items-center">
                       Visit Center{" "}
                       <ArrowRight
@@ -265,14 +265,14 @@ export const PremiumStores: React.FC<PremiumStoresProps> = ({
                     </h3>
                     <div className="flex flex-col space-y-1">
                       <div className="flex items-center text-emerald-600 dark:text-emerald-400 text-sm">
-                        <MapPin size={14} className="mr-1 flex-shrink-0" />
+                        <MapPin size={14} className="mr-1 shrink-0" />
                         <span className="truncate">
                           {getStoreLocation(store)}
                         </span>
                       </div>
                       {store.phoneNumber && (
                         <div className="flex items-center text-emerald-600 dark:text-emerald-400 text-sm">
-                          <Phone size={14} className="mr-1 flex-shrink-0" />
+                          <Phone size={14} className="mr-1 shrink-0" />
                           <span>{store.phoneNumber}</span>
                         </div>
                       )}

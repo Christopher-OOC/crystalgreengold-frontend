@@ -138,7 +138,7 @@ export const Profile: React.FC<ProfileProps> = ({ onBack, onViewAnalysis }) => {
           >
             {/* Hero Profile Section */}
             <div className="relative">
-              <div className="h-32 md:h-40 bg-gradient-to-r from-amber-400 via-yellow-500 to-rose-500 rounded-[24px] shadow-xl overflow-hidden relative">
+              <div className="h-32 md:h-40 bg-linear-to-r from-amber-400 via-yellow-500 to-rose-500 rounded-[24px] shadow-xl overflow-hidden relative">
                 <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
               </div>
               <div className="px-6 -mt-14 relative z-10">
@@ -242,11 +242,11 @@ export const Profile: React.FC<ProfileProps> = ({ onBack, onViewAnalysis }) => {
                 </Card>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="p-4 bg-gradient-to-br from-indigo-500 to-purple-600 text-white border-none">
+                  <Card className="p-4 bg-linear-to-br from-indigo-500 to-purple-600 text-white border-none">
                     <p className="text-2xl font-black mb-0.5">+24.5%</p>
                     <p className="text-[9px] text-white/70 uppercase tracking-widest font-black">Monthly Growth</p>
                   </Card>
-                  <Card className="p-4 bg-gradient-to-br from-amber-400 to-yellow-600 text-white border-none">
+                  <Card className="p-4 bg-linear-to-br from-amber-400 to-yellow-600 text-white border-none">
                     <p className="text-2xl font-black mb-0.5">
                       {typeof safeMember.rank === 'string' ? safeMember.rank : safeMember.rank?.name ?? 'N/A'}
                     </p>

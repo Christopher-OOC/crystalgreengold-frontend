@@ -211,6 +211,10 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
   const [totalElements, setTotalElements] = useState(0);
   const [members, setMembers] = useState<MemberData[]>([]);
   const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);
+  const [memberRoleValue, setMemberRoleValue] = useState<'ROLE_ADMIN' | 'ROLE_PREMIUM_STORE' | 'ROLE_SERVICE_CENTER'>('ROLE_ADMIN');
+  const [memberEnabled, setMemberEnabled] = useState<boolean>(true);
+  const [memberUpdateLoading, setMemberUpdateLoading] = useState<boolean>(false);
+  const [memberUpdateError, setMemberUpdateError] = useState<string | null>(null);
   const [impersonatingMemberId, setImpersonatingMemberId] = useState<string | null>(null);
 
   const { loginAsUser } = useAuth();
@@ -307,6 +311,55 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
     return "Regular Member";
   };
 
+  const getMemberRoleValue = (member: MemberData): 'ROLE_ADMIN' | 'ROLE_PREMIUM_STORE' | 'ROLE_SERVICE_CENTER' => {
+    const roles = member.roles ?? [];
+    const roleNames = roles.map((role) =>
+      (typeof role === "string" ? role : role.name || role.authority || "").toUpperCase(),
+    );
+    if (roleNames.some((role) => role === "ROLE_ADMIN" || role === "ADMIN")) return "ROLE_ADMIN";
+    if (roleNames.some((role) => role === "ROLE_PREMIUM_STORE" || role === "PREMIUM_STORE")) return "ROLE_PREMIUM_STORE";
+    if (roleNames.some((role) => role === "ROLE_SERVICE_CENTER" || role === "SERVICE_CENTER")) return "ROLE_SERVICE_CENTER";
+    return "ROLE_ADMIN";
+  };
+
+  useEffect(() => {
+    if (!selectedMember) return;
+    setMemberRoleValue(getMemberRoleValue(selectedMember));
+    setMemberEnabled(selectedMember.enabled ?? true);
+    setMemberUpdateError(null);
+  }, [selectedMember]);
+
+  const handleUpdateMemberRoleAndStatus = async () => {
+    if (!selectedMember) return;
+    const memberId = getMemberLoginId(selectedMember);
+    setMemberUpdateLoading(true);
+    setMemberUpdateError(null);
+    try {
+      const updated = await adminService.updateMemberRoleAndEnabled(
+        memberId,
+        memberRoleValue,
+        memberEnabled,
+      );
+      setSelectedMember((prev) =>
+        prev
+          ? {
+              ...prev,
+              enabled: updated.enabled,
+              roles: updated.roles,
+            }
+          : prev,
+      );
+      handleAction("Member role and status updated successfully");
+      fetchMembers(currentPage, rowsPerPage, searchQuery, sortByBV, enabledFilter);
+    } catch (err: any) {
+      setMemberUpdateError(
+        err?.response?.data?.message || "Unable to update the member role and enabled status.",
+      );
+    } finally {
+      setMemberUpdateLoading(false);
+    }
+  };
+
   const tabs = [
     { id: "All Members", icon: Users, label: "All Members" },
     { id: "Local Centers", icon: Shield, label: "Local Centers" },
@@ -316,7 +369,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
 
   if (isLoading && activeTab === "All Members" && members.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">
           Loading Member Data...
@@ -445,6 +498,69 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                 </p>
               </Card>
             </div>
+
+            <Card className="p-6 border-none shadow-xl">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-lg font-black text-emerald-950 dark:text-white tracking-tight">
+                    Update Role & Status
+                  </h3>
+                  <p className="text-sm text-emerald-600">Change this member's role and enabled state.</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">
+                    Role
+                  </label>
+                  <select
+                    value={memberRoleValue}
+                    onChange={(e) => setMemberRoleValue(e.target.value as any)}
+                    className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl px-4 py-3 outline-none focus:border-amber-400 transition-all text-sm font-medium"
+                  >
+                    <option value="ROLE_ADMIN">Admin</option>
+                    <option value="ROLE_PREMIUM_STORE">State Center</option>
+                    <option value="ROLE_SERVICE_CENTER">Local Center</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">
+                      Enabled
+                    </p>
+                    <p className="text-sm font-bold text-emerald-800 dark:text-emerald-200">
+                      {memberEnabled ? 'Enabled' : 'Disabled'}
+                    </p>
+                  </div>
+                  <Button
+                    type="button"
+                    onClick={() => setMemberEnabled((prev) => !prev)}
+                    className={
+                      memberEnabled
+                        ? 'bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-xl font-bold'
+                        : 'bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl font-bold'
+                    }
+                  >
+                    {memberEnabled ? 'Disable' : 'Enable'}
+                  </Button>
+                </div>
+
+                {memberUpdateError && (
+                  <div className="text-sm text-rose-500">{memberUpdateError}</div>
+                )}
+
+                <Button
+                  type="button"
+                  onClick={handleUpdateMemberRoleAndStatus}
+                  disabled={memberUpdateLoading}
+                  className="bg-amber-400 hover:bg-amber-500 text-white w-full py-3 rounded-xl font-bold"
+                >
+                  {memberUpdateLoading ? 'Saving...' : 'Save Role & Status'}
+                </Button>
+              </div>
+            </Card>
 
             <Card className="p-8 border-none shadow-xl space-y-6">
               <h3 className="text-lg font-black text-emerald-950 dark:text-white tracking-tight">
@@ -598,7 +714,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse min-w-[1200px]">
+                  <table className="w-full text-left border-collapse min-w-300">
                     <thead>
                       <tr className="bg-yellow-50/50 dark:bg-white/5 border-b border-yellow-100 dark:border-white/5">
                         <th className="px-4 py-4 text-[10px] font-black text-yellow-600 uppercase tracking-widest">
@@ -652,7 +768,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.03 }}
                             onClick={() => setSelectedMember(member)}
-                            className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors group cursor-pointer"
+                            className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors group cursor-pointer"
                           >
                             <td className="px-4 py-4 text-xs font-bold text-emerald-400">
                               {(currentPage - 1) * rowsPerPage + i + 1}.
@@ -710,7 +826,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                 </div>
               )}
 
-              <div className="px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white dark:border-white/5 bg-white/30 dark:bg-white/[0.01]">
+              <div className="px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white dark:border-white/5 bg-white/30 dark:bg-white/1">
                 <p className="text-xs font-bold text-emerald-400">
                   Showing{" "}
                   <span className="text-emerald-950 dark:text-white">
@@ -789,7 +905,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
   };
 
   return (
-    <div className="space-y-6 max-w-[1600px] mx-auto pb-12">
+    <div className="space-y-6 max-w-400 mx-auto pb-12">
       <div className="flex items-center justify-between">
         <button
           onClick={onBack}

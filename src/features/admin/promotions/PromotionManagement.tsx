@@ -64,7 +64,7 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Promotions...</p>
       </div>
@@ -130,7 +130,7 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
         ))}
       </div>
 
-      <Card noPadding className="overflow-hidden border-none shadow-2xl min-h-[400px]">
+      <Card noPadding className="overflow-hidden border-none shadow-2xl min-h-100">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
@@ -165,7 +165,7 @@ export const PromotionManagement: React.FC<PromotionManagementProps> = ({ onBack
               ) : (
                 filtered.map((promo, i) => (
                   <motion.tr key={promo.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors border-b border-white dark:border-white/5">
+                    className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors border-b border-white dark:border-white/5">
                     <td className="px-6 py-5">
                       <div className="flex items-center space-x-3">
                         {promo.image ? (

@@ -91,7 +91,7 @@ export const AdminUserManagement: React.FC<AdminUserManagementProps> = ({
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Admin Users...</p>
       </div>
@@ -212,7 +212,7 @@ export const AdminUserManagement: React.FC<AdminUserManagementProps> = ({
                       </div>
                       <div className="flex items-center justify-between text-xs">
                         <span className="font-black text-emerald-400 uppercase tracking-widest">Email</span>
-                        <span className="font-bold text-emerald-600 truncate max-w-[150px]">{admin.email}</span>
+                        <span className="font-bold text-emerald-600 truncate max-w-37.5">{admin.email}</span>
                       </div>
                       {admin.phoneNumber && (
                         <div className="flex items-center justify-between text-xs">

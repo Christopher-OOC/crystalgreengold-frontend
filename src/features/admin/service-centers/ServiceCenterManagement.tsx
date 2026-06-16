@@ -55,7 +55,7 @@ export const ServiceCenterManagement: React.FC<ServiceCenterManagementProps> = (
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Local Centers...</p>
       </div>
@@ -159,7 +159,7 @@ export const ServiceCenterManagement: React.FC<ServiceCenterManagementProps> = (
                     </div>
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-black text-emerald-400 uppercase tracking-widest">Email</span>
-                      <span className="font-bold text-emerald-600 truncate max-w-[150px]">{center.email || 'N/A'}</span>
+                      <span className="font-bold text-emerald-600 truncate max-w-37.5">{center.email || 'N/A'}</span>
                     </div>
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-black text-emerald-400 uppercase tracking-widest">Balance</span>

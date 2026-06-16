@@ -290,7 +290,7 @@ const handleSubmit = async (e: React.FormEvent) => {
               Cancel
             </button>
             <button type="submit" disabled={isLoading}
-              className="px-6 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-yellow-500/20 transition-all disabled:opacity-80 min-w-[140px] flex items-center justify-center">
+              className="px-6 py-2.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-yellow-500/20 transition-all disabled:opacity-80 min-w-35 flex items-center justify-center">
               {isLoading ? (
                 <span className="flex items-center space-x-2">
                   <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">

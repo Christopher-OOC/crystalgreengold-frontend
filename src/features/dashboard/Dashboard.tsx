@@ -251,7 +251,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
       <main className="flex-1 flex flex-col overflow-hidden relative">
         {/* Background Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 via-transparent to-amber-400/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-linear-to-br from-yellow-500/5 via-transparent to-amber-400/5 pointer-events-none" />
 
         {/* Top Bar */}
         <header className="h-12 border-b border-emerald-100 dark:border-white/5 px-3 flex items-center justify-between bg-white/80 dark:bg-emerald-950/50 backdrop-blur-xl z-10">
@@ -432,7 +432,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <SalesDistribution data={dashboardData} />
 
                     {/* Rank Card */}
-                    <Card className="bg-gradient-to-br from-amber-400 to-yellow-600 text-white shadow-2xl shadow-amber-400/20 relative overflow-hidden group p-4">
+                    <Card className="bg-linear-to-br from-amber-400 to-yellow-600 text-white shadow-2xl shadow-amber-400/20 relative overflow-hidden group p-4">
                       <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
                       <div className="relative z-10">
                         <div className="flex items-center justify-between mb-3">

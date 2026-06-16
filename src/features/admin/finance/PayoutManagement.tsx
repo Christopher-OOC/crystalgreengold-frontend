@@ -84,7 +84,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Payout Requests...</p>
       </div>
@@ -202,7 +202,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack, onNa
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.05 }}
-                        className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors group"
+                        className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors group"
                       >
                         <td className="px-6 py-5">
                           <div className="flex items-center space-x-3">

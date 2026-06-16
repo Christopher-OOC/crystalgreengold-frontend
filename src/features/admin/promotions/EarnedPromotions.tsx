@@ -49,7 +49,7 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Achievements...</p>
       </div>
@@ -68,7 +68,7 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
           <span>Back to Promotions</span>
         </button>
 
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-yellow-500 to-yellow-600 p-8 md:p-10 shadow-xl shadow-yellow-500/20">
+        <div className="relative overflow-hidden rounded-3xl bg-linear-to-r from-yellow-500 to-yellow-600 p-8 md:p-10 shadow-xl shadow-yellow-500/20">
           <div className="relative z-10 flex items-center space-x-6">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center text-white">
               <Gift size={32} />
@@ -129,7 +129,7 @@ export const EarnedPromotions: React.FC<EarnedPromotionsProps> = ({ onBack }) =>
               <tbody className="divide-y divide-white dark:divide-white/5">
                 {promos.map((promo, i) => (
                   <motion.tr key={promo.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors">
+                    className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors">
                     <td className="px-6 py-5 text-sm font-black text-emerald-400">{i + 1}.</td>
                     <td className="px-6 py-5">
                       <div className="flex items-center space-x-3">

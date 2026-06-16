@@ -68,7 +68,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
             className={`absolute inset-0 transition-all duration-700 ${
               page === 'signup'
                 ? 'bg-amber-400/90 mix-blend-multiply'
-                : 'bg-gradient-to-t from-black/95 via-black/40 to-transparent'
+                : 'bg-linear-to-t from-black/95 via-black/40 to-transparent'
             }`}
           />
 
@@ -166,7 +166,7 @@ export function AuthRoute({ page }: { page: AuthPage }) {
           </div>
         </div>
 
-        <div className="relative w-full md:w-1/2 flex flex-col bg-gradient-to-br from-white via-amber-50/30 to-yellow-100/40 dark:from-emerald-950 dark:via-emerald-950 dark:to-yellow-900/30 p-6 md:p-10 transition-all duration-700">
+        <div className="relative w-full md:w-1/2 flex flex-col bg-linear-to-br from-white via-amber-50/30 to-yellow-100/40 dark:from-emerald-950 dark:via-emerald-950 dark:to-yellow-900/30 p-6 md:p-10 transition-all duration-700">
           <AnimatePresence mode="wait">
             {page === 'signup' && (
               <motion.div

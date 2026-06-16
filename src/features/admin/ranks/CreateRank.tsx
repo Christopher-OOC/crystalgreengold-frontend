@@ -91,7 +91,7 @@ export const CreateRank: React.FC<CreateRankProps> = ({ onBack, initialData }) =
 
       {error && (
         <div className="bg-rose-500/10 border border-rose-500/20 rounded-xl p-4 flex items-center space-x-3">
-          <AlertCircle className="text-rose-500 flex-shrink-0" size={20} />
+          <AlertCircle className="text-rose-500 shrink-0" size={20} />
           <p className="text-sm font-medium text-rose-500 flex-1">{error}</p>
           <button onClick={() => setError(null)}><X size={16} className="text-rose-500" /></button>
         </div>

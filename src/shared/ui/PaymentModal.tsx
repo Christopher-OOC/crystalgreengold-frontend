@@ -109,7 +109,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
           >
             <div className="overflow-hidden">
               {/* Top accent */}
-              <div className="h-1.5 w-full bg-gradient-to-r from-yellow-400 via-amber-400 to-yellow-500" />
+              <div className="h-1.5 w-full bg-linear-to-r from-yellow-400 via-amber-400 to-yellow-500" />
 
               <div className="p-6 space-y-5">
                 {/* Header */}

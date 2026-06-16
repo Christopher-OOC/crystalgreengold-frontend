@@ -213,7 +213,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   transition={{ duration: 1, ease: 'easeOut' }}
                   className="relative"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-tr from-amber-400/20 to-yellow-400/20 rounded-full blur-3xl" />
+                  <div className="absolute inset-0 bg-linear-to-tr from-amber-400/20 to-yellow-400/20 rounded-full blur-3xl" />
                   <Image
                     src={bottleImage}
                     alt="Lifestyle"

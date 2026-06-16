@@ -124,7 +124,7 @@ export const CreatePremiumStoreModal: React.FC<
       >
         <Card className="p-0 overflow-hidden border-none shadow-2xl">
           {/* Header */}
-          <div className="relative bg-gradient-to-r from-yellow-500 to-yellow-600 px-6 py-4">
+          <div className="relative bg-linear-to-r from-yellow-500 to-yellow-600 px-6 py-4">
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors"

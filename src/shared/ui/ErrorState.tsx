@@ -20,7 +20,7 @@ export const ErrorState: React.FC<ErrorStateProps> = ({
     <motion.div 
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="flex flex-col items-center justify-center min-h-[400px] p-8 text-center"
+      className="flex flex-col items-center justify-center min-h-100 p-8 text-center"
     >
       <div className="w-20 h-20 bg-rose-500/10 text-rose-500 rounded-3xl flex items-center justify-center mb-6">
         <AlertCircle size={40} />

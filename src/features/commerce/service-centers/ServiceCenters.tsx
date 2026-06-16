@@ -41,7 +41,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 
 	if (isLoading) {
 		return (
-			<div className="flex flex-col items-center justify-center min-h-[400px]">
+			<div className="flex flex-col items-center justify-center min-h-100">
 				<Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
 				<p className="text-emerald-600 font-bold animate-pulse">
 					Finding local centers...
@@ -111,7 +111,7 @@ export const ServiceCenters: React.FC<ServiceCentersProps> = ({
 									className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
 								/>
 							) : (
-								<div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30">
+								<div className="w-full h-full flex items-center justify-center bg-linear-to-br from-amber-100 to-amber-200 dark:from-amber-900/30 dark:to-amber-800/30">
 									<Award size={48} className="text-amber-400" />
 								</div>
 							)}

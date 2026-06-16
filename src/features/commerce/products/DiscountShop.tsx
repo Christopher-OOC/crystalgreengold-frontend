@@ -39,7 +39,7 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse">Loading discounted products...</p>
       </div>
@@ -63,7 +63,7 @@ export const DiscountShop: React.FC<DiscountShopProps> = ({ onSelectProduct }) =
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         rounded="2xl"
-        className="bg-gradient-to-r from-amber-400 to-yellow-600 p-5 text-white shadow-lg shadow-amber-400/20 flex items-center space-x-4 border-none"
+        className="bg-linear-to-r from-amber-400 to-yellow-600 p-5 text-white shadow-lg shadow-amber-400/20 flex items-center space-x-4 border-none"
       >
         <div className="p-3 bg-white/20 backdrop-blur-md rounded-xl border border-white/20">
           <Package size={24} />

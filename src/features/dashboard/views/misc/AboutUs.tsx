@@ -143,7 +143,7 @@ export const AboutUs: React.FC = () => {
               className="text-5xl md:text-7xl font-black text-emerald-950 dark:text-white tracking-tighter leading-[0.85] uppercase"
             >
               About <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-600">crystalgreengold</span>
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-400 to-yellow-600">crystalgreengold</span>
             </motion.h1>
           </div>
         </motion.div>
@@ -196,7 +196,7 @@ export const AboutUs: React.FC = () => {
               alt="Our Story" 
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/80 to-transparent flex items-end p-12">
+            <div className="absolute inset-0 bg-linear-to-t from-emerald-950/80 to-transparent flex items-end p-12">
               <p className="text-white text-2xl font-serif italic">"Our journey has always been about helping people enrich their lives."</p>
             </div>
           </div>

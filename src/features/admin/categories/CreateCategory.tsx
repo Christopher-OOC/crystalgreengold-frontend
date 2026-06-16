@@ -128,7 +128,7 @@ export const CreateCategory: React.FC<CreateCategoryProps> = ({
         {/* Error Message */}
         {error && (
           <div className="bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/20 rounded-xl p-4 flex items-center space-x-3">
-            <XCircle size={20} className="text-rose-500 flex-shrink-0" />
+            <XCircle size={20} className="text-rose-500 shrink-0" />
             <p className="text-sm font-medium text-rose-600 dark:text-rose-400">{error}</p>
           </div>
         )}

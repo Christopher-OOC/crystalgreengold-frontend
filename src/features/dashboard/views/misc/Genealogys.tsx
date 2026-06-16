@@ -149,7 +149,7 @@ const UrlModal: React.FC<{ slot: SlotInfo | null; onClose: () => void }> = ({ sl
           className="bg-white dark:bg-emerald-950 rounded-3xl shadow-2xl border border-emerald-50 dark:border-white/10 w-full max-w-sm overflow-hidden"
           onClick={e => e.stopPropagation()}
         >
-          <div className="h-1.5 w-full bg-gradient-to-r from-amber-400 to-yellow-500" />
+          <div className="h-1.5 w-full bg-linear-to-r from-amber-400 to-yellow-500" />
           <div className="p-7 space-y-5">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">

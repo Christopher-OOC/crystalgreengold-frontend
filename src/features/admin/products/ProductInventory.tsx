@@ -118,7 +118,7 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-yellow-600 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Inventory...</p>
       </div>
@@ -212,7 +212,7 @@ export const ProductInventory: React.FC<ProductInventoryProps> = ({ onBack }) =>
               ) : (
                 paginated.map((product, i) => (
                   <motion.tr key={product.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-                    className="hover:bg-white/50 dark:hover:bg-white/[0.02] transition-colors">
+                    className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors">
                     <td className="px-6 py-5 text-sm font-black text-emerald-400">{(currentPage - 1) * itemsPerPage + i + 1}.</td>
                     <td className="px-6 py-5">
                       <div className="w-12 h-12 rounded-lg overflow-hidden border border-emerald-50 dark:border-white/10 bg-emerald-50 dark:bg-white/5">

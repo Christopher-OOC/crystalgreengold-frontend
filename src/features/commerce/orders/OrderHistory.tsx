@@ -68,7 +68,7 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[400px]">
+      <div className="flex flex-col items-center justify-center min-h-100">
         <Loader2 className="w-12 h-12 text-amber-400 animate-spin mb-4" />
         <p className="text-emerald-600 font-bold animate-pulse">Loading your orders...</p>
       </div>
