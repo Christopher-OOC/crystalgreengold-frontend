@@ -39,6 +39,9 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
 const [newPassword, setNewPassword] = useState('');
 const [confirmPassword, setConfirmPassword] = useState('');
   const [dashboardData, setDashboardData] = useState<DashboardMetrics | null>(null); // ← ADD THIS
+
+  console.log("Select member from store:", selectMember);
+    console.log("member from store:", member);
   
 const fetchData = async () => {
   setIsLoading(true);
@@ -145,7 +148,7 @@ useEffect(() => {
                   {member?.memberType}
                 </span>
                 <span className="px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-[10px] font-black rounded-full uppercase tracking-widest border border-white/20">
-                 {member?.packageId ? member.packageId : 'No Package'}
+                 {member?.currentPackage?.name || 'No Package'}
                 </span>
                 <span className="px-4 py-1.5 bg-emerald-500/20 backdrop-blur-md text-emerald-100 text-[10px] font-black rounded-full uppercase tracking-widest border border-emerald-500/30">
                   Active
