@@ -1,11 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'motion/react';
-import { Search, ChevronLeft, ChevronRight, Package, ShoppingCart, Loader2, Filter } from 'lucide-react';
-import { Card } from '@/shared/ui/Card';
-import { Button } from '@/shared/ui/Button';
-import { ErrorState } from '@/shared/ui/ErrorState';
-import { productService } from '@/lib/api/services/product.service';
-import { getCategoryName, type Product } from '@/lib/types/product.types';
+import React, { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import {
+  Search,
+  ChevronLeft,
+  ChevronRight,
+  Package,
+  ShoppingCart,
+  Loader2,
+  Filter,
+} from "lucide-react";
+import { Card } from "@/shared/ui/Card";
+import { Button } from "@/shared/ui/Button";
+import { ErrorState } from "@/shared/ui/ErrorState";
+import { productService } from "@/lib/api/services/product.service";
+import { getCategoryName, type Product } from "@/lib/types/product.types";
 
 interface ServiceCenterProductsProps {
   centerName: string;
@@ -16,30 +24,32 @@ interface ServiceCenterProductsProps {
   onBuyPackage: () => void;
 }
 
-export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({ 
-  centerName, 
+export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
+  centerName,
   centerId,
   title = "Local Center Products",
-  onBack, 
-  onSelectProduct, 
-  onBuyPackage 
+  onBack,
+  onSelectProduct,
+  onBuyPackage,
 }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
-  const [categories, setCategories] = useState<string[]>(['ALL']);
-  const [sortBy, setSortBy] = useState<'price_asc' | 'price_desc' | 'name_asc' | 'name_desc'>('name_asc');
+  const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
+  const [categories, setCategories] = useState<string[]>(["ALL"]);
+  const [sortBy, setSortBy] = useState<
+    "price_asc" | "price_desc" | "name_asc" | "name_desc"
+  >("name_asc");
 
   // Debug log to check the centerId
-  console.log('ServiceCenterProducts mounted with centerId:', centerId);
+  console.log("ServiceCenterProducts mounted with centerId:", centerId);
 
   const fetchProducts = async () => {
     if (!centerId) {
-      console.error('No centerId provided!');
-      setError('Invalid local center ID. Please go back and try again.');
+      console.error("No centerId provided!");
+      setError("Invalid local center ID. Please go back and try again.");
       setIsLoading(false);
       return;
     }
@@ -47,19 +57,32 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
     setIsLoading(true);
     setError(null);
     try {
-      console.log('Calling getStoreByMember with:', centerId);
-      const data = await productService.getStoreByMember(centerId);
-      console.log('Raw data returned:', data);
-      
-      const productList = Array.isArray(data) ? data : [];
+      const response = await productService.getStoreByMember(centerId);
+
+      console.log("API response for store products:", response);
+
+      const productList = response.map((item) => item?.product);
+
+      console.log("Extracted product list:", productList);
+
       setProducts(productList);
 
+      console.log("Extracted product list:", productList);
+
       // Extract unique categories
-      const uniqueCategories = ['ALL', ...new Set(productList.map(p => getCategoryName(p.category)).filter(Boolean))];
+      const uniqueCategories = [
+        "ALL",
+        ...new Set(
+          productList.map((p) => getCategoryName(p.category)).filter(Boolean),
+        ),
+      ];
       setCategories(uniqueCategories);
     } catch (err: any) {
-      console.error('Error fetching products:', err);
-      setError(err?.response?.data?.message || 'Failed to load products for this local center. Please try again.');
+      console.error("Error fetching products:", err);
+      setError(
+        err?.response?.data?.message ||
+          "Failed to load products for this local center. Please try again.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -71,27 +94,29 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
 
   // Filter and sort products
   const filteredAndSortedProducts = products
-    .filter(product => {
+    .filter((product) => {
       const searchLower = searchQuery.toLowerCase();
-      const matchesSearch = 
+      const matchesSearch =
         product.name?.toLowerCase().includes(searchLower) ||
         product.description?.toLowerCase().includes(searchLower) ||
         product.sku?.toLowerCase().includes(searchLower);
-      
-      const matchesCategory = selectedCategory === 'ALL' || getCategoryName(product.category) === selectedCategory;
-      
+
+      const matchesCategory =
+        selectedCategory === "ALL" ||
+        getCategoryName(product.category) === selectedCategory;
+
       return matchesSearch && matchesCategory;
     })
     .sort((a, b) => {
       switch (sortBy) {
-        case 'price_asc':
+        case "price_asc":
           return (a.price || 0) - (b.price || 0);
-        case 'price_desc':
+        case "price_desc":
           return (b.price || 0) - (a.price || 0);
-        case 'name_asc':
-          return (a.name || '').localeCompare(b.name || '');
-        case 'name_desc':
-          return (b.name || '').localeCompare(a.name || '');
+        case "name_asc":
+          return (a.name || "").localeCompare(b.name || "");
+        case "name_desc":
+          return (b.name || "").localeCompare(a.name || "");
         default:
           return 0;
       }
@@ -102,7 +127,7 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
   const totalPages = Math.ceil(filteredAndSortedProducts.length / itemsPerPage);
   const paginatedProducts = filteredAndSortedProducts.slice(
     (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
+    currentPage * itemsPerPage,
   );
 
   if (isLoading) {
@@ -110,7 +135,9 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center space-y-4">
           <Loader2 className="w-12 h-12 text-amber-400 animate-spin mx-auto" />
-          <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">Loading Products...</p>
+          <p className="text-emerald-600 font-bold animate-pulse tracking-widest uppercase text-xs">
+            Loading Products...
+          </p>
         </div>
       </div>
     );
@@ -119,7 +146,7 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-[60vh] p-8">
-        <ErrorState 
+        <ErrorState
           title="Products Error"
           message={error}
           onRetry={fetchProducts}
@@ -134,7 +161,7 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
         <div className="flex items-center space-x-4">
-          <button 
+          <button
             onClick={onBack}
             className="p-2 hover:bg-emerald-50 dark:hover:bg-white/5 rounded-full transition-colors text-emerald-600"
           >
@@ -145,11 +172,15 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
             <span className="font-bold">{title}</span>
           </div>
           <div>
-            <h2 className="text-xl font-bold text-emerald-950 dark:text-white">{centerName}</h2>
-            <p className="text-xs text-emerald-600">{products.length} products available</p>
+            <h2 className="text-xl font-bold text-emerald-950 dark:text-white">
+              {centerName}
+            </h2>
+            <p className="text-xs text-emerald-600">
+              {products.length} products available
+            </p>
           </div>
         </div>
-        <Button 
+        <Button
           onClick={onBuyPackage}
           className="bg-amber-400 hover:bg-amber-400 text-white px-6 py-2 rounded-lg font-bold shadow-lg shadow-amber-400/20"
         >
@@ -160,10 +191,13 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
       {/* Filters */}
       <Card className="p-4 flex flex-col md:flex-row items-center gap-4">
         <div className="flex-1 relative w-full">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400" size={20} />
-          <input 
-            type="text" 
-            placeholder="Search products by name, description, or SKU..." 
+          <Search
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-emerald-400"
+            size={20}
+          />
+          <input
+            type="text"
+            placeholder="Search products by name, description, or SKU..."
             className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/5 rounded-xl py-3 pl-12 pr-4 outline-none focus:border-amber-400 transition-all"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -171,13 +205,15 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
         </div>
         <div className="flex items-center space-x-4 w-full md:w-auto">
           <Filter size={18} className="text-emerald-400" />
-          <select 
+          <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="flex-1 md:w-48 bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/5 rounded-xl py-3 px-4 outline-none focus:border-amber-400 transition-all text-sm font-medium"
           >
-            {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
             ))}
           </select>
           <select
@@ -196,7 +232,8 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
       {/* Status Banner */}
       <div className="bg-amber-50 dark:bg-amber-400/5 border border-amber-100 dark:border-amber-400/20 py-2 px-6 rounded-lg">
         <p className="text-amber-400 dark:text-amber-400 text-sm font-bold">
-          Showing {paginatedProducts.length} of {filteredAndSortedProducts.length} products available
+          Showing {paginatedProducts.length} of{" "}
+          {filteredAndSortedProducts.length} products available
         </p>
       </div>
 
@@ -205,7 +242,9 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
         <div className="text-center py-16">
           <Package size={48} className="mx-auto text-emerald-200 mb-4" />
           <p className="text-emerald-600 font-medium">No products found</p>
-          <p className="text-emerald-400 text-sm mt-2">Try adjusting your search or filters.</p>
+          <p className="text-emerald-400 text-sm mt-2">
+            Try adjusting your search or filters.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -221,9 +260,9 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
               <div className="bg-white dark:bg-emerald-950 rounded-3xl overflow-hidden shadow-sm border border-emerald-50 dark:border-white/5 hover:shadow-xl transition-all duration-500">
                 <div className="relative aspect-square overflow-hidden bg-white dark:bg-white/5">
                   {product.image ? (
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
+                    <img
+                      src={product.image}
+                      alt={product.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       referrerPolicy="no-referrer"
                     />
@@ -257,7 +296,9 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
                       {getCategoryName(product.category)}
                     </p>
                   )}
-                  <p className="text-xl font-bold text-amber-400">₦{product.price?.toLocaleString()}</p>
+                  <p className="text-xl font-bold text-amber-400">
+                    ₦{product.price?.toLocaleString()}
+                  </p>
                   {product.stock !== undefined && product.stock > 0 && (
                     <p className="text-[10px] text-green-500 mt-1">
                       In Stock: {product.stock} units
@@ -278,14 +319,14 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
       {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center space-x-2 pt-8">
-          <button 
-            onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
             disabled={currentPage === 1}
             className="p-2 rounded-lg border border-emerald-100 dark:border-white/5 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <ChevronLeft size={20} />
           </button>
-          
+
           {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
             let pageNum;
             if (totalPages <= 7) {
@@ -297,24 +338,24 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
             } else {
               pageNum = currentPage - 3 + i;
             }
-            
+
             return (
               <button
                 key={pageNum}
                 onClick={() => setCurrentPage(pageNum)}
                 className={`w-10 h-10 rounded-lg font-bold transition-all ${
                   currentPage === pageNum
-                    ? 'bg-amber-400 text-white shadow-lg shadow-amber-400/20'
-                    : 'border border-emerald-100 dark:border-white/5 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5'
+                    ? "bg-amber-400 text-white shadow-lg shadow-amber-400/20"
+                    : "border border-emerald-100 dark:border-white/5 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5"
                 }`}
               >
                 {pageNum}
               </button>
             );
           })}
-          
-          <button 
-            onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
             disabled={currentPage === totalPages}
             className="p-2 rounded-lg border border-emerald-100 dark:border-white/5 text-emerald-400 hover:bg-emerald-50 dark:hover:bg-white/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           >

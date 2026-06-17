@@ -47,7 +47,7 @@ export const productService = {
     return data.data;
   },
 
-  getStoreByMember: async (memberId: string): Promise<Product[]> => {
+  getStoreByMember: async (memberId: string): Promise<any[]> => {
     const { data } = await apiClient.get(ENDPOINTS.PRODUCTS.STORE_BY_MEMBER(memberId));
     return data.data;
   },

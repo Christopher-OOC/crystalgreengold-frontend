@@ -66,6 +66,7 @@ export interface Order {
 
 export interface CreateOrderRequest {
   memberType?: MemberType;
+  reference?: string;
   address?: string;
   phoneNumber?: string;
   items: OrderItem[];

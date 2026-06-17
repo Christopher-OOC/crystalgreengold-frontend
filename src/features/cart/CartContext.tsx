@@ -65,9 +65,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const addToCart = useCallback(async (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => {
     const qty = item.quantity || 1;
+    let originalItems: CartItem[] = [];
 
     // Optimistically update local state first for instant UI feedback
     setItems(prevItems => {
+      originalItems = prevItems;
       const existingItem = prevItems.find(i => i.id === item.id);
       if (existingItem) {
         return prevItems.map(i =>
@@ -89,9 +91,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         });
       } catch (err: any) {
         console.error('Failed to sync cart with backend:', err);
-        // Don't revert the local state — the item is still usable locally
-        // but notify the user so they know something may be off
-        toast.error('Cart saved locally but failed to sync with server.', {
+        setItems(originalItems);
+        toast.error('Failed to add item to cart. Local changes were reverted.', {
           style: { borderRadius: '10px', background: '#333', color: '#fff' },
         });
         return;

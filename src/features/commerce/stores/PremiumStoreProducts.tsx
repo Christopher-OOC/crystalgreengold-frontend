@@ -43,10 +43,20 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
     setIsLoading(true);
     setError(null);
     try {
-      const data = await productService.getStoreByMember(storeId);
-      const productList = Array.isArray(data) ? data : [];
+      const response = await productService.getStoreByMember(storeId);
+
+      console.log('API response for store products:', response);
+
+      const productList = response.map((item) => item?.product);
+
+      console.log('Extracted product list:', productList);
+
       setProducts(productList);
-      const uniqueCategories = ['ALL', ...new Set(productList.map((p) => getCategoryName(p.category)).filter(Boolean))];
+
+      console.log('Extracted product list:', productList);
+
+
+      const uniqueCategories = ['ALL', ...new Set(productList.map((p) => getCategoryName(p.category.name)).filter(Boolean))];
       setCategories(uniqueCategories);
     } catch (err: any) {
       console.error('Error fetching state center products:', err);

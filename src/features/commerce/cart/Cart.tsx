@@ -61,6 +61,7 @@ const CheckoutComponent: React.FC<{
         // Step 1: Create the order as PAID
         const result = await orderService.create(member.id, {
           memberType: member.memberType,
+          reference: reference,
           items: items.map(item => ({
             productId: String(item.id),
             productName: item.name,
