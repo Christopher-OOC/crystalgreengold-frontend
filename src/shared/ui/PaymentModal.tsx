@@ -16,7 +16,7 @@ interface PaymentModalProps {
   fixedAmount?: number;
   title?: string;
   description?: string;
-  onPaymentSuccess?: (reference: string) => void;
+  onPaymentSuccess?: (reference: string) => void | Promise<void>;
 }
 
 export const PaymentModal: React.FC<PaymentModalProps> = ({
@@ -67,10 +67,19 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
     phone,
    
 
-    onSuccess: (reference) => {
-  setSuccess(true);
-  onPaymentSuccess?.(reference); // caller decides what to do with the reference
-},
+    onSuccess: async (reference) => {
+      setError(null);
+      setIsLaunching(true);
+      try {
+        await onPaymentSuccess?.(reference);
+        setSuccess(true);
+      } catch (e: any) {
+        const msg = e?.response?.data?.message || e?.response?.data?.error || e?.message || 'Payment was received, but we could not complete this action. Please contact support with your payment reference.';
+        setError(msg);
+      } finally {
+        setIsLaunching(false);
+      }
+    },
     onClose: () => {
       // user closed the Paystack popup without paying — do nothing
     },

@@ -14,6 +14,7 @@ import {
   Trash2,
   Loader2,
   CheckCircle2,
+  AlertCircle,
 } from 'lucide-react';
 import { Card } from '@/shared/ui/Card';
 import { Button } from '@/shared/ui/Button';
@@ -54,11 +55,14 @@ const CheckoutComponent: React.FC<{
     };
 
     const handlePaymentSuccess = async (reference: string) => {
-      if (!member) return;
+      if (!member) {
+        setError('Please login to place your order');
+        throw new Error('Please login to place your order');
+      }
 
       setIsProcessing(true);
+      setError(null);
       try {
-        // Step 1: Create the order as PAID
         const result = await orderService.create(member.id, {
           memberType: member.memberType,
           reference: reference,
@@ -75,7 +79,6 @@ const CheckoutComponent: React.FC<{
 
         setOrderId(result.id);
 
-        // Step 2: Attach the Paystack reference to the order
         try {
           await orderService.update(result.id, member.id, {
             status: 'PAID',
@@ -86,17 +89,17 @@ const CheckoutComponent: React.FC<{
           console.warn('Order created but failed to attach Paystack reference:', updateErr);
         }
 
+        setShowPayment(false);
+        clearCart();
+        setOrderSuccess(true);
+        onOrderPlaced?.();
       } catch (err: any) {
         console.error('Failed to create order after payment:', err?.response?.data ?? err);
-        // Payment went through — don't block the user, just log
+        setError(getRequestErrorMessage(err, 'Payment was received, but your order could not be created. Please contact support with your payment reference.'));
+        throw err;
       } finally {
         setIsProcessing(false);
       }
-
-      setShowPayment(false);
-      clearCart();
-      setOrderSuccess(true);
-      onOrderPlaced?.();
     };
 
     const handleViewOrders = () => {
@@ -155,8 +158,9 @@ const CheckoutComponent: React.FC<{
           )}
 
           {error && (
-            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-sm">
-              {error}
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-sm flex items-start gap-2">
+              <AlertCircle size={16} className="mt-0.5 shrink-0" />
+              <span>{error}</span>
             </div>
           )}
 
@@ -216,6 +220,15 @@ const CheckoutComponent: React.FC<{
       </div>
     );
   };
+
+function getRequestErrorMessage(err: any, fallback: string) {
+  if (err?.response?.data?.message) return err.response.data.message;
+  if (err?.response?.data?.error) return err.response.data.error;
+  if (err?.code === 'ECONNABORTED') return 'The request timed out. Please try again.';
+  if (err?.message === 'Network Error') return 'Unable to reach the API. Please check the backend connection and try again.';
+  if (err?.message) return err.message;
+  return fallback;
+}
 
 interface CartProps {
   onStartShopping?: () => void;

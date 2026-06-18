@@ -1,11 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, DollarSign, CheckCircle2, CreditCard, ShieldCheck } from 'lucide-react';
+import { X, DollarSign, CheckCircle2, CreditCard, AlertCircle } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
+import { PaymentModal } from '@/shared/ui/PaymentModal';
+import { useAuth } from '@/features/auth/AuthContext';
+import { orderService } from '@/lib/api/services/order.service';
 
 interface ProductPurchaseModalProps {
   isOpen: boolean;
   onClose: () => void;
+  productId: string;
   productName: string;
   price: string | number; // Allow both string and number
   quantity: number;
@@ -14,12 +18,16 @@ interface ProductPurchaseModalProps {
 export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({ 
   isOpen, 
   onClose, 
+  productId,
   productName, 
   price, 
   quantity 
 }) => {
-  const [step, setStep] = useState<'confirm' | 'payment' | 'processing' | 'success'>('confirm');
+  const [step, setStep] = useState<'confirm' | 'processing' | 'success' | 'error'>('confirm');
   const [progress, setProgress] = useState(0);
+  const [showPayment, setShowPayment] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { member } = useAuth();
 
   // Helper function to extract numeric price safely
   const getNumericPrice = useMemo(() => {
@@ -47,31 +55,67 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
   }, [price]);
 
   const handleProceed = () => {
-    setStep('payment');
+    if (!member) {
+      setError('Please login before buying this product.');
+      setStep('error');
+      return;
+    }
+    setError(null);
+    setShowPayment(true);
   };
 
-  const handleConfirmPayment = () => {
+  const handlePaymentSuccess = async (reference: string) => {
+    if (!member) throw new Error('Please login before buying this product.');
+
+    setShowPayment(false);
     setStep('processing');
+    setProgress(0);
+    setError(null);
+
     let currentProgress = 0;
     const interval = setInterval(() => {
-      currentProgress += Math.random() * 20;
-      if (currentProgress >= 100) {
-        currentProgress = 100;
-        clearInterval(interval);
-        setTimeout(() => setStep('success'), 500);
-      }
+      currentProgress = Math.min(currentProgress + Math.random() * 20, 90);
       setProgress(currentProgress);
     }, 200);
+
+    try {
+      await orderService.create(member.id, {
+        memberType: member.memberType,
+        reference,
+        items: [{
+          productId,
+          productName,
+          quantity,
+          price: getNumericPrice,
+          subtotal: getNumericPrice * quantity,
+        }],
+        totalAmount: getNumericPrice * quantity,
+        status: 'PAID',
+      });
+
+      clearInterval(interval);
+      setProgress(100);
+      setTimeout(() => setStep('success'), 500);
+    } catch (err: any) {
+      clearInterval(interval);
+      console.error('Failed to buy product after payment:', err?.response?.data ?? err);
+      setError(getRequestErrorMessage(err, 'Payment was received, but your order could not be created. Please contact support with your payment reference.'));
+      setStep('error');
+      throw err;
+    }
   };
 
   const handleClose = () => {
     // Reset to initial step when closing
     setStep('confirm');
     setProgress(0);
+    setError(null);
+    setShowPayment(false);
     onClose();
   };
 
   return (
+    <>
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -139,52 +183,6 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
                 </>
               )}
 
-              {step === 'payment' && (
-                <>
-                  <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto">
-                    <ShieldCheck size={48} />
-                  </div>
-
-                  <div className="space-y-2">
-                    <h2 className="text-2xl font-black text-emerald-950 dark:text-white tracking-tight">Secure Payment</h2>
-                    <p className="text-emerald-600 dark:text-emerald-400 text-sm font-medium">
-                      Please transfer to the account details below!
-                    </p>
-                  </div>
-
-                  <div className="bg-white dark:bg-white/5 p-6 rounded-3xl border border-emerald-50 dark:border-white/5 text-left space-y-4">
-                    <p className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest">Transfer To:</p>
-                    <div className="space-y-2">
-                      <p className="text-sm font-bold text-emerald-950 dark:text-white">
-                        Account Name: <span className="font-medium text-emerald-700 dark:text-emerald-400">crystalgreengold Official</span>
-                      </p>
-                      <p className="text-sm font-bold text-emerald-950 dark:text-white">
-                        Account Number: <span className="font-medium text-emerald-700 dark:text-emerald-400">1002891739</span>
-                      </p>
-                      <p className="text-sm font-bold text-emerald-950 dark:text-white">
-                        Bank: <span className="font-medium text-emerald-700 dark:text-emerald-400">Lotus Bank</span>
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4 pt-4">
-                    <Button 
-                      variant="secondary" 
-                      onClick={() => setStep('confirm')}
-                      className="flex-1 py-4 rounded-2xl"
-                    >
-                      Back
-                    </Button>
-                    <Button 
-                      onClick={handleConfirmPayment}
-                      className="flex-1 py-4 rounded-2xl"
-                    >
-                      Confirm Payment
-                    </Button>
-                  </div>
-                </>
-              )}
-
               {step === 'processing' && (
                 <div className="py-12 space-y-12">
                   <div className="w-24 h-24 bg-amber-400/10 text-amber-400 rounded-full flex items-center justify-center mx-auto relative">
@@ -232,10 +230,55 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
                   </Button>
                 </motion.div>
               )}
+
+              {step === 'error' && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="py-8 space-y-6"
+                >
+                  <div className="w-24 h-24 bg-rose-500/10 text-rose-500 rounded-full flex items-center justify-center mx-auto">
+                    <AlertCircle size={48} />
+                  </div>
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Order Failed</h2>
+                    <p className="text-rose-500 font-medium">{error}</p>
+                  </div>
+                  <div className="flex space-x-4">
+                    <Button onClick={() => setStep('confirm')} className="flex-1 py-4 rounded-2xl">
+                      Try Again
+                    </Button>
+                    <Button variant="secondary" onClick={handleClose} className="flex-1 py-4 rounded-2xl">
+                      Close
+                    </Button>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </div>
       )}
     </AnimatePresence>
+    <PaymentModal
+      isOpen={showPayment}
+      onClose={() => setShowPayment(false)}
+      defaultEmail={member?.email ?? ''}
+      defaultName={`${member?.firstName ?? ''} ${member?.lastName ?? ''}`.trim() || (member?.username ?? '')}
+      defaultPhone={member?.phoneNumber ?? ''}
+      fixedAmount={getNumericPrice * quantity}
+      title={`Buy ${productName}`}
+      description={`One-time payment for ${quantity}x ${productName}`}
+      onPaymentSuccess={handlePaymentSuccess}
+    />
+    </>
   );
 };
+
+function getRequestErrorMessage(err: any, fallback: string) {
+  if (err?.response?.data?.message) return err.response.data.message;
+  if (err?.response?.data?.error) return err.response.data.error;
+  if (err?.code === 'ECONNABORTED') return 'The request timed out. Please try again.';
+  if (err?.message === 'Network Error') return 'Unable to reach the API. Please check the backend connection and try again.';
+  if (err?.message) return err.message;
+  return fallback;
+}

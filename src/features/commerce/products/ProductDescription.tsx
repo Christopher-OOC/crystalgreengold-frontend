@@ -329,6 +329,7 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
       <ProductPurchaseModal 
         isOpen={isPurchaseModalOpen}
         onClose={() => setIsPurchaseModalOpen(false)}
+        productId={String(product.id || product.name)}
         productName={product.name}
         price={product.price}
         quantity={quantity}

@@ -32,9 +32,10 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
   quantity = 1,
 }) => {
   const { member } = useAuth(); // ✅ get user from context
-  const [step, setStep] = useState<'confirm' | 'processing' | 'success'>('confirm');
+  const [step, setStep] = useState<'confirm' | 'processing' | 'success' | 'error'>('confirm');
   const [progress, setProgress] = useState(0);
   const [showPayment, setShowPayment] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
 
   const numericPrice = mode === 'buy' ? price * quantity : price;
@@ -45,45 +46,50 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
     : `You are about to pay ${displayPrice} to activate the ${pkgName} package.`;
 
   const handleProceed = () => {
+    setError(null);
     setShowPayment(true); // ✅ open PaymentModal
   };
 
   const handlePaymentSuccess = async (reference: string) => {
     setShowPayment(false);
     setStep('processing');
+    setProgress(0);
+    setError(null);
 
-    // Animate progress bar
     let currentProgress = 0;
     const interval = setInterval(() => {
-      currentProgress += Math.random() * 15;
-      if (currentProgress >= 100) {
-        currentProgress = 100;
-        clearInterval(interval);
-        setTimeout(() => setStep('success'), 500);
-      }
+      currentProgress = Math.min(currentProgress + Math.random() * 15, 90);
       setProgress(currentProgress);
     }, 300);
 
-    // Call backend if pkgId provided
-    if (pkgId && member && reference) {
-      try {
-        if (mode === 'buy') {
-          await memberService.buyPackage(member.id, {
-            packageId: pkgId,
-            quantity,
-            storeId: storeId ?? null,
-            txnReference: reference
-          });
-        } else {
-          await memberService.activatePackage(member.id, {
-            packageId: pkgId,
-            storeId: storeId ?? null,
-            txnReference: reference
-          });
-        }
-      } catch (err) {
-        console.error(`Package ${mode} failed`, err);
+    try {
+      if (!member) throw new Error('Please login before completing this package payment.');
+      if (!pkgId) throw new Error('Package details are missing. Please refresh and try again.');
+
+      if (mode === 'buy') {
+        await memberService.buyPackage(member.id, {
+          packageId: pkgId,
+          quantity,
+          storeId: storeId ?? null,
+          txnReference: reference
+        });
+      } else {
+        await memberService.activatePackage(member.id, {
+          packageId: pkgId,
+          storeId: storeId ?? null,
+          txnReference: reference
+        });
       }
+
+      clearInterval(interval);
+      setProgress(100);
+      setTimeout(() => setStep('success'), 500);
+    } catch (err: any) {
+      clearInterval(interval);
+      console.error(`Package ${mode} failed`, err?.response?.data ?? err);
+      setError(getRequestErrorMessage(err, `Payment was received, but the package could not be ${mode === 'buy' ? 'purchased' : 'activated'}. Please contact support with your payment reference.`));
+      setStep('error');
+      throw err;
     }
   };
 
@@ -241,6 +247,34 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                     </div>
                   </motion.div>
                 )}
+
+                {step === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="py-8 space-y-6"
+                  >
+                    <div className="w-24 h-24 bg-rose-500/10 text-rose-500 rounded-full flex items-center justify-center mx-auto">
+                      <AlertCircle size={48} />
+                    </div>
+                    <div className="space-y-2">
+                      <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">
+                        Action Failed
+                      </h2>
+                      <p className="text-rose-500 font-medium">
+                        {error}
+                      </p>
+                    </div>
+                    <div className="flex flex-col space-y-3">
+                      <Button onClick={() => setStep('confirm')} className="w-full py-4 rounded-2xl">
+                        Try Again
+                      </Button>
+                      <Button variant="secondary" onClick={onClose} className="w-full py-4 rounded-2xl">
+                        Close
+                      </Button>
+                    </div>
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           </div>
@@ -262,3 +296,12 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
     </>
   );
 };
+
+function getRequestErrorMessage(err: any, fallback: string) {
+  if (err?.response?.data?.message) return err.response.data.message;
+  if (err?.response?.data?.error) return err.response.data.error;
+  if (err?.code === 'ECONNABORTED') return 'The request timed out. Please try again.';
+  if (err?.message === 'Network Error') return 'Unable to reach the API. Please check the backend connection and try again.';
+  if (err?.message) return err.message;
+  return fallback;
+}
