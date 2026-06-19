@@ -132,15 +132,15 @@ export const Bonuses: React.FC = () => {
                   <td className="px-6 py-5 text-sm font-bold text-emerald-950 dark:text-white">{i + 1}.</td>
                   <td className="px-6 py-5">
                     <span className="text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest">
-                      {bonus.type}
+                      {bonus.commissionType}
                     </span>
                   </td>
                   <td className="px-6 py-5 text-sm font-medium text-emerald-700 dark:text-emerald-400">
-                   Bonus earned from {formatBonusType(bonus.type)}
+                   Bonus earned from {formatBonusType(bonus.commissionType)}
                   </td>
                   <td className="px-6 py-5 text-sm font-black text-emerald-950 dark:text-white">{formatCurrency(bonus.amount)}</td>
                   <td className="px-6 py-5 text-sm font-bold text-emerald-400">
-                    {bonus.createdAt ? new Date(bonus.createdAt).toLocaleString() : 'N/A'}
+                    {bonus.earnedDate ? new Date(bonus.earnedDate).toLocaleString() : 'N/A'}
                   </td>
                 </motion.tr>
               ))}
