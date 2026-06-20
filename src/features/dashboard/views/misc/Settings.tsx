@@ -230,12 +230,12 @@ useEffect(() => {
 
             <div className="grid grid-cols-2 gap-4">
               {[
-                { label: 'Available Balance', value: formatCurrency(dashboardData?.available_balance ?? 0),  },
-                { label: 'Awaiting Wallet', value: formatCurrency(dashboardData?.awaiting_wallet ?? 0),  },
-                { label: 'Binary Left PV', value: String(dashboardData?.binary_left_pv ?? 0),  },
-                { label: 'Binary Right PV', value: String(dashboardData?.binary_right_pv ?? 0),  },
-                { label: 'Monthly Left PV', value: String(dashboardData?.monthly_left_pv ?? 0),  },
-                { label: 'Monthly Right PV', value: String(dashboardData?.monthly_right_pv ?? 0),  },
+                { label: 'Available Balance', value: formatCurrency(dashboardData?.availableBalance ?? 0),  },
+                { label: 'Awaiting Wallet', value: formatCurrency(dashboardData?.awaitingWallet ?? 0),  },
+                { label: 'Binary Left PV', value: String(dashboardData?.binaryLeftPv ?? 0),  },
+                { label: 'Binary Right PV', value: String(dashboardData?.binaryRightPv ?? 0),  },
+                { label: 'Monthly Left PV', value: String(dashboardData?.monthlyLeftPv ?? 0),  },
+                { label: 'Monthly Right PV', value: String(dashboardData?.monthlyRightPv ?? 0),  },
               ].map((stat, i) => (
                 <div key={i} className="p-5 bg-amber-50/50 dark:bg-amber-400/5 rounded-2xl border border-amber-100 dark:border-amber-400/10">
                   <p className="text-[10px] font-black text-amber-400 dark:text-amber-400 uppercase tracking-widest mb-2">{stat.label}</p>

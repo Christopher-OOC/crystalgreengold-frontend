@@ -1,47 +1,63 @@
 export interface DashboardMetrics {
-  // Financial Metrics
-  available_balance: number;
-  awaiting_wallet: number;
-  cashback?: number;
-  daily_binary_earning: number;
-  
-  // Binary PV/BV Stats
-  binary_left_pv: number;
-  binary_right_pv: number;
-  total_left_bv: number;
-  total_right_bv: number;
-  total_left_pv?: number;
-  total_right_pv?: number;
-  
-  // Monthly Stats
-  monthly_left_pv: number;
-  monthly_right_pv: number;
-  monthly_sales_pv?: number;
-  
-  // Membership info
-  rank_id: number | null;
-  count_newly_registered_on_monthly_weaker_leg: number;
-  
-  // Network Structure (snake_case from API)
-  sponsor_id: number | string | null;
-  placer_id: number | string | null;
-  left_leg_id: number | string | null;
-  right_leg_id: number | string | null;
-  sponsor_name?: string;
-  placer_name?: string;
-  left_leg_name?: string;
-  right_leg_name?: string;
+  // User Information
+  memberId: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  phoneNumber: string | null;
+  address: string | null;
+  image: string | null;
+  businessName: string | null;
 
-  // Network Structure (camelCase normalization)
-  sponsorId?: number | string;
-  placerId?: number | string;
-  leftLegId?: number | string;
-  rightLegId?: number | string;
+  // Status
+  enabled: boolean;
+  canReceivePayment: boolean;
+  registeredOn: string;
+  lastActive: string | null;
+  lastEarned: string | null;
+
+  // Financial Metrics
+  availableBalance: number;
+  awaitingWallet: number;
+  transactionWallet: number;
+  cashback: number;
+  dailyBinaryEarning: number;
+
+  // Binary PV/BV Stats
+  binaryLeftPv: number;
+  binaryRightPv: number;
+  totalLeftBv: number;
+  totalRightBv: number;
+
+  // Monthly Stats
+  monthlyLeftPv?: number;
+  monthlyRightPv?: number;
+  monthlySalesPv?: number;
+
+  // Membership
+  rank: any | null;
+  currentPackage: any | null;
+  countNewlyRegisteredOnMonthlyWeakerLeg: number;
+
+  // Network Structure
+  sponsorId: string | null;
   sponsorUsername?: string;
+
+  placerId: string | null;
   placerUsername?: string;
+
+  leftLegId: string | null;
   leftLegUsername?: string;
+
+  rightLegId: string | null;
   rightLegUsername?: string;
+
+  // Other
+  accountDetails: any | null;
+  roles: any[];
 }
+
 
 export interface NetworkStructureProps {
   data: DashboardMetrics | null;

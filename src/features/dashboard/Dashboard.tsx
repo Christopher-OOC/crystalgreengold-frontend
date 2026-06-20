@@ -119,8 +119,10 @@ export const Dashboard: React.FC<DashboardProps> = ({
     setError(null);
     try {
       // Fetch core member metrics
-      const response = await apiClient.get('/api/v1/members');
-      setDashboardData(normalizeMetrics(response.data));
+      const response = await apiClient.get(`/api/v1/members/${currentMemberId}`);
+      console.log("Raw Dashboard Data:", response);
+      
+      setDashboardData(normalizeMetrics(response.data.data));
 
       // Fetch specific analysis data for network structure
       const analysisRes = await apiClient.get(`/api/v1/members/${currentMemberId}/analysis`);
@@ -151,14 +153,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const stats = [
     {
       label: 'Available Balance',
-      value: formatCurrency(dashboardData?.available_balance ?? 0),
+      value: formatCurrency(dashboardData?.availableBalance ?? 0),
       icon: Wallet,
       color: 'purple',
       trend: '↑ 0%'
     },
     {
       label: 'Awaiting Wallet',
-      value: formatCurrency(dashboardData?.awaiting_wallet ?? 0),
+      value: formatCurrency(dashboardData?.awaitingWallet ?? 0),
       icon: Clock,
       color: 'amber'
     },
@@ -170,32 +172,32 @@ export const Dashboard: React.FC<DashboardProps> = ({
     },
     {
       label: 'Daily Binary Earnings',
-      value: formatCurrency(dashboardData?.daily_binary_earning ?? 0),
+      value: formatCurrency(dashboardData?.dailyBinaryEarning ?? 0),
       icon: ArrowLeftRight,
       color: 'emerald',
       trend: '↑ 0%'
     },
     {
       label: 'Binary Left PV',
-      value: String(dashboardData?.binary_left_pv ?? 0),
+      value: String(dashboardData?.binaryLeftPv ?? 0),
       icon: Layers,
       color: 'blue'
     },
     {
       label: 'Binary Right PV',
-      value: String(dashboardData?.binary_right_pv ?? 0),
+      value: String(dashboardData?.binaryRightPv ?? 0),
       icon: Layers,
       color: 'orange'
     },
     {
       label: 'Total Left BV',
-      value: String(dashboardData?.total_left_bv ?? 0),
+      value: String(dashboardData?.totalLeftBv ?? 0),
       icon: Layers,
       color: 'blue'
     },
     {
       label: 'Total Right BV',
-      value: String(dashboardData?.total_right_bv ?? 0),
+      value: String(dashboardData?.totalRightBv ?? 0),
       icon: Layers,
       color: 'orange'
     },
@@ -376,27 +378,28 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   <Card rounded="xl" className="p-3 text-center" hover>
                     <p className="text-emerald-600 font-medium mb-0.5 text-sm">Available Balance</p>
                     <p className="text-lg font-bold text-emerald-950 dark:text-white">
-                      {formatCurrency(dashboardData?.available_balance ?? 0)}
+                      {formatCurrency(dashboardData?.availableBalance ?? 0)}
                     </p>
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
                     <p className="text-emerald-600 font-medium mb-0.5 text-sm">Pending Wallet</p>
                     <p className="text-lg font-bold text-emerald-950 dark:text-white">
-                      {formatCurrency(dashboardData?.awaiting_wallet ?? 0)}
+                      {formatCurrency(dashboardData?.awaitingWallet ?? 0)}
                     </p>
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
                     <p className="text-emerald-600 font-medium mb-0.5 text-sm">Rank</p>
                     <p className="text-lg font-bold text-emerald-950 dark:text-white">
-                      {dashboardData?.rank_id ? `Rank ${dashboardData.rank_id}` : "Member"}
+                      {dashboardData?.rank?.name || "Member"}
                     </p>
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
                     <p className="text-emerald-600 font-medium mb-0.5 text-sm">Current Members Counter</p>
-                    <p className="text-lg font-bold text-emerald-950 dark:text-white mb-0.5">0 out of 20.</p>
+                    <p className="text-lg font-bold text-emerald-950 dark:text-white mb-0.5">{dashboardData?.countNewlyRegisteredOnMonthlyWeakerLeg
+ || 0} out of 20.</p>
                     <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Award: ₦20000.00</p>
                   </Card>
                 </div>
@@ -663,7 +666,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <div className="space-y-3">
                 <h5 className="text-[9px] font-bold text-emerald-950 dark:text-white uppercase tracking-[0.2em]">Information</h5>
                 <p className="text-[10px] text-emerald-600 leading-relaxed">
-                  4, Afariogun Street, Awolowo Way, Ikeja, Lagos, Nigeria.
+                  26 oluwadarasimi st okuola Bustop Egbeda Lagos
                 </p>
                 <div className="space-y-0.5">
                   <button className="block text-[10px] text-amber-400 hover:underline">About us</button>
@@ -718,4 +721,3 @@ export const Dashboard: React.FC<DashboardProps> = ({
     </div>
   );
 };
-

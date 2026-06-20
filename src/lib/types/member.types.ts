@@ -29,6 +29,7 @@ export interface Member {
   phoneNumber?: string;       // optional for enterprise consistency
   address?: string; 
   packageId?: string;
+  currentPackage?: any | null;
   sponsorId?: string;
   placementId?: string;
   leg?: 'LEFT' | 'RIGHT';     // classic MLM binary tree

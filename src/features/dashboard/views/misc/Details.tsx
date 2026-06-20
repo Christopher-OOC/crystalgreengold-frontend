@@ -8,10 +8,10 @@ import { DashboardMetrics,NetworkStructureProps,FinancialMetricsProps } from '@/
 
 export const NetworkStructure = ({ data }: NetworkStructureProps) => {
   const nodes = [
-    { label: 'Sponsor',  name: data?.sponsorUsername || data?.sponsor_name || '—', icon: User },
-    { label: 'Placer',   name: data?.placerUsername || data?.placer_name || '—', icon: User },
-    { label: 'Left Leg', name: data?.leftLegUsername || data?.left_leg_name || '—', icon: ArrowRightLeft },
-    { label: 'Right Leg',name: data?.rightLegUsername || data?.right_leg_name || '—', icon: ArrowRightLeft },
+    { label: 'Sponsor',  name: data?.sponsorUsername || '—', icon: User },
+    { label: 'Placer',   name: data?.placerUsername || '—', icon: User },
+    { label: 'Left Leg', name: data?.leftLegUsername || '—', icon: ArrowRightLeft },
+    { label: 'Right Leg',name: data?.rightLegUsername || '—', icon: ArrowRightLeft },
   ];
 
   return (
@@ -44,10 +44,10 @@ export const NetworkStructure = ({ data }: NetworkStructureProps) => {
 
 export const FinancialMetrics = ({ data }: FinancialMetricsProps) => {
   const metrics = [
-    { label: 'Total Left PV',       value: String(data?.monthly_left_pv ?? 0),              trend: '↑ 0%' },
-    { label: 'Total Right PV',      value: String(data?.monthly_right_pv ?? 0),             trend: '↑ 0%' },
-    { label: 'Available Balance',   value: formatCurrency(data?.available_balance ?? 0),    isMoney: true },
-    { label: 'Daily Binary Earning',value: formatCurrency(data?.daily_binary_earning ?? 0), isMoney: true },
+    { label: 'Total Left PV',       value: String(data?.monthlyLeftPv ?? 0),              trend: '↑ 0%' },
+    { label: 'Total Right PV',      value: String(data?.monthlyRightPv ?? 0),             trend: '↑ 0%' },
+    { label: 'Available Balance',   value: formatCurrency(data?.availableBalance ?? 0),    isMoney: true },
+    { label: 'Daily Binary Earning',value: formatCurrency(data?.dailyBinaryEarning ?? 0), isMoney: true },
   ];
 
   return (
@@ -78,9 +78,9 @@ export const FinancialMetrics = ({ data }: FinancialMetricsProps) => {
 };
 
 export const SalesDistribution = ({ data }: { data: DashboardMetrics | null }) => {
-  const leftPV  = data?.monthly_left_pv   ?? 0;
-  const rightPV = data?.monthly_right_pv  ?? 0;
-  const salesPV = data?.monthly_sales_pv  ?? 0;
+  const leftPV  = data?.monthlyLeftPv   ?? 0;
+  const rightPV = data?.monthlyRightPv  ?? 0;
+  const salesPV = data?.monthlySalesPv  ?? 0;
   const total   = leftPV + rightPV + salesPV || 1; // avoid divide-by-zero
 
   const chartData = [
@@ -150,8 +150,8 @@ export const MonthlyPVAnalysis = ({ data }: { data: DashboardMetrics | null }) =
   const chartData = [
     {
       name: monthLabel,
-      left:  data?.monthly_left_pv  ?? 0,
-      right: data?.monthly_right_pv ?? 0,
+      left:  data?.monthlyLeftPv  ?? 0,
+      right: data?.monthlyRightPv ?? 0,
     },
   ];
 
