@@ -207,7 +207,10 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
               onChange={handleInputChange}
             />
             <Input
-              id="phone_number"
+              id="phoneNumber"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
               label="Phone Number"
               icon={Phone}
               placeholder="Enter your phone number"
