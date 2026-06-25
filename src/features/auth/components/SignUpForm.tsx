@@ -26,7 +26,7 @@ import type { CreateMemberRequest } from "@/lib/types/member.types";
 const initialFormData = {
   firstName: "",
   lastName: "",
-  phone_number: "",
+  phoneNumber: "",
   email: "",
   username: "",
   sponsor: "",
@@ -41,7 +41,7 @@ function validateStep(
   if (step === 1) {
     if (!data.firstName.trim()) return "First name is required";
     if (!data.lastName.trim()) return "Last name is required";
-    if (!data.phone_number.trim()) return "Phone number is required";
+    if (!data.phoneNumber.trim()) return "Phone number is required";
   }
   if (step === 2) {
     if (!data.email.trim()) return "Email is required";
@@ -124,7 +124,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
       const payload: CreateMemberRequest = {
         firstName: formData.firstName,
         lastName: formData.lastName,
-        phone_number: formData.phone_number,
+        phoneNumber: formData.phoneNumber,
         email: formData.email,
         username: formData.username,
         sponsorId: formData.sponsor,
@@ -211,7 +211,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
               label="Phone Number"
               icon={Phone}
               placeholder="Enter your phone number"
-              value={formData.phone_number}
+              value={formData.phoneNumber}
               onChange={handleInputChange}
             />
 
