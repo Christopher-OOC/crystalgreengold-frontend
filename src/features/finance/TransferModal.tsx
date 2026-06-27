@@ -27,7 +27,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({ isOpen, onClose })
     setIsLoading(true);
     try {
       await memberService.transferFunds(member.id, {
-        recipientUsername: formData.recipient,
+        username: formData.recipient,
         amount: parseFloat(formData.amount),
       });
       

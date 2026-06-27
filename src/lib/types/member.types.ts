@@ -85,11 +85,9 @@ export interface UpdateMemberRequest {
 // ── Financial Actions ───────────────────────────────────
 
 export interface TransferFundsRequest {
-  toMemberId?: string;        // classic MLM
-  recipientUsername?: string; // enterprise
+  username?: string; 
   amount: number;
-  description?: string;
-  note?: string;
+
 }
 
 export interface ChangePasswordRequest {
