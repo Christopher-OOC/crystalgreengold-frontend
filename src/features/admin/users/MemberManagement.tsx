@@ -40,7 +40,7 @@ import {
 } from "@/lib/api/services/admin.service";
 import { useAuth } from "@/features/auth/AuthContext";
 import type { Member } from "@/lib/types/member.types";
-import { BANKS } from "@/src/lib/constants/bank";
+import { BANKS, BANKS1 } from "@/src/lib/constants/bank";
 
 interface MemberData extends Member {
   memberId?: string;
@@ -54,6 +54,8 @@ interface MemberData extends Member {
   phoneNumber?: string;
   address?: string;
   registeredOn?: string;
+  businessName?: string;
+  accountDetails?: any;
   roles?: (
     | { id?: number | string; name?: string; authority?: string }
     | string
@@ -242,6 +244,15 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
     address: "",
   });
 
+  const [accountDetails, setAccountDetails] = useState({
+    accountName: "",
+    accountNumber: "",
+    bankName: "",
+    bankCode: "",
+    bankType: "",
+    currency: "",
+  });
+
   const { loginAsUser } = useAuth();
   const fetchMembers = useCallback(
     async (
@@ -382,6 +393,9 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
 
   useEffect(() => {
     if (!selectedMember) return;
+
+    console.log("Selected member changed:", selectedMember);
+
     setMemberRoleValue(getMemberRoleValue(selectedMember));
     setMemberEnabled(selectedMember.enabled ?? true);
     setMemberUpdateError(null);
@@ -390,8 +404,16 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
       lastName: selectedMember.lastName,
       email: selectedMember.email,
       phoneNumber: selectedMember.phoneNumber,
-      // businessName: selectedMember.businessName,
+      businessName: selectedMember.businessName,
       address: selectedMember.address,
+    });
+    setAccountDetails({
+      accountName: selectedMember?.accountDetails?.accountName || "",
+      accountNumber: selectedMember?.accountDetails?.accountNumber || "",
+      bankName: selectedMember?.accountDetails?.bankName || "",
+      bankCode: selectedMember?.accountDetails?.bankCode || "",
+      bankType: selectedMember?.accountDetails?.bankType || "",
+      currency: selectedMember?.accountDetails?.currency || "",
     });
   }, [selectedMember]);
 
@@ -439,7 +461,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
     setMemberUpdateLoading(true);
     setMemberUpdateError(null);
     try {
-      console.log( "Updating member info with form data:", form);
+      console.log("Updating member info with form data:", form);
       const updated = await adminService.update(memberId, form);
       handleAction("Member info updated successfully");
       fetchMembers(
@@ -451,8 +473,33 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
       );
     } catch (err: any) {
       setMemberUpdateError(
-        err?.response?.data?.message ||
-          "Unable to update the member .",
+        err?.response?.data?.message || "Unable to update the member .",
+      );
+    } finally {
+      setMemberUpdateLoading(false);
+    }
+  };
+
+  const handleAddAccountDetails = async () => {
+    if (!selectedMember) return;
+    const memberId = getMemberLoginId(selectedMember);
+    setMemberUpdateLoading(true);
+    setMemberUpdateError(null);
+    try {
+      console.log("Adding account details for member:", selectedMember);
+      console.log("Account details to add:", accountDetails);
+      const updated = await memberService.addAccountDetails(memberId, accountDetails);
+      handleAction("Account details added successfully");
+      fetchMembers(
+        currentPage,
+        rowsPerPage,
+        searchQuery,
+        sortByBV,
+        enabledFilter,
+      );
+    } catch (err: any) {
+      setMemberUpdateError(
+        err?.response?.data?.message || "Unable to add account details for the member .",
       );
     } finally {
       setMemberUpdateLoading(false);
@@ -574,7 +621,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                   </span>
                 </div>
                 <p className="text-2xl font-black text-emerald-950 dark:text-white">
-                  ₦{selectedMember.availableBalance?.toLocaleString()}
+                  ₦{selectedMember.availableBalance}
                 </p>
                 <p className="text-xs text-emerald-600 font-medium mt-1">
                   Available balance
@@ -723,6 +770,13 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                     </label>
                     <input
                       type="text"
+                      value={accountDetails.accountName}
+                      onChange={(e) =>
+                        setAccountDetails({
+                          ...accountDetails,
+                          accountName: e.target.value,
+                        })
+                      }
                       className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
                     />
                   </div>
@@ -730,15 +784,31 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                     <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
                       Bank Name
                     </label>
+                    {/* Bank */}
                     <select
-                      value={""}
+                      value={accountDetails.bankCode}
+                      onChange={(e) => {
+                        const bank = BANKS1.find(
+                          (b) => b.code === e.target.value,
+                        );
+
+                        if (!bank) return;
+
+                        setAccountDetails({
+                          ...accountDetails,
+                          bankName: bank.name,
+                          bankCode: bank.code,
+                          bankType: bank.type,
+                          currency: bank.currency,
+                        });
+                      }}
                       className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all appearance-none font-bold text-emerald-800 dark:text-emerald-100 disabled:opacity-50"
                     >
                       <option value="">Select Bank</option>
 
-                      {BANKS.map((bank, index) => (
-                        <option key={index} value={bank}>
-                          {bank}
+                      {BANKS1.map((bank) => (
+                        <option key={bank.name} value={bank.code}>
+                          {bank.name}
                         </option>
                       ))}
                     </select>
@@ -749,6 +819,13 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                     </label>
                     <input
                       type="text"
+                      value={accountDetails.accountNumber}
+                      onChange={(e) =>
+                        setAccountDetails({
+                          ...accountDetails,
+                          accountNumber: e.target.value,
+                        })
+                      }
                       className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
                     />
                   </div>
@@ -756,7 +833,8 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
 
                 <div className="flex justify-end">
                   <Button
-                    isLoading={true}
+                    isLoading={false}
+                    onClick={handleAddAccountDetails}
                     className="px-10 py-4 rounded-xl flex items-center space-x-2"
                   >
                     <Check size={18} />

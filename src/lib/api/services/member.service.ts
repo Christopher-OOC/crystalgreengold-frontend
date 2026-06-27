@@ -104,7 +104,7 @@ export const memberService = {
     return data.data;
   },
 
-  addAccountDetails: async (memberId: string, payload: AddAccountDetailsRequest): Promise<unknown> => {
+  addAccountDetails: async (memberId: string, payload: any): Promise<unknown> => {
     const { data } = await apiClient.post(ENDPOINTS.MEMBERS.ADD_ACCOUNT_DETAILS(memberId), payload);
     return data.data;
   },
