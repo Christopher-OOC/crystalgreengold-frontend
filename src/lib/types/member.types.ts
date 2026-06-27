@@ -94,7 +94,7 @@ export interface ChangePasswordRequest {
   oldPassword?: string;       // classic
   currentPassword?: string;   // enterprise
   newPassword: string;
-  confirmPassword?: string;
+  confirmNewPassword?: string;
 }
 
 export interface ForgotPasswordRequest {

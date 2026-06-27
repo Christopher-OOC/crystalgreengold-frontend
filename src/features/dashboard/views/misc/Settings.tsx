@@ -18,7 +18,7 @@ import { Card } from "@/shared/ui/Card";
 import { Button } from "@/shared/ui/Button";
 import { ErrorState } from "@/shared/ui/ErrorState";
 import { useAuthStore, selectMember } from "@/lib/store/authStore";
-import { BANKS } from "@/lib/constants/bank";
+import { BANKS, BANKS1 } from "@/lib/constants/bank";
 import { memberService } from "@/lib/api/services/member.service";
 import { formatCurrency } from "@/lib/utils/format";
 import { DashboardMetrics } from "@/lib/types/metrics.types";
@@ -41,9 +41,6 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
   const [dashboardData, setDashboardData] = useState<DashboardMetrics | null>(
     null,
   ); // ← ADD THIS
-
-  console.log("Select member from store:", selectMember);
-  console.log("member from store:", member);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -82,8 +79,9 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
     setIsSavingPassword(true);
     try {
       await memberService.changePassword(member.id, {
-        oldPassword: oldPassword, // from input state
-        newPassword: newPassword, // from input state
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        confirmNewPassword: confirmPassword,
       });
       alert("Password changed successfully!");
     } catch (err) {
@@ -383,7 +381,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               </label>
               <input
                 type="text"
-                disabled={isSavingBank}
+                disabled={false}
                 className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
               />
             </div>
@@ -394,16 +392,16 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               <select
                 value={selectedBank}
                 onChange={(e) => setSelectedBank(e.target.value)}
-                disabled={isSavingBank}
+                disabled={false}
                 className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all appearance-none font-bold text-emerald-800 dark:text-emerald-100 disabled:opacity-50"
               >
                 <option value="">Select Bank</option>
 
-                {BANKS.map((bank, index) => (
-                  <option key={index} value={bank}>
-                    {bank}
+                {/* {BANKS1.map((bank, index) => (
+                  <option key={index} value={bank.name}>
+                    {member?.bankName === bank.name ? (bank.name) : (bank.name)}
                   </option>
-                ))}
+                ))} */}
               </select>
             </div>
             <div className="space-y-2 md:col-span-2">
@@ -412,13 +410,13 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               </label>
               <input
                 type="text"
-                disabled={isSavingBank}
+                disabled={false}
                 className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
               />
             </div>
           </div>
 
-          <div className="flex justify-end">
+          {/* <div className="flex justify-end">
             <Button
               onClick={handleSaveBankDetails}
               isLoading={isSavingBank}
@@ -427,7 +425,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               <Check size={18} />
               <span>Save Bank Details</span>
             </Button>
-          </div>
+          </div> */}
         </div>
       </Card>
     </div>
