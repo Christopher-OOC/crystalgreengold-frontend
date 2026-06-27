@@ -41,7 +41,9 @@ export interface UpdateAdminRequest {
   firstName?: string;
   lastName?: string;
   phoneNumber?: string;
-  enabled?: boolean;
+  email?: string;
+  businessName?: string;
+  address?: string;
 }
 
 function mapToAdminUser(raw: any): AdminUser {

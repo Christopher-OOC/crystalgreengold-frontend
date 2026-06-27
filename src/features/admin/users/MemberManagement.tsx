@@ -19,6 +19,9 @@ import {
   CheckCircle2,
   Loader2,
   LogIn,
+  Building2,
+  Check,
+  Lock,
 } from "lucide-react";
 import { Card } from "@/shared/ui/Card";
 import { Button } from "@/shared/ui/Button";
@@ -31,9 +34,13 @@ import { CreateServiceCenterModal } from "@/features/admin/service-centers/Creat
 import { CreatePremiumStoreModal } from "@/features/admin/stores/CreatePremiumStoreModal";
 import { CreateAdminModal } from "@/features/admin/users/CreateAdminModal";
 import { premiumStoreService } from "@/lib/api/services/premium-store.service";
-import { adminService } from "@/lib/api/services/admin.service";
+import {
+  adminService,
+  UpdateAdminRequest,
+} from "@/lib/api/services/admin.service";
 import { useAuth } from "@/features/auth/AuthContext";
 import type { Member } from "@/lib/types/member.types";
+import { BANKS } from "@/src/lib/constants/bank";
 
 interface MemberData extends Member {
   memberId?: string;
@@ -47,7 +54,10 @@ interface MemberData extends Member {
   phoneNumber?: string;
   address?: string;
   registeredOn?: string;
-  roles?: ({ id?: number | string; name?: string; authority?: string } | string)[];
+  roles?: (
+    | { id?: number | string; name?: string; authority?: string }
+    | string
+  )[];
   currentPackage?: any;
 }
 
@@ -211,11 +221,26 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
   const [totalElements, setTotalElements] = useState(0);
   const [members, setMembers] = useState<MemberData[]>([]);
   const [selectedMember, setSelectedMember] = useState<MemberData | null>(null);
-  const [memberRoleValue, setMemberRoleValue] = useState<'ROLE_ADMIN' | 'ROLE_PREMIUM_STORE' | 'ROLE_SERVICE_CENTER'>('ROLE_ADMIN');
+  const [memberRoleValue, setMemberRoleValue] = useState<
+    "ROLE_ADMIN" | "ROLE_PREMIUM_STORE" | "ROLE_SERVICE_CENTER"
+  >("ROLE_ADMIN");
   const [memberEnabled, setMemberEnabled] = useState<boolean>(true);
-  const [memberUpdateLoading, setMemberUpdateLoading] = useState<boolean>(false);
-  const [memberUpdateError, setMemberUpdateError] = useState<string | null>(null);
-  const [impersonatingMemberId, setImpersonatingMemberId] = useState<string | null>(null);
+  const [memberUpdateLoading, setMemberUpdateLoading] =
+    useState<boolean>(false);
+  const [memberUpdateError, setMemberUpdateError] = useState<string | null>(
+    null,
+  );
+  const [impersonatingMemberId, setImpersonatingMemberId] = useState<
+    string | null
+  >(null);
+  const [form, setForm] = useState<UpdateAdminRequest>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    businessName: "",
+    address: "",
+  });
 
   const { loginAsUser } = useAuth();
   const fetchMembers = useCallback(
@@ -288,7 +313,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
   const handleLoginAsMember = async (member: MemberData) => {
     const memberId = getMemberLoginId(member);
     if (!memberId) {
-      handleAction('No member ID found');
+      handleAction("No member ID found");
       return;
     }
 
@@ -300,25 +325,58 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
   const getRoleName = (member: MemberData) => {
     const roles = member.roles ?? [];
     const roleNames = roles.map((role) =>
-      (typeof role === "string" ? role : role.name || role.authority || "").toUpperCase(),
+      (typeof role === "string"
+        ? role
+        : role.name || role.authority || ""
+      ).toUpperCase(),
     );
-    if (roleNames.some((role) => role === "ROLE_SUPER_ADMIN" || role === "SUPER_ADMIN")) return "Super Admin";
-    if (roleNames.some((role) => role === "ROLE_ADMIN" || role === "ADMIN")) return "Admin";
-    if (roleNames.some((role) => role === "ROLE_PREMIUM_STORE" || role === "PREMIUM_STORE"))
+    if (
+      roleNames.some(
+        (role) => role === "ROLE_SUPER_ADMIN" || role === "SUPER_ADMIN",
+      )
+    )
+      return "Super Admin";
+    if (roleNames.some((role) => role === "ROLE_ADMIN" || role === "ADMIN"))
+      return "Admin";
+    if (
+      roleNames.some(
+        (role) => role === "ROLE_PREMIUM_STORE" || role === "PREMIUM_STORE",
+      )
+    )
       return "State Center";
-    if (roleNames.some((role) => role === "ROLE_SERVICE_CENTER" || role === "SERVICE_CENTER"))
+    if (
+      roleNames.some(
+        (role) => role === "ROLE_SERVICE_CENTER" || role === "SERVICE_CENTER",
+      )
+    )
       return "Local Center";
     return "Regular Member";
   };
 
-  const getMemberRoleValue = (member: MemberData): 'ROLE_ADMIN' | 'ROLE_PREMIUM_STORE' | 'ROLE_SERVICE_CENTER' => {
+  const getMemberRoleValue = (
+    member: MemberData,
+  ): "ROLE_ADMIN" | "ROLE_PREMIUM_STORE" | "ROLE_SERVICE_CENTER" => {
     const roles = member.roles ?? [];
     const roleNames = roles.map((role) =>
-      (typeof role === "string" ? role : role.name || role.authority || "").toUpperCase(),
+      (typeof role === "string"
+        ? role
+        : role.name || role.authority || ""
+      ).toUpperCase(),
     );
-    if (roleNames.some((role) => role === "ROLE_ADMIN" || role === "ADMIN")) return "ROLE_ADMIN";
-    if (roleNames.some((role) => role === "ROLE_PREMIUM_STORE" || role === "PREMIUM_STORE")) return "ROLE_PREMIUM_STORE";
-    if (roleNames.some((role) => role === "ROLE_SERVICE_CENTER" || role === "SERVICE_CENTER")) return "ROLE_SERVICE_CENTER";
+    if (roleNames.some((role) => role === "ROLE_ADMIN" || role === "ADMIN"))
+      return "ROLE_ADMIN";
+    if (
+      roleNames.some(
+        (role) => role === "ROLE_PREMIUM_STORE" || role === "PREMIUM_STORE",
+      )
+    )
+      return "ROLE_PREMIUM_STORE";
+    if (
+      roleNames.some(
+        (role) => role === "ROLE_SERVICE_CENTER" || role === "SERVICE_CENTER",
+      )
+    )
+      return "ROLE_SERVICE_CENTER";
     return "ROLE_ADMIN";
   };
 
@@ -327,6 +385,14 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
     setMemberRoleValue(getMemberRoleValue(selectedMember));
     setMemberEnabled(selectedMember.enabled ?? true);
     setMemberUpdateError(null);
+    setForm({
+      firstName: selectedMember.firstName,
+      lastName: selectedMember.lastName,
+      email: selectedMember.email,
+      phoneNumber: selectedMember.phoneNumber,
+      // businessName: selectedMember.businessName,
+      address: selectedMember.address,
+    });
   }, [selectedMember]);
 
   const handleUpdateMemberRoleAndStatus = async () => {
@@ -350,10 +416,43 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
           : prev,
       );
       handleAction("Member role and status updated successfully");
-      fetchMembers(currentPage, rowsPerPage, searchQuery, sortByBV, enabledFilter);
+      fetchMembers(
+        currentPage,
+        rowsPerPage,
+        searchQuery,
+        sortByBV,
+        enabledFilter,
+      );
     } catch (err: any) {
       setMemberUpdateError(
-        err?.response?.data?.message || "Unable to update the member role and enabled status.",
+        err?.response?.data?.message ||
+          "Unable to update the member role and enabled status.",
+      );
+    } finally {
+      setMemberUpdateLoading(false);
+    }
+  };
+
+  const handleUpdateMemberInfo = async () => {
+    if (!selectedMember) return;
+    const memberId = getMemberLoginId(selectedMember);
+    setMemberUpdateLoading(true);
+    setMemberUpdateError(null);
+    try {
+      console.log( "Updating member info with form data:", form);
+      const updated = await adminService.update(memberId, form);
+      handleAction("Member info updated successfully");
+      fetchMembers(
+        currentPage,
+        rowsPerPage,
+        searchQuery,
+        sortByBV,
+        enabledFilter,
+      );
+    } catch (err: any) {
+      setMemberUpdateError(
+        err?.response?.data?.message ||
+          "Unable to update the member .",
       );
     } finally {
       setMemberUpdateLoading(false);
@@ -499,13 +598,183 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
               </Card>
             </div>
 
+            {/* Update Information Card */}
+
+            <Card className="p-8 md:p-12 border-none shadow-xl">
+              <div className="space-y-8">
+                <div className="flex items-center space-x-3 text-amber-400">
+                  <User size={20} />
+                  <h3 className="text-lg font-black tracking-tight text-emerald-950 dark:text-white uppercase">
+                    Update Profile
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      value={form.firstName}
+                      onChange={(e) =>
+                        setForm({ ...form, firstName: e.target.value })
+                      }
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      value={form.lastName}
+                      onChange={(e) =>
+                        setForm({ ...form, lastName: e.target.value })
+                      }
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={(e) =>
+                        setForm({ ...form, email: e.target.value })
+                      }
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      value={form.phoneNumber}
+                      onChange={(e) =>
+                        setForm({ ...form, phoneNumber: e.target.value })
+                      }
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Business Name
+                    </label>
+                    <input
+                      type="text"
+                      value={form.businessName}
+                      onChange={(e) =>
+                        setForm({ ...form, businessName: e.target.value })
+                      }
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Address
+                    </label>
+                    <textarea
+                      rows={4}
+                      value={form.address}
+                      onChange={(e) =>
+                        setForm({ ...form, address: e.target.value })
+                      }
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all resize-none"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end">
+                  <Button
+                    className="px-10 py-4 rounded-xl flex items-center space-x-2"
+                    onClick={handleUpdateMemberInfo}
+                  >
+                    <Check size={18} />
+                    <span>Update Profile</span>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+            {/* Bank Account Details Card */}
+            <Card className="p-8 md:p-12 border-none shadow-xl">
+              <div className="space-y-8">
+                <div className="flex items-center space-x-3 text-amber-400">
+                  <Building2 size={20} />
+                  <h3 className="text-lg font-black tracking-tight text-emerald-950 dark:text-white uppercase">
+                    Bank Account Details
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Account Name
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Bank Name
+                    </label>
+                    <select
+                      value={""}
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all appearance-none font-bold text-emerald-800 dark:text-emerald-100 disabled:opacity-50"
+                    >
+                      <option value="">Select Bank</option>
+
+                      {BANKS.map((bank, index) => (
+                        <option key={index} value={bank}>
+                          {bank}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="text-xs font-black text-emerald-400 uppercase tracking-widest">
+                      Account Number
+                    </label>
+                    <input
+                      type="text"
+                      className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex justify-end">
+                  <Button
+                    isLoading={true}
+                    className="px-10 py-4 rounded-xl flex items-center space-x-2"
+                  >
+                    <Check size={18} />
+                    <span>Save Bank Details</span>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+
             <Card className="p-6 border-none shadow-xl">
               <div className="flex items-center justify-between mb-4">
                 <div>
                   <h3 className="text-lg font-black text-emerald-950 dark:text-white tracking-tight">
                     Update Role & Status
                   </h3>
-                  <p className="text-sm text-emerald-600">Change this member's role and enabled state.</p>
+                  <p className="text-sm text-emerald-600">
+                    Change this member's role and enabled state.
+                  </p>
                 </div>
               </div>
 
@@ -531,7 +800,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                       Enabled
                     </p>
                     <p className="text-sm font-bold text-emerald-800 dark:text-emerald-200">
-                      {memberEnabled ? 'Enabled' : 'Disabled'}
+                      {memberEnabled ? "Enabled" : "Disabled"}
                     </p>
                   </div>
                   <Button
@@ -539,16 +808,18 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                     onClick={() => setMemberEnabled((prev) => !prev)}
                     className={
                       memberEnabled
-                        ? 'bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-xl font-bold'
-                        : 'bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl font-bold'
+                        ? "bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-xl font-bold"
+                        : "bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl font-bold"
                     }
                   >
-                    {memberEnabled ? 'Disable' : 'Enable'}
+                    {memberEnabled ? "Disable" : "Enable"}
                   </Button>
                 </div>
 
                 {memberUpdateError && (
-                  <div className="text-sm text-rose-500">{memberUpdateError}</div>
+                  <div className="text-sm text-rose-500">
+                    {memberUpdateError}
+                  </div>
                 )}
 
                 <Button
@@ -557,7 +828,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                   disabled={memberUpdateLoading}
                   className="bg-amber-400 hover:bg-amber-500 text-white w-full py-3 rounded-xl font-bold"
                 >
-                  {memberUpdateLoading ? 'Saving...' : 'Save Role & Status'}
+                  {memberUpdateLoading ? "Saving..." : "Save Role & Status"}
                 </Button>
               </div>
             </Card>
@@ -611,7 +882,9 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
               </Button>
               <Button
                 onClick={() => handleLoginAsMember(selectedMember)}
-                disabled={impersonatingMemberId === getMemberLoginId(selectedMember)}
+                disabled={
+                  impersonatingMemberId === getMemberLoginId(selectedMember)
+                }
                 className="bg-yellow-500 text-white hover:bg-yellow-600 px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all flex items-center space-x-2"
               >
                 {impersonatingMemberId === getMemberLoginId(selectedMember) ? (
@@ -619,7 +892,11 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                 ) : (
                   <LogIn size={16} />
                 )}
-                <span>{impersonatingMemberId === getMemberLoginId(selectedMember) ? 'Starting Session...' : 'Login as User'}</span>
+                <span>
+                  {impersonatingMemberId === getMemberLoginId(selectedMember)
+                    ? "Starting Session..."
+                    : "Login as User"}
+                </span>
               </Button>
             </div>
           </div>
@@ -744,7 +1021,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                         <th className="px-4 py-4 text-[10px] font-black text-yellow-600 uppercase tracking-widest text-center">
                           ACTIONS
                         </th>
-                       </tr>
+                      </tr>
                     </thead>
                     <tbody className="divide-y divide-white dark:divide-white/5">
                       {members.length === 0 ? (
@@ -757,70 +1034,83 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                           </td>
                         </tr>
                       ) : (
-	                        members.map((member, i) => {
-                            const memberLoginId = getMemberLoginId(member);
-                            const isImpersonating = impersonatingMemberId === memberLoginId;
+                        members.map((member, i) => {
+                          const memberLoginId = getMemberLoginId(member);
+                          const isImpersonating =
+                            impersonatingMemberId === memberLoginId;
 
-                            return (
-	                          <motion.tr
-	                            key={member.id || member.memberId || member.username || i}
-	                            initial={{ opacity: 0, y: 5 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.03 }}
-                            onClick={() => setSelectedMember(member)}
-                            className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors group cursor-pointer"
-                          >
-                            <td className="px-4 py-4 text-xs font-bold text-emerald-400">
-                              {(currentPage - 1) * rowsPerPage + i + 1}.
-                            </td>
-                            <td className="px-4 py-4">
-                              <span className="text-xs font-black text-emerald-950 dark:text-white group-hover:text-yellow-500 transition-colors">
-                                {member.firstName} {member.lastName}
-                              </span>
-                            </td>
-                            <td className="px-4 py-4 text-xs font-bold text-emerald-600">
-                              {member.email}
-                            </td>
-                            <td className="px-4 py-4 text-xs font-bold text-emerald-600">
-                              {member.username}
-                            </td>
-                            <td className="px-4 py-4 text-xs font-black text-emerald-950 dark:text-white">
-                              ₦{member.availableBalance?.toLocaleString()}
-                            </td>
-                            <td className="px-4 py-4 text-xs font-bold text-emerald-600">
-                              {member.sponsorUsername ?? "—"}
-                            </td>
-                            <td className="px-4 py-4 text-xs font-bold text-emerald-600">
-                              {member.placerUsername ?? "—"}
-                            </td>
-                            <td className="px-4 py-4 text-center">
-                              <span
-                                className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
-                                  member.enabled
-                                    ? "bg-emerald-50 text-emerald-500 border border-emerald-100"
-                                    : "bg-rose-50 text-rose-500 border border-rose-100"
-                                }`}
-                              >
-                                {member.enabled ? "Active" : "Inactive"}
-                              </span>
-                            </td>
-                            <td className="px-4 py-4 text-center">
-	                              <button
-	                                onClick={(e) => {
-	                                  e.stopPropagation();
-	                                  handleLoginAsMember(member);
-	                                }}
+                          return (
+                            <motion.tr
+                              key={
+                                member.id ||
+                                member.memberId ||
+                                member.username ||
+                                i
+                              }
+                              initial={{ opacity: 0, y: 5 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: i * 0.03 }}
+                              onClick={() => setSelectedMember(member)}
+                              className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors group cursor-pointer"
+                            >
+                              <td className="px-4 py-4 text-xs font-bold text-emerald-400">
+                                {(currentPage - 1) * rowsPerPage + i + 1}.
+                              </td>
+                              <td className="px-4 py-4">
+                                <span className="text-xs font-black text-emerald-950 dark:text-white group-hover:text-yellow-500 transition-colors">
+                                  {member.firstName} {member.lastName}
+                                </span>
+                              </td>
+                              <td className="px-4 py-4 text-xs font-bold text-emerald-600">
+                                {member.email}
+                              </td>
+                              <td className="px-4 py-4 text-xs font-bold text-emerald-600">
+                                {member.username}
+                              </td>
+                              <td className="px-4 py-4 text-xs font-black text-emerald-950 dark:text-white">
+                                ₦{member.availableBalance?.toLocaleString()}
+                              </td>
+                              <td className="px-4 py-4 text-xs font-bold text-emerald-600">
+                                {member.sponsorUsername ?? "—"}
+                              </td>
+                              <td className="px-4 py-4 text-xs font-bold text-emerald-600">
+                                {member.placerUsername ?? "—"}
+                              </td>
+                              <td className="px-4 py-4 text-center">
+                                <span
+                                  className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${
+                                    member.enabled
+                                      ? "bg-emerald-50 text-emerald-500 border border-emerald-100"
+                                      : "bg-rose-50 text-rose-500 border border-rose-100"
+                                  }`}
+                                >
+                                  {member.enabled ? "Active" : "Inactive"}
+                                </span>
+                              </td>
+                              <td className="px-4 py-4 text-center">
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleLoginAsMember(member);
+                                  }}
                                   disabled={isImpersonating}
-	                                className="p-2 bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded-lg transition-all"
-	                                title="Login as user"
-	                              >
-	                                {isImpersonating ? <Loader2 size={14} className="animate-spin" /> : <LogIn size={14} />}
-	                              </button>
-	                            </td>
-	                          </motion.tr>
-	                        );
-                          })
-	                      )}
+                                  className="p-2 bg-yellow-500/10 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded-lg transition-all"
+                                  title="Login as user"
+                                >
+                                  {isImpersonating ? (
+                                    <Loader2
+                                      size={14}
+                                      className="animate-spin"
+                                    />
+                                  ) : (
+                                    <LogIn size={14} />
+                                  )}
+                                </button>
+                              </td>
+                            </motion.tr>
+                          );
+                        })
+                      )}
                     </tbody>
                   </table>
                 </div>
