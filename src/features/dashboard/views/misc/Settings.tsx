@@ -409,7 +409,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               </label>
               <input
                 type="text"
-                 disabled={member.accountDetails}
+                 disabled={member?.accountDetails}
                 value={accountDetails.accountName}
                 onChange={(e) =>
                   setAccountDetails({
@@ -426,7 +426,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               </label>
               <select
                 value={accountDetails.bankCode}
-                 disabled={member.accountDetails}
+                 disabled={member?.accountDetails}
                 onChange={(e) => {
                   const bank = BANKS1.find(
                     (b) => b.code === e.target.value,
@@ -458,7 +458,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               <input
                 type="text"
                 value={accountDetails.accountNumber}
-                disabled={member.accountDetails}
+                disabled={member?.accountDetails}
                 onChange={(e) =>
                   setAccountDetails({
                     ...accountDetails,
@@ -473,7 +473,7 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
           <div className="flex justify-end">
             <Button
               onClick={handleSaveBankDetails}
-              disabled={member.accountDetails}
+              disabled={member?.accountDetails}
               isLoading={isSavingBank}
               className="px-10 py-4 rounded-xl flex items-center space-x-2"
             >
