@@ -52,6 +52,7 @@ export interface Member {
   createdAt?: string;
   registered_on?: string;
   updatedAt?: string;
+  accountDetails: any;
 }
 
 // ── Requests ────────────────────────────────────────────

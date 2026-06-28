@@ -33,7 +33,14 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
   const [isSavingPassword, setIsSavingPassword] = useState(false);
   const [isSavingBank, setIsSavingBank] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedBank, setSelectedBank] = useState("");
+  const [accountDetails, setAccountDetails] = useState({
+    accountName: "",
+    accountNumber: "",
+    bankName: "",
+    bankCode: "",
+    bankType: "",
+    currency: "",
+  });
   const member = useAuthStore(selectMember);
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -66,6 +73,19 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
     }
   }, [member?.id]);
 
+  useEffect(() => {
+      if (!member) return;
+  
+      setAccountDetails({
+        accountName: member?.accountDetails?.accountName || "",
+        accountNumber: member?.accountDetails?.accountNumber || "",
+        bankName: member?.accountDetails?.bankName || "",
+        bankCode: member?.accountDetails?.bankCode || "",
+        bankType: member?.accountDetails?.bankType || "",
+        currency: member?.accountDetails?.currency || "",
+      });
+    }, [member]);
+
   const joinedDate = member?.registered_on
     ? new Date(member.registered_on).toLocaleDateString("en-NG", {
         year: "numeric",
@@ -92,10 +112,16 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
   };
 
   const handleSaveBankDetails = async () => {
+    if (!member?.id) return;
     setIsSavingBank(true);
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setIsSavingBank(false);
-    alert("Bank details saved successfully!");
+    try {
+      await memberService.addAccountDetails(member.id, accountDetails);
+      alert("Bank details saved successfully!");
+    } catch (err) {
+      alert("Failed to save bank details. Please try again.");
+    } finally {
+      setIsSavingBank(false);
+    }
   };
 
   if (isLoading) {
@@ -114,6 +140,8 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
       <ErrorState title="Settings Error" message={error} onBack={onBack} />
     );
   }
+
+  console.log("Dashboard member:", member);
 
   return (
     <div className="space-y-8 max-w-5xl mx-auto pb-12">
@@ -381,7 +409,14 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               </label>
               <input
                 type="text"
-                disabled={false}
+                 disabled={member.accountDetails}
+                value={accountDetails.accountName}
+                onChange={(e) =>
+                  setAccountDetails({
+                    ...accountDetails,
+                    accountName: e.target.value,
+                  })
+                }
                 className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
               />
             </div>
@@ -390,18 +425,30 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
                 Bank Name
               </label>
               <select
-                value={selectedBank}
-                onChange={(e) => setSelectedBank(e.target.value)}
-                disabled={false}
+                value={accountDetails.bankCode}
+                 disabled={member.accountDetails}
+                onChange={(e) => {
+                  const bank = BANKS1.find(
+                    (b) => b.code === e.target.value,
+                  );
+                  if (!bank) return;
+                  setAccountDetails({
+                    ...accountDetails,
+                    bankName: bank.name,
+                    bankCode: bank.code,
+                    bankType: bank.type,
+                    currency: bank.currency,
+                  });
+                }}
                 className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all appearance-none font-bold text-emerald-800 dark:text-emerald-100 disabled:opacity-50"
               >
                 <option value="">Select Bank</option>
 
-                {/* {BANKS1.map((bank, index) => (
-                  <option key={index} value={bank.name}>
-                    {member?.bankName === bank.name ? (bank.name) : (bank.name)}
+                {BANKS1.map((bank) => (
+                  <option key={bank.name} value={bank.code}>
+                    {bank.name}
                   </option>
-                ))} */}
+                ))}
               </select>
             </div>
             <div className="space-y-2 md:col-span-2">
@@ -410,22 +457,30 @@ export const Settings: React.FC<SettingsProps> = ({ onBack }) => {
               </label>
               <input
                 type="text"
-                disabled={false}
+                value={accountDetails.accountNumber}
+                disabled={member.accountDetails}
+                onChange={(e) =>
+                  setAccountDetails({
+                    ...accountDetails,
+                    accountNumber: e.target.value,
+                  })
+                }
                 className="w-full bg-white dark:bg-white/5 border border-emerald-100 dark:border-white/10 rounded-xl py-4 px-6 outline-none focus:ring-2 focus:ring-amber-400/20 focus:border-amber-400 transition-all disabled:opacity-50"
               />
             </div>
           </div>
 
-          {/* <div className="flex justify-end">
+          <div className="flex justify-end">
             <Button
               onClick={handleSaveBankDetails}
+              disabled={member.accountDetails}
               isLoading={isSavingBank}
               className="px-10 py-4 rounded-xl flex items-center space-x-2"
             >
               <Check size={18} />
               <span>Save Bank Details</span>
             </Button>
-          </div> */}
+          </div>
         </div>
       </Card>
     </div>

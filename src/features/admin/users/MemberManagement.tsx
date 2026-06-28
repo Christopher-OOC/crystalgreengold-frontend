@@ -55,7 +55,6 @@ interface MemberData extends Member {
   address?: string;
   registeredOn?: string;
   businessName?: string;
-  accountDetails?: any;
   roles?: (
     | { id?: number | string; name?: string; authority?: string }
     | string
