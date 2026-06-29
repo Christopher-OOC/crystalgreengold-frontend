@@ -32,7 +32,7 @@ export const Packages: React.FC<PackagesProps> = ({ onBack, onSelectPackage, sto
     setError(null);
     try {
       const data = await packageService.getAll(storeId ?? null);
-      setPackages(data);
+      setPackages(data.sort((a, b) => a.price - b.price));
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Unable to fetch packages. Please try again.');
     } finally {

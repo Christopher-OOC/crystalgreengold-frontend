@@ -15,6 +15,7 @@ import {
 import { Card } from '@/shared/ui/Card';
 import { Button } from '@/shared/ui/Button';
 import { PackageActivationModal } from '@/features/commerce/packages/PackageActivationModal';
+import { useAuth } from '../../auth/AuthContext';
 
 interface Package {
   id: number;
@@ -40,9 +41,15 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
   const [isActivationModalOpen, setIsActivationModalOpen] = useState(false);
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [buyQuantity, setBuyQuantity] = useState(1);
+  const { member } = useAuth();
+  
+
+  const currentPackagePrice = member?.currentPackage?.price || 0;
+  const purchasePrice = pkg.price - currentPackagePrice;
 
   console.log("package", pkg.id);
   console.log("buyFrom", buyFrom);
+  console.log("member: ", member);
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto pb-12">
@@ -225,7 +232,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
         onClose={() => setIsActivationModalOpen(false)}
         onViewOrder={onViewOrder}
         pkgName={pkg.name}
-        price={pkg.price}
+        price={purchasePrice}
         pkgId={pkg.id}
         mode="activate"
       />
@@ -237,7 +244,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
         onClose={() => setIsBuyModalOpen(false)}
         onViewOrder={onViewOrder}
         pkgName={pkg.name}
-        price={pkg.price}
+        price={purchasePrice}
         pkgId={pkg.id}
         mode="buy"
         quantity={buyQuantity}
