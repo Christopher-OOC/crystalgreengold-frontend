@@ -88,7 +88,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const { impersonating } = useAuth();
   const currentMemberId = member?.memberId ?? member?.id;
   const [dashboardData, setDashboardData] = useState<DashboardMetrics | null>(null);
-  const [analysisData, setAnalysisData] = useState<DashboardMetrics | null>(null);
+  const [analysisData, setAnalysisData] = useState<any | null>(null);
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
@@ -120,18 +120,21 @@ export const Dashboard: React.FC<DashboardProps> = ({
     try {
       // Fetch core member metrics
       const response = await apiClient.get(`/api/v1/members/${currentMemberId}`);
-      console.log("Raw Dashboard Data:", response);
       
       setDashboardData(normalizeMetrics(response.data.data));
 
-      // Fetch specific analysis data for network structure
-      const analysisRes = await apiClient.get(`/api/v1/members/${currentMemberId}/analysis`);
-      setAnalysisData(normalizeMetrics(analysisRes.data.data || analysisRes.data));
-
       setIsLoading(false);
     } catch (err) {
-      console.warn("Analysis data not found, falling back to dashboard metrics.");
+      setError("Failed to load dashboard data. Please try again.");
       setIsLoading(false);
+    }
+
+    // Fetch analysis data separately (non-critical)
+    try {
+      const analysisRes = await apiClient.get(`/api/v1/members/${currentMemberId}/analysis`);
+      setAnalysisData(analysisRes.data.data || analysisRes.data);
+    } catch (err) {
+      console.warn("Analysis data not found, falling back to dashboard metrics.");
     }
   };
 
@@ -424,8 +427,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <MainChart />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <FinancialMetrics data={analysisData || dashboardData} />
-                      <NetworkStructure data={analysisData || dashboardData} />
+                      <FinancialMetrics data={dashboardData} />
+                      <NetworkStructure data={dashboardData} />
                     </div>
 
                     <MonthlyPVAnalysis data={dashboardData} />
