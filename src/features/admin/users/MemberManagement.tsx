@@ -22,6 +22,8 @@ import {
   Building2,
   Check,
   Lock,
+  Package as PackageIcon,
+  Box,
 } from "lucide-react";
 import { Card } from "@/shared/ui/Card";
 import { Button } from "@/shared/ui/Button";
@@ -30,6 +32,8 @@ import { ServiceCenterManagement } from "@/features/admin/service-centers/Servic
 import { PremiumStoreManagement } from "@/features/admin/stores/PremiumStoreManagement";
 import { AdminUserManagement } from "@/features/admin/users/AdminUserManagement";
 import { memberService } from "@/lib/api/services/member.service";
+import { packageService } from "@/lib/api/services/package.service";
+import type { Package } from "@/lib/types/package.types";
 import { CreateServiceCenterModal } from "@/features/admin/service-centers/CreateServiceCenterModal";
 import { CreatePremiumStoreModal } from "@/features/admin/stores/CreatePremiumStoreModal";
 import { CreateAdminModal } from "@/features/admin/users/CreateAdminModal";
@@ -252,6 +256,10 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
     currency: "",
   });
 
+  const [allPackages, setAllPackages] = useState<Package[]>([]);
+  const [packagesLoading, setPackagesLoading] = useState(false);
+  const [activatingPackageId, setActivatingPackageId] = useState<string | number | null>(null);
+
   const { loginAsUser } = useAuth();
   const fetchMembers = useCallback(
     async (
@@ -399,12 +407,12 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
     setMemberEnabled(selectedMember.enabled ?? true);
     setMemberUpdateError(null);
     setForm({
-      firstName: selectedMember.firstName,
-      lastName: selectedMember.lastName,
-      email: selectedMember.email,
-      phoneNumber: selectedMember.phoneNumber,
-      businessName: selectedMember.businessName,
-      address: selectedMember.address,
+      firstName: selectedMember.firstName ?? "",
+      lastName: selectedMember.lastName ?? "",
+      email: selectedMember.email ?? "",
+      phoneNumber: selectedMember.phoneNumber ?? "",
+      businessName: selectedMember.businessName ?? "",
+      address: selectedMember.address ?? "",
     });
     setAccountDetails({
       accountName: selectedMember?.accountDetails?.accountName || "",
@@ -502,6 +510,40 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
       );
     } finally {
       setMemberUpdateLoading(false);
+    }
+  };
+
+  const fetchPackages = async () => {
+    setPackagesLoading(true);
+    try {
+      const data = await packageService.getAll();
+      setAllPackages(data);
+    } catch (err) {
+      console.warn("Failed to load packages");
+    } finally {
+      setPackagesLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (!selectedMember) return;
+    fetchPackages();
+  }, [selectedMember]);
+
+  const handleActivatePackage = async (pkg: Package) => {
+    if (!selectedMember) return;
+    const memberId = getMemberLoginId(selectedMember);
+    setActivatingPackageId(pkg.id);
+    try {
+      await memberService.adminActivateMemberPackage(memberId, pkg.id);
+      setAllPackages((prev) => prev.filter((p) => p.id !== pkg.id));
+      handleAction(`Package "${pkg.name}" activated for ${selectedMember.username}`);
+    } catch (err: any) {
+      setMemberUpdateError(
+        err?.response?.data?.message || "Failed to activate package",
+      );
+    } finally {
+      setActivatingPackageId(null);
     }
   };
 
@@ -620,7 +662,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                   </span>
                 </div>
                 <p className="text-2xl font-black text-emerald-950 dark:text-white">
-                  ₦{selectedMember.availableBalance}
+                  ₦{(selectedMember.availableBalance ?? 0).toLocaleString()}
                 </p>
                 <p className="text-xs text-emerald-600 font-medium mt-1">
                   Available balance
@@ -948,6 +990,92 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                   </p>
                 </div>
               </div>
+            </Card>
+
+            {/* Activate Package Card */}
+            <Card className="p-8 border-none shadow-xl space-y-6">
+              <div className="flex items-center space-x-3 text-amber-400">
+                <PackageIcon size={20} />
+                <h3 className="text-lg font-black tracking-tight text-emerald-950 dark:text-white uppercase">
+                  Activate Package
+                </h3>
+              </div>
+
+              <p className="text-sm text-emerald-600">
+                Current Package:{" "}
+                <span className="font-bold text-emerald-950 dark:text-white">
+                  {selectedMember.currentPackage?.name ?? "No Package"}
+                </span>
+              </p>
+
+              {packagesLoading ? (
+                <div className="flex items-center justify-center py-8">
+                  <Loader2 className="w-6 h-6 text-yellow-500 animate-spin" />
+                </div>
+              ) : allPackages.length === 0 ? (
+                <div className="text-center py-8">
+                  <Box size={32} className="mx-auto text-emerald-300 mb-2" />
+                  <p className="text-sm font-bold text-emerald-400">No packages available</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {allPackages.map((pkg) => {
+                    const currentPkg = selectedMember?.currentPackage;
+                    const currentPkgPrice = currentPkg && typeof currentPkg === 'object' ? (currentPkg as any).price : undefined;
+                    const currentPkgId = currentPkg && typeof currentPkg === 'object' ? (currentPkg as any).id : undefined;
+                    const isCurrentPkg = currentPkgId != null && String(pkg.id) === String(currentPkgId);
+                    const isLowerPrice = currentPkgPrice != null && pkg.price <= currentPkgPrice;
+                    const isPackageDisabled = isCurrentPkg || isLowerPrice;
+
+                    return (
+                      <div
+                        key={pkg.id}
+                        className={`flex items-center justify-between p-4 rounded-xl bg-white dark:bg-white/5 border border-emerald-50 dark:border-white/5 transition-all ${
+                          isPackageDisabled ? 'opacity-60' : 'hover:border-amber-400/20'
+                        }`}
+                      >
+                        <div className="space-y-1">
+                          <p className="text-sm font-bold text-emerald-950 dark:text-white">
+                            {pkg.name}
+                          </p>
+                          <p className="text-xs font-bold text-emerald-600">
+                            ₦{pkg.price.toLocaleString()}
+                          </p>
+                          {pkg.bv != null && (
+                            <p className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">
+                              BV: {pkg.bv}
+                            </p>
+                          )}
+                        </div>
+                        <button
+                          onClick={() => handleActivatePackage(pkg)}
+                          disabled={isPackageDisabled || activatingPackageId === pkg.id}
+                          className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center space-x-1.5 ${
+                            isCurrentPkg
+                              ? 'bg-emerald-100 text-emerald-400 cursor-not-allowed'
+                              : isLowerPrice
+                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                : 'bg-yellow-500 hover:bg-yellow-600 text-white'
+                          }`}
+                        >
+                          {activatingPackageId === pkg.id ? (
+                            <>
+                              <Loader2 size={12} className="animate-spin" />
+                              <span>Activating...</span>
+                            </>
+                          ) : isCurrentPkg ? (
+                            <span>Current</span>
+                          ) : isLowerPrice ? (
+                            <span>Upgrade Only</span>
+                          ) : (
+                            <span>Activate</span>
+                          )}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </Card>
 
             <div className="flex items-center justify-end space-x-4">

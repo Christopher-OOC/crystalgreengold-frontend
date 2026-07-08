@@ -122,13 +122,13 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
       tokenStorage.clearTokens();
 
       const payload: CreateMemberRequest = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        phoneNumber: formData.phoneNumber,
-        email: formData.email,
-        username: formData.username,
-        sponsorId: formData.sponsor,
-        placementId: formData.placer,
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        phoneNumber: formData.phoneNumber.trim(),
+        email: formData.email.trim(),
+        username: formData.username.trim(),
+        sponsorId: formData.sponsor.trim(),
+        placementId: formData.placer.trim(),
         leg: formData.leg as "LEFT" | "RIGHT",
         address: "",
         memberType: "REGULAR_MEMBER",

@@ -42,12 +42,13 @@ export const NetworkStructure = ({ data }: NetworkStructureProps) => {
   );
 };
 
-export const FinancialMetrics = ({ data }: FinancialMetricsProps) => {
+export const FinancialMetrics = ({ data, analysisData, isAdmin }: FinancialMetricsProps) => {
   const metrics = [
     { label: 'Total Left PV',       value: String(data?.monthlyLeftPv ?? 0),              trend: '↑ 0%' },
     { label: 'Total Right PV',      value: String(data?.monthlyRightPv ?? 0),             trend: '↑ 0%' },
     { label: 'Available Balance',   value: formatCurrency(data?.availableBalance ?? 0),    isMoney: true },
     { label: 'Daily Binary Earning',value: formatCurrency(data?.dailyBinaryEarning ?? 0), isMoney: true },
+    ...(isAdmin ? [{ label: 'Accumulated PVs', value: analysisData?.accumulatedPvs ?? 0, isMoney: false }] : []),
   ];
 
   return (

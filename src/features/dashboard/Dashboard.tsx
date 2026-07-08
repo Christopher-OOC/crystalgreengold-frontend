@@ -427,7 +427,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <MainChart />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      <FinancialMetrics data={dashboardData} />
+                      <FinancialMetrics data={dashboardData} analysisData={analysisData} isAdmin={isAdmin} />
                       <NetworkStructure data={dashboardData} />
                     </div>
 

@@ -108,4 +108,9 @@ export const memberService = {
     const { data } = await apiClient.post(ENDPOINTS.MEMBERS.ADD_ACCOUNT_DETAILS(memberId), payload);
     return data.data;
   },
+
+  adminActivateMemberPackage: async (memberId: string, packageId: string | number): Promise<{ success: boolean; message: string }> => {
+   const { data } = await apiClient.put(ENDPOINTS.ADMIN.ACTIVATE_MEMBER_PACKAGE(memberId, packageId ));
+    return data.data ?? data;
+  },
 };

@@ -65,4 +65,6 @@ export interface NetworkStructureProps {
 
 export interface FinancialMetricsProps {
   data: DashboardMetrics | null;
+  analysisData: any | null;
+  isAdmin?: boolean;
 }

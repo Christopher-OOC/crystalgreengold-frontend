@@ -123,6 +123,7 @@ export const ENDPOINTS = {
     SETTING_BY_NAME:    (name: string)                 => `${V1}/admins/settings/name/${name}`,
     LOGIN_AS_USER:      (adminId: string, memberId: string) => `${V1}/admins/login-as-user/${adminId}/${memberId}`,
     UPDATE_ROLE: (memberId: string) => `${V1}/admins/${memberId}/role`,
+    ACTIVATE_MEMBER_PACKAGE: (memberId: string, packageId: string | number) => `${V1}/admins/${memberId}/activate-package/${packageId}`,
   },
 
   // ── Store Packages ───────────────────────────────────────────────────────────
