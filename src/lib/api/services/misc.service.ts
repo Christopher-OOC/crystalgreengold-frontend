@@ -36,18 +36,40 @@ export const earnedPromoService = {
 // ── Bonuses / Earning Commissions ─────────────────────────────────────────────
 
 export const bonusService = {
-  getByMember: async (memberId: string): Promise<Bonus[]> => {
-    const { data } = await apiClient.get(ENDPOINTS.BONUSES.BY_MEMBER(memberId));
-    return data.data;
+  getByMember: async (
+    memberId: string,
+    page = 1,
+    size = 10,
+    type = 'ALL'
+  ): Promise<{ data: Bonus[]; totalPages: number; totalElements: number }> => {
+    const { data } = await apiClient.get(
+      `${ENDPOINTS.BONUSES.BY_MEMBER(memberId)}?page=${page}&size=${size}&type=${type}`
+    );
+    return {
+      data: data.data ?? [],
+      totalPages: data.metadata?.totalPages ?? 1,
+      totalElements: data.metadata?.totalNumberOfElements ?? 0,
+    };
   },
 };
 
 // ── Transactions ──────────────────────────────────────────────────────────────
 
 export const transactionService = {
-  getByMember: async (memberId: string): Promise<Transaction[]> => {
-    const { data } = await apiClient.get(ENDPOINTS.TRANSACTIONS.BY_MEMBER(memberId));
-    return data.data;
+  getByMember: async (
+    memberId: string,
+    page = 1,
+    size = 10,
+    type = 'ALL'
+  ): Promise<{ data: Transaction[]; totalPages: number; totalElements: number }> => {
+    const { data } = await apiClient.get(
+      `${ENDPOINTS.TRANSACTIONS.BY_MEMBER(memberId)}?page=${page}&size=${size}&type=${type}`
+    );
+    return {
+      data: data.data ?? [],
+      totalPages: data.metadata?.totalPages ?? 1,
+      totalElements: data.metadata?.totalNumberOfElements ?? 0,
+    };
   },
 };
 

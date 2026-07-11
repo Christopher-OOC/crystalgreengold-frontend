@@ -4,7 +4,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Trophy,
-  Filter,
   Loader2
 } from 'lucide-react';
 import { Card } from '@/shared/ui/Card';
@@ -37,22 +36,28 @@ const commissionTypes = [
 export const Bonuses: React.FC = () => {
   const [bonuses, setBonuses] = useState<Bonus[]>([]);
   const [typeFilter, setTypeFilter] = useState('ALL');
-  const [displayEntries, setDisplayEntries] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const member = useAuthStore(selectMember);
 
   const formatBonusType = (type?: string) => {
-  if (!type) return 'unknown bonus';
-  return type.replace(/_/g, ' ').toLowerCase();
-};
+    if (!type) return 'unknown bonus';
+    return type.replace(/_/g, ' ').toLowerCase();
+  };
+
   const fetchData = async () => {
     if (!member?.id) return;
     setIsLoading(true);
     setError(null);
     try {
-      const data = await bonusService.getByMember(member.id);
-      setBonuses(Array.isArray(data) ? data : []);
+      const result = await bonusService.getByMember(member.id, currentPage, pageSize, typeFilter);
+      setBonuses(result.data);
+      setTotalPages(result.totalPages);
+      setTotalElements(result.totalElements);
       setIsLoading(false);
     } catch (err: any) {
       console.error('Error fetching bonuses:', err);
@@ -63,7 +68,11 @@ export const Bonuses: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, [member?.id]);
+  }, [member?.id, currentPage, pageSize, typeFilter]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [typeFilter, pageSize]);
 
   if (isLoading) {
     return (
@@ -129,7 +138,7 @@ export const Bonuses: React.FC = () => {
                   transition={{ delay: i * 0.05 }}
                   className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors"
                 >
-                  <td className="px-6 py-5 text-sm font-bold text-emerald-950 dark:text-white">{i + 1}.</td>
+                  <td className="px-6 py-5 text-sm font-bold text-emerald-950 dark:text-white">{(currentPage - 1) * pageSize + i + 1}.</td>
                   <td className="px-6 py-5">
                     <span className="text-[10px] font-black text-indigo-500 dark:text-indigo-400 uppercase tracking-widest">
                       {bonus.commissionType}
@@ -150,15 +159,15 @@ export const Bonuses: React.FC = () => {
 
         <div className="p-6 border-t border-white dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest">
-            Showing 1 to {bonuses.length} of {bonuses.length} entries
+            Showing {totalElements === 0 ? 0 : (currentPage - 1) * pageSize + 1} to {Math.min(currentPage * pageSize, totalElements)} of {totalElements} entries
           </p>
 
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <label className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Display</label>
               <select
-                value={displayEntries}
-                onChange={(e) => setDisplayEntries(Number(e.target.value))}
+                value={pageSize}
+                onChange={(e) => setPageSize(Number(e.target.value))}
                 className="bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-lg py-1 px-3 outline-none text-xs font-bold"
               >
                 <option value={10}>10</option>
@@ -169,13 +178,21 @@ export const Bonuses: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-2">
-              <button className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 transition-all">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              >
                 <ChevronLeft size={16} />
               </button>
               <button className="w-8 h-8 bg-amber-400 text-white rounded-lg font-bold shadow-lg shadow-amber-400/20 text-xs">
-                1
+                {currentPage}
               </button>
-              <button className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 transition-all">
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="p-2 rounded-lg border border-emerald-100 dark:border-white/10 text-emerald-400 hover:text-amber-400 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              >
                 <ChevronRight size={16} />
               </button>
             </div>

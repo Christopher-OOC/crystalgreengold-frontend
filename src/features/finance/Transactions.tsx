@@ -19,7 +19,10 @@ import type { Transaction } from '@/lib/types/transaction.types';
 export const Transactions: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [typeFilter, setTypeFilter] = useState('ALL');
-  const [displayEntries, setDisplayEntries] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalElements, setTotalElements] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const member = useAuthStore(selectMember);
@@ -29,8 +32,10 @@ export const Transactions: React.FC = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const data = await transactionService.getByMember(member.id);
-      setTransactions(Array.isArray(data) ? data : []);
+      const result = await transactionService.getByMember(member.id, currentPage, pageSize, typeFilter);
+      setTransactions(result.data);
+      setTotalPages(result.totalPages);
+      setTotalElements(result.totalElements);
       setIsLoading(false);
     } catch (err: any) {
       console.error('Error fetching transactions:', err);
@@ -41,7 +46,11 @@ export const Transactions: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, [member?.id]);
+  }, [member?.id, currentPage, pageSize, typeFilter]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [typeFilter, pageSize]);
 
   if (isLoading) {
     return (
@@ -84,6 +93,7 @@ export const Transactions: React.FC = () => {
               <option value="BUY_PACKAGE">BUY_PACKAGE</option>
               <option value="BUY_PRODUCT">BUY_PRODUCT</option>
               <option value="WITHDRAWAL">WITHDRAWAL</option>
+              <option value="INTERNAL_TRANSFER">INTERNAL_TRANSFER</option>
             </select>
           </div>
         </div>
@@ -111,7 +121,7 @@ export const Transactions: React.FC = () => {
                   transition={{ delay: i * 0.05 }}
                   className="hover:bg-white/50 dark:hover:bg-white/2 transition-colors"
                 >
-                  <td className="px-6 py-5 text-sm font-bold text-emerald-950 dark:text-white">{i + 1}.</td>
+                  <td className="px-6 py-5 text-sm font-bold text-emerald-950 dark:text-white">{(currentPage - 1) * pageSize + i + 1}.</td>
                   <td className="px-6 py-5 text-sm font-bold text-emerald-700 dark:text-emerald-400 font-mono">{tx.reference || 'N/A'}</td>
                   <td className="px-6 py-5 text-sm font-black text-emerald-950 dark:text-white">{formatCurrency(tx.amount)}</td>
                   <td className="px-6 py-5">
@@ -139,15 +149,15 @@ export const Transactions: React.FC = () => {
 
         <div className="p-6 border-t border-white dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs font-bold text-emerald-400 uppercase tracking-widest">
-            Showing 1 to {transactions.length} of {transactions.length} entries
+            Showing {totalElements === 0 ? 0 : (currentPage - 1) * pageSize + 1} to {Math.min(currentPage * pageSize, totalElements)} of {totalElements} entries
           </p>
 
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <label className="text-xs font-bold text-emerald-400 uppercase tracking-widest">Display</label>
               <select 
-                value={displayEntries}
-                onChange={(e) => setDisplayEntries(Number(e.target.value))}
+                value={pageSize}
+                onChange={(e) => setPageSize(Number(e.target.value))}
                 className="bg-white dark:bg-emerald-950 border border-emerald-100 dark:border-white/10 rounded-lg py-1 px-3 outline-none text-xs font-bold"
               >
                 <option value={10}>10</option>
