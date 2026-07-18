@@ -49,6 +49,7 @@ export const FinancialMetrics = ({ data, analysisData, isAdmin }: FinancialMetri
     { label: 'Available Balance',   value: formatCurrency(data?.availableBalance ?? 0),    isMoney: true },
     { label: 'Daily Binary Earning',value: formatCurrency(data?.dailyBinaryEarning ?? 0), isMoney: true },
     ...(isAdmin ? [{ label: 'Accumulated PVs', value: analysisData?.accumulatedPvs ?? 0, isMoney: false }] : []),
+     ...(isAdmin ? [{ label: 'Unpaid Balance', value: formatCurrency(analysisData?.unpaidBalance ?? 0), isMoney: true }] : []),
   ];
 
   return (
