@@ -155,7 +155,7 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                         className="w-full bg-white dark:bg-white/5 border-2 border-amber-400/20 rounded-2xl py-4 px-6 text-center text-2xl font-black text-emerald-950 dark:text-white outline-none focus:border-amber-400 transition-all"
                       />
                       <p className="mt-3 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
-                        Complete payment via Paystack
+                        Complete payment via Flutterwave
                       </p>
                     </div>
 
