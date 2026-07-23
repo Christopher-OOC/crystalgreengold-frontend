@@ -15,6 +15,7 @@ interface Product {
   image?: string;
   imageUrl?: string;
   images?: string[];
+  storeId?: string;
   category?: string | { id: number | string; name: string };
   description?: string | { id: number | string; name: string; description?: string };
   stock?: number;
@@ -112,6 +113,7 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
         image: product.image || product.imageUrl || product.images?.[0] || `https://picsum.photos/seed/${product.id || product.name}/400/400`,
         pv: product.pv ?? 0,
         bv: product.bv ?? 0,
+        storeId: product.storeId,
         quantity: quantity
       });
     }

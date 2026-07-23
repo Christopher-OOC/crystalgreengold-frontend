@@ -16,6 +16,7 @@ interface Product {
   pv: number;
   bv: number;
   image: string;
+  storeId?: string;
   category?: { 
     id: number; 
     name: string;
@@ -126,6 +127,7 @@ export const CompanyProducts: React.FC<CompanyProductsProps> = ({ onSelectProduc
       image: product.image,
       pv: product.pv,
       bv: product.bv,
+      storeId: product.storeId,
     });
     
     

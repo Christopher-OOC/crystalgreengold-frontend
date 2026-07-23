@@ -4,6 +4,7 @@ import { Search, ChevronLeft, ChevronRight, Package, ShoppingCart, Loader2, Filt
 import { Card } from '@/shared/ui/Card';
 import { Button } from '@/shared/ui/Button';
 import { ErrorState } from '@/shared/ui/ErrorState';
+import { useCart } from '@/features/cart/CartContext';
 import { productService } from '@/lib/api/services/product.service';
 import { getCategoryName, type Product } from '@/lib/types/product.types';
 
@@ -32,6 +33,7 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [categories, setCategories] = useState<string[]>(['ALL']);
   const [sortBy, setSortBy] = useState<'price_asc' | 'price_desc' | 'name_asc' | 'name_desc'>('name_asc');
+  const { addToCart } = useCart();
 
   const fetchProducts = async () => {
     if (!storeId) {
@@ -72,6 +74,19 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
   useEffect(() => {
     fetchProducts();
   }, [storeId]);
+
+  const handleAddToCart = (product: Product, e: React.MouseEvent) => {
+    e.stopPropagation();
+    addToCart({
+      id: String(product.id),
+      name: product.name,
+      price: product.price,
+      image: product.image || product.imageUrl || product.images?.[0] || '',
+      pv: product.pv ?? 0,
+      bv: product.bv ?? 0,
+      storeId,
+    });
+  };
 
   // Filter and sort
   const filteredAndSortedProducts = products
@@ -243,9 +258,12 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
                     </div>
                   </div>
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <Button className="rounded-full p-4 bg-white text-amber-400 hover:bg-amber-400 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300">
+                    <button
+                      onClick={(e) => handleAddToCart(product, e)}
+                      className="rounded-full p-4 bg-white text-amber-400 hover:bg-amber-400 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 cursor-pointer"
+                    >
                       <ShoppingCart size={24} />
-                    </Button>
+                    </button>
                   </div>
                 </div>
                 <div className="p-6 text-center">

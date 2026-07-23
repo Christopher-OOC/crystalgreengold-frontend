@@ -5,12 +5,14 @@ import { useAuthStore, selectMember } from '@/lib/store/authStore';
 
 export interface CartItem {
   id: string | number;
+  cartItemId?: number;
   name: string;
   price: number;
   quantity: number;
   image: string;
   pv?: number;
   bv?: number;
+  storeId?: string;
 }
 
 interface CartContextType {
@@ -18,6 +20,7 @@ interface CartContextType {
   addToCart: (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => Promise<void>;
   removeFromCart: (id: string | number) => void;
   updateQuantity: (id: string | number, delta: number) => void;
+  updateCart: () => Promise<void>;
   clearCart: () => void;
   getItemCount: () => number;
   getSubtotal: () => number;
@@ -43,18 +46,54 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const member = useAuthStore(selectMember);
 
-  // Load cart from localStorage on mount
+  // Load cart from backend on mount, fall back to localStorage
   useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      try {
-        setItems(JSON.parse(savedCart));
-      } catch (error) {
-        console.error('Failed to parse cart from localStorage:', error);
+    const loadCart = async () => {
+      const savedCart = localStorage.getItem('cart');
+      let localItems: CartItem[] = [];
+      if (savedCart) {
+        try {
+          localItems = JSON.parse(savedCart);
+        } catch (error) {
+          console.error('Failed to parse cart from localStorage:', error);
+        }
       }
-    }
-    setIsLoading(false);
-  }, []);
+
+      if (member?.id) {
+        try {
+          const serverCart = await cartService.getByMember(member.id);
+          if (serverCart?.items?.length) {
+            // Merge server cartItemId into local items
+            const merged = serverCart.items.map(serverItem => {
+              const local = localItems.find(li => String(li.id) === String(serverItem.productId));
+              return {
+                id: serverItem.productId,
+                cartItemId: Number(serverItem.id),
+                name: local?.name || serverItem.product?.name || 'Product',
+                price: local?.price || serverItem.unitPrice || 0,
+                quantity: serverItem.quantity,
+                image: local?.image || serverItem.product?.image || '',
+                pv: local?.pv || serverItem.product?.pv,
+                bv: local?.bv || serverItem.product?.bv,
+                storeId: local?.storeId,
+              };
+            });
+            setItems(merged);
+            setIsLoading(false);
+            return;
+          }
+        } catch (err) {
+          console.warn('Failed to fetch cart from backend, using local cart:', err);
+        }
+      }
+
+      // Fallback to local items
+      setItems(localItems);
+      setIsLoading(false);
+    };
+
+    loadCart();
+  }, [member?.id]);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
@@ -85,10 +124,23 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     // Call the backend endpoint
     if (member?.id) {
       try {
-        await cartService.addToCart(member.id, {
+        const response = await cartService.addToCart(member.id, {
           productId: String(item.id),
           quantity: qty,
+          storeId: item.storeId,
         });
+        // Update items with cartItemId from the server response
+        if (response?.items?.length) {
+          setItems(prev => prev.map(localItem => {
+            const serverItem = response.items.find(
+              si => String(si.productId) === String(localItem.id)
+            );
+            if (serverItem) {
+              return { ...localItem, cartItemId: Number(serverItem.id) };
+            }
+            return localItem;
+          }));
+        }
       } catch (err: any) {
         console.error('Failed to sync cart with backend:', err);
         setItems(originalItems);
@@ -128,6 +180,71 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     );
   }, []);
 
+  const updateCart = useCallback(async () => {
+    const buildUpdateItems = (cartItems: CartItem[]) =>
+      cartItems
+        .map(item => ({
+          cartItemId: Number(item.cartItemId),
+          quantity: item.quantity,
+        }))
+        .filter(item => Number.isInteger(item.cartItemId));
+
+    if (!member?.id) {
+      console.warn('updateCart: no member ID found, skipping API call.');
+      toast.error('Please login to update your cart.', {
+        style: { borderRadius: '10px', background: '#333', color: '#fff' },
+      });
+      return;
+    }
+
+    let itemsToUpdate = buildUpdateItems(items);
+
+    if (itemsToUpdate.length !== items.length) {
+      try {
+        const serverCart = await cartService.getByMember(member.id);
+        const syncedItems = items.map(item => {
+          const serverItem = serverCart.items?.find(
+            cartItem => String(cartItem.productId) === String(item.id)
+          );
+
+          return serverItem
+            ? { ...item, cartItemId: Number(serverItem.id) }
+            : item;
+        });
+
+        itemsToUpdate = buildUpdateItems(syncedItems);
+        if (itemsToUpdate.length === syncedItems.length) {
+          setItems(syncedItems);
+        }
+      } catch (err) {
+        console.warn('updateCart: failed to refresh cart item IDs before update:', err);
+      }
+    }
+
+    if (itemsToUpdate.length !== items.length) {
+      console.warn('updateCart: one or more items are missing a numeric cartItemId.');
+      toast.error('Cart is still syncing. Please wait a moment and try updating again.', {
+        style: { borderRadius: '10px', background: '#333', color: '#fff' },
+      });
+      return;
+    }
+
+    try {
+      await cartService.update(member.id, {
+        items: itemsToUpdate,
+      });
+      toast.success('Cart updated successfully!', {
+        style: { borderRadius: '10px', background: '#333', color: '#fff' },
+        iconTheme: { primary: '#f59e0b', secondary: '#FFFAEE' },
+      });
+    } catch (err: any) {
+      console.error('Failed to update cart:', err);
+      toast.error('Failed to update cart. Please try again.', {
+        style: { borderRadius: '10px', background: '#333', color: '#fff' },
+      });
+    }
+  }, [member?.id, items]);
+
   const clearCart = useCallback(() => {
     setItems([]);
     localStorage.removeItem('cart');
@@ -148,6 +265,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         addToCart,
         removeFromCart,
         updateQuantity,
+        updateCart,
         clearCart,
         getItemCount,
         getSubtotal,

@@ -237,7 +237,8 @@ interface CartProps {
 
 export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders }) => {
   const [showCheckout, setShowCheckout] = useState(false);
-  const { items, removeFromCart, updateQuantity, isLoading, clearCart } = useCart();
+  const [isUpdating, setIsUpdating] = useState(false);
+  const { items, removeFromCart, updateQuantity, updateCart, isLoading, clearCart } = useCart();
   const { member } = useAuth();
 
   const subtotal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -417,8 +418,27 @@ export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders 
 
             {items.length > 0 && (
               <div className="mt-8 pt-8 border-t border-white dark:border-white/5 flex justify-between">
-                <Button variant="secondary" className="px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs">
-                  Update Cart
+                <Button
+                  variant="secondary"
+                  onClick={async () => {
+                    setIsUpdating(true);
+                    try {
+                      await updateCart();
+                    } finally {
+                      setIsUpdating(false);
+                    }
+                  }}
+                  disabled={isUpdating}
+                  className="px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs"
+                >
+                  {isUpdating ? (
+                    <span className="flex items-center space-x-2">
+                      <Loader2 size={14} className="animate-spin" />
+                      <span>Updating...</span>
+                    </span>
+                  ) : (
+                    'Update Cart'
+                  )}
                 </Button>
                 <Button
                   variant="secondary"

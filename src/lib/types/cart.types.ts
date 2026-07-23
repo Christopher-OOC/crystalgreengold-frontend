@@ -21,11 +21,14 @@ export interface Cart {
 export interface AddToCartRequest {
   productId: string;
   quantity: number;
+  storeId?: string;
+}
+
+export interface CartItemUpdateRequest {
+  cartItemId: number;
+  quantity: number;
 }
 
 export interface UpdateCartRequest {
-  items: {
-    productId: string;
-    quantity: number;
-  }[];
+  items: CartItemUpdateRequest[];
 }
