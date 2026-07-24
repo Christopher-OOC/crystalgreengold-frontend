@@ -49,7 +49,13 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
 
       console.log('API response for store products:', response);
 
-      const productList = response.map((item) => item?.product);
+      const productList = response
+        .map((item) => item?.product)
+        .filter(Boolean)
+        .map((product) => ({
+          ...product,
+          storeId,
+        }));
 
       console.log('Extracted product list:', productList);
 
@@ -57,8 +63,7 @@ export const PremiumStoreProducts: React.FC<PremiumStoreProductsProps> = ({
 
       console.log('Extracted product list:', productList);
 
-
-      const uniqueCategories = ['ALL', ...new Set(productList.map((p) => getCategoryName(p.category.name)).filter(Boolean))];
+      const uniqueCategories = ['ALL', ...new Set(productList.map((p) => getCategoryName(p.category)).filter(Boolean))];
       setCategories(uniqueCategories);
     } catch (err: any) {
       console.error('Error fetching state center products:', err);
