@@ -536,7 +536,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   centerName={selectedServiceCenter.name}
                   centerId={selectedServiceCenter.id}
                   onBack={() => setSelectedServiceCenter(null)}
-                  onSelectProduct={setSelectedProduct}
+                  onSelectProduct={(product) =>
+                    setSelectedProduct({ ...product, storeId: selectedServiceCenter.id })
+                  }
                   onBuyPackage={() => setShowPackages(true)}
                 />
               ) : (

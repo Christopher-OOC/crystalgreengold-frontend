@@ -61,7 +61,13 @@ export const ServiceCenterProducts: React.FC<ServiceCenterProductsProps> = ({
 
       console.log("API response for store products:", response);
 
-      const productList = response.map((item) => item?.product);
+      const productList = response
+        .map((item) => item?.product)
+        .filter(Boolean)
+        .map((product) => ({
+          ...product,
+          storeId: centerId,
+        }));
 
       console.log("Extracted product list:", productList);
 
