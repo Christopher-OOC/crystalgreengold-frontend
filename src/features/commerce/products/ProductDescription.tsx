@@ -18,7 +18,7 @@ interface Product {
   storeId?: string;
   category?: string | { id: number | string; name: string };
   description?: string | { id: number | string; name: string; description?: string };
-  stock?: number;
+  availableQuantity?: number;
 }
 
 interface ProductDescriptionProps {
@@ -176,7 +176,7 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
                   <span className="uppercase tracking-widest">Center Product</span>
                 </div>
                 <span className="text-xs font-bold text-emerald-400">
-                  Availability: <span className="text-emerald-500">{product.stock || 20} In Stock</span>
+                  Availability: <span className="text-emerald-500">{product.availableQuantity} In Stock</span>
                 </span>
               </div>
 
@@ -229,13 +229,13 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
                   <ShoppingCart size={20} />
                   <span>CART</span>
                 </Button>
-                <Button 
+                {/* <Button 
                   onClick={handleBuyNow}
                   className="flex-1 py-4 rounded-xl flex items-center justify-center space-x-3"
                 >
                   <DollarSign size={20} />
                   <span>BUY NOW</span>
-                </Button>
+                </Button> */}
               </div>
             </div>
 
@@ -319,7 +319,7 @@ export const ProductDescription: React.FC<ProductDescriptionProps> = ({
                   </div>
                   <div className="flex justify-between py-2">
                     <span className="font-bold text-emerald-700 dark:text-emerald-400">Stock Status</span>
-                    <span className="text-emerald-500 font-bold">{product.stock || 20} units available</span>
+                    <span className="text-emerald-500 font-bold">{product.availableQuantity || 20} units available</span>
                   </div>
                 </div>
               </div>
