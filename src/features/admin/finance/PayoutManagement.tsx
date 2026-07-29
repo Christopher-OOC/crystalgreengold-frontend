@@ -4,9 +4,12 @@ import {
   ArrowLeft,
   Building2,
   CheckCircle2,
+  ChevronDown,
   Clock,
   CreditCard,
+  Download,
   Loader2,
+  Send,
   RefreshCw,
   Search,
   User,
@@ -16,7 +19,7 @@ import {
 import { Card } from '@/shared/ui/Card';
 import { Button } from '@/shared/ui/Button';
 import { ErrorState } from '@/shared/ui/ErrorState';
-import { paymentService } from '@/lib/api/services/misc.service';
+import { fileService, paymentService } from '@/lib/api/services/misc.service';
 
 type PayrollStatus = 'INITIALIZED' | 'PENDING' | 'COMPLETED' | 'FAILED' | 'REJECTED' | string;
 
@@ -100,6 +103,10 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isPaying, setIsPaying] = useState(false);
+  const [isPayConfirmationOpen, setIsPayConfirmationOpen] = useState(false);
+  const [downloadFormat, setDownloadFormat] = useState('');
+  const [isDownloading, setIsDownloading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [payrollEntries, setPayrollEntries] = useState<PayrollEntry[]>([]);
 
@@ -132,12 +139,65 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
     setError(null);
 
     try {
-      await paymentService.preparePayroll();
+      //await paymentService.preparePayroll();
       await fetchData();
     } catch (err: any) {
       setError(err?.response?.data?.message || err.message || 'Failed to generate payroll.');
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const payableEntries = useMemo(
+    () => payrollEntries.filter(entry => (entry.status || 'INITIALIZED').toUpperCase() === 'INITIALIZED'),
+    [payrollEntries],
+  );
+
+  const handlePayPayroll = async () => {
+    if (!payableEntries.length || isPaying) return;
+
+    setIsPaying(true);
+    setError(null);
+
+    try {
+      await paymentService.sendPayroll({ entries: payableEntries.map(entry => ({
+        id: String(entry.id),
+        memberId: entry.member?.memberId || '',
+        amount: entry.amount,
+        accountNumber: entry.member?.accountDetails?.accountNumber,
+        bankCode: entry.member?.accountDetails?.bankCode,
+      })) });
+      setIsPayConfirmationOpen(false);
+      await fetchData();
+    } catch (err: any) {
+      setError(err?.response?.data?.message || err.message || 'Failed to send payroll payments.');
+    } finally {
+      setIsPaying(false);
+    }
+  };
+
+  const handlePayrollDownload = async (format: string) => {
+    if ((format !== 'normal' && format !== 'flutterwave') || isDownloading) return;
+
+    setDownloadFormat(format);
+    setIsDownloading(true);
+    setError(null);
+
+    try {
+      const blob = await fileService.getPayrollReport(format);
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = format === 'flutterwave' ? 'payroll-flutterwave.csv' : 'payroll-report.csv';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err: any) {
+      setError(err?.response?.data?.message || err.message || 'Failed to download payroll report.');
+    } finally {
+      setIsDownloading(false);
+      setDownloadFormat('');
     }
   };
 
@@ -227,19 +287,84 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
             Review payroll recipients, bank details, payout amount, and transfer status.
           </p>
         </div>
-        <Button
-          onClick={handleGeneratePayroll}
-          disabled={isGenerating}
-          className="bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl flex items-center space-x-2 font-black uppercase tracking-widest shadow-lg shadow-yellow-500/20"
-        >
-          {isGenerating ? <Loader2 size={20} className="animate-spin" /> : <RefreshCw size={20} />}
-          <span>{isGenerating ? 'Generating...' : 'Generate Payroll'}</span>
-        </Button>
+        <div className="grid w-full grid-cols-1 gap-2 sm:flex sm:w-auto sm:flex-nowrap sm:justify-end">
+          <Button
+            onClick={handleGeneratePayroll}
+            disabled={isGenerating}
+            className="justify-center whitespace-nowrap bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2.5 rounded-xl flex items-center space-x-1.5 font-black uppercase tracking-wider text-[10px] shadow-lg shadow-yellow-500/20"
+          >
+            {isGenerating ? <Loader2 size={17} className="animate-spin" /> : <RefreshCw size={17} />}
+            <span>{isGenerating ? 'Generating...' : 'Generate Payroll'}</span>
+          </Button>
+          <Button
+            onClick={() => setIsPayConfirmationOpen(true)}
+            disabled={isPaying}
+            className="justify-center whitespace-nowrap bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl flex items-center space-x-1.5 font-black uppercase tracking-wider text-[10px] shadow-lg shadow-emerald-600/20 disabled:opacity-50"
+          >
+            {isPaying ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
+            <span>{isPaying ? 'Paying...' : 'Pay'}</span>
+          </Button>
+          <div
+            className="relative flex items-center gap-1.5 rounded-xl border border-emerald-100 bg-white px-4 py-2.5 text-[10px] font-black uppercase tracking-wider text-emerald-700 dark:border-white/10 dark:bg-white/10 dark:text-white"
+          >
+            <Download size={17} />
+            <select
+              aria-label="Choose CSV download format"
+              value={downloadFormat}
+              onChange={(event) => handlePayrollDownload(event.target.value)}
+              disabled={isDownloading}
+              className="min-w-[118px] appearance-none bg-transparent pr-5 outline-none"
+            >
+              <option value="" disabled>{isDownloading ? 'Downloading...' : 'Download as'}</option>
+              <option value="normal">Normal CSV</option>
+              <option value="flutterwave">Flutterwave CSV</option>
+            </select>
+            <ChevronDown size={15} className="pointer-events-none absolute right-3" />
+          </div>
+        </div>
       </div>
 
       {error && (
         <div className="rounded-xl border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-sm font-bold text-rose-500">
           {error}
+        </div>
+      )}
+
+      {isPayConfirmationOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950/50 px-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="pay-confirmation-title"
+        >
+          <Card className="w-full max-w-md rounded-2xl p-6 shadow-2xl">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-yellow-500/10 text-yellow-600">
+              <Send size={22} />
+            </div>
+            <h2 id="pay-confirmation-title" className="text-xl font-black text-emerald-950 dark:text-white">
+              Confirm payroll payment
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-emerald-700 dark:text-emerald-300">
+              Only recipients with an <span className="font-black">INITIALIZED</span> status will receive a transfer. This will pay {payableEntries.length} recipient{payableEntries.length === 1 ? '' : 's'}.
+            </p>
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <Button
+                onClick={() => setIsPayConfirmationOpen(false)}
+                disabled={isPaying}
+                className="justify-center border border-emerald-100 bg-white px-4 py-2.5 text-xs font-black uppercase tracking-wider text-emerald-700 dark:border-white/10 dark:bg-white/10 dark:text-white"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handlePayPayroll}
+                disabled={isPaying}
+                className="justify-center bg-emerald-600 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white hover:bg-emerald-700"
+              >
+                {isPaying ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
+                <span>{isPaying ? 'Processing...' : 'OK, Proceed'}</span>
+              </Button>
+            </div>
+          </Card>
         </div>
       )}
 
@@ -314,7 +439,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
                 <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Account Details</th>
                 <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Transaction ID</th>
                 <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Amount</th>
-                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Wallets</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Package</th>
                 <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Status</th>
               </tr>
             </thead>
@@ -372,8 +497,6 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
                     </td>
                     <td className="px-6 py-5 min-w-44">
                       <div className="space-y-1 text-xs font-bold">
-                        <p className="text-emerald-700 dark:text-emerald-300">Available: {formatCurrency(member?.availableBalance)}</p>
-                        <p className="text-emerald-500">Awaiting: {formatCurrency(member?.awaitingWallet)}</p>
                         <p className="text-[10px] font-black uppercase tracking-widest text-emerald-400">
                           {member?.currentPackage?.name || 'No package'}
                         </p>

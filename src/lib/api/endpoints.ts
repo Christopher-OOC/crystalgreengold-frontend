@@ -134,8 +134,9 @@ export const ENDPOINTS = {
 
   // ── Files / Resources ────────────────────────────────────────────────────────
   FILES: {
-    ORDER_RESOURCE: (id: string) => `${V1}/resources/orders/${id}`,
+    ORDER_RESOURCE:          (id: string) => `${V1}/resources/orders/${id}`,
+    PAYROLL_REPORT:                       `${V1}/resources/payroll/report`,
+    PAYROLL_FLUTTERWAVE_CSV:              `${V1}/resources/payroll/flutterwave-csv`,
   },
 
 } as const;
-

@@ -3,7 +3,7 @@ import { ENDPOINTS } from '@/lib/api/endpoints';
 import type { EarnedPromo } from '@/lib/types/promotion.types';
 import type { Bonus } from '@/lib/types/bonus.types';
 import type { Transaction } from '@/lib/types/transaction.types';
-import type { Payment, Payroll, Bank } from '@/lib/types/payment.types';
+import type { Payroll, Bank } from '@/lib/types/payment.types';
 import type { AdminSettings, UpdateAdminSettingsRequest, UpdateMemberAdminRequest } from '@/lib/types/admin.types';
 import type { StorePackage } from '@/lib/types/package.types';
 
@@ -75,6 +75,17 @@ export const transactionService = {
 
 // ── Payments ──────────────────────────────────────────────────────────────────
 
+type SendPayrollRequest = {
+  payrollId?: string;
+  entries?: Array<{
+    id?: string;
+    memberId?: string;
+    amount?: number;
+    accountNumber?: string;
+    bankCode?: string;
+  }>;
+};
+
 export const paymentService = {
   getAllBanks: async (): Promise<Bank[]> => {
     const { data } = await apiClient.get(ENDPOINTS.PAYMENTS.ALL_BANKS);
@@ -88,7 +99,7 @@ export const paymentService = {
     const { data } = await apiClient.get(ENDPOINTS.PAYMENTS.GET_PAYROLL);
     return data.data;
   },
-  sendPayroll: async (payload: Payment): Promise<unknown> => {
+  sendPayroll: async (payload: SendPayrollRequest): Promise<unknown> => {
     const { data } = await apiClient.post(ENDPOINTS.PAYMENTS.SEND_PAYROLL, payload);
     return data.data;
   },
@@ -150,6 +161,13 @@ export const fileService = {
     const { data } = await apiClient.get(ENDPOINTS.FILES.ORDER_RESOURCE(id), {
       responseType: 'blob',
     });
+    return data;
+  },
+  getPayrollReport: async (format: 'normal' | 'flutterwave'): Promise<Blob> => {
+    const endpoint = format === 'flutterwave'
+      ? ENDPOINTS.FILES.PAYROLL_FLUTTERWAVE_CSV
+      : ENDPOINTS.FILES.PAYROLL_REPORT;
+    const { data } = await apiClient.get(endpoint, { responseType: 'blob' });
     return data;
   },
 };
