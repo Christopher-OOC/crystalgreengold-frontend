@@ -25,7 +25,7 @@ const wideTrackingStyle: React.CSSProperties = { letterSpacing: '0.12em' };
 
 const getOrderKey = (order: Order, index: number) => {
   const orderId = order.id ? String(order.id) : 'missing-id';
-  const reference = order.paystackReference || order.createdAt || order.updatedAt || 'no-reference';
+  const reference = order.flutterwaveReference || order.createdAt || order.updatedAt || 'no-reference';
   return `order-${orderId}-${reference}-${index}`;
 };
 

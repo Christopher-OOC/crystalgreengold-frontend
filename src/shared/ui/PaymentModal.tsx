@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CreditCard, Loader2, CheckCircle2, Mail, User, Phone, Wallet } from 'lucide-react';
-import { usePaystack } from '@/lib/hooks/usePaystack';
+import { useFlutterwave } from '@/lib/hooks/useFlutterwave';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -27,7 +27,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   defaultPhone = '',
   fixedAmount,
   title = 'Make Payment',
-  description = 'Complete your payment securely via Paystack',
+  description = 'Complete your payment securely via Flutterwave',
   onPaymentSuccess,
 }) => {
   const [email, setEmail] = useState(defaultEmail);
@@ -55,12 +55,12 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   const isValid = email && (fixedAmount !== undefined ? fixedAmount > 0 : numericAmount > 0);
 
   const PAYSTACK_KEY =
-    process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || process.env.VITE_PAYSTACK_PUBLIC_KEY || '';
+    process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || process.env.VITE_FLUTTERWAVE_PUBLIC_KEY || '';
 
   const PAYSTACK_PUBLIC_KEY =
-    process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || process.env.VITE_PAYSTACK_PUBLIC_KEY || '';
+    process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || process.env.VITE_FLUTTERWAVE_PUBLIC_KEY || '';
 
-  const { pay } = usePaystack({
+  const { pay } = useFlutterwave({
     email,
     amount: numericAmount,
     name,
@@ -68,6 +68,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
    
 
     onSuccess: async (reference) => {
+      console.log('Payment successful with reference:', reference);
       setError(null);
       setIsLaunching(true);
       try {
@@ -81,7 +82,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
       }
     },
     onClose: () => {
-      // user closed the Paystack popup without paying — do nothing
+      // user closed the Flutterwave popup without paying — do nothing
     },
   });
 
@@ -238,7 +239,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
                     {!PAYSTACK_KEY && (
                       <p className="text-xs text-amber-400 font-medium bg-amber-50 dark:bg-amber-400/10 px-4 py-3 rounded-xl">
-                        Paystack is not configured. Please set <strong>NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY</strong> in your environment.
+                        Flutterwave is not configured. Please set <strong>NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY</strong> in your environment.
                       </p>
                     )}
 
@@ -247,7 +248,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                         setIsLaunching(true);
                         console.log('Pay button clicked', { email, amount: numericAmount, PAYSTACK_KEY, payType: typeof pay });
                         if (!pay) {
-                          setError('Paystack is not initialized (missing react-paystack or invalid config).');
+                          setError('Flutterwave is not initialized (missing flutterwave-react-v3 or invalid config).');
                           setIsLaunching(false);
                           return;
                         }
@@ -279,7 +280,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                       {isLaunching ? (
                         <>
                           <Loader2 size={16} className="animate-spin" />
-                          Launching Paystack...
+                          Launching Flutterwave...
                         </>
                       ) : (
                         <>
@@ -290,7 +291,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                     </button>
 
                     <p className="text-center text-[10px] text-emerald-400 font-medium">
-                      Secured by <span className="font-black text-emerald-700 dark:text-emerald-200">Paystack</span>
+                      Secured by <span className="font-black text-emerald-700 dark:text-emerald-200">Flutterwave</span>
                     </p>
                   </div>
                 )}

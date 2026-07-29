@@ -61,7 +61,7 @@ export interface Order {
   pdfText?: string;
   transaction?: Transaction;
   confirmation?: 'CONFIRMED' | 'NOT_CONFIRMED' | string;
-  paystackReference?: string;
+  flutterwaveReference?: string;
 }
 
 export interface CreateOrderRequest {
@@ -78,7 +78,7 @@ export interface UpdateOrderRequest {
   address?: string;
   phoneNumber?: string;
   status?: OrderStatus;
-  paystackReference?: string;
+  flutterwaveReference?: string;
 }
 
 export interface ValidateOrderRequest {

@@ -61,7 +61,7 @@ export function useMember(memberId?: string) {
 			await memberService.transferFunds(id, payload);
 			toast.success(
 				"Transfer successful",
-				`Sent ₦${payload.amount} to ${payload.recipientUsername}`,
+				`Sent ₦${payload.amount} to ${payload.username}`,
 			);
 		} catch (err: unknown) {
 			const msg = extractMessage(err, "Transfer failed");

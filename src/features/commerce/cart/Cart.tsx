@@ -82,11 +82,11 @@ const CheckoutComponent: React.FC<{
         try {
           await orderService.update(result.id, member.id, {
             status: 'PAID',
-            paystackReference: reference,
+            flutterwaveReference: reference,
           });
         } catch (updateErr) {
           // Reference update failed but order exists — log and continue
-          console.warn('Order created but failed to attach Paystack reference:', updateErr);
+          console.warn('Order created but failed to attach Flutterwave reference:', updateErr);
         }
 
         setShowPayment(false);
