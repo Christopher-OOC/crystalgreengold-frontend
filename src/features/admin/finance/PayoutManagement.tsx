@@ -130,8 +130,30 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
     }
   };
 
+  const fetchDataInBackground = async () => {
+    try {
+      const payroll = await paymentService.getPayroll();
+      const entries = Array.isArray(payroll)
+        ? payroll
+        : Array.isArray((payroll as any)?.entries)
+          ? (payroll as any).entries
+          : [];
+
+      setPayrollEntries(entries);
+    } catch (err: any) {
+      // Silently fail on background refresh to avoid interrupting user
+    }
+  };
+
   useEffect(() => {
     fetchData();
+
+    // Auto-refresh payroll data every 1 minute without showing spinner
+    const interval = setInterval(() => {
+      fetchDataInBackground();
+    }, 60000); // 60000 ms = 1 minute
+
+    return () => clearInterval(interval);
   }, []);
 
   const handleGeneratePayroll = async () => {
