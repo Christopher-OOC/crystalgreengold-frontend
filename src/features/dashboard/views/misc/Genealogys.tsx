@@ -234,7 +234,7 @@ export const Genealogys: React.FC<GenealogyProps> = ({ memberId, sponsorUsername
     setError(null);
     try {
       const cache = new Map<string, MemberRecord>();
-      const tree  = await buildTree(currentRootId, 0, 2, cache);
+      const tree  = await buildTree(currentRootId, 0, 3, cache);
       if (!tree) throw new Error('Tree construction failed.');
       setRootNode(tree);
     } catch (err: any) {
