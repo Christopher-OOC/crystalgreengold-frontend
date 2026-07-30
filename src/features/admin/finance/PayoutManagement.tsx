@@ -151,7 +151,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
     // Auto-refresh payroll data every 1 minute without showing spinner
     const interval = setInterval(() => {
       fetchDataInBackground();
-    }, 60000); // 60000 ms = 1 minute
+    }, 20000); // 60000 ms = 1 minute
 
     return () => clearInterval(interval);
   }, []);
