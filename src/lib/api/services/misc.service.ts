@@ -6,6 +6,7 @@ import type { Transaction } from '@/lib/types/transaction.types';
 import type { Payroll, Bank } from '@/lib/types/payment.types';
 import type { AdminSettings, UpdateAdminSettingsRequest, UpdateMemberAdminRequest } from '@/lib/types/admin.types';
 import type { StorePackage } from '@/lib/types/package.types';
+import type { AdminEvent } from '@/lib/types/event.types';
 
 // ── Earned Promotions ─────────────────────────────────────────────────────────
 
@@ -169,5 +170,17 @@ export const fileService = {
       : ENDPOINTS.FILES.PAYROLL_REPORT;
     const { data } = await apiClient.get(endpoint, { responseType: 'blob' });
     return data;
+  },
+};
+
+// ── Events ──────────────────────────────────────────────────────────────────
+
+export const eventService = {
+  getUnacknowledged: async (): Promise<AdminEvent[]> => {
+    const { data } = await apiClient.get(ENDPOINTS.EVENTS.UNACKNOWLEDGED);
+    return Array.isArray(data) ? data : (data?.data ?? []);
+  },
+  acknowledge: async (id: string | number): Promise<void> => {
+    await apiClient.put(ENDPOINTS.EVENTS.ACKNOWLEDGE(id));
   },
 };

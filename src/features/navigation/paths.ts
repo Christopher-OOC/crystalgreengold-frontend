@@ -20,6 +20,7 @@ export type AdminView =
   | 'service-centers'
   | 'payouts'
   | 'payroll'
+  | 'events'
   | 'settings';
 
 export type DashboardTab =
@@ -87,6 +88,7 @@ export const ADMIN_VIEW_PATHS: Record<AdminView, string> = {
   'service-centers': '/dashboard/admin/service-center',
   payouts: '/dashboard/admin/payout',
   payroll: '/dashboard/admin/payroll',
+  events: '/dashboard/admin/events',
   settings: '/dashboard/admin/settings',
 };
 
@@ -110,6 +112,8 @@ const ADMIN_VIEW_SEGMENTS: Record<string, AdminView> = {
   payout: 'payouts',
   payouts: 'payouts',
   payroll: 'payroll',
+  event: 'events',
+  events: 'events',
   setting: 'settings',
   settings: 'settings',
 };

@@ -18,6 +18,7 @@ export {
   adminService,
   storePackageService,
   fileService,
+  eventService,
 }    from '@/lib/api/services/misc.service';
 
 export { default as apiClient, tokenStorage } from '@/lib/api/client';

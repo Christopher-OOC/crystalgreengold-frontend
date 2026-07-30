@@ -139,4 +139,11 @@ export const ENDPOINTS = {
     PAYROLL_FLUTTERWAVE_CSV:              `${V1}/resources/payroll/flutterwave-csv`,
   },
 
+  // ── Events ───────────────────────────────────────────────────────────────
+  EVENTS: {
+    BASE: `${V1}/events`,
+    UNACKNOWLEDGED: `${V1}/events/unacknowledged`,
+    ACKNOWLEDGE: (id: string | number) => `${V1}/events/${id}/acknowledge`,
+  },
+
 } as const;

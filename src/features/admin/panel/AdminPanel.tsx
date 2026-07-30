@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { usePathname } from 'next/navigation';
@@ -15,7 +13,8 @@ import {
   Settings,
   Store,
   ArrowRight,
-  Loader2
+  Loader2,
+  BellRing,
 } from 'lucide-react';
 import { Card } from '@/shared/ui/Card';
 import { ProductInventory } from '@/features/admin/products/ProductInventory';
@@ -30,6 +29,7 @@ import { PayrollManagement } from '@/features/admin/finance/PayrollManagement';
 import { SystemSettingsManagement } from '@/features/admin/system/SystemSettingsManagement';
 import { ServiceCenterManagement } from '@/features/admin/service-centers/ServiceCenterManagement';
 import { CreateServiceCenterModal } from '@/features/admin/service-centers/CreateServiceCenterModal';
+import { EventManagement } from '@/features/admin/events/EventManagement';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { getAdminViewFromPath, getAdminViewPath, type AdminView } from '@/features/navigation/paths';
 import type { ServiceCenter } from '@/lib/types/service-center.types';
@@ -190,6 +190,14 @@ export const AdminPanel: React.FC = () => {
       bg: 'bg-cyan-500/10' 
     },
     { 
+      id: 'events',
+      title: 'Events', 
+      desc: 'Review and acknowledge unacknowledged system events', 
+      icon: BellRing, 
+      color: 'text-amber-500', 
+      bg: 'bg-amber-500/10' 
+    },
+    { 
       id: 'settings',
       title: 'System Settings', 
       desc: 'Configure business parameters', 
@@ -261,6 +269,8 @@ export const AdminPanel: React.FC = () => {
         return <PayoutManagement onBack={() => setActiveView('dashboard')} onNavigateToPayroll={() => setActiveView('payroll')} />;
       case 'payroll':
         return <PayrollManagement onBack={() => setActiveView('payouts')} />;
+      case 'events':
+        return <EventManagement onBack={() => setActiveView('dashboard')} />;
       case 'settings':
         return <SystemSettingsManagement onBack={() => setActiveView('dashboard')} />;
       default:
