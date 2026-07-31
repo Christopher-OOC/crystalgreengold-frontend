@@ -12,6 +12,7 @@ import {
   Send,
   RefreshCw,
   Search,
+  Trash2,
   User,
   Wallet,
   XCircle,
@@ -109,6 +110,9 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
   const [isDownloading, setIsDownloading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [payrollEntries, setPayrollEntries] = useState<PayrollEntry[]>([]);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -151,7 +155,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
     // Auto-refresh payroll data every 1 minute without showing spinner
     const interval = setInterval(() => {
       fetchDataInBackground();
-    }, 20000); // 60000 ms = 1 minute
+    }, 30000); // 60000 ms = 1 minute
 
     return () => clearInterval(interval);
   }, []);
@@ -220,6 +224,29 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
     } finally {
       setIsDownloading(false);
       setDownloadFormat('');
+    }
+  };
+
+  const handleDeleteEntry = async (entryId: string) => {
+    setDeleteTargetId(entryId);
+    setIsDeleteConfirmOpen(true);
+  };
+
+  const confirmDeleteEntry = async () => {
+    if (!deleteTargetId || deletingId) return;
+
+    setDeletingId(deleteTargetId);
+    setError(null);
+
+    try {
+      await paymentService.deletePayrollEntry(deleteTargetId);
+      setIsDeleteConfirmOpen(false);
+      setDeleteTargetId(null);
+      await fetchDataInBackground();
+    } catch (err: any) {
+      setError(err?.response?.data?.message || err.message || 'Failed to delete payroll entry.');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -390,6 +417,44 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
         </div>
       )}
 
+      {isDeleteConfirmOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950/50 px-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="delete-confirmation-title"
+        >
+          <Card className="w-full max-w-md rounded-2xl p-6 shadow-2xl">
+            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-rose-500/10 text-rose-600">
+              <Trash2 size={22} />
+            </div>
+            <h2 id="delete-confirmation-title" className="text-xl font-black text-emerald-950 dark:text-white">
+              Delete payroll entry?
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-emerald-700 dark:text-emerald-300">
+              This action cannot be undone. The payroll entry will be permanently removed from the system.
+            </p>
+            <div className="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+              <Button
+                onClick={() => setIsDeleteConfirmOpen(false)}
+                disabled={deletingId !== null}
+                className="justify-center border border-emerald-100 bg-white px-4 py-2.5 text-xs font-black uppercase tracking-wider text-emerald-700 dark:border-white/10 dark:bg-white/10 dark:text-white"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={confirmDeleteEntry}
+                disabled={deletingId !== null}
+                className="justify-center bg-rose-600 hover:bg-rose-700 px-4 py-2.5 text-xs font-black uppercase tracking-wider text-white"
+              >
+                {deletingId ? <Loader2 size={17} className="animate-spin" /> : <Trash2 size={17} />}
+                <span>{deletingId ? 'Deleting...' : 'Delete Entry'}</span>
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
         <Card className="p-5 rounded-2xl">
           <div className="flex items-center justify-between mb-3">
@@ -463,6 +528,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
                 <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Amount</th>
                 <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Package</th>
                 <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest">Status</th>
+                <th className="px-6 py-5 text-[10px] font-black text-emerald-400 uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white dark:divide-white/5">
@@ -529,6 +595,17 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
                         <StatusIcon size={12} />
                         {status.label}
                       </span>
+                    </td>
+                    <td className="px-6 py-5 text-right">
+                      <button
+                        onClick={() => handleDeleteEntry(String(entry.id))}
+                        disabled={deletingId === String(entry.id)}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-rose-600 hover:bg-rose-500/10 transition-all disabled:opacity-50 font-bold text-xs uppercase tracking-wider"
+                        title="Delete entry"
+                      >
+                        {deletingId === String(entry.id) ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
+                        <span>Delete</span>
+                      </button>
                     </td>
                   </motion.tr>
                 );
