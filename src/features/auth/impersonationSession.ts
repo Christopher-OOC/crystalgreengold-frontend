@@ -109,6 +109,7 @@ export function normalizeImpersonatedMember(rawMember: Partial<Member> | null | 
     username: member.username || member.email || 'member',
     memberType: member.memberType || 'REGULAR_MEMBER',
     roles: member.roles ?? [],
+    accountDetails: member.accountDetails ?? null,
   };
 }
 
