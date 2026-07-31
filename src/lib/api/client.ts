@@ -85,7 +85,7 @@ export const tokenStorage = {
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 60000, // 60s — Render free tier can take 30-60s to wake from sleep
+  timeout: 180000, // 3 minutes — allows slower backend startup and long-running requests
   // withCredentials: true, // ⚠️ Disable for now: Backend uses CORS wildcard '*' which breaks with credentials
   headers: {
     'Content-Type': 'application/json',

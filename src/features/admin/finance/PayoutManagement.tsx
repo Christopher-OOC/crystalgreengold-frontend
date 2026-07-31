@@ -165,7 +165,7 @@ export const PayoutManagement: React.FC<PayoutManagementProps> = ({ onBack }) =>
     setError(null);
 
     try {
-      //await paymentService.preparePayroll();
+      await paymentService.preparePayroll();
       await fetchData();
     } catch (err: any) {
       setError(err?.response?.data?.message || err.message || 'Failed to generate payroll.');
