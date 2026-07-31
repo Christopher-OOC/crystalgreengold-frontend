@@ -168,7 +168,12 @@ export const fileService = {
     const endpoint = format === 'flutterwave'
       ? ENDPOINTS.FILES.PAYROLL_FLUTTERWAVE_CSV
       : ENDPOINTS.FILES.PAYROLL_REPORT;
-    const { data } = await apiClient.get(endpoint, { responseType: 'blob' });
+    const { data } = await apiClient.get(endpoint, {
+      responseType: 'blob',
+      headers: {
+        Accept: 'text/csv',
+      },
+    });
     return data;
   },
 };
