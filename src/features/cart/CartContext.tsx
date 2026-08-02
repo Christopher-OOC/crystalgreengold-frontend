@@ -21,13 +21,32 @@ interface CartContextType {
   removeFromCart: (id: string | number) => void;
   updateQuantity: (id: string | number, delta: number) => void;
   updateCart: () => Promise<void>;
-  clearCart: () => void;
+  clearCart: () => Promise<void>;
+  refreshCart: () => Promise<void>;
   getItemCount: () => number;
   getSubtotal: () => number;
   isLoading: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
+
+const mapServerCartToItems = (serverCart: any): CartItem[] => {
+  const rawItems = Array.isArray(serverCart)
+    ? serverCart
+    : (serverCart?.data?.cartItems ?? serverCart?.cartItems ?? serverCart?.items ?? serverCart?.data?.items ?? []);
+
+  return rawItems.map((serverItem: any) => ({
+    id: serverItem.product?.id || serverItem.productId || serverItem.id,
+    cartItemId: Number(serverItem.id),
+    name: serverItem.product?.name || serverItem.name || 'Product',
+    price: Number(serverItem.product?.price ?? serverItem.unitPrice ?? serverItem.price ?? 0),
+    quantity: Number(serverItem.quantity ?? 1),
+    image: serverItem.product?.image || serverItem.image || '',
+    pv: serverItem.product?.pv ?? serverItem.pv,
+    bv: serverItem.product?.bv ?? serverItem.bv,
+    storeId: serverItem.storeResponse?.storeId || serverItem.storeId || serverItem.product?.storeId,
+  }));
+};
 
 export const useCart = () => {
   const context = useContext(CartContext);
@@ -46,82 +65,33 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const member = useAuthStore(selectMember);
 
-  // Load cart from backend on mount, fall back to localStorage
-  useEffect(() => {
-    const loadCart = async () => {
-      const savedCart = localStorage.getItem('cart');
-      let localItems: CartItem[] = [];
-      if (savedCart) {
-        try {
-          localItems = JSON.parse(savedCart);
-        } catch (error) {
-          console.error('Failed to parse cart from localStorage:', error);
-        }
-      }
-
-      if (member?.id) {
-        try {
-          const serverCart = await cartService.getByMember(member.id);
-          if (serverCart?.items?.length) {
-            // Merge server cartItemId into local items
-            const merged = serverCart.items.map(serverItem => {
-              const local = localItems.find(li => String(li.id) === String(serverItem.productId));
-              return {
-                id: serverItem.productId,
-                cartItemId: Number(serverItem.id),
-                name: local?.name || serverItem.product?.name || 'Product',
-                price: local?.price || serverItem.unitPrice || 0,
-                quantity: serverItem.quantity,
-                image: local?.image || serverItem.product?.image || '',
-                pv: local?.pv || serverItem.product?.pv,
-                bv: local?.bv || serverItem.product?.bv,
-                storeId: local?.storeId,
-              };
-            });
-            setItems(merged);
-            setIsLoading(false);
-            return;
-          }
-        } catch (err) {
-          console.warn('Failed to fetch cart from backend, using local cart:', err);
-        }
-      }
-
-      // Fallback to local items
-      setItems(localItems);
+  const refreshCart = useCallback(async () => {
+    if (!member?.id) {
+      setItems([]);
       setIsLoading(false);
-    };
+      return;
+    }
 
-    loadCart();
+    setIsLoading(true);
+
+    try {
+      const serverCart = await cartService.getByMember(member.id);
+      setItems(mapServerCartToItems(serverCart));
+    } catch (err) {
+      console.warn('Failed to fetch cart from server:', err);
+      setItems([]);
+    } finally {
+      setIsLoading(false);
+    }
   }, [member?.id]);
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem('cart', JSON.stringify(items));
-    }
-  }, [items, isLoading]);
+    void refreshCart();
+  }, [refreshCart]);
 
   const addToCart = useCallback(async (item: Omit<CartItem, 'quantity'> & { quantity?: number }) => {
     const qty = item.quantity || 1;
-    let originalItems: CartItem[] = [];
 
-    // Optimistically update local state first for instant UI feedback
-    setItems(prevItems => {
-      originalItems = prevItems;
-      const existingItem = prevItems.find(i => i.id === item.id);
-      if (existingItem) {
-        return prevItems.map(i =>
-          i.id === item.id
-            ? { ...i, quantity: i.quantity + qty }
-            : i
-        );
-      } else {
-        return [...prevItems, { ...item, quantity: qty }];
-      }
-    });
-
-    // Call the backend endpoint
     if (member?.id) {
       try {
         const response = await cartService.addToCart(member.id, {
@@ -129,22 +99,11 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           quantity: qty,
           storeId: item.storeId,
         });
-        // Update items with cartItemId from the server response
-        if (response?.items?.length) {
-          setItems(prev => prev.map(localItem => {
-            const serverItem = response.items.find(
-              si => String(si.productId) === String(localItem.id)
-            );
-            if (serverItem) {
-              return { ...localItem, cartItemId: Number(serverItem.id) };
-            }
-            return localItem;
-          }));
-        }
+        setItems(mapServerCartToItems(response));
+        await refreshCart();
       } catch (err: any) {
         console.error('Failed to sync cart with backend:', err);
-        setItems(originalItems);
-        toast.error('Failed to add item to cart. Local changes were reverted.', {
+        toast.error('Failed to add item to cart. Please try again.', {
           style: { borderRadius: '10px', background: '#333', color: '#fff' },
         });
         return;
@@ -245,10 +204,19 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   }, [member?.id, items]);
 
-  const clearCart = useCallback(() => {
+  const clearCart = useCallback(async () => {
+    if (member?.id) {
+      try {
+        await cartService.clear(member.id);
+        await refreshCart();
+        return;
+      } catch (err) {
+        console.error('Failed to clear cart on server:', err);
+      }
+    }
+
     setItems([]);
-    localStorage.removeItem('cart');
-  }, []);
+  }, [member?.id, refreshCart]);
 
   const getItemCount = useCallback(() => {
     return items.reduce((total, item) => total + item.quantity, 0);
@@ -267,6 +235,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         updateQuantity,
         updateCart,
         clearCart,
+        refreshCart,
         getItemCount,
         getSubtotal,
         isLoading,

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, CreditCard, Loader2, CheckCircle2, Mail, User, Phone, Wallet } from 'lucide-react';
-import { useFlutterwave } from '@/lib/hooks/useFlutterwave';
+import { resolveFlutterwavePublicKey, useFlutterwave } from '@/lib/hooks/useFlutterwave';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -54,11 +54,9 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   const numericAmount = parseFloat(amount) || 0;
   const isValid = email && (fixedAmount !== undefined ? fixedAmount > 0 : numericAmount > 0);
 
-  const PAYSTACK_KEY =
-    process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || process.env.VITE_FLUTTERWAVE_PUBLIC_KEY || '';
+  const flutterwaveKey = resolveFlutterwavePublicKey();
 
-  const PAYSTACK_PUBLIC_KEY =
-    process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY || process.env.VITE_FLUTTERWAVE_PUBLIC_KEY || '';
+  console.log('About to do paymentreference:');
 
   const { pay } = useFlutterwave({
     email,
@@ -73,11 +71,14 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
       setIsLaunching(true);
       try {
         await onPaymentSuccess?.(reference);
+        console.log('Payment successful with reference:', reference);
         setSuccess(true);
       } catch (e: any) {
+        console.log('Error happen while doing  payment.');
         const msg = e?.response?.data?.message || e?.response?.data?.error || e?.message || 'Payment was received, but we could not complete this action. Please contact support with your payment reference.';
         setError(msg);
       } finally {
+         console.log('Done doing  payment.');
         setIsLaunching(false);
       }
     },
@@ -237,16 +238,16 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                       </p>
                     )}
 
-                    {!PAYSTACK_KEY && (
+                    {!flutterwaveKey && (
                       <p className="text-xs text-amber-400 font-medium bg-amber-50 dark:bg-amber-400/10 px-4 py-3 rounded-xl">
-                        Flutterwave is not configured. Please set <strong>NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY</strong> in your environment.
+                        Flutterwave is not configured. Please set <strong>CRYSTAL_GREEN_GOLD_FLUTTERWAVE_PUBLIC_KEY</strong> or <strong>NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY</strong> in your environment.
                       </p>
                     )}
 
                     <button
                       onClick={() => {
                         setIsLaunching(true);
-                        console.log('Pay button clicked', { email, amount: numericAmount, PAYSTACK_KEY, payType: typeof pay });
+                        console.log('Pay button clicked', { email, amount: numericAmount, flutterwaveKey, payType: typeof pay });
                         if (!pay) {
                           setError('Flutterwave is not initialized (missing flutterwave-react-v3 or invalid config).');
                           setIsLaunching(false);
@@ -274,7 +275,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                           setIsLaunching(false);
                         }
                       }}
-                      disabled={!isValid || isLaunching || !PAYSTACK_KEY}
+                      disabled={!isValid || isLaunching || !flutterwaveKey}
                       className="w-full flex items-center justify-center gap-2 py-3.5 bg-yellow-500 hover:bg-yellow-400 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-xl font-black text-sm uppercase tracking-widest transition-all shadow-lg shadow-yellow-500/20"
                     >
                       {isLaunching ? (

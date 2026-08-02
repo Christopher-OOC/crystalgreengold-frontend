@@ -1,5 +1,5 @@
 // src/components/dashboard/Cart.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { orderService } from '@/lib/api/services/order.service';
 import { motion, AnimatePresence } from 'motion/react';
 import { PaymentModal } from '@/shared/ui/PaymentModal';
@@ -238,8 +238,12 @@ interface CartProps {
 export const Cart: React.FC<CartProps> = ({ onStartShopping, onNavigateToOrders }) => {
   const [showCheckout, setShowCheckout] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const { items, removeFromCart, updateQuantity, updateCart, isLoading, clearCart } = useCart();
+  const { items, removeFromCart, updateQuantity, updateCart, isLoading, clearCart, refreshCart } = useCart();
   const { member } = useAuth();
+
+  useEffect(() => {
+    void refreshCart();
+  }, [refreshCart]);
 
   const subtotal = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
   const shipping = 0;

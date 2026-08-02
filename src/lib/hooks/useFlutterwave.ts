@@ -9,6 +9,20 @@ interface FlutterwaveConfig {
   onClose?: () => void;
 }
 
+const FALLBACK_FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK_TEST-6682ace78adcf7705fd62afa3848b5f9-X';
+
+export const resolveFlutterwavePublicKey = (
+  env: Record<string, string | undefined> = process.env
+) => {
+  const resolvedKey =
+    env.CRYSTAL_GREEN_GOLD_FLUTTERWAVE_PUBLIC_KEY ||
+    env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ||
+    env.VITE_FLUTTERWAVE_PUBLIC_KEY ||
+    FALLBACK_FLUTTERWAVE_PUBLIC_KEY;
+
+  return resolvedKey?.trim() || FALLBACK_FLUTTERWAVE_PUBLIC_KEY;
+};
+
 export const useFlutterwave = ({
   email,
   amount,
@@ -17,11 +31,9 @@ export const useFlutterwave = ({
   onSuccess,
   onClose,
 }: FlutterwaveConfig) => {
+  const publicKey = resolveFlutterwavePublicKey();
   const config = {
-    public_key:
-      process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY ||
-      process.env.VITE_FLUTTERWAVE_PUBLIC_KEY ||
-      '',
+    public_key: publicKey,
     tx_ref: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
     amount,
     currency: 'NGN' as const,
@@ -41,6 +53,14 @@ export const useFlutterwave = ({
   const handleFlutterPayment = useFlutterwaveSdk(config);
 
   const pay = () => {
+    if (!publicKey) {
+      throw new Error('Flutterwave is not configured. Please set CRYSTAL_GREEN_GOLD_FLUTTERWAVE_PUBLIC_KEY or NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY.');
+    }
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+      throw new Error('Please enter a valid payment amount before continuing.');
+    }
+
     handleFlutterPayment({
       callback: (response) => {
         if (response.status === 'successful') {
