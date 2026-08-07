@@ -24,8 +24,8 @@ import type { Order } from '@/lib/types/order.types';
 const wideTrackingStyle: React.CSSProperties = { letterSpacing: '0.12em' };
 
 const getOrderKey = (order: Order, index: number) => {
-  const orderId = order.id ? String(order.id) : 'missing-id';
-  const reference = order.flutterwaveReference || order.createdAt || order.updatedAt || 'no-reference';
+  const orderId = order.id ? String(order.id) : order.orderId ? String(order.orderId) : 'missing-id';
+  const reference = order.flutterwaveReference || order.createdAt || order.updatedAt || order.orderDate || 'no-reference';
   return `order-${orderId}-${reference}-${index}`;
 };
 
@@ -148,13 +148,13 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="space-y-4">
                   <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-lg font-black text-emerald-950 dark:text-white">Order #{order.id}</h3>
+                    <h3 className="text-lg font-black text-emerald-950 dark:text-white">Order #{order.orderId || order.id}</h3>
                     <span style={wideTrackingStyle} className={`px-3 py-1 text-[10px] font-black rounded-full uppercase ${
-                      order.status === 'COMPLETED' ? 'bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-500' :
-                      order.status === 'CANCELLED' ? 'bg-rose-100 dark:bg-rose-500/10 text-rose-600 dark:text-rose-500' :
+                      (order.orderStatus || order.status) === 'COMPLETED' ? 'bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-500' :
+                      (order.orderStatus || order.status) === 'CANCELLED' ? 'bg-rose-100 dark:bg-rose-500/10 text-rose-600 dark:text-rose-500' :
                       'bg-amber-100 dark:bg-amber-400/10 text-amber-400 dark:text-amber-400'
                     }`}>
-                      {order.status}
+                      {order.orderStatus || order.status}
                     </span>
                     <span style={wideTrackingStyle} className={`px-3 py-1 text-[10px] font-black rounded-full uppercase ${
                       order.confirmation === 'CONFIRMED' ? 'bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-500' :
@@ -167,11 +167,11 @@ export const OrderHistory: React.FC<OrderHistoryProps> = ({ initialShowDetails }
                   <div className="flex items-center space-x-6 text-emerald-400">
                     <div className="flex items-center space-x-2">
                       <Calendar size={16} />
-                      <span className="text-xs font-bold">{order.createdAt ? new Date(order.createdAt).toLocaleDateString() : 'N/A'}</span>
+                      <span className="text-xs font-bold">{order.orderDate || order.createdAt ? new Date(order.orderDate || order.createdAt).toLocaleDateString() : 'N/A'}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Package size={16} />
-                      <span className="text-xs font-bold">{order.items?.length || 0} items</span>
+                      <span className="text-xs font-bold">{order.orderItems?.length || order.items?.length || 0} items</span>
                     </div>
                   </div>
                 </div>

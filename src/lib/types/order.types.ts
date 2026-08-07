@@ -81,6 +81,15 @@ export interface UpdateOrderRequest {
   flutterwaveReference?: string;
 }
 
+export interface VerifyOrderRequest {
+  reference?: string;
+  trxref?: string;
+  transaction?: string;
+  memberType?: MemberType;
+  address?: string;
+  phoneNumber?: string;
+}
+
 export interface ValidateOrderRequest {
   items: {
     productId: string;

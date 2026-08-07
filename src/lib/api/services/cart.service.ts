@@ -32,6 +32,18 @@ export const cartService = {
   },
 
   clear: async (memberId: string): Promise<void> => {
-    await apiClient.delete(ENDPOINTS.CART.BY_MEMBER(memberId));
+    const cart = await cartService.getByMember(memberId);
+    const cartItems = Array.isArray(cart)
+      ? cart
+      : (cart as any)?.cartItems ?? (cart as any)?.items ?? [];
+
+    for (const item of cartItems) {
+      const cartItemId = Number(item?.id ?? item?.cartItemId);
+      if (Number.isInteger(cartItemId)) {
+        await apiClient.delete(ENDPOINTS.CART.BY_MEMBER(memberId), {
+          params: { cartItemId },
+        });
+      }
+    }
   },
 };

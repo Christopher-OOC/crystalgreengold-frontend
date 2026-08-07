@@ -114,6 +114,11 @@ export const ENDPOINTS = {
     DELETE_ENTRY:    (id: string) => `${V1}/payments/payroll-entry/${id}`,
   },
 
+  // ── Flutterwave Payments ─────────────────────────────────────────────────────
+  FLUTTERWAVE: {
+    VERIFY_ORDER: (memberId: string) => `${V1}/flutterwave/payments/orders/${memberId}/verify`,
+  },
+
   // ── Admin ────────────────────────────────────────────────────────────────────
   ADMIN: {
     UPDATE_MEMBER:      (memberId: string)              => `${V1}/admins/${memberId}/members`,
