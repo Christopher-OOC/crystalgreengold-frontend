@@ -1,6 +1,6 @@
 import apiClient from '@/lib/api/client';
 import { ENDPOINTS } from '@/lib/api/endpoints';
-import type { Order, CreateOrderRequest, UpdateOrderRequest, ValidateOrderRequest } from '@/lib/types/order.types';
+import type { Order, CreateOrderRequest, UpdateOrderRequest, ValidateOrderRequest, VerifyOrderRequest } from '@/lib/types/order.types';
 
 export const orderService = {
 
@@ -31,6 +31,11 @@ export const orderService = {
 
   validate: async (memberId: string, payload: ValidateOrderRequest): Promise<unknown> => {
     const { data } = await apiClient.post(ENDPOINTS.ORDERS.VALIDATE(memberId), payload);
+    return data.data || data;
+  },
+
+  verifyWithFlutterwave: async (memberId: string, payload: VerifyOrderRequest): Promise<Order> => {
+    const { data } = await apiClient.post(ENDPOINTS.FLUTTERWAVE.VERIFY_ORDER(memberId), payload);
     return data.data || data;
   },
 

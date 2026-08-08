@@ -63,31 +63,12 @@ const CheckoutComponent: React.FC<{
       setIsProcessing(true);
       setError(null);
       try {
-        const result = await orderService.create(member.id, {
+        const result = await orderService.verifyWithFlutterwave(member.id, {
           memberType: member.memberType,
           reference: reference,
-          items: items.map(item => ({
-            productId: String(item.id),
-            productName: item.name,
-            quantity: item.quantity,
-            price: item.price,
-            subtotal: item.price * item.quantity,
-          })),
-          totalAmount: total,
-          status: 'PAID',
         });
 
-        setOrderId(result.id);
-
-        try {
-          await orderService.update(result.id, member.id, {
-            status: 'PAID',
-            flutterwaveReference: reference,
-          });
-        } catch (updateErr) {
-          // Reference update failed but order exists — log and continue
-          console.warn('Order created but failed to attach Flutterwave reference:', updateErr);
-        }
+        setOrderId(result.orderId);
 
         setShowPayment(false);
         clearCart();
