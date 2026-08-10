@@ -9,7 +9,7 @@ interface FlutterwaveConfig {
   onClose?: () => void;
 }
 
-const FALLBACK_FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK_TEST-6682ace78adcf7705fd62afa3848b5f9-X';
+const FALLBACK_FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK-3b795a3a32be7221613a634b763eb727-X';
 
 export const resolveFlutterwavePublicKey = (
   env: Record<string, string | undefined> = process.env
