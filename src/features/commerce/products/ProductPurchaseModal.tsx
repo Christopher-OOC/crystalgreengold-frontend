@@ -18,7 +18,6 @@ interface ProductPurchaseModalProps {
 export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({ 
   isOpen, 
   onClose, 
-  productId,
   productName, 
   price, 
   quantity 
@@ -79,18 +78,9 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
     }, 200);
 
     try {
-      await orderService.create(member.id, {
+      await orderService.verifyWithFlutterwave(member.id, {
         memberType: member.memberType,
         reference,
-        items: [{
-          productId,
-          productName,
-          quantity,
-          price: getNumericPrice,
-          subtotal: getNumericPrice * quantity,
-        }],
-        totalAmount: getNumericPrice * quantity,
-        status: 'PAID',
       });
 
       clearInterval(interval);

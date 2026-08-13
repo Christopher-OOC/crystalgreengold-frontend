@@ -63,8 +63,8 @@ export const useFlutterwave = ({
 
     handleFlutterPayment({
       callback: (response) => {
-        if (response.status === 'successful') {
-          console.log('Flutterwave payment successful:', response);
+        const isSuccessful = response?.status === 'successful' || response?.status === 'completed';
+        if (isSuccessful) {
           onSuccess?.(response.tx_ref);
         }
       },
