@@ -56,29 +56,22 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
   const flutterwaveKey = resolveFlutterwavePublicKey();
 
-  console.log('About to do paymentreference:');
-
   const { pay } = useFlutterwave({
     email,
     amount: numericAmount,
     name,
     phone,
-   
 
     onSuccess: async (reference) => {
-      console.log('Payment successful with reference:', reference);
       setError(null);
       setIsLaunching(true);
       try {
         await onPaymentSuccess?.(reference);
-        console.log('Payment successful with reference:', reference);
         setSuccess(true);
       } catch (e: any) {
-        console.log('Error happen while doing  payment.');
         const msg = e?.response?.data?.message || e?.response?.data?.error || e?.message || 'Payment was received, but we could not complete this action. Please contact support with your payment reference.';
         setError(msg);
       } finally {
-         console.log('Done doing  payment.');
         setIsLaunching(false);
       }
     },
@@ -247,7 +240,6 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                     <button
                       onClick={() => {
                         setIsLaunching(true);
-                        console.log('Pay button clicked', { email, amount: numericAmount, flutterwaveKey, payType: typeof pay });
                         if (!pay) {
                           setError('Flutterwave is not initialized (missing flutterwave-react-v3 or invalid config).');
                           setIsLaunching(false);

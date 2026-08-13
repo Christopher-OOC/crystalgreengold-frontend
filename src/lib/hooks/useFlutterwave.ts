@@ -9,7 +9,7 @@ interface FlutterwaveConfig {
   onClose?: () => void;
 }
 
-const FALLBACK_FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK_TEST-6682ace78adcf7705fd62afa3848b5f9-X';
+const FALLBACK_FLUTTERWAVE_PUBLIC_KEY = 'FLWPUBK-3b795a3a32be7221613a634b763eb727-X';
 
 export const resolveFlutterwavePublicKey = (
   env: Record<string, string | undefined> = process.env
@@ -63,12 +63,9 @@ export const useFlutterwave = ({
 
     handleFlutterPayment({
       callback: (response) => {
-        console.log('Flutterwave callback fired with status:', response?.status, response);
-        if (response?.status === 'successful') {
-          console.log('Flutterwave payment successful:', response);
+        const isSuccessful = response?.status === 'successful' || response?.status === 'completed';
+        if (isSuccessful) {
           onSuccess?.(response.tx_ref);
-        } else {
-          console.warn('Flutterwave payment NOT successful, status =', response?.status, response);
         }
       },
       onClose: () => {
