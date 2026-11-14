@@ -89,12 +89,12 @@ export const memberService = {
     return data.data;
   },
 
-  buyPackage: async (memberId: string, payload: { packageId: number, quantity: number, storeId: string, txnReference: string }): Promise<unknown> => {
+  buyPackage: async (memberId: string, payload: { packageId: number, quantity: number, storeId: string | null }): Promise<unknown> => {
     const { data } = await apiClient.post(ENDPOINTS.MEMBERS.BUY_PACKAGE(memberId), payload);
     return data.data;
   },
 
-  activatePackage: async (memberId: string, payload: { packageId: number, storeId: string, txnReference: string }): Promise<unknown> => {
+  activatePackage: async (memberId: string, payload: { packageId: number, storeId: string | null }): Promise<unknown> => {
     const { data } = await apiClient.post(ENDPOINTS.MEMBERS.ACTIVATE_PACKAGE(memberId), payload);
     return data.data;
   },

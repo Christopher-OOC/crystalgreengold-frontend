@@ -2,9 +2,10 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, DollarSign, CheckCircle2, CreditCard, AlertCircle } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
-import { PaymentModal } from '@/shared/ui/PaymentModal';
 import { useAuth } from '@/features/auth/AuthContext';
 import { orderService } from '@/lib/api/services/order.service';
+import { memberService } from '@/lib/api/services/member.service';
+import { useAuthStore } from '@/lib/store/authStore';
 
 interface ProductPurchaseModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ interface ProductPurchaseModalProps {
   productName: string;
   price: string | number; // Allow both string and number
   quantity: number;
+  storeId?: string;
 }
 
 export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({ 
@@ -21,13 +23,14 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
   productId,
   productName, 
   price, 
-  quantity 
+  quantity,
+  storeId,
 }) => {
   const [step, setStep] = useState<'confirm' | 'processing' | 'success' | 'error'>('confirm');
   const [progress, setProgress] = useState(0);
-  const [showPayment, setShowPayment] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { member } = useAuth();
+  const updateMember = useAuthStore(state => state.updateMember);
 
   // Helper function to extract numeric price safely
   const getNumericPrice = useMemo(() => {
@@ -61,13 +64,12 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
       return;
     }
     setError(null);
-    setShowPayment(true);
+    void handleTokenPurchase();
   };
 
-  const handlePaymentSuccess = async (reference: string) => {
+  const handleTokenPurchase = async () => {
     if (!member) throw new Error('Please login before buying this product.');
 
-    setShowPayment(false);
     setStep('processing');
     setProgress(0);
     setError(null);
@@ -79,29 +81,29 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
     }, 200);
 
     try {
-      await orderService.create(member.id, {
+      await orderService.buyNow(member.id, {
+        productId,
+        storeId,
+        quantity,
         memberType: member.memberType,
-        reference,
-        items: [{
-          productId,
-          productName,
-          quantity,
-          price: getNumericPrice,
-          subtotal: getNumericPrice * quantity,
-        }],
-        totalAmount: getNumericPrice * quantity,
-        status: 'PAID',
+        address: member.address,
+        phoneNumber: member.phoneNumber,
       });
+      try {
+        const updatedMember = await memberService.getById(member.id);
+        if (typeof updatedMember.tokens === 'number') updateMember({ tokens: updatedMember.tokens });
+      } catch (refreshError) {
+        console.warn('Purchase succeeded, but the token balance display could not be refreshed.', refreshError);
+      }
 
       clearInterval(interval);
       setProgress(100);
       setTimeout(() => setStep('success'), 500);
     } catch (err: any) {
       clearInterval(interval);
-      console.error('Failed to buy product after payment:', err?.response?.data ?? err);
-      setError(getRequestErrorMessage(err, 'Payment was received, but your order could not be created. Please contact support with your payment reference.'));
+      console.error('Failed to buy product with tokens:', err?.response?.data ?? err);
+      setError(getRequestErrorMessage(err, 'Token payment failed. Check your token balance and try again.'));
       setStep('error');
-      throw err;
     }
   };
 
@@ -110,7 +112,6 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
     setStep('confirm');
     setProgress(0);
     setError(null);
-    setShowPayment(false);
     onClose();
   };
 
@@ -161,7 +162,7 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
                       <p className="text-3xl font-black text-amber-400">{totalPrice}</p>
                     </div>
                     <p className="mt-3 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
-                      Payment will be processed securely
+                      This purchase will be paid from your token balance ({Number(member?.tokens ?? 0).toLocaleString()} tokens available).
                     </p>
                   </div>
 
@@ -177,7 +178,7 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
                       onClick={handleProceed}
                       className="flex-1 py-4 rounded-2xl"
                     >
-                      Proceed
+                      Pay with Tokens
                     </Button>
                   </div>
                 </>
@@ -196,7 +197,7 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
                   <div className="space-y-4">
                     <h2 className="text-3xl font-black text-emerald-950 dark:text-white tracking-tight">Processing Order</h2>
                     <p className="text-emerald-600 dark:text-emerald-400 font-medium">
-                      We are verifying your payment...
+                      We are processing your token payment...
                     </p>
                   </div>
 
@@ -259,17 +260,6 @@ export const ProductPurchaseModal: React.FC<ProductPurchaseModalProps> = ({
         </div>
       )}
     </AnimatePresence>
-    <PaymentModal
-      isOpen={showPayment}
-      onClose={() => setShowPayment(false)}
-      defaultEmail={member?.email ?? ''}
-      defaultName={`${member?.firstName ?? ''} ${member?.lastName ?? ''}`.trim() || (member?.username ?? '')}
-      defaultPhone={member?.phoneNumber ?? ''}
-      fixedAmount={getNumericPrice * quantity}
-      title={`Buy ${productName}`}
-      description={`One-time payment for ${quantity}x ${productName}`}
-      onPaymentSuccess={handlePaymentSuccess}
-    />
     </>
   );
 };

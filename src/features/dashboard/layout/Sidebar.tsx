@@ -9,6 +9,7 @@ import {
   ClipboardList, 
   History, 
   Gift, 
+  Ticket,
   Users, 
   User,
   ShieldCheck,
@@ -60,6 +61,7 @@ const menuItems = [
    { icon: ClipboardList, label: 'Manage Orders', id: 'manage-orders' },
   { icon: History, label: 'Transactions', id: 'transactions' },
   { icon: Gift, label: 'Bonuses', id: 'bonuses' },
+  { icon: Ticket, label: 'Tokens', id: 'tokens' },
 
   { section: 'ACCOUNT' },
   { icon: User, label: 'Profile', id: 'profile' },
@@ -142,4 +144,3 @@ const menuItems = [
     </aside>
   );
 };
-

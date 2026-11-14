@@ -52,6 +52,7 @@ interface MemberData extends Member {
   lastName?: string;
   email?: string;
   availableBalance?: number;
+  tokens?: number;
   sponsorUsername?: string;
   placerUsername?: string;
   enabled?: boolean;
@@ -532,10 +533,21 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
 
   const handleActivatePackage = async (pkg: Package) => {
     if (!selectedMember) return;
+    const currentPackagePrice = Number(selectedMember.currentPackage?.price ?? 0);
+    const tokenCost = Math.max(0, pkg.price - currentPackagePrice);
+    if (Number(selectedMember.tokens ?? 0) < tokenCost) {
+      setMemberUpdateError(`Insufficient tokens. This activation requires ${tokenCost.toLocaleString()} tokens.`);
+      return;
+    }
     const memberId = getMemberLoginId(selectedMember);
     setActivatingPackageId(pkg.id);
     try {
       await memberService.adminActivateMemberPackage(memberId, pkg.id);
+      setSelectedMember(current => current ? {
+        ...current,
+        tokens: Number(current.tokens ?? 0) - tokenCost,
+        currentPackage: pkg,
+      } : current);
       setAllPackages((prev) => prev.filter((p) => p.id !== pkg.id));
       handleAction(`Package "${pkg.name}" activated for ${selectedMember.username}`);
     } catch (err: any) {
@@ -989,6 +1001,10 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                     {selectedMember.currentPackage?.name ?? "No Package"}
                   </p>
                 </div>
+                <div className="space-y-1">
+                  <p className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Tokens</p>
+                  <p className="text-sm font-bold text-emerald-800 dark:text-emerald-200">{Number(selectedMember.tokens ?? 0).toLocaleString()}</p>
+                </div>
               </div>
             </Card>
 
@@ -1025,7 +1041,9 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                     const currentPkgId = currentPkg && typeof currentPkg === 'object' ? (currentPkg as any).id : undefined;
                     const isCurrentPkg = currentPkgId != null && String(pkg.id) === String(currentPkgId);
                     const isLowerPrice = currentPkgPrice != null && pkg.price <= currentPkgPrice;
-                    const isPackageDisabled = isCurrentPkg || isLowerPrice;
+                    const tokenCost = Math.max(0, pkg.price - Number(currentPkgPrice ?? 0));
+                    const hasInsufficientTokens = Number(selectedMember.tokens ?? 0) < tokenCost;
+                    const isPackageDisabled = isCurrentPkg || isLowerPrice || hasInsufficientTokens;
 
                     return (
                       <div
@@ -1039,7 +1057,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                             {pkg.name}
                           </p>
                           <p className="text-xs font-bold text-emerald-600">
-                            ₦{pkg.price.toLocaleString()}
+                            ₦{pkg.price.toLocaleString()} · {tokenCost.toLocaleString()} tokens
                           </p>
                           {pkg.bv != null && (
                             <p className="text-[9px] font-black text-emerald-400 uppercase tracking-widest">
@@ -1053,8 +1071,10 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                           className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center space-x-1.5 ${
                             isCurrentPkg
                               ? 'bg-emerald-100 text-emerald-400 cursor-not-allowed'
-                              : isLowerPrice
+                            : isLowerPrice
                                 ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                : hasInsufficientTokens
+                                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                 : 'bg-yellow-500 hover:bg-yellow-600 text-white'
                           }`}
                         >
@@ -1067,6 +1087,8 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                             <span>Current</span>
                           ) : isLowerPrice ? (
                             <span>Upgrade Only</span>
+                          ) : hasInsufficientTokens ? (
+                            <span>Insufficient Tokens</span>
                           ) : (
                             <span>Activate</span>
                           )}

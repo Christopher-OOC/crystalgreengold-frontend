@@ -29,6 +29,11 @@ export const orderService = {
     return data.data || data;
   },
 
+  buyNow: async (memberId: string, payload: { productId: string; storeId?: string; quantity: number; memberType?: string; address?: string; phoneNumber?: string }): Promise<Order> => {
+    const { data } = await apiClient.post(ENDPOINTS.ORDERS.BUY_NOW(memberId), payload);
+    return data.data || data;
+  },
+
   validate: async (memberId: string, payload: ValidateOrderRequest): Promise<unknown> => {
     const { data } = await apiClient.post(ENDPOINTS.ORDERS.VALIDATE(memberId), payload);
     return data.data || data;

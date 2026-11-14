@@ -32,6 +32,7 @@ export const ENDPOINTS = {
     BUY_PACKAGE:     (id: string)=> `${V1}/members/${id}/buy-package`,
     ACTIVATE_PACKAGE:(id: string)=> `${V1}/members/${id}/activate-package`,
     TRANSFER_FUNDS:  (id: string)=> `${V1}/members/${id}/transfer-funds`,
+    CONVERT_BALANCE_TO_TOKENS: `${V1}/members/convert-balance-to-tokens`,
     CHANGE_PASSWORD: (id: string)=> `${V1}/members/${id}/change-password`,
     FORGOT_PASSWORD:                `${V1}/members/forgot-password`,
     CAN_RECEIVE_PAYMENT:(id: string)=>`${V1}/members/${id}/can-receive-payment`,
@@ -56,6 +57,7 @@ export const ENDPOINTS = {
     CONFIRM:         (orderId: string, memberId: string) => `${V1}/orders/${orderId}/confirm-orders/${memberId}`,
     VALIDATE:        (memberId: string)           => `${V1}/orders/validate/${memberId}`,
     CREATE:          (memberId: string)           => `${V1}/orders/create-order/${memberId}`,
+    BUY_NOW:         (memberId: string)           => `${V1}/orders/buy-now/${memberId}`,
     MANAGE:          (storeId: string)            => `${V1}/orders/manage-orders/members/${storeId}`,
   },
 
@@ -69,6 +71,12 @@ export const ENDPOINTS = {
   PACKAGES: {
     BASE:                         `${V1}/packages`,
     BY_ID: (id: string)        => `${V1}/packages/${id}`,
+  },
+  TOKENS: {
+    GENERATE: `${V1}/tokens/generate`,
+    LOAD: `${V1}/tokens/load`,
+    ISSUED: `${V1}/tokens/issued`,
+    RECEIVED: `${V1}/tokens/received`,
   },
 
   // ── Categories ───────────────────────────────────────────────────────────────

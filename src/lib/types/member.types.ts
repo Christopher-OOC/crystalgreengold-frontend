@@ -36,6 +36,7 @@ export interface Member {
   parentId?: string;          // enterprise upline
   balance?: number;
   availableBalance?: number;
+  tokens?: number;
   walletBalance?: number;
   canReceivePayment?: boolean;
   memberType?: MemberType;

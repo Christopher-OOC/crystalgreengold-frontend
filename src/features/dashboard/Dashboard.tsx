@@ -25,6 +25,7 @@ import { MainChart } from '@/shared/ui/MainChart';
 import { NetworkStructure, FinancialMetrics, SalesDistribution, MonthlyPVAnalysis } from '@/features/dashboard/views/misc/Details';
 import { useAuthStore, selectMember } from "@/lib/store/authStore";
 import { TransferModal } from '@/features/finance/TransferModal';
+import { ConvertBalanceToTokensModal } from '@/features/finance/ConvertBalanceToTokensModal';
 import { DiscountShop } from '@/features/commerce/products/DiscountShop';
 import { ServiceCenters } from '@/features/commerce/service-centers/ServiceCenters';
 import { ServiceCenterProducts } from '@/features/commerce/service-centers/ServiceCenterProducts';
@@ -39,6 +40,7 @@ import { OrderHistory } from '@/features/commerce/orders/OrderHistory';
 import { ManageOrders } from '@/features/commerce/orders/ManageOrders';
 import { Transactions } from '@/features/finance/Transactions';
 import { Bonuses } from '@/features/dashboard/views/misc/Bonuses';
+import { Tokens } from '@/features/dashboard/views/misc/Tokens';
 import { Settings } from '@/features/dashboard/views/misc/Settings';
 import { Profile } from '@/features/profile/Profile';
 import { AboutUs } from '@/features/dashboard/views/misc/AboutUs';
@@ -76,6 +78,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   const [activeTab, setActiveTabState] = useState(initialTab);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
+  const [isConvertTokensModalOpen, setIsConvertTokensModalOpen] = useState(false);
   const [selectedServiceCenter, setSelectedServiceCenter] = useState<SelectedCenter | null>(null);
   const [selectedPremiumStore, setSelectedPremiumStore] = useState<{ name: string; id: string } | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<any | null>(null);
@@ -368,12 +371,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     </h2>
                     <p className="text-emerald-600 text-sm">See your metrics, and upgrade your current package to a higher package.</p>
                   </div>
-                  <button
-                    onClick={() => setIsTransferModalOpen(true)}
-                    className="bg-amber-400 hover:bg-amber-400 text-white px-3 py-1 rounded-lg font-bold transition-all shadow-lg shadow-amber-400/20 text-[9px]"
-                  >
-                    Transfer
-                  </button>
+                  <button onClick={() => setIsTransferModalOpen(true)} className="bg-amber-400 hover:bg-amber-500 text-white px-3 py-2 rounded-lg font-bold transition-all shadow-lg shadow-amber-400/20 text-xs">Transfer</button>
                 </Card>
 
                 {/* Dashboard Grid */}
@@ -383,6 +381,13 @@ export const Dashboard: React.FC<DashboardProps> = ({
                     <p className="text-lg font-bold text-emerald-950 dark:text-white">
                       {formatCurrency(dashboardData?.availableBalance ?? 0)}
                     </p>
+                    <button
+                      type="button"
+                      onClick={() => setIsConvertTokensModalOpen(true)}
+                      className="mt-2 rounded-lg bg-emerald-700 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-emerald-800"
+                    >
+                      Convert to Tokens
+                    </button>
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
@@ -393,9 +398,9 @@ export const Dashboard: React.FC<DashboardProps> = ({
                   </Card>
 
                   <Card rounded="xl" className="p-3 text-center" hover>
-                    <p className="text-emerald-600 font-medium mb-0.5 text-sm">Rank</p>
+                    <p className="text-emerald-600 font-medium mb-0.5 text-sm">Tokens</p>
                     <p className="text-lg font-bold text-emerald-950 dark:text-white">
-                      {dashboardData?.rank?.name || "Member"}
+                      {Number(member?.tokens ?? 0).toLocaleString()}
                     </p>
                   </Card>
 
@@ -629,6 +634,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
               <Transactions />
             ) : activeTab === 'bonuses' ? (
               <Bonuses />
+            ) : activeTab === 'tokens' ? (
+              <Tokens />
             ) : activeTab === 'profile' ? (
               <Profile
                 onBack={() => setActiveTab('dashboard')}
@@ -727,6 +734,14 @@ export const Dashboard: React.FC<DashboardProps> = ({
       <TransferModal
         isOpen={isTransferModalOpen}
         onClose={() => setIsTransferModalOpen(false)}
+      />
+      <ConvertBalanceToTokensModal
+        isOpen={isConvertTokensModalOpen}
+        onClose={() => setIsConvertTokensModalOpen(false)}
+        onConverted={(availableBalance, tokens) => {
+          setDashboardData(current => current ? { ...current, availableBalance } : current);
+          useAuthStore.getState().updateMember({ availableBalance, tokens });
+        }}
       />
     </div>
   );

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { orderService } from '@/lib/api/services/order.service';
 import { motion, AnimatePresence } from 'motion/react';
-import { PaymentModal } from '@/shared/ui/PaymentModal';
 import {
   ShoppingCart,
   Home,
@@ -21,6 +20,8 @@ import { Button } from '@/shared/ui/Button';
 import { ErrorState } from '@/shared/ui/ErrorState';
 import { useCart } from '@/features/cart/CartContext';
 import { useAuth } from '@/features/auth/AuthContext';
+import { useAuthStore } from '@/lib/store/authStore';
+import { memberService } from '@/lib/api/services/member.service';
 
 
 const CheckoutComponent: React.FC<{
@@ -38,9 +39,9 @@ const CheckoutComponent: React.FC<{
     const [orderSuccess, setOrderSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [orderId, setOrderId] = useState<string | null>(null);
-    const [showPayment, setShowPayment] = useState(false); // 👈 new
     const { clearCart } = useCart();
     const { member } = useAuth();
+    const updateMember = useAuthStore(state => state.updateMember);
 
     const total = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
@@ -50,11 +51,10 @@ const CheckoutComponent: React.FC<{
         setTimeout(() => { window.location.href = '/login'; }, 2000);
         return;
       }
-      setError(null);
-      setShowPayment(true);
+      void handleTokenCheckout();
     };
 
-    const handlePaymentSuccess = async (reference: string) => {
+    const handleTokenCheckout = async () => {
       if (!member) {
         setError('Please login to place your order');
         throw new Error('Please login to place your order');
@@ -65,7 +65,6 @@ const CheckoutComponent: React.FC<{
       try {
         const result = await orderService.create(member.id, {
           memberType: member.memberType,
-          reference: reference,
           items: items.map(item => ({
             productId: String(item.id),
             productName: item.name,
@@ -78,25 +77,18 @@ const CheckoutComponent: React.FC<{
         });
 
         setOrderId(result.id);
-
         try {
-          await orderService.update(result.id, member.id, {
-            status: 'PAID',
-            flutterwaveReference: reference,
-          });
-        } catch (updateErr) {
-          // Reference update failed but order exists — log and continue
-          console.warn('Order created but failed to attach Flutterwave reference:', updateErr);
+          const updatedMember = await memberService.getById(member.id);
+          if (typeof updatedMember.tokens === 'number') updateMember({ tokens: updatedMember.tokens });
+        } catch (refreshError) {
+          console.warn('Order succeeded, but the token balance display could not be refreshed.', refreshError);
         }
-
-        setShowPayment(false);
         clearCart();
         setOrderSuccess(true);
         onOrderPlaced?.();
       } catch (err: any) {
-        console.error('Failed to create order after payment:', err?.response?.data ?? err);
-        setError(getRequestErrorMessage(err, 'Payment was received, but your order could not be created. Please contact support with your payment reference.'));
-        throw err;
+        console.error('Failed to create order with tokens:', err?.response?.data ?? err);
+        setError(getRequestErrorMessage(err, 'Token payment failed. Check your token balance and try again.'));
       } finally {
         setIsProcessing(false);
       }
@@ -118,14 +110,14 @@ const CheckoutComponent: React.FC<{
               <CheckCircle2 size={48} />
             </div>
             <div className="space-y-2">
-              <h2 className="text-2xl font-black text-emerald-950 dark:text-white">Order Placed & Paid!</h2>
+              <h2 className="text-2xl font-black text-emerald-950 dark:text-white">Order Placed · Tokens Deducted</h2>
               {orderId && (
                 <p className="text-sm text-emerald-600">
                   Order ID: <span className="font-mono font-bold text-amber-400">{orderId}</span>
                 </p>
               )}
               <p className="text-emerald-600">
-                Your order has been received and payment confirmed. You'll receive a confirmation email shortly.
+              Your order has been received and paid with tokens. You'll receive a confirmation email shortly.
               </p>
             </div>
             <div className="flex gap-4 justify-center">
@@ -182,6 +174,7 @@ const CheckoutComponent: React.FC<{
               <span className="text-lg font-bold text-emerald-950 dark:text-white">Total</span>
               <span className="text-2xl font-black text-amber-400">₦{total.toLocaleString()}</span>
             </div>
+            <p className="text-xs text-emerald-600 text-right">Token balance: {Number(member?.tokens ?? 0).toLocaleString()} · Order total will be deducted from tokens</p>
           </div>
 
           <div className="mt-8 space-y-3">
@@ -196,7 +189,7 @@ const CheckoutComponent: React.FC<{
                   <span>Processing Order...</span>
                 </div>
               ) : (
-                'Place Order & Pay'
+              `Place Order · Pay ${total.toLocaleString()} tokens`
               )}
             </Button>
             <p className="text-xs text-center text-emerald-600">
@@ -205,18 +198,6 @@ const CheckoutComponent: React.FC<{
           </div>
         </Card>
 
-        {/* 👇 Payment modal — opens after order is created */}
-        <PaymentModal
-          isOpen={showPayment}
-          onClose={() => setShowPayment(false)} // user can dismiss but order stays PENDING
-          title="Complete Payment"
-          description={`Pay for Order ${orderId ?? ''}`}
-          fixedAmount={total}
-          defaultEmail={member?.email ?? ''}
-          defaultName={member?.username ?? ''}
-          defaultPhone={member?.phoneNumber ?? ''}
-          onPaymentSuccess={handlePaymentSuccess}
-        />
       </div>
     );
   };

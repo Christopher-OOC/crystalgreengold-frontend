@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { X, DollarSign, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
-import { PaymentModal } from '@/shared/ui/PaymentModal';
 import { useAuth } from '@/features/auth/AuthContext'; // adjust path
 import { memberService } from '@/lib/api/services/member.service'; // adjust path
+import { useAuthStore } from '@/lib/store/authStore';
+import type { Member } from '@/lib/types/member.types';
 
 interface PackageActivationModalProps {
   isOpen: boolean;
@@ -34,11 +35,12 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
   const { member } = useAuth(); // ✅ get user from context
   const [step, setStep] = useState<'confirm' | 'processing' | 'success' | 'error'>('confirm');
   const [progress, setProgress] = useState(0);
-  const [showPayment, setShowPayment] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const updateMember = useAuthStore(state => state.updateMember);
 
 
-  const numericPrice = mode === 'buy' ? price * quantity : price;
+  const currentPackagePrice = Number(member?.currentPackage?.price ?? 0);
+  const numericPrice = mode === 'buy' ? price * quantity : Math.max(0, price - currentPackagePrice);
   const displayPrice = `₦${numericPrice.toLocaleString()}`;
   const modalTitle = mode === 'buy' ? 'Buy Package' : 'Package Activation';
   const modalDescription = mode === 'buy'
@@ -47,11 +49,10 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
 
   const handleProceed = () => {
     setError(null);
-    setShowPayment(true); // ✅ open PaymentModal
+    void handleTokenPurchase();
   };
 
-  const handlePaymentSuccess = async (reference: string) => {
-    setShowPayment(false);
+  const handleTokenPurchase = async () => {
     setStep('processing');
     setProgress(0);
     setError(null);
@@ -67,18 +68,18 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
       if (!pkgId) throw new Error('Package details are missing. Please refresh and try again.');
 
       if (mode === 'buy') {
-        await memberService.buyPackage(member.id, {
+        const updated = await memberService.buyPackage(member.id, {
           packageId: pkgId,
           quantity,
           storeId: storeId ?? null,
-          txnReference: reference
-        });
+        }) as Partial<Member>;
+        if (typeof updated.tokens === 'number') updateMember({ tokens: updated.tokens });
       } else {
-        await memberService.activatePackage(member.id, {
+        const updated = await memberService.activatePackage(member.id, {
           packageId: pkgId,
           storeId: storeId ?? null,
-          txnReference: reference
-        });
+        }) as Partial<Member>;
+        if (typeof updated.tokens === 'number') updateMember({ tokens: updated.tokens });
       }
 
       clearInterval(interval);
@@ -87,14 +88,12 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
     } catch (err: any) {
       clearInterval(interval);
       console.error(`Package ${mode} failed`, err?.response?.data ?? err);
-      setError(getRequestErrorMessage(err, `Payment was received, but the package could not be ${mode === 'buy' ? 'purchased' : 'activated'}. Please contact support with your payment reference.`));
+      setError(getRequestErrorMessage(err, `The token payment could not be completed. Check your token balance and try again.`));
       setStep('error');
-      throw err;
     }
   };
 
   return (
-    // ✅ AnimatePresence wraps ONLY the modal, PaymentModal sits outside
     <>
       <AnimatePresence>
         {isOpen && (
@@ -139,7 +138,7 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                           </>
                         ) : (
                           <>
-                            You are about to pay{' '}
+                            You are about to spend{' '}
                             <span className="text-amber-400 font-bold">{displayPrice}</span> to activate the{' '}
                             <span className="font-bold text-emerald-950 dark:text-white">{pkgName}</span> package.
                           </>
@@ -151,11 +150,11 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                       <input
                         type="text"
                         readOnly
-                        value={price}
+                        value={displayPrice}
                         className="w-full bg-white dark:bg-white/5 border-2 border-amber-400/20 rounded-2xl py-4 px-6 text-center text-2xl font-black text-emerald-950 dark:text-white outline-none focus:border-amber-400 transition-all"
                       />
                       <p className="mt-3 text-[10px] font-bold text-emerald-400 uppercase tracking-widest">
-                        Complete payment via Flutterwave
+                        Token balance: {Number(member?.tokens ?? 0).toLocaleString()} · Required: {numericPrice.toLocaleString()}
                       </p>
                     </div>
 
@@ -163,8 +162,8 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                       <Button variant="secondary" onClick={onClose} className="flex-1 py-4 rounded-2xl">
                         Cancel
                       </Button>
-                      <Button onClick={handleProceed} className="flex-1 py-4 rounded-2xl">
-                        Proceed to Pay
+                      <Button onClick={handleProceed} disabled={Number(member?.tokens ?? 0) < numericPrice} className="flex-1 py-4 rounded-2xl disabled:opacity-50">
+                        Pay with Tokens
                       </Button>
                     </div>
                   </>
@@ -281,18 +280,6 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
         )}
       </AnimatePresence>
 
-      {/* ✅ PaymentModal lives OUTSIDE AnimatePresence so it renders on top correctly */}
-      <PaymentModal
-        isOpen={showPayment}
-        onClose={() => setShowPayment(false)}
-        defaultEmail={member?.email ?? ''}
-        defaultName={`${member?.firstName ?? ''} ${member?.lastName ?? ''}`}
-        defaultPhone={member?.phoneNumber ?? ''}
-        fixedAmount={numericPrice}
-        title={mode === 'buy' ? `Buy ${pkgName}` : `Activate ${pkgName}`}
-        description={mode === 'buy' ? `One-time payment to purchase ${quantity}x ${pkgName}` : `One-time payment to activate your ${pkgName} package`}
-        onPaymentSuccess={handlePaymentSuccess}
-      />
     </>
   );
 };
