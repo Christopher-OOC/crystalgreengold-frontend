@@ -44,8 +44,8 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
   const { member } = useAuth();
   
 
-  const currentPackagePrice = member?.currentPackage?.price || 0;
-  const purchasePrice = pkg.price - currentPackagePrice;
+  const hasCurrentPackage = Boolean(member?.currentPackage);
+  const cannotUpgrade = hasCurrentPackage && pkg.price <= Number(member?.currentPackage?.price ?? 0);
 
   console.log("package", pkg.id);
   console.log("buyFrom", buyFrom);
@@ -215,10 +215,11 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
               {/* Activate Button */}
               <Button 
                 onClick={() => setIsActivationModalOpen(true)}
+                disabled={cannotUpgrade}
                 className="py-6 rounded-3xl text-lg font-black shadow-2xl shadow-amber-400/40 flex items-center justify-center space-x-3"
               >
                 <ShieldCheck size={24} />
-                <span>Activate Package</span>
+                <span>{cannotUpgrade ? 'Not an Upgrade' : hasCurrentPackage ? 'Upgrade Package' : 'Activate Package'}</span>
               </Button>
             </div>
           </div>
@@ -232,9 +233,9 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
         onClose={() => setIsActivationModalOpen(false)}
         onViewOrder={onViewOrder}
         pkgName={pkg.name}
-        price={purchasePrice}
+        price={pkg.price}
         pkgId={pkg.id}
-        mode="activate"
+        mode={hasCurrentPackage ? 'upgrade' : 'activate'}
       />
 
       <PackageActivationModal 
@@ -244,7 +245,7 @@ export const PackageDetails: React.FC<PackageDetailsProps> = ({ pkg, buyFrom, st
         onClose={() => setIsBuyModalOpen(false)}
         onViewOrder={onViewOrder}
         pkgName={pkg.name}
-        price={purchasePrice}
+        price={pkg.price}
         pkgId={pkg.id}
         mode="buy"
         quantity={buyQuantity}

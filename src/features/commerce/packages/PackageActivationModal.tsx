@@ -16,7 +16,7 @@ interface PackageActivationModalProps {
   pkgName: string;
   price: number;
   pkgId?: number;
-  mode?: 'activate' | 'buy';  // 'activate' or 'buy'
+  mode?: 'activate' | 'buy' | 'upgrade';
   quantity?: number;  // for buy mode
 }
 
@@ -40,12 +40,14 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
 
 
   const currentPackagePrice = Number(member?.currentPackage?.price ?? 0);
-  const numericPrice = mode === 'buy' ? price * quantity : Math.max(0, price - currentPackagePrice);
+  const numericPrice = mode === 'buy' ? price * quantity : mode === 'upgrade' ? Math.max(0, price - currentPackagePrice) : price;
   const displayPrice = `₦${numericPrice.toLocaleString()}`;
-  const modalTitle = mode === 'buy' ? 'Buy Package' : 'Package Activation';
+  const modalTitle = mode === 'buy' ? 'Buy Package' : mode === 'upgrade' ? 'Upgrade Package' : 'Package Activation';
   const modalDescription = mode === 'buy'
     ? `You are about to buy ${quantity} x ${pkgName} package for ${displayPrice}.`
-    : `You are about to pay ${displayPrice} to activate the ${pkgName} package.`;
+    : mode === 'upgrade'
+      ? `You are about to pay the price difference of ${displayPrice} to upgrade to ${pkgName}.`
+      : `You are about to pay the full package price of ${displayPrice} to activate the ${pkgName} package.`;
 
   const handleProceed = () => {
     setError(null);
@@ -136,6 +138,8 @@ export const PackageActivationModal: React.FC<PackageActivationModalProps> = ({
                             Buy <span className="font-bold text-emerald-950 dark:text-white">{quantity}x</span> {pkgName} package for{' '}
                             <span className="text-amber-400 font-bold">{displayPrice}</span>.
                           </>
+                        ) : mode === 'upgrade' ? (
+                          <>You are about to pay the upgrade difference of <span className="text-amber-400 font-bold">{displayPrice}</span> to move to <span className="font-bold text-emerald-950 dark:text-white">{pkgName}</span>.</>
                         ) : (
                           <>
                             You are about to spend{' '}
