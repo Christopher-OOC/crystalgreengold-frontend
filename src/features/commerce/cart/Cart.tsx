@@ -66,7 +66,7 @@ const CheckoutComponent: React.FC<{
         const result = await orderService.create(member.id, {
           memberType: member.memberType,
           items: items.map(item => ({
-            productId: String(item.id),
+            productId: item.productId,
             productName: item.name,
             quantity: item.quantity,
             price: item.price,

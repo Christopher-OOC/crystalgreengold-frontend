@@ -64,6 +64,7 @@ export const ENDPOINTS = {
   // ── Cart ─────────────────────────────────────────────────────────────────────
   CART: {
     BY_MEMBER:    (memberId: string) => `${V1}/carts/${memberId}`,
+    ITEM:         (memberId: string, cartItemId: number) => `${V1}/carts/${memberId}/items/${cartItemId}`,
     ADD_TO_CART:  (memberId: string) => `${V1}/carts/add-to-cart/${memberId}`,
   },
 

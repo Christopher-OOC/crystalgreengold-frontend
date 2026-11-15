@@ -27,11 +27,17 @@ export const cartService = {
   },
 
   update: async (memberId: string, payload: UpdateCartRequest): Promise<Cart> => {
-    const { data } = await apiClient.put(ENDPOINTS.CART.BY_MEMBER(memberId), payload);
+    const { data } = await apiClient.put(ENDPOINTS.CART.BY_MEMBER(memberId), payload.items);
     return normalizeCart(data);
   },
 
-  clear: async (memberId: string): Promise<void> => {
-    await apiClient.delete(ENDPOINTS.CART.BY_MEMBER(memberId));
+  removeItem: async (memberId: string, cartItemId: number): Promise<Cart> => {
+    const { data } = await apiClient.delete(ENDPOINTS.CART.ITEM(memberId, cartItemId));
+    return normalizeCart(data);
+  },
+
+  clear: async (memberId: string): Promise<Cart> => {
+    const { data } = await apiClient.delete(ENDPOINTS.CART.BY_MEMBER(memberId));
+    return normalizeCart(data);
   },
 };
