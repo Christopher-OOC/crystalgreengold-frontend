@@ -174,7 +174,12 @@ const CheckoutComponent: React.FC<{
               <span className="text-lg font-bold text-emerald-950 dark:text-white">Total</span>
               <span className="text-2xl font-black text-amber-400">₦{total.toLocaleString()}</span>
             </div>
-            <p className="text-xs text-emerald-600 text-right">Token balance: {Number(member?.tokens ?? 0).toLocaleString()} · Order total will be deducted from tokens</p>
+            <div role="status" className="rounded-xl border border-amber-400/40 bg-amber-400/10 p-3 text-sm text-emerald-900 dark:text-emerald-100">
+              <p className="font-bold">Token payment notice</p>
+              <p className="mt-1">
+                Placing this order will deduct {total.toLocaleString()} tokens from your balance of {Number(member?.tokens ?? 0).toLocaleString()} tokens.
+              </p>
+            </div>
           </div>
 
           <div className="mt-8 space-y-3">

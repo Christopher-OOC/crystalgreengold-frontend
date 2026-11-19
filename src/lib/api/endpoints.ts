@@ -74,8 +74,7 @@ export const ENDPOINTS = {
     BY_ID: (id: string)        => `${V1}/packages/${id}`,
   },
   TOKENS: {
-    GENERATE: `${V1}/tokens/generate`,
-    LOAD: `${V1}/tokens/load`,
+    SEND: `${V1}/tokens/send`,
     ISSUED: `${V1}/tokens/issued`,
     RECEIVED: `${V1}/tokens/received`,
   },
